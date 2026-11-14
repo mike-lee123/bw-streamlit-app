@@ -1,0 +1,17 @@
+.venv/
+venv/
+__pycache__/
+*.pyc
+*.pyd
+*.exe
+.env
+
+# 執行產物與本機資料
+*.log
+*.db
+
+# 與 app.py 相同的本機備份檔
+bw_ultimate_dashboard_v18.8*_dashboard_FullMaster.py
+
+# 金鑰
+.streamlit/secrets.toml
