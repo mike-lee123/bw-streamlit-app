@@ -1708,8 +1708,9 @@ def backtest_mtf(d_lo: pd.DataFrame, d_hi: pd.DataFrame, lo_minutes: int = 5, hi
     bull_hi = (d_hi["Close"] > d_hi["MA13"]).to_numpy()
     bear_hi = (d_hi["Close"] < d_hi["MA13"]).to_numpy()
     if bias_mode == "strict":
-        bull_hi &= ((d_hi["K"] > 50) & (d_hi["OSC"] > 0)).to_numpy()
-        bear_hi &= ((d_hi["K"] < 50) & (d_hi["OSC"] < 0)).to_numpy()
+        # 不用 &=：pandas 3（Copy-on-Write）的 to_numpy() 是唯讀陣列，就地修改會 ValueError
+        bull_hi = bull_hi & ((d_hi["K"] > 50) & (d_hi["OSC"] > 0)).to_numpy()
+        bear_hi = bear_hi & ((d_hi["K"] < 50) & (d_hi["OSC"] < 0)).to_numpy()
     hi["bias"] = np.where(bull_hi, 1, np.where(bear_hi, -1, 0))
     hi.loc[hi["hi_ma"].isna(), "bias"] = 0
     m = pd.merge_asof(lo_end.to_frame(), hi.sort_values("end"), on="end", direction="backward")
