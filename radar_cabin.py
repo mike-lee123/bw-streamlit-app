@@ -110,6 +110,7 @@ def _flatten(rows: list) -> pd.DataFrame:
         "FactSet共識目標價": cs.get("target"), "共識上漲空間%": b.get("upside_pct"),
         "PTT近7天篇數": rt.get("posts_7d"), "PTT熱度倍數": rt.get("heat_ratio"), "PTT過熱": rt.get("hot"),
         "PTT看多": rt.get("bull"), "PTT看空": rt.get("bear"),
+        "東森相關報導3天": (r.get("ebc") or {}).get("count"), "東森標題提到3天": (r.get("ebc") or {}).get("in_title"),
         "5日報酬%": r.get("ret_5d"), "5日大盤%": r.get("mkt_ret_5d"), "5日超額%": ex5,
         "20日報酬%": r.get("ret_20d"), "20日大盤%": r.get("mkt_ret_20d"), "20日超額%": ex20,
         "一句話重點": r.get("one_line"), "展望重點": "；".join(r.get("guidance") or []),
@@ -183,6 +184,11 @@ def _stock_detail(rows: list, stock_id: str, news: list):
           arrow = {"up": "▲", "down": "▼"}
           st.markdown("**券商目標價新聞**\n" + "\n".join(
               f"- {arrow.get(i['direction'], '・')} {_md((i.get('date') or '')[5:])} {_link(i['title'][:36], i.get('link'))}" for i in items))
+        eb = r.get("ebc") or {}
+        if eb.get("ok"):
+          head = f"**東森財經近 3 天**：相關報導 {eb.get('count', 0)} 則（標題直接提到 {eb.get('in_title', 0)} 則）"
+          lines = [f"- {_md(t.get('date', ''))} {_link(t.get('title', '')[:36], t.get('link'))}" for t in (eb.get("titles") or [])]
+          st.markdown(head + ("\n" + "\n".join(lines) if lines else ""))
         if rt.get("titles"):
           st.markdown("**PTT 近期討論**\n" + "\n".join(
               f"- {_md(t['date'])} {_link(t['title'][:36], t.get('url'))}（{'爆' if t['nrec'] >= 100 else int(t['nrec'])} 推）" for t in rt["titles"][:3]))
@@ -190,6 +196,38 @@ def _stock_detail(rows: list, stock_id: str, news: list):
         st.caption(_md("；".join(r["notes"])))
       if _safe_url(r.get("pdf_url")):
         st.markdown(f"[📄 法說會簡報 PDF]({_safe_url(r['pdf_url'])})")
+
+
+def _ebc_section():
+  """每天東森財經新聞標題提到哪些股票、各幾次（★＝自選股）。只用標題，不抓內文。"""
+  st.markdown("---")
+  st.markdown("#### 📺 東森財經個股熱度")
+  try:
+    ebc = load_json("ebc.json")
+  except Exception:
+    st.caption("還沒有東森財經的資料。")
+    return
+  if not ebc:
+    st.caption("還沒有東森財經的資料。")
+    return
+  df = pd.DataFrame(ebc)
+  dates = sorted(df["date"].unique(), reverse=True)
+  c1, c2 = st.columns([1, 1])
+  day = c1.selectbox("日期", dates, index=0, key="ebc_day")
+  only_watch = c2.checkbox("只看自選股", value=False, key="ebc_watch")
+  v = df[df["date"] == day]
+  if only_watch:
+    v = v[v["in_watchlist"]]
+  total = int(v["news_total"].max()) if len(v) else 0
+  st.caption(f"{day}：東森財經共 {total} 則新聞，標題提到 {len(v)} 檔股票。數字是標題提到的次數。")
+  table = pd.DataFrame({
+      "自選": v["in_watchlist"].map(lambda x: "★" if x else ""),
+      "代號": v["stock_id"], "名稱": v["name"], "提到次數": v["mentions"],
+      "最新標題": v["titles"].map(lambda t: (t or [{}])[0].get("title", "") if isinstance(t, list) else ""),
+  })
+  st.dataframe(table, width="stretch", hide_index=True)
+  st.download_button("⬇️ 下載東森財經熱度 CSV", _no_formula(table).to_csv(index=False).encode("utf-8-sig"),
+                     file_name=f"東森財經熱度_{day}.csv", mime="text/csv", key="ebc_csv")
 
 
 def render_radar_cabin(focus_stock: str | None = None):
@@ -259,6 +297,9 @@ def render_radar_cabin(focus_stock: str | None = None):
     default = stock_sel if stock_sel in detail_opts else detail_opts[0]
     pick = st.selectbox("🔍 個股細節", detail_opts, index=detail_opts.index(default), key="radar_detail")
     _stock_detail(rows, pick.split(" ")[0], news)
+
+  # ---------- 東森財經個股熱度 ----------
+  _ebc_section()
 
   # ---------- 打臉戰績 ----------
   st.markdown("---")
