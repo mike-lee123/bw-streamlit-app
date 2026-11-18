@@ -3862,9 +3862,14 @@ tabs_list = [
     "🧠 AI投資研究團隊艙",
     "📈 多源即時量化研報艙",
     "📐 13MA的魔力艙",
+    "📡 法說會籌碼雷達艙",
 ]
 
-col_sel = st.selectbox("🎯 選擇要進入的實戰分頁艙", tabs_list)
+# 網址參數 ?cabin=radar&stock=3231：直接打開雷達艙並聚焦該股（雷達 Email 的連結用這個格式）
+_qp_cabin = st.query_params.get("cabin", "")
+_qp_stock = st.query_params.get("stock", "")
+_default_cabin = tabs_list.index("📡 法說會籌碼雷達艙") if _qp_cabin == "radar" else 0
+col_sel = st.selectbox("🎯 選擇要進入的實戰分頁艙", tabs_list, index=_default_cabin)
 st.markdown("---")
 
 
@@ -5898,3 +5903,7 @@ elif col_sel == "📈 多源即時量化研報艙":
 
 elif col_sel == "📐 13MA的魔力艙":
   render_ma13_cabin()
+
+elif col_sel == "📡 法說會籌碼雷達艙":
+  from radar_cabin import render_radar_cabin
+  render_radar_cabin(focus_stock=_qp_stock or None)
