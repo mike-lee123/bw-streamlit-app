@@ -713,5 +713,138 @@
   "mkt_ret_20d": null,
   "inst_20d": null,
   "analyzed_at": "2026-11-18 00:25"
+ },
+ {
+  "call_key": "3231_323120260804M003.pdf",
+  "stock_id": "3231",
+  "name": "緯創",
+  "call_date": "2026-08-04",
+  "signal": "🔵 戴維斯雙擊候選：展望樂觀、券商調升、法人同步買",
+  "level": 2,
+  "market": "上市",
+  "tone": "非常樂觀",
+  "tone_score": 2,
+  "news_sentiment": 0,
+  "one_line": "緯創看好AI市場前景，預期將帶動長期成長，財報顯示公司業務穩健，表現亮眼。",
+  "guidance": [
+   "管理層強調AI驅動長期成長，預期AI伺服器及運算設備將成為未來主要增長點。",
+   "營收年複合成長率高達59%，顯示公司核心業務穩健。",
+   "1H26營業收入淨額和已實現營業毛利均創新高，表現強勁。"
+  ],
+  "risks": [],
+  "notes": [],
+  "news_reason": "近三天無相關新聞，無法判斷股價情緒。",
+  "pdf_url": "https://mopsov.twse.com.tw/nas/STR/323120260804M003.pdf",
+  "chips": {
+   "close": 195,
+   "inst_5d": 74456,
+   "trust_5d": 19726,
+   "data_date": "2026-08-04",
+   "dealer_5d": 2676,
+   "margin_5d": 6379,
+   "volume_5d": 693139,
+   "foreign_5d": 54730,
+   "inst_5d_pct": 10.7,
+   "price_5d_pct": 14.7,
+   "trust_streak": 9,
+   "foreign_streak": 3,
+   "after_call_days": 0,
+   "after_call_inst": 0,
+   "price_since_call_pct": 0
+  },
+  "brokers": {
+   "ups": 2,
+   "downs": 0,
+   "items": [
+    {
+     "date": "2026-07-23",
+     "link": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE8zbkprZE14V0k0QjU2UVRkWGJ6M244NnNKRUp5OFhEV05jSTNGZXptTEpsRlNVME9sNm1LLWJkYVpVOWxHN0ItRDRtTHp5U0JHekVmQklGUVR1d2NZOHJF?oc=5",
+     "title": "緯創德州D1新廠報捷外資追捧、股價強漲逾8％ 法人喊出這目標價- 證券",
+     "broker": "外資",
+     "source": "工商時報",
+     "target": null,
+     "direction": "flat"
+    },
+    {
+     "date": "2026-07-22",
+     "link": "https://news.google.com/rss/articles/CBMib0FVX3lxTFBST0M4Q0lPV21mbmtWcnhxN091OXRUVTFhTk80bUFoQXhSOVJ2Y0oyS0xUSldnMy1aMk1hWUN3bHM3blQ1SkVlaWVPZVBDQjhFeG9YSXVXNlZ5Q2VwOGV1SjZETnN4cmF6YWRsak1pVQ?oc=5",
+     "title": "緯創上半營收成長翻倍 目標價210元",
+     "broker": "",
+     "source": "理財周刊",
+     "target": 210,
+     "direction": "flat"
+    },
+    {
+     "date": "2026-07-21",
+     "link": "https://news.google.com/rss/articles/CBMiX0FVX3lxTFBVY2szVDVSWVZaaFYtcGNyS2VDTkVVZGQ1alh0b0tkV2RoRDNkcFZBZ3paWC12S2VfSkdwWGZCSW1RQjdHZW9XQ25QcjJCelpjbzZkbG84QWNKUEhYWWxn?oc=5",
+     "title": "緯穎、緯創瑞銀雙升目標價- 證券",
+     "broker": "瑞銀",
+     "source": "工商時報",
+     "target": null,
+     "direction": "up"
+    },
+    {
+     "date": "2026-07-20",
+     "link": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE5XWmZRR0tjRGJIbDFPMTIyRnZDSUFqY0YtcDVwaTJ6OWgzNE1ka0RVLW54Y1pMT0d2TnZuWVhKVF83eHpEcXF5bWpvbjBELWZRbjZJWnl1U2l4d9IBX0FVX3lxTE0tOXBBQk96Q3k5ZEw3Y0hiVDJnZVgzbFl4Q0N6S2Q1Ym5GcUtUQnAtTnQ5Ul9CclNzbmtBQ2VMTHQ2ZVE1UEpiWDN4XzdNOUJqMDI3YjVmVURTdy1OYU5r?oc=5",
+     "title": "歐系券商調升緯創、緯穎目標價 AI 伺服器出貨展望轉強",
+     "broker": "",
+     "source": "經濟日報",
+     "target": null,
+     "direction": "up"
+    },
+    {
+     "date": "2026-07-06",
+     "link": "https://news.google.com/rss/articles/CBMiakFVX3lxTFBIZ1FWcElKdVZFU1gyR2dGTmNvVjVBNWJNbkd4WFhDLVV4dlZ0bVRmclVFVV9ucmpBaERkZjFKZUZCRXpCbUZGNE55MHlvY3duZXBWQWVTanQydWNQaXRLS25YRDZ1Yk9rckE?oc=5",
+     "title": "輝達揪伴進攻智慧工廠！鴻海、緯創、廣達...3檔老AI樂歪法人最新目標價、EPS一次看- 上市櫃",
+     "broker": "法人",
+     "source": "旺得富理財網",
+     "target": null,
+     "direction": "flat"
+    }
+   ],
+   "trend": "up",
+   "consensus": null,
+   "upside_pct": null
+  },
+  "retail": {
+   "ok": true,
+   "hot": false,
+   "bear": 0,
+   "bull": 0,
+   "titles": [],
+   "posts_7d": 0,
+   "posts_30d": 1,
+   "heat_ratio": 0
+  },
+  "ebc": {
+   "ok": true,
+   "count": 3,
+   "titles": [
+    {
+     "date": "08-01",
+     "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE4yX2dzYUZtZFI3akZWQTh0Wk1KclJpSFFpNkRwN3RHdDc1YnQyM0hsSk1FNnZDVUFtYU96Z1RNUnJEYXBNam53SGtoVVZvdTJIN0hnbW5B?oc=5",
+     "title": "緯創38萬股東注意！現金股利再延3天 最新發放日曝光"
+    },
+    {
+     "date": "08-03",
+     "link": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE1LUWtWWjhXTWxLYW1nV0xjQlcyYzBJZXVHTzQwWHEzYnpva1hxMXlwOUdJSV9iVnhQN3BfU0s4LTRZYXJmQXpVQ2h5bDZ1RWhSWmFRNTZGZzl5QQ?oc=5",
+     "title": "台積電休息沒在怕！台股收漲266點 力守43K"
+    },
+    {
+     "date": "08-03",
+     "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE9DNXRYb1ZkcEFXUTRjc090Mkd5X3NaV0xvbmwwVWotU2FuWndfX0gyaUhjQlRhVkhULWFiNFZ5Ykg0MlJXd1QtNDk4MzVVWklHLUk0SEFn?oc=5",
+     "title": "外資賣192億、空單破9萬口！ 投信豪擲211億撐盤"
+    }
+   ],
+   "in_title": 1
+  },
+  "base_date": null,
+  "price_at_report": 195,
+  "ret_5d": null,
+  "mkt_ret_5d": null,
+  "ret_20d": null,
+  "mkt_ret_20d": null,
+  "inst_20d": null,
+  "analyzed_at": "2026-11-18 13:34"
  }
 ]
