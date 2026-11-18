@@ -47,12 +47,12 @@
   {
    "signal_type": "🔵 戴維斯雙擊候選",
    "bias": "bull",
-   "n_5d": 0,
-   "avg_excess_5d": null,
-   "hit_rate_5d": null,
-   "n_20d": 0,
-   "avg_excess_20d": null,
-   "hit_rate_20d": null
+   "n_5d": 1,
+   "avg_excess_5d": -6.11,
+   "hit_rate_5d": 0,
+   "n_20d": 1,
+   "avg_excess_20d": -14.94,
+   "hit_rate_20d": 0
   },
   {
    "signal_type": "🔵 順風車",
@@ -77,6 +77,30 @@
  ],
  "brokers": [
   {
+   "broker": "瑞銀",
+   "direction": "up",
+   "n_20d": 1,
+   "avg_excess_20d": 18.64,
+   "hit_rate_20d": 100,
+   "n_total": 1
+  },
+  {
+   "broker": "外資",
+   "direction": "up",
+   "n_20d": 1,
+   "avg_excess_20d": -1.59,
+   "hit_rate_20d": 0,
+   "n_total": 1
+  },
+  {
+   "broker": "（未具名）",
+   "direction": "up",
+   "n_20d": 1,
+   "avg_excess_20d": 22.28,
+   "hit_rate_20d": 100,
+   "n_total": 1
+  },
+  {
    "broker": "外資",
    "direction": "down",
    "n_20d": 0,
@@ -93,30 +117,6 @@
    "n_total": 2
   },
   {
-   "broker": "瑞銀",
-   "direction": "up",
-   "n_20d": 0,
-   "avg_excess_20d": null,
-   "hit_rate_20d": null,
-   "n_total": 1
-  },
-  {
-   "broker": "（未具名）",
-   "direction": "down",
-   "n_20d": 0,
-   "avg_excess_20d": null,
-   "hit_rate_20d": null,
-   "n_total": 1
-  },
-  {
-   "broker": "外資",
-   "direction": "up",
-   "n_20d": 0,
-   "avg_excess_20d": null,
-   "hit_rate_20d": null,
-   "n_total": 1
-  },
-  {
    "broker": "法人",
    "direction": "down",
    "n_20d": 0,
@@ -126,7 +126,7 @@
   },
   {
    "broker": "（未具名）",
-   "direction": "up",
+   "direction": "down",
    "n_20d": 0,
    "avg_excess_20d": null,
    "hit_rate_20d": null,

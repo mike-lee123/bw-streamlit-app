@@ -14,6 +14,20 @@
   "mkt_ret_20d": null
  },
  {
+  "stock_id": "3231",
+  "news_date": "2026-11-16",
+  "broker": "外資",
+  "direction": "down",
+  "target": null,
+  "title": "市場氣氛轉弱 外資調降廣達、鴻海及緯創等 AI 伺服器概念股目標價",
+  "source": "經濟日報",
+  "link": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE5wcE04cGxVcHA5WHRfV2ZacVlCZFIxVzhTVUI5cGFBSFVLdlhIeHp0LXNhaHdlSWh1cy1DVXc3WU1WSGg1cl90dEU3SFREOXN4QVZ4Tk9yMmVod9IBX0FVX3lxTE0zUW9BYnlhWVBDOUdzcnQ5VWdFZnEzVlBhMlRLQ29kMm5MM1ZIYnllMUxjNUdNanhVcVVkN1FZekxOczlWTzVvTjJWSWxPMzJHRzBqeFF3Vl9HX3pfRGFB?oc=5",
+  "close_base": null,
+  "close_20d": null,
+  "ret_20d": null,
+  "mkt_ret_20d": null
+ },
+ {
   "stock_id": "6274",
   "news_date": "2026-11-16",
   "broker": "FactSet 共識",
@@ -42,20 +56,6 @@
   "mkt_ret_20d": null
  },
  {
-  "stock_id": "3231",
-  "news_date": "2026-11-16",
-  "broker": "外資",
-  "direction": "down",
-  "target": null,
-  "title": "市場氣氛轉弱 外資調降廣達、鴻海及緯創等 AI 伺服器概念股目標價",
-  "source": "經濟日報",
-  "link": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE5wcE04cGxVcHA5WHRfV2ZacVlCZFIxVzhTVUI5cGFBSFVLdlhIeHp0LXNhaHdlSWh1cy1DVXc3WU1WSGg1cl90dEU3SFREOXN4QVZ4Tk9yMmVod9IBX0FVX3lxTE0zUW9BYnlhWVBDOUdzcnQ5VWdFZnEzVlBhMlRLQ29kMm5MM1ZIYnllMUxjNUdNanhVcVVkN1FZekxOczlWTzVvTjJWSWxPMzJHRzBqeFF3Vl9HX3pfRGFB?oc=5",
-  "close_base": null,
-  "close_20d": null,
-  "ret_20d": null,
-  "mkt_ret_20d": null
- },
- {
   "stock_id": "6223",
   "news_date": "2026-11-14",
   "broker": "FactSet 共識",
@@ -70,20 +70,6 @@
   "mkt_ret_20d": null
  },
  {
-  "stock_id": "3231",
-  "news_date": "2026-11-12",
-  "broker": "FactSet 共識",
-  "direction": "flat",
-  "target": 283,
-  "title": "鉅亨速報 - Factset 最新調查：緯創(3231-TW)EPS預估上修至18.38元，預估目標價為283元",
-  "source": "TradingView",
-  "link": "https://news.google.com/rss/articles/CBMiZEFVX3lxTE1jMERlbjVqbDkxSS1LMDNrY0VMS195eDFuUWZQaFRWQ3BHT1BEbmRyQ2pfUXRlOWVUYmROWlptOUIza21FU3lwZXhTZzZOa29sSWFBMzJRc3psSWVoN2kwTlR0M18?oc=5",
-  "close_base": null,
-  "close_20d": null,
-  "ret_20d": null,
-  "mkt_ret_20d": null
- },
- {
   "stock_id": "2382",
   "news_date": "2026-11-12",
   "broker": "法人",
@@ -92,6 +78,20 @@
   "title": "毛利率不如預期！廣達今挫逾3% 法人點2關鍵喊買、降目標價",
   "source": "TVBS新聞網",
   "link": "https://news.google.com/rss/articles/CBMiT0FVX3lxTE9XQ2NILUd1aWt3Y2tMM3RCcnRaMEFGTmJKdG5hWnhZWkNvdkhyc044WkJrdFJXSk8yaFhWSUllLWlYcWtIV0hzVXJabHFzblU?oc=5",
+  "close_base": null,
+  "close_20d": null,
+  "ret_20d": null,
+  "mkt_ret_20d": null
+ },
+ {
+  "stock_id": "3231",
+  "news_date": "2026-11-12",
+  "broker": "FactSet 共識",
+  "direction": "flat",
+  "target": 283,
+  "title": "鉅亨速報 - Factset 最新調查：緯創(3231-TW)EPS預估上修至18.38元，預估目標價為283元",
+  "source": "TradingView",
+  "link": "https://news.google.com/rss/articles/CBMiZEFVX3lxTE1jMERlbjVqbDkxSS1LMDNrY0VMS195eDFuUWZQaFRWQ3BHT1BEbmRyQ2pfUXRlOWVUYmROWlptOUIza21FU3lwZXhTZzZOa29sSWFBMzJRc3psSWVoN2kwTlR0M18?oc=5",
   "close_base": null,
   "close_20d": null,
   "ret_20d": null,
@@ -184,34 +184,6 @@
  {
   "stock_id": "2383",
   "news_date": "2026-10-29",
-  "broker": "外資",
-  "direction": "flat",
-  "target": 11700,
-  "title": "高階CCL供不應求 外資喊台光電目標價1.17萬元、台燿3,460元",
-  "source": "BigGo 財經",
-  "link": "https://news.google.com/rss/articles/CBMiekFVX3lxTE00dnFuLVM3bE11X3FTbFV5TEt1V2t4ZUw4UFZrTVUyMC1Fb1ZKX1ptaXQzQXFmd2JCYVpQSjdQbDk0SkxzOGJacnZaeF9jc1ZFN1Z5YlFmU2E3YzB5WHd0S25lSExvOFA0ejRUY0RnQkNPZElGX0lvaExn?oc=5",
-  "close_base": null,
-  "close_20d": null,
-  "ret_20d": null,
-  "mkt_ret_20d": null
- },
- {
-  "stock_id": "2383",
-  "news_date": "2026-10-29",
-  "broker": "法人",
-  "direction": "flat",
-  "target": null,
-  "title": "四年長約「超額預定」 台光電漲價、擴產仍不夠賣 法人給破萬元驚人目標價",
-  "source": "Yahoo新聞",
-  "link": "https://news.google.com/rss/articles/CBMiwANBVV95cUxNbl9idFlTRTZjS2JDbFRpV2QtaWxmdzNOZVFaT2lSYmsxNGQ0M1Y4UnNkckJQOW4yV2xCMnpiRF9xZHBRWU0xY3hiMXFTaENYVEtxa3hDOVQ1V1JWOXVIb2EybE1JZkVrV0xxajlpRUFIX05yX1ZnWVJTekl2OWZUUXM4NUN4cVVabUN3SWZiV2Z3bm4waDhZNDRMTjZDSkpocTJHcGtLWEFFYmZXbkVmdnpTR1Rnd2ZwS0ladTVpYlBuREdRVEI4VnByY1Bzc3dHOF9NYnptaDBudlVOb2NsSnhaMEttQ1h3SHhnWUxQTF9sVWxpYm93TklSM2lKQkpHdTRoVjVCTkN5T3Y2WUNweVJqczlwTm5QTmxGeWVvLVhadUlJampOV0pqdVlGdGRHeHQ3RFZHcmgtbV9KZS1lNUl5RXJONkN5R1BSWXR3LWVaRWo3cFp5UFY1TjhVRXM1dllyYkw1MVZGdzh6aUhacDE2d1NYSUVjMTZCbHpVZXJJbmliaHVNTzFFS092V3huSTVtREs2ZVlNQkZYUDdPY2s1RVZfLWVYNFc4ZGpobnZmQTRpd0pWTTBzLXZrdlZX?oc=5",
-  "close_base": null,
-  "close_20d": null,
-  "ret_20d": null,
-  "mkt_ret_20d": null
- },
- {
-  "stock_id": "2383",
-  "news_date": "2026-10-29",
   "broker": "",
   "direction": "flat",
   "target": null,
@@ -240,6 +212,20 @@
  {
   "stock_id": "2383",
   "news_date": "2026-10-29",
+  "broker": "法人",
+  "direction": "flat",
+  "target": null,
+  "title": "四年長約「超額預定」 台光電漲價、擴產仍不夠賣 法人給破萬元驚人目標價",
+  "source": "Yahoo新聞",
+  "link": "https://news.google.com/rss/articles/CBMiwANBVV95cUxNbl9idFlTRTZjS2JDbFRpV2QtaWxmdzNOZVFaT2lSYmsxNGQ0M1Y4UnNkckJQOW4yV2xCMnpiRF9xZHBRWU0xY3hiMXFTaENYVEtxa3hDOVQ1V1JWOXVIb2EybE1JZkVrV0xxajlpRUFIX05yX1ZnWVJTekl2OWZUUXM4NUN4cVVabUN3SWZiV2Z3bm4waDhZNDRMTjZDSkpocTJHcGtLWEFFYmZXbkVmdnpTR1Rnd2ZwS0ladTVpYlBuREdRVEI4VnByY1Bzc3dHOF9NYnptaDBudlVOb2NsSnhaMEttQ1h3SHhnWUxQTF9sVWxpYm93TklSM2lKQkpHdTRoVjVCTkN5T3Y2WUNweVJqczlwTm5QTmxGeWVvLVhadUlJampOV0pqdVlGdGRHeHQ3RFZHcmgtbV9KZS1lNUl5RXJONkN5R1BSWXR3LWVaRWo3cFp5UFY1TjhVRXM1dllyYkw1MVZGdzh6aUhacDE2d1NYSUVjMTZCbHpVZXJJbmliaHVNTzFFS092V3huSTVtREs2ZVlNQkZYUDdPY2s1RVZfLWVYNFc4ZGpobnZmQTRpd0pWTTBzLXZrdlZX?oc=5",
+  "close_base": null,
+  "close_20d": null,
+  "ret_20d": null,
+  "mkt_ret_20d": null
+ },
+ {
+  "stock_id": "2383",
+  "news_date": "2026-10-29",
   "broker": "外資",
   "direction": "flat",
   "target": null,
@@ -252,14 +238,14 @@
   "mkt_ret_20d": null
  },
  {
-  "stock_id": "6510",
-  "news_date": "2026-10-28",
-  "broker": "FactSet 共識",
+  "stock_id": "2383",
+  "news_date": "2026-10-29",
+  "broker": "外資",
   "direction": "flat",
-  "target": 4187.5,
-  "title": "Factset 最新調查：精測(6510-TW)EPS預估下修至62.25元，預估目標價為4187.5元｜新聞快訊｜豐雲學堂",
-  "source": "永豐金證券",
-  "link": "https://news.google.com/rss/articles/CBMidkFVX3lxTE9MM2x4cktIaWhidlo2UmQwOXJod0xWUXVOelZxUDZFMms4TWtYc0RISTM0Sk14V1dtUDNELVoyNVVxeVRSbWdodUlXQXM1SUlZQnhkLVJLUXF1MEdUa2pJSGsyUVQyTDJUalQ3UHdteXhmcmtKX1E?oc=5",
+  "target": 11700,
+  "title": "高階CCL供不應求 外資喊台光電目標價1.17萬元、台燿3,460元",
+  "source": "BigGo 財經",
+  "link": "https://news.google.com/rss/articles/CBMiekFVX3lxTE00dnFuLVM3bE11X3FTbFV5TEt1V2t4ZUw4UFZrTVUyMC1Fb1ZKX1ptaXQzQXFmd2JCYVpQSjdQbDk0SkxzOGJacnZaeF9jc1ZFN1Z5YlFmU2E3YzB5WHd0S25lSExvOFA0ejRUY0RnQkNPZElGX0lvaExn?oc=5",
   "close_base": null,
   "close_20d": null,
   "ret_20d": null,
@@ -274,6 +260,20 @@
   "title": "CCL缺很大 三雄搶食高階商機！ 台光電新目標價曝光",
   "source": "Yahoo新聞",
   "link": "https://news.google.com/rss/articles/CBMiygJBVV95cUxOSDRHWDI1RVVsdzdDT01LWXFKdXpjcGFLNDY1QXJkM291WjlNc2JuT21Fby1XV0VMMkdfV2dUTDZwc2tjSzNPU3h6YmhhZ0JGazJjSjBONnZfX0V6RDVfVmJaZFhPZkdrTUw1aFlsR1VjQmZSaXR0NmNPX2dPNlV6SVg3aTVvcl8tQVN5VEpNU2xzbHl0dXBXM2JqR3JDTG9wWTJmcHZaN2hGT0FJWmkyM0VSWVdVLUdBYlhnYVBUM0tOVVc3bFotb2cwX0NnWUoxZGZQQTAzVkRIYlNEUWpwd1hTZnNEbW9ZTlhleUVhaEh3cGt6LWdwblhxRE1LS1p3R3lsQWVSY292aERoRzJ5RlRqdU54azNVdGpBcEVicG1ETnJNSjVLcm0wZjZjc1hFQnNQb0JJT2o4R2dveDBRZTlVRExpallPN1E?oc=5",
+  "close_base": null,
+  "close_20d": null,
+  "ret_20d": null,
+  "mkt_ret_20d": null
+ },
+ {
+  "stock_id": "6510",
+  "news_date": "2026-10-28",
+  "broker": "FactSet 共識",
+  "direction": "flat",
+  "target": 4187.5,
+  "title": "Factset 最新調查：精測(6510-TW)EPS預估下修至62.25元，預估目標價為4187.5元｜新聞快訊｜豐雲學堂",
+  "source": "永豐金證券",
+  "link": "https://news.google.com/rss/articles/CBMidkFVX3lxTE9MM2x4cktIaWhidlo2UmQwOXJod0xWUXVOelZxUDZFMms4TWtYc0RISTM0Sk14V1dtUDNELVoyNVVxeVRSbWdodUlXQXM1SUlZQnhkLVJLUXF1MEdUa2pJSGsyUVQyTDJUalQ3UHdteXhmcmtKX1E?oc=5",
   "close_base": null,
   "close_20d": null,
   "ret_20d": null,
@@ -344,10 +344,10 @@
   "title": "《電週邊》廣達Q4營收拚逐月成長 外資目標價只升1元至300",
   "source": "富聯網",
   "link": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxPYmFFY1NfT0NwdHdvVEhLNmR4a01nMTVPRFRDVEpjcFpxRm9NQVFDNkdLSEUzd2F5NlNqeEI4QjI5UVdmNHZtU2VtUVFDbE13dVFLV0tZczFJaEVKSTdYbU9SNlFubjRWT1M5UjUtX2RRaXBlSVNqTTNQb3Y0SVlzdzM3TjQxY3Jk?oc=5",
-  "close_base": null,
-  "close_20d": null,
-  "ret_20d": null,
-  "mkt_ret_20d": null
+  "close_base": 314.5,
+  "close_20d": 265,
+  "ret_20d": -15.74,
+  "mkt_ret_20d": -14.15
  },
  {
   "stock_id": "2383",
@@ -400,9 +400,9 @@
   "title": "緯穎、緯創瑞銀雙升目標價- 證券",
   "source": "工商時報",
   "link": "https://news.google.com/rss/articles/CBMiX0FVX3lxTFBVY2szVDVSWVZaaFYtcGNyS2VDTkVVZGQ1alh0b0tkV2RoRDNkcFZBZ3paWC12S2VfSkdwWGZCSW1RQjdHZW9XQ25QcjJCelpjbzZkbG84QWNKUEhYWWxn?oc=5",
-  "close_base": null,
-  "close_20d": null,
-  "ret_20d": null,
-  "mkt_ret_20d": null
+  "close_base": 149.5,
+  "close_20d": 181,
+  "ret_20d": 21.07,
+  "mkt_ret_20d": 2.43
  }
 ]
