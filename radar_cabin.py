@@ -115,12 +115,19 @@ def _stock_detail(rows: list, stock_id: str, news: list):
       st.markdown(f"**{r.get('signal')}**　法說會 {r.get('call_date')}")
       if r.get("one_line"):
         st.write(r["one_line"])
-      m = st.columns(4)
-      m[0].metric("簡報語氣", f"{r.get('tone') or '—'}（{_fmt(r.get('tone_score'), digits=0)}）")
-      m[1].metric("法人 5 日", f"{_fmt(c.get('inst_5d'), ' 張', 0)}", _fmt(c.get("inst_5d_pct"), "% 佔量"), delta_color="off")
-      m[2].metric("券商動向", BROKER_TXT.get(b.get("trend"), "—"), f"升 {b.get('ups', 0)}／降 {b.get('downs', 0)}", delta_color="off")
+      # 用小字排版，不用 st.metric：metric 字太大，窄螢幕會把「非常樂觀」截成「非常…」
       heat = rt.get("heat_ratio")
-      m[3].metric("PTT 散戶", f"{rt.get('posts_7d', 0)} 篇", "過熱" if rt.get("hot") else (f"{heat} 倍" if heat is not None else "—"), delta_color="off")
+      cells = [
+          ("簡報語氣", f"{r.get('tone') or '—'}（{_fmt(r.get('tone_score'), digits=0)}）", ""),
+          ("法人 5 日", _fmt(c.get("inst_5d"), " 張", 0), f"佔成交量 {_fmt(c.get('inst_5d_pct'), '%')}"),
+          ("券商動向", BROKER_TXT.get(b.get("trend"), "—"), f"調升 {b.get('ups', 0)}／調降 {b.get('downs', 0)}"),
+          ("PTT 散戶", f"近 7 天 {rt.get('posts_7d', 0)} 篇",
+           "過熱" if rt.get("hot") else (f"熱度 {heat} 倍" if heat is not None else "")),
+      ]
+      for col, (label, value, sub) in zip(st.columns(4), cells):
+        col.markdown(f"<div style='font-size:12px;opacity:.65'>{label}</div>"
+                     f"<div style='font-size:16px;font-weight:600'>{value}</div>"
+                     f"<div style='font-size:12px;opacity:.65'>{sub}</div>", unsafe_allow_html=True)
       if r.get("ret_5d") is not None:
         ex5 = r["ret_5d"] - (r.get("mkt_ret_5d") or 0)
         ex20 = None if r.get("ret_20d") is None else r["ret_20d"] - (r.get("mkt_ret_20d") or 0)
