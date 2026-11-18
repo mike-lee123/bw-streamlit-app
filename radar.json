@@ -57,6 +57,7 @@
    "posts_30d": 0,
    "heat_ratio": 0
   },
+  "ebc": null,
   "base_date": null,
   "price_at_report": 533,
   "ret_5d": null,
@@ -148,6 +149,7 @@
    "posts_30d": 0,
    "heat_ratio": 0
   },
+  "ebc": null,
   "base_date": null,
   "price_at_report": 157,
   "ret_5d": null,
@@ -199,6 +201,7 @@
   },
   "brokers": null,
   "retail": null,
+  "ebc": null,
   "base_date": null,
   "price_at_report": 533,
   "ret_5d": null,
@@ -321,6 +324,7 @@
    "posts_30d": 1,
    "heat_ratio": 2.7
   },
+  "ebc": null,
   "base_date": null,
   "price_at_report": 262.5,
   "ret_5d": null,
@@ -373,6 +377,7 @@
   },
   "brokers": null,
   "retail": null,
+  "ebc": null,
   "base_date": null,
   "price_at_report": 46.65,
   "ret_5d": null,
@@ -422,6 +427,7 @@
   },
   "brokers": null,
   "retail": null,
+  "ebc": null,
   "base_date": null,
   "price_at_report": 3995,
   "ret_5d": null,
@@ -578,6 +584,7 @@
    "posts_30d": 0,
    "heat_ratio": 0
   },
+  "ebc": null,
   "base_date": null,
   "price_at_report": 3540,
   "ret_5d": null,
@@ -626,6 +633,7 @@
   },
   "brokers": null,
   "retail": null,
+  "ebc": null,
   "base_date": null,
   "price_at_report": 259.5,
   "ret_5d": null,
@@ -696,6 +704,7 @@
    "posts_30d": 0,
    "heat_ratio": 0
   },
+  "ebc": null,
   "base_date": null,
   "price_at_report": 533,
   "ret_5d": null,
