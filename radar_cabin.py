@@ -49,6 +49,39 @@ def _fmt(v, unit="", digits=1, sign=True):
   return s + unit
 
 
+# ---------- 外部內容的安全處理 ----------
+# 新聞和 PTT 標題來自外部網站，顯示前要跳脫 Markdown 符號，連結只放行預期的網域
+_ALLOWED_HOSTS = ("news.google.com", "www.ptt.cc", "mopsov.twse.com.tw")
+_MD_SPECIAL = str.maketrans({ch: "\\" + ch for ch in r"\`*_{}[]()<>#+-.!|~"})
+
+
+def _md(text) -> str:
+  return str(text or "").translate(_MD_SPECIAL)
+
+
+def _safe_url(url) -> str:
+  from urllib.parse import urlparse
+  try:
+    u = urlparse(str(url or ""))
+  except ValueError:
+    return ""
+  return str(url) if u.scheme == "https" and u.hostname in _ALLOWED_HOSTS else ""
+
+
+def _link(title, url) -> str:
+  safe = _safe_url(url)
+  return f"[{_md(title)}]({safe})" if safe else _md(title)
+
+
+def _no_formula(df: pd.DataFrame) -> pd.DataFrame:
+  """下載前處理：以 = + - @ 或 Tab／換行開頭的文字前面加 '，Excel 才不會當成公式執行。數字欄位不受影響。"""
+  out = df.copy()
+  for col in out.columns:
+    if out[col].dtype == object:
+      out[col] = out[col].map(lambda v: "'" + v if isinstance(v, str) and v[:1] in ("=", "+", "-", "@", "\t", "\r") else v)
+  return out
+
+
 BROKER_TXT = {"up": "以調升為主", "down": "以調降為主", "mixed": "方向不明顯", "flat": "只報價位", "none": "無報導"}
 
 
@@ -86,7 +119,7 @@ def _excel(sheets: dict) -> bytes:
   buf = io.BytesIO()
   with pd.ExcelWriter(buf, engine="openpyxl") as xw:
     for name, df in sheets.items():
-      df.to_excel(xw, sheet_name=name[:31], index=False)
+      _no_formula(df).to_excel(xw, sheet_name=name[:31], index=False)
   return buf.getvalue()
 
 
@@ -144,14 +177,14 @@ def _stock_detail(rows: list, stock_id: str, news: list):
         if items:
           arrow = {"up": "▲", "down": "▼"}
           st.markdown("**券商目標價新聞**\n" + "\n".join(
-              f"- {arrow.get(i['direction'], '・')} {(i.get('date') or '')[5:]} [{i['title'][:36]}]({i['link']})" for i in items))
+              f"- {arrow.get(i['direction'], '・')} {_md((i.get('date') or '')[5:])} {_link(i['title'][:36], i.get('link'))}" for i in items))
         if rt.get("titles"):
           st.markdown("**PTT 近期討論**\n" + "\n".join(
-              f"- {t['date']} [{t['title'][:36]}]({t['url']})（{'爆' if t['nrec'] >= 100 else t['nrec']} 推）" for t in rt["titles"][:3]))
+              f"- {_md(t['date'])} {_link(t['title'][:36], t.get('url'))}（{'爆' if t['nrec'] >= 100 else int(t['nrec'])} 推）" for t in rt["titles"][:3]))
       if r.get("notes"):
-        st.caption("；".join(r["notes"]))
-      if r.get("pdf_url"):
-        st.markdown(f"[📄 法說會簡報 PDF]({r['pdf_url']})")
+        st.caption(_md("；".join(r["notes"])))
+      if _safe_url(r.get("pdf_url")):
+        st.markdown(f"[📄 法說會簡報 PDF]({_safe_url(r['pdf_url'])})")
 
 
 def render_radar_cabin(focus_stock: str | None = None):
@@ -207,7 +240,7 @@ def render_radar_cabin(focus_stock: str | None = None):
   brk = pd.DataFrame(score.get("brokers") or [])
   nws = pd.DataFrame(news or [])
   d1, d2 = st.columns(2)
-  d1.download_button("⬇️ 下載 CSV（目前篩選）", view.to_csv(index=False).encode("utf-8-sig"),
+  d1.download_button("⬇️ 下載 CSV（目前篩選）", _no_formula(view).to_csv(index=False).encode("utf-8-sig"),
                      file_name=f"法說會雷達_{meta.get('updated_at', '')[:10]}.csv", mime="text/csv", key="radar_csv")
   d2.download_button("⬇️ 下載 Excel（雷達＋戰績＋券商新聞）",
                      _excel({"雷達訊號": view, "訊號戰績": sig, "券商戰績": brk, "券商目標價新聞": nws}),
