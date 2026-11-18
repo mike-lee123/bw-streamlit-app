@@ -157,10 +157,11 @@ def _stock_detail(rows: list, stock_id: str, news: list):
           ("PTT 散戶", f"近 7 天 {rt.get('posts_7d', 0)} 篇",
            "過熱" if rt.get("hot") else (f"熱度 {heat} 倍" if heat is not None else "")),
       ]
+      from html import escape
       for col, (label, value, sub) in zip(st.columns(4), cells):
-        col.markdown(f"<div style='font-size:12px;opacity:.65'>{label}</div>"
-                     f"<div style='font-size:16px;font-weight:600'>{value}</div>"
-                     f"<div style='font-size:12px;opacity:.65'>{sub}</div>", unsafe_allow_html=True)
+        col.markdown(f"<div style='font-size:12px;opacity:.65'>{escape(str(label))}</div>"
+                     f"<div style='font-size:16px;font-weight:600'>{escape(str(value))}</div>"
+                     f"<div style='font-size:12px;opacity:.65'>{escape(str(sub))}</div>", unsafe_allow_html=True)
       if r.get("ret_5d") is not None:
         ex5 = r["ret_5d"] - (r.get("mkt_ret_5d") or 0)
         ex20 = None if r.get("ret_20d") is None else r["ret_20d"] - (r.get("mkt_ret_20d") or 0)
