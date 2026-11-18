@@ -65,7 +65,11 @@ def _safe_url(url) -> str:
     u = urlparse(str(url or ""))
   except ValueError:
     return ""
-  return str(url) if u.scheme == "https" and u.hostname in _ALLOWED_HOSTS else ""
+  s = str(url)
+  # 含空白或 ( ) < > [ ] 的網址會破壞 Markdown 連結語法，直接不採用
+  if any(ch in s for ch in " \t\r\n()<>[]\"'`"):
+    return ""
+  return s if u.scheme == "https" and u.hostname in _ALLOWED_HOSTS else ""
 
 
 def _link(title, url) -> str:
@@ -75,10 +79,10 @@ def _link(title, url) -> str:
 
 def _no_formula(df: pd.DataFrame) -> pd.DataFrame:
   """下載前處理：以 = + - @ 或 Tab／換行開頭的文字前面加 '，Excel 才不會當成公式執行。數字欄位不受影響。"""
+  # 每一欄都跑（pandas 3 的文字欄位是 string 型別，不是 object）；非文字的值原樣保留
   out = df.copy()
   for col in out.columns:
-    if out[col].dtype == object:
-      out[col] = out[col].map(lambda v: "'" + v if isinstance(v, str) and v[:1] in ("=", "+", "-", "@", "\t", "\r") else v)
+    out[col] = out[col].map(lambda v: "'" + v if isinstance(v, str) and v[:1] in ("=", "+", "-", "@", "\t", "\r", "\n") else v)
   return out
 
 
