@@ -715,6 +715,510 @@
   "analyzed_at": "2026-11-18 00:25"
  },
  {
+  "call_key": "6510_651020261102M001.pdf",
+  "stock_id": "6510",
+  "name": "精測",
+  "call_date": "2026-11-16",
+  "signal": "🟡 訊號不明顯",
+  "level": 0,
+  "market": "上櫃",
+  "tone": "樂觀",
+  "tone_score": 1,
+  "news_sentiment": 2,
+  "one_line": "中華精測第三季營收和毛利率雙雙上揚，展望未來市場前景樂觀。",
+  "guidance": [
+   "第三季營收年增53%，毛利率提升至57.3%。",
+   "各應用市場如HPC、AP等表現強勁，佔比分別達65.9%及32%。",
+   "公司預期未來半導體市場將持續成長。"
+  ],
+  "risks": [],
+  "notes": [
+   "會後 2 個交易日法人合計 +98 張"
+  ],
+  "news_reason": "多篇新聞標題顯示精測股價走強及創新高，且有漲停現象。",
+  "pdf_url": "https://mopsov.twse.com.tw/nas/STR/651020261102M001.pdf",
+  "chips": {
+   "close": 2915,
+   "inst_5d": 930,
+   "trust_5d": 814,
+   "data_date": "2026-11-18",
+   "dealer_5d": 103,
+   "margin_5d": -139,
+   "volume_5d": 5519,
+   "foreign_5d": 116,
+   "inst_5d_pct": 16.9,
+   "price_5d_pct": -4.7,
+   "trust_streak": 2,
+   "foreign_streak": -1,
+   "after_call_days": 2,
+   "after_call_inst": 98,
+   "price_since_call_pct": -3
+  },
+  "brokers": {
+   "ups": 0,
+   "downs": 0,
+   "items": [
+    {
+     "date": "2026-10-28",
+     "link": "https://news.google.com/rss/articles/CBMidkFVX3lxTE9MM2x4cktIaWhidlo2UmQwOXJod0xWUXVOelZxUDZFMms4TWtYc0RISTM0Sk14V1dtUDNELVoyNVVxeVRSbWdodUlXQXM1SUlZQnhkLVJLUXF1MEdUa2pJSGsyUVQyTDJUalQ3UHdteXhmcmtKX1E?oc=5",
+     "title": "Factset 最新調查：精測(6510-TW)EPS預估下修至62.25元，預估目標價為4187.5元｜新聞快訊｜豐雲學堂",
+     "broker": "FactSet 共識",
+     "source": "永豐金證券",
+     "target": 4187.5,
+     "direction": "flat"
+    },
+    {
+     "date": "2026-10-23",
+     "link": "https://news.google.com/rss/articles/CBMiakFVX3lxTE5OLXdMSjAwZmpDZzNicFlJLVJwWkYzNzNtZnFGcHdTRE54WVhBcG9MbTVhcWJUcWo1X0FIY3p2NXJsNFN3WmZpWjF1SzlqOFpTZlBncjU1RnhBMXlrSUlYeUFYcUJoUFdydEE?oc=5",
+     "title": "封測廠目標價1表看》日月光、京元電、矽格、精測、頎邦...老牌法人「18選5」：這3檔雙位數季增- 上市櫃",
+     "broker": "法人",
+     "source": "旺得富理財網",
+     "target": null,
+     "direction": "flat"
+    }
+   ],
+   "trend": "flat",
+   "consensus": {
+    "date": "2026-10-28",
+    "target": 4187.5,
+    "direction": "flat",
+    "change_pct": null
+   },
+   "upside_pct": 43.7
+  },
+  "retail": {
+   "ok": true,
+   "hot": false,
+   "bear": 0,
+   "bull": 0,
+   "titles": [],
+   "posts_7d": 0,
+   "posts_30d": 1,
+   "heat_ratio": 0
+  },
+  "ebc": null,
+  "base_date": null,
+  "price_at_report": 2915,
+  "ret_5d": null,
+  "mkt_ret_5d": null,
+  "ret_20d": null,
+  "mkt_ret_20d": null,
+  "inst_20d": null,
+  "analyzed_at": "2026-11-18 17:43"
+ },
+ {
+  "call_key": "6274_627420261028M001.pdf",
+  "stock_id": "6274",
+  "name": "台燿",
+  "call_date": "2026-11-16",
+  "signal": "🟡 訊號不明顯",
+  "level": 0,
+  "market": "上櫃",
+  "tone": "保守",
+  "tone_score": -1,
+  "news_sentiment": -1,
+  "one_line": "簡報主要回顧財務數據，並未提出未來展望或風險。",
+  "guidance": [],
+  "risks": [
+   "去化庫存"
+  ],
+  "notes": [
+   "會後 2 個交易日法人合計 +2658 張"
+  ],
+  "news_reason": "多篇報導提到台燿股價重挫甚至跌停，顯示市場對公司前景不樂觀",
+  "pdf_url": "https://mopsov.twse.com.tw/nas/STR/627420261028M001.pdf",
+  "chips": {
+   "close": 768,
+   "inst_5d": 1556,
+   "trust_5d": -5555,
+   "data_date": "2026-11-18",
+   "dealer_5d": -61,
+   "margin_5d": -1861,
+   "volume_5d": 62034,
+   "foreign_5d": 7111,
+   "inst_5d_pct": 2.5,
+   "price_5d_pct": -27.5,
+   "trust_streak": -7,
+   "foreign_streak": 2,
+   "after_call_days": 2,
+   "after_call_inst": 2658,
+   "price_since_call_pct": -12.4
+  },
+  "brokers": {
+   "ups": 0,
+   "downs": 0,
+   "items": [
+    {
+     "date": "2026-11-16",
+     "link": "https://news.google.com/rss/articles/CBMidkFVX3lxTE1LYWJXaXk1c0F1aVZkSEprYTBQOHg2VmRFWU5WNkxjWElDRWxwdXJEalNkSUVPVUtDMklaM18tSFhiWTM3UnV5c0JPY0dnSXExWGJUM1JGZG55OW9Cbm14ZXZNOUMwdTVzZHo4YWlrSnduY3Rfb2c?oc=5",
+     "title": "Factset 最新調查：台燿(6274-TW)EPS預估上修至41.73元，預估目標價為2115元｜新聞快訊｜豐雲學堂",
+     "broker": "FactSet 共識",
+     "source": "永豐金證券",
+     "target": 2115,
+     "direction": "flat"
+    },
+    {
+     "date": "2026-11-06",
+     "link": "https://news.google.com/rss/articles/CBMiXEFVX3lxTE9zRjFtSGU4dWJ1QmlnX1JFM3A4WnBzQUNCWG1NNlFheHA5cDR1TC14blEzR3l5cjdKX1EzTGFOcmo5cThvaXpLVUJWWDNyd3Utc280TS16VkFEdWJi0gFiQVVfeXFMUGN0OWFDVmR4bzIzZUZjMTNjUjAzSVJ6bzd3UElHS0haVmxteWx1VlZpWG1tLVdlTHZEVy1VVEx5Z0Q3QXdwaEpsVjYyVnJEU3pWRUlORDhwaXAwS2FTQTduZUE?oc=5",
+     "title": "台燿目標價喊至2070元　明年EPS挑戰50元",
+     "broker": "",
+     "source": "鏡週刊Mirror Media",
+     "target": null,
+     "direction": "flat"
+    },
+    {
+     "date": "2026-11-01",
+     "link": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE03TkQ5Z042VEZZeTlLcXA1cXFqaWdVaUtQNS1nQ2lkakh1SndCM0VRaGdvQjJEdmZiWTlDTWFmV0JPeVlGUG5CMnByZ1NtNW52b2Fj?oc=5",
+     "title": "台股重挫反成買點？台光電、台燿迎漲價大行情 法人喊出驚人目標價",
+     "broker": "法人",
+     "source": "中天新聞網",
+     "target": null,
+     "direction": "flat"
+    },
+    {
+     "date": "2026-10-31",
+     "link": "https://news.google.com/rss/articles/CBMiXEFVX3lxTE4zcHItc21UOU8zUzZ4ME5tRXd6UVpSUDFSZDI3a1VPd2l5eTZoNDJkYUs3ZVNwOW1nVWVGcTIwNWhoX3NkNXY2M2N0QS0yOURTdXpmbU9jZXZCTldP0gFiQVVfeXFMUDhnZVIzVDdIekdXRTJmUGhhVE8zeDNwNWZkazJKdXFfc0RScFpQd0x3M2dXWU15ek9ER3E1bV9DTGhMdXFvdGkyNkd1X0JaZHlGaVhGMjZNb3JBNmtyb0prUWc?oc=5",
+     "title": "台燿挾高階材料出貨爆發　目標價衝2070元",
+     "broker": "",
+     "source": "鏡週刊Mirror Media",
+     "target": 2070,
+     "direction": "flat"
+    },
+    {
+     "date": "2026-10-29",
+     "link": "https://news.google.com/rss/articles/CBMiekFVX3lxTE00dnFuLVM3bE11X3FTbFV5TEt1V2t4ZUw4UFZrTVUyMC1Fb1ZKX1ptaXQzQXFmd2JCYVpQSjdQbDk0SkxzOGJacnZaeF9jc1ZFN1Z5YlFmU2E3YzB5WHd0S25lSExvOFA0ejRUY0RnQkNPZElGX0lvaExn?oc=5",
+     "title": "高階CCL供不應求 外資喊台光電目標價1.17萬元、台燿3,460元",
+     "broker": "外資",
+     "source": "BigGo 財經",
+     "target": null,
+     "direction": "flat"
+    }
+   ],
+   "trend": "flat",
+   "consensus": {
+    "date": "2026-11-16",
+    "target": 2115,
+    "direction": "flat",
+    "change_pct": null
+   },
+   "upside_pct": 175.4
+  },
+  "retail": {
+   "ok": true,
+   "hot": false,
+   "bear": 0,
+   "bull": 0,
+   "titles": [
+    {
+     "url": "https://www.ptt.cc/bbs/Stock/M.1794449616.A.763.html",
+     "date": "11-12",
+     "nrec": 6,
+     "side": "",
+     "title": "[新聞] MSCI半年調出爐 景碩、南電、台燿入列 禾"
+    }
+   ],
+   "posts_7d": 1,
+   "posts_30d": 1,
+   "heat_ratio": 3.5
+  },
+  "ebc": null,
+  "base_date": null,
+  "price_at_report": 768,
+  "ret_5d": null,
+  "mkt_ret_5d": null,
+  "ret_20d": null,
+  "mkt_ret_20d": null,
+  "inst_20d": null,
+  "analyzed_at": "2026-11-18 17:43"
+ },
+ {
+  "call_key": "3131_313120261110M001.pdf",
+  "stock_id": "3131",
+  "name": "弘塑",
+  "call_date": "2026-11-16",
+  "signal": "🟡 訊號不明顯",
+  "level": 0,
+  "market": "上櫃",
+  "tone": "中性",
+  "tone_score": 0,
+  "news_sentiment": 0,
+  "one_line": "弘塑科技法說會主要回顧過去業績，並強調未來擴充產能及提升生產力。",
+  "guidance": [
+   "無明確未來展望",
+   "強調擴充產能與提升生產力",
+   "未提及具體營收或毛利目標"
+  ],
+  "risks": [],
+  "notes": [
+   "會後 2 個交易日法人合計 +3 張"
+  ],
+  "news_reason": "標題多為中性資訊，無顯著正面或負面新聞",
+  "pdf_url": "https://mopsov.twse.com.tw/nas/STR/313120261110M001.pdf",
+  "chips": {
+   "close": 1620,
+   "inst_5d": -113,
+   "trust_5d": -107,
+   "data_date": "2026-11-18",
+   "dealer_5d": -1,
+   "margin_5d": -9,
+   "volume_5d": 1571,
+   "foreign_5d": -6,
+   "inst_5d_pct": -7.2,
+   "price_5d_pct": -8.2,
+   "trust_streak": -3,
+   "foreign_streak": -1,
+   "after_call_days": 2,
+   "after_call_inst": 3,
+   "price_since_call_pct": 3.5
+  },
+  "brokers": {
+   "ups": 0,
+   "downs": 0,
+   "items": [
+    {
+     "date": "2026-10-20",
+     "link": "https://news.google.com/rss/articles/CBMidkFVX3lxTE9tQ1hmRm5LSzhmaWxGWDlYNjdxd2xoSlBad1ptX0tJVTdXXzZDZkE1ZTA3UXlEVG8zUzhCX2lndGJldXBpVEZ0SmRmVWFUVGtQN1J2MkRLRGV6UFFfejlFTjFZSXhLTkVlYnVteW5yQ080alc1OEE?oc=5",
+     "title": "Factset 最新調查：弘塑(3131-TW)EPS預估上修至62.73元，預估目標價為3900元｜新聞快訊｜豐雲學堂",
+     "broker": "FactSet 共識",
+     "source": "永豐金證券",
+     "target": 3900,
+     "direction": "flat"
+    }
+   ],
+   "trend": "flat",
+   "consensus": {
+    "date": "2026-10-20",
+    "target": 3900,
+    "direction": "flat",
+    "change_pct": null
+   },
+   "upside_pct": 140.7
+  },
+  "retail": {
+   "ok": true,
+   "hot": false,
+   "bear": 0,
+   "bull": 0,
+   "titles": [],
+   "posts_7d": 0,
+   "posts_30d": 0,
+   "heat_ratio": 0
+  },
+  "ebc": null,
+  "base_date": null,
+  "price_at_report": 1620,
+  "ret_5d": null,
+  "mkt_ret_5d": null,
+  "ret_20d": null,
+  "mkt_ret_20d": null,
+  "inst_20d": null,
+  "analyzed_at": "2026-11-18 17:43"
+ },
+ {
+  "call_key": "6223_622320261113M002.pdf",
+  "stock_id": "6223",
+  "name": "旺矽",
+  "call_date": "2026-11-16",
+  "signal": "🟡 訊號不明顯",
+  "level": 0,
+  "market": "上櫃",
+  "tone": "非常樂觀",
+  "tone_score": 2,
+  "news_sentiment": -2,
+  "one_line": "旺矽第三季財報表現亮眼，展望第四季及未來皆樂觀，強調市場需求強勁。",
+  "guidance": [
+   "管理層預期第四季營收將持續成長。",
+   "未來將擴產以應對市場需求。",
+   "強調供不應求的市場環境。"
+  ],
+  "risks": [],
+  "notes": [
+   "會後 2 個交易日法人合計 -48 張",
+   "公司展望樂觀，但券商近 30 天以調降目標價為主"
+  ],
+  "news_reason": "多篇報導聚焦於旺矽的違約交割問題，對股價形成負面影響。",
+  "pdf_url": "https://mopsov.twse.com.tw/nas/STR/622320261113M002.pdf",
+  "chips": {
+   "close": 4390,
+   "inst_5d": 220,
+   "trust_5d": 1197,
+   "data_date": "2026-11-18",
+   "dealer_5d": -29,
+   "margin_5d": -70,
+   "volume_5d": 8763,
+   "foreign_5d": -977,
+   "inst_5d_pct": 2.5,
+   "price_5d_pct": -2,
+   "trust_streak": 10,
+   "foreign_streak": -2,
+   "after_call_days": 2,
+   "after_call_inst": -48,
+   "price_since_call_pct": 2
+  },
+  "brokers": {
+   "ups": 0,
+   "downs": 0,
+   "items": [
+    {
+     "date": "2026-11-16",
+     "link": "https://news.google.com/rss/articles/CBMidkFVX3lxTFA0THZnZ2R4WlRfSHJFRXlzOHZUcFVEMTREdFlOczkwa0U0bW1uUHRORGZISlgwNUx0b3IzcXMwZnJfNjBmY3UwWm5Ua0VZdm1JZVZ6QWVRa2RYS0E0UGtXWFNKM0R2cl94eFVTQlB0YlUybHZiWVE?oc=5",
+     "title": "Factset 最新調查：旺矽(6223-TW)EPS預估上修至66.27元，預估目標價為7300元｜新聞快訊｜豐雲學堂",
+     "broker": "FactSet 共識",
+     "source": "永豐金證券",
+     "target": 7300,
+     "direction": "down"
+    },
+    {
+     "date": "2026-11-14",
+     "link": "https://news.google.com/rss/articles/CBMiZEFVX3lxTE1FMHFkbVdIb1F1MGt1TEJ6LUZtNGZ1NV9ZRVFURVJUR1NMVUo2M09wNlBWWHVicDRwQnNSUlZtYjBCQWg1SUx1NFpMT0VqaWVDZ0xqa25sOGJLVlluWUJ5Mm94Tmk?oc=5",
+     "title": "鉅亨速報 - Factset 最新調查：旺矽(6223-TW)目標價調降至7677.5元，幅度約6.46%",
+     "broker": "FactSet 共識",
+     "source": "TradingView",
+     "target": 7677.5,
+     "direction": "down"
+    },
+    {
+     "date": "2026-11-11",
+     "link": "https://news.google.com/rss/articles/CBMiS0FVX3lxTE8yOWVxU3d3QzFjV0h0QkdUWVRISWY0OUk3US1hSjVQZjlBeXNwb2RDMGJycWZubVRfTWxvU3pjbDNxaW82YVJ6MUR3VQ?oc=5",
+     "title": "明年獲利估賺22個股本！「ASIC大廠」目標價9字頭、同列87檔漲停名單半導體股漢測、旺矽也高掛紅燈",
+     "broker": "",
+     "source": "FTNN",
+     "target": null,
+     "direction": "flat"
+    }
+   ],
+   "trend": "down",
+   "consensus": {
+    "date": "2026-11-16",
+    "target": 7300,
+    "direction": "down",
+    "change_pct": -4.9
+   },
+   "upside_pct": 66.3
+  },
+  "retail": {
+   "ok": true,
+   "hot": false,
+   "bear": 0,
+   "bull": 0,
+   "titles": [],
+   "posts_7d": 0,
+   "posts_30d": 0,
+   "heat_ratio": 0
+  },
+  "ebc": null,
+  "base_date": null,
+  "price_at_report": 4390,
+  "ret_5d": null,
+  "mkt_ret_5d": null,
+  "ret_20d": null,
+  "mkt_ret_20d": null,
+  "inst_20d": null,
+  "analyzed_at": "2026-11-18 17:43"
+ },
+ {
+  "call_key": "6223_622320261113M001.pdf",
+  "stock_id": "6223",
+  "name": "旺矽",
+  "call_date": "2026-11-16",
+  "signal": "🟡 訊號不明顯",
+  "level": 0,
+  "market": "上櫃",
+  "tone": "非常樂觀",
+  "tone_score": 2,
+  "news_sentiment": -2,
+  "one_line": "旺矽第三季財報表現亮眼，展望第四季及未來皆樂觀，強調市場需求強勁。",
+  "guidance": [
+   "管理層預期第四季營收將持續成長。",
+   "未來將擴產以應對市場需求。",
+   "強調供不應求的市場環境。"
+  ],
+  "risks": [],
+  "notes": [
+   "會後 2 個交易日法人合計 -48 張",
+   "公司展望樂觀，但券商近 30 天以調降目標價為主"
+  ],
+  "news_reason": "多篇報導聚焦於旺矽的違約交割問題，對股價形成負面影響。",
+  "pdf_url": "https://mopsov.twse.com.tw/nas/STR/622320261113M001.pdf",
+  "chips": {
+   "close": 4390,
+   "inst_5d": 220,
+   "trust_5d": 1197,
+   "data_date": "2026-11-18",
+   "dealer_5d": -29,
+   "margin_5d": -70,
+   "volume_5d": 8763,
+   "foreign_5d": -977,
+   "inst_5d_pct": 2.5,
+   "price_5d_pct": -2,
+   "trust_streak": 10,
+   "foreign_streak": -2,
+   "after_call_days": 2,
+   "after_call_inst": -48,
+   "price_since_call_pct": 2
+  },
+  "brokers": {
+   "ups": 0,
+   "downs": 0,
+   "items": [
+    {
+     "date": "2026-11-16",
+     "link": "https://news.google.com/rss/articles/CBMidkFVX3lxTFA0THZnZ2R4WlRfSHJFRXlzOHZUcFVEMTREdFlOczkwa0U0bW1uUHRORGZISlgwNUx0b3IzcXMwZnJfNjBmY3UwWm5Ua0VZdm1JZVZ6QWVRa2RYS0E0UGtXWFNKM0R2cl94eFVTQlB0YlUybHZiWVE?oc=5",
+     "title": "Factset 最新調查：旺矽(6223-TW)EPS預估上修至66.27元，預估目標價為7300元｜新聞快訊｜豐雲學堂",
+     "broker": "FactSet 共識",
+     "source": "永豐金證券",
+     "target": 7300,
+     "direction": "down"
+    },
+    {
+     "date": "2026-11-14",
+     "link": "https://news.google.com/rss/articles/CBMiZEFVX3lxTE1FMHFkbVdIb1F1MGt1TEJ6LUZtNGZ1NV9ZRVFURVJUR1NMVUo2M09wNlBWWHVicDRwQnNSUlZtYjBCQWg1SUx1NFpMT0VqaWVDZ0xqa25sOGJLVlluWUJ5Mm94Tmk?oc=5",
+     "title": "鉅亨速報 - Factset 最新調查：旺矽(6223-TW)目標價調降至7677.5元，幅度約6.46%",
+     "broker": "FactSet 共識",
+     "source": "TradingView",
+     "target": 7677.5,
+     "direction": "down"
+    },
+    {
+     "date": "2026-11-11",
+     "link": "https://news.google.com/rss/articles/CBMiS0FVX3lxTE8yOWVxU3d3QzFjV0h0QkdUWVRISWY0OUk3US1hSjVQZjlBeXNwb2RDMGJycWZubVRfTWxvU3pjbDNxaW82YVJ6MUR3VQ?oc=5",
+     "title": "明年獲利估賺22個股本！「ASIC大廠」目標價9字頭、同列87檔漲停名單半導體股漢測、旺矽也高掛紅燈",
+     "broker": "",
+     "source": "FTNN",
+     "target": null,
+     "direction": "flat"
+    }
+   ],
+   "trend": "down",
+   "consensus": {
+    "date": "2026-11-16",
+    "target": 7300,
+    "direction": "down",
+    "change_pct": -4.9
+   },
+   "upside_pct": 66.3
+  },
+  "retail": {
+   "ok": true,
+   "hot": false,
+   "bear": 0,
+   "bull": 0,
+   "titles": [],
+   "posts_7d": 0,
+   "posts_30d": 0,
+   "heat_ratio": 0
+  },
+  "ebc": null,
+  "base_date": null,
+  "price_at_report": 4390,
+  "ret_5d": null,
+  "mkt_ret_5d": null,
+  "ret_20d": null,
+  "mkt_ret_20d": null,
+  "inst_20d": null,
+  "analyzed_at": "2026-11-18 17:43"
+ },
+ {
   "call_key": "3231_323120260804M003.pdf",
   "stock_id": "3231",
   "name": "緯創",

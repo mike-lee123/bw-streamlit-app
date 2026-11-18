@@ -11,14 +11,14 @@
   "ma13_state": "多頭",
   "tech": "四維黑馬 4/4；多頭成立、站上13MA；13MA 多頭",
   "chips": {
-   "inst_5d": -5592,
-   "trust_5d": 54,
-   "data_date": "2026-11-17",
+   "inst_5d": -6693,
+   "trust_5d": 212,
+   "data_date": "2026-11-18",
    "margin_5d": 253,
-   "foreign_5d": -5646,
-   "inst_5d_pct": -11.1,
-   "trust_streak": -3,
-   "foreign_streak": -6
+   "foreign_5d": -6905,
+   "inst_5d_pct": -9.1,
+   "trust_streak": 1,
+   "foreign_streak": -7
   },
   "brokers": {
    "ups": 0,
@@ -47,8 +47,13 @@
    "heat_ratio": 0
   },
   "ebc": {
-   "count": 0,
-   "titles": [],
+   "count": 1,
+   "titles": [
+    {
+     "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE1URXhIUE1hcGFtNWx5Sldack1oZmFDaFc1cU5KNkozODIwNXA2b0ZZd3BXMEY5V0RLdk1abjdQMUR1Z2NSWnhVbGtXa1ZocklsWTR5VzVn?oc=5",
+     "title": "台股千點震盪「堅守4萬點」 法人：最恐慌時間已過了"
+    }
+   ],
    "in_title": 0
   },
   "ret_5d": null,
@@ -68,14 +73,14 @@
   "ma13_state": "中性",
   "tech": "四維黑馬 3/4；13MA 中性",
   "chips": {
-   "inst_5d": -115,
-   "trust_5d": -89,
-   "data_date": "2026-11-17",
+   "inst_5d": -113,
+   "trust_5d": -107,
+   "data_date": "2026-11-18",
    "margin_5d": -9,
-   "foreign_5d": -26,
-   "inst_5d_pct": -8.6,
-   "trust_streak": -2,
-   "foreign_streak": 1
+   "foreign_5d": -6,
+   "inst_5d_pct": -7.2,
+   "trust_streak": -3,
+   "foreign_streak": -1
   },
   "brokers": {
    "ups": 0,
@@ -113,24 +118,86 @@
  },
  {
   "date": "2026-11-18",
+  "stock_id": "3665",
+  "name": "貿聯-KY",
+  "close": 1550,
+  "signal": "🔵 三方共振：技術轉多、法人連買、券商或報導跟上",
+  "level": 2,
+  "bias": "bull",
+  "four_score": 3,
+  "ma13_state": "多頭",
+  "tech": "四維黑馬 3/4；多頭成立、站上13MA；13MA 多頭",
+  "chips": {
+   "inst_5d": 2158,
+   "trust_5d": 2608,
+   "data_date": "2026-11-18",
+   "margin_5d": -578,
+   "foreign_5d": -450,
+   "inst_5d_pct": 11.1,
+   "trust_streak": 5,
+   "foreign_streak": -1
+  },
+  "brokers": {
+   "ups": 0,
+   "downs": 1,
+   "items": [
+    {
+     "date": "2026-11-16",
+     "link": "https://news.google.com/rss/articles/CBMiTEFVX3lxTE5MQXVUeHlnMGJKQUk1ZmFHdHVMb240dV9vU09WdkoyX1RZRjhZSHdsX3E2QnZVTXUwMGFROWJ5V3F6ajBkTnZLb0c0Ylg?oc=5",
+     "title": "大摩下調貿聯-KY 目標價至 2,500 元，但仍維持優於大盤投資評等",
+     "direction": "down"
+    }
+   ],
+   "trend": "mixed",
+   "consensus": {
+    "date": "2026-11-17",
+    "target": 3080,
+    "direction": "flat",
+    "change_pct": null
+   }
+  },
+  "retail": {
+   "hot": false,
+   "bear": 0,
+   "bull": 0,
+   "posts_7d": 1,
+   "heat_ratio": null
+  },
+  "ebc": {
+   "count": 1,
+   "titles": [
+    {
+     "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE9PR056b0RvUTdlaXUwa1MteUFlRGZfWDhVUnJqVmg3T0ljRTlHVGtBbzU3U3RzTGhjeXJnLVJzZEFZYWhNUEtPUTNOY1VuV2ItcHN1S0l3?oc=5",
+     "title": "個股：Interplex貢獻優於預期，貿聯-KY(3665)獲利動能大躍進，股價攻漲停"
+    }
+   ],
+   "in_title": 1
+  },
+  "ret_5d": null,
+  "mkt_ret_5d": null,
+  "ret_20d": null,
+  "mkt_ret_20d": null
+ },
+ {
+  "date": "2026-11-18",
   "stock_id": "2615",
   "name": "萬海",
-  "close": 110.5,
-  "signal": "🟠 黑馬但法人倒貨：四維黑馬 3/4，法人連賣",
-  "level": 2,
-  "bias": "bear",
-  "four_score": 3,
-  "ma13_state": "空頭",
-  "tech": "四維黑馬 3/4；13MA 空頭",
+  "close": 111,
+  "signal": "🟡 只有技術訊號，籌碼與情緒沒有明顯配合",
+  "level": 0,
+  "bias": "none",
+  "four_score": 4,
+  "ma13_state": "中性",
+  "tech": "四維黑馬 4/4；站上13MA；13MA 中性",
   "chips": {
-   "inst_5d": -4771,
-   "trust_5d": -1733,
-   "data_date": "2026-11-17",
+   "inst_5d": 1782,
+   "trust_5d": -2709,
+   "data_date": "2026-11-18",
    "margin_5d": -873,
-   "foreign_5d": -3038,
-   "inst_5d_pct": -7.2,
-   "trust_streak": -1,
-   "foreign_streak": -1
+   "foreign_5d": 4491,
+   "inst_5d_pct": 2.7,
+   "trust_streak": -2,
+   "foreign_streak": 1
   },
   "brokers": {
    "ups": 0,
@@ -163,122 +230,9 @@
  },
  {
   "date": "2026-11-18",
-  "stock_id": "3665",
-  "name": "貿聯-KY",
-  "close": 1550,
-  "signal": "🟡 只有技術訊號，籌碼與情緒沒有明顯配合",
-  "level": 0,
-  "bias": "none",
-  "four_score": 3,
-  "ma13_state": "多頭",
-  "tech": "四維黑馬 3/4；多頭成立、站上13MA；13MA 多頭",
-  "chips": {
-   "inst_5d": 1403,
-   "trust_5d": 1717,
-   "data_date": "2026-11-17",
-   "margin_5d": -578,
-   "foreign_5d": -314,
-   "inst_5d_pct": 8.1,
-   "trust_streak": 4,
-   "foreign_streak": 1
-  },
-  "brokers": {
-   "ups": 0,
-   "downs": 1,
-   "items": [
-    {
-     "date": "2026-11-17",
-     "link": "https://news.google.com/rss/articles/CBMiZEFVX3lxTE1VTUhRNkxSSDdRRU9JSVpKaU5hRU9OOVgyV253YWFJaThuZGRteVc3d2E0UTRqNTZTdlZ2OWd4NTkyYThWSktpRXlnRkQ0a2NkN0xPX1luMUJqNXJmLWhUanFOUUI?oc=5",
-     "title": "討論牆 | 鉅亨速報 - Factset 最新調查：貿聯-KY(3665-TW)目標價調降至3080元，幅度約6.67%",
-     "direction": "down"
-    },
-    {
-     "date": "2026-11-16",
-     "link": "https://news.google.com/rss/articles/CBMiTEFVX3lxTE5MQXVUeHlnMGJKQUk1ZmFHdHVMb240dV9vU09WdkoyX1RZRjhZSHdsX3E2QnZVTXUwMGFROWJ5V3F6ajBkTnZLb0c0Ylg?oc=5",
-     "title": "大摩下調貿聯-KY 目標價至 2,500 元，但仍維持優於大盤投資評等",
-     "direction": "down"
-    }
-   ],
-   "trend": "down",
-   "consensus": {
-    "date": "2026-11-17",
-    "target": 3080,
-    "direction": "down",
-    "change_pct": -6.67
-   }
-  },
-  "retail": {
-   "hot": false,
-   "bear": 0,
-   "bull": 0,
-   "posts_7d": 1,
-   "heat_ratio": null
-  },
-  "ebc": {
-   "count": 1,
-   "titles": [
-    {
-     "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE9PR056b0RvUTdlaXUwa1MteUFlRGZfWDhVUnJqVmg3T0ljRTlHVGtBbzU3U3RzTGhjeXJnLVJzZEFZYWhNUEtPUTNOY1VuV2ItcHN1S0l3?oc=5",
-     "title": "個股：Interplex貢獻優於預期，貿聯-KY(3665)獲利動能大躍進，股價攻漲停"
-    }
-   ],
-   "in_title": 1
-  },
-  "ret_5d": null,
-  "mkt_ret_5d": null,
-  "ret_20d": null,
-  "mkt_ret_20d": null
- },
- {
-  "date": "2026-11-18",
-  "stock_id": "3704",
-  "name": "合勤控",
-  "close": 36.4,
-  "signal": "🟡 只有技術訊號，籌碼與情緒沒有明顯配合",
-  "level": 0,
-  "bias": "none",
-  "four_score": 3,
-  "ma13_state": "多頭",
-  "tech": "四維黑馬 3/4；13MA 多頭",
-  "chips": {
-   "inst_5d": -2527,
-   "trust_5d": 0,
-   "data_date": "2026-11-17",
-   "margin_5d": 681,
-   "foreign_5d": -2527,
-   "inst_5d_pct": -13.3,
-   "trust_streak": 0,
-   "foreign_streak": 1
-  },
-  "brokers": {
-   "ups": 0,
-   "downs": 0,
-   "items": [],
-   "trend": "none",
-   "consensus": null
-  },
-  "retail": {
-   "hot": false,
-   "bear": 0,
-   "bull": 0,
-   "posts_7d": 0,
-   "heat_ratio": 0
-  },
-  "ebc": {
-   "count": 0,
-   "titles": [],
-   "in_title": 0
-  },
-  "ret_5d": null,
-  "mkt_ret_5d": null,
-  "ret_20d": null,
-  "mkt_ret_20d": null
- },
- {
-  "date": "2026-11-18",
   "stock_id": "2454",
   "name": "聯發科",
-  "close": 3945,
+  "close": 3940,
   "signal": "🟡 只有技術訊號，籌碼與情緒沒有明顯配合",
   "level": 0,
   "bias": "none",
@@ -286,14 +240,14 @@
   "ma13_state": "多頭",
   "tech": "四維黑馬 3/4；13MA 多頭",
   "chips": {
-   "inst_5d": 2138,
-   "trust_5d": 1836,
-   "data_date": "2026-11-17",
+   "inst_5d": 1340,
+   "trust_5d": 1598,
+   "data_date": "2026-11-18",
    "margin_5d": -571,
-   "foreign_5d": 302,
-   "inst_5d_pct": 3.2,
-   "trust_streak": 16,
-   "foreign_streak": -2
+   "foreign_5d": -258,
+   "inst_5d_pct": 1.8,
+   "trust_streak": 17,
+   "foreign_streak": -3
   },
   "brokers": {
    "ups": 0,
@@ -310,7 +264,7 @@
    "heat_ratio": 0
   },
   "ebc": {
-   "count": 20,
+   "count": 25,
    "titles": [
     {
      "link": "https://news.google.com/rss/articles/CBMiWkFVX3lxTFBJUnlOa08ybVVlZTVmR2RPMm84eFg0MkUzWW41OFRORmJfNGEtZmV3dWE1S3d6djlIWmR2bnN3SS1WcUxiMDVQLWVnODl6TW5JVEt4MXJJZDYyZw?oc=5",
@@ -334,24 +288,24 @@
  },
  {
   "date": "2026-11-18",
-  "stock_id": "6442",
-  "name": "光盛",
-  "close": 1065,
+  "stock_id": "3704",
+  "name": "合勤控",
+  "close": 36,
   "signal": "🟡 只有技術訊號，籌碼與情緒沒有明顯配合",
   "level": 0,
   "bias": "none",
   "four_score": 3,
-  "ma13_state": "空頭",
-  "tech": "四維黑馬 3/4；13MA 空頭",
+  "ma13_state": "多頭",
+  "tech": "四維黑馬 3/4；13MA 多頭",
   "chips": {
-   "inst_5d": 429,
-   "trust_5d": -7,
-   "data_date": "2026-11-17",
-   "margin_5d": -106,
-   "foreign_5d": 436,
-   "inst_5d_pct": 3.7,
-   "trust_streak": -1,
-   "foreign_streak": 1
+   "inst_5d": -3287,
+   "trust_5d": 0,
+   "data_date": "2026-11-18",
+   "margin_5d": 681,
+   "foreign_5d": -3287,
+   "inst_5d_pct": -11.6,
+   "trust_streak": 0,
+   "foreign_streak": -1
   },
   "brokers": {
    "ups": 0,
@@ -379,24 +333,114 @@
  },
  {
   "date": "2026-11-18",
-  "stock_id": "0056",
-  "name": "元大高股息",
-  "close": 49.19,
+  "stock_id": "6442",
+  "name": "光盛",
+  "close": 1065,
+  "signal": "🟡 只有技術訊號，籌碼與情緒沒有明顯配合",
+  "level": 0,
+  "bias": "none",
+  "four_score": 3,
+  "ma13_state": "空頭",
+  "tech": "四維黑馬 3/4；13MA 空頭",
+  "chips": {
+   "inst_5d": 115,
+   "trust_5d": -45,
+   "data_date": "2026-11-18",
+   "margin_5d": -106,
+   "foreign_5d": 160,
+   "inst_5d_pct": 0.9,
+   "trust_streak": -2,
+   "foreign_streak": -1
+  },
+  "brokers": {
+   "ups": 0,
+   "downs": 0,
+   "items": [],
+   "trend": "none",
+   "consensus": null
+  },
+  "retail": {
+   "hot": false,
+   "bear": 0,
+   "bull": 0,
+   "posts_7d": 0,
+   "heat_ratio": 0
+  },
+  "ebc": {
+   "count": 0,
+   "titles": [],
+   "in_title": 0
+  },
+  "ret_5d": null,
+  "mkt_ret_5d": null,
+  "ret_20d": null,
+  "mkt_ret_20d": null
+ },
+ {
+  "date": "2026-11-18",
+  "stock_id": "6588",
+  "name": "東典光電",
+  "close": 71.6,
+  "signal": "🟡 只有技術訊號，籌碼與情緒沒有明顯配合",
+  "level": 0,
+  "bias": "none",
+  "four_score": 3,
+  "ma13_state": "中性",
+  "tech": "四維黑馬 3/4；13MA 中性",
+  "chips": {
+   "inst_5d": 129,
+   "trust_5d": 0,
+   "data_date": "2026-11-18",
+   "margin_5d": -8,
+   "foreign_5d": 129,
+   "inst_5d_pct": 7.9,
+   "trust_streak": 0,
+   "foreign_streak": 2
+  },
+  "brokers": {
+   "ups": 0,
+   "downs": 0,
+   "items": [],
+   "trend": "none",
+   "consensus": null
+  },
+  "retail": {
+   "hot": false,
+   "bear": 0,
+   "bull": 0,
+   "posts_7d": 0,
+   "heat_ratio": 0
+  },
+  "ebc": {
+   "count": 0,
+   "titles": [],
+   "in_title": 0
+  },
+  "ret_5d": null,
+  "mkt_ret_5d": null,
+  "ret_20d": null,
+  "mkt_ret_20d": null
+ },
+ {
+  "date": "2026-11-18",
+  "stock_id": "2880",
+  "name": "華南金",
+  "close": 48.2,
   "signal": "🟡 只有技術訊號，籌碼與情緒沒有明顯配合",
   "level": 0,
   "bias": "none",
   "four_score": 2,
-  "ma13_state": "空頭",
-  "tech": "空頭成立；13MA 空頭",
+  "ma13_state": "中性",
+  "tech": "跌破13MA；13MA 中性",
   "chips": {
-   "inst_5d": -25766,
-   "trust_5d": 3663,
-   "data_date": "2026-11-17",
-   "margin_5d": 71,
-   "foreign_5d": -29429,
-   "inst_5d_pct": -9.6,
+   "inst_5d": -6568,
+   "trust_5d": -3665,
+   "data_date": "2026-11-18",
+   "margin_5d": -145,
+   "foreign_5d": -2903,
+   "inst_5d_pct": -8.2,
    "trust_streak": 2,
-   "foreign_streak": -6
+   "foreign_streak": -1
   },
   "brokers": {
    "ups": 0,
@@ -434,14 +478,14 @@
   "ma13_state": "多頭",
   "tech": "多頭成立、站上13MA；13MA 多頭",
   "chips": {
-   "inst_5d": 328,
-   "trust_5d": 1581,
-   "data_date": "2026-11-17",
+   "inst_5d": 220,
+   "trust_5d": 1197,
+   "data_date": "2026-11-18",
    "margin_5d": -70,
-   "foreign_5d": -1253,
-   "inst_5d_pct": 3.8,
-   "trust_streak": 9,
-   "foreign_streak": -1
+   "foreign_5d": -977,
+   "inst_5d_pct": 2.5,
+   "trust_streak": 10,
+   "foreign_streak": -2
   },
   "brokers": {
    "ups": 0,
@@ -476,7 +520,7 @@
    "heat_ratio": 0
   },
   "ebc": {
-   "count": 5,
+   "count": 7,
    "titles": [
     {
      "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE14cmFydzhublpNa1BqV2xyUHdTQmZsbU9XQkpBMnJXVDk4eGhZTWZnZGNXVFZuczRPRTVENHd0QXFmN3dLUUhqMGhfdFlmaHBjY1VJUm53?oc=5",
@@ -502,7 +546,7 @@
   "date": "2026-11-18",
   "stock_id": "2891",
   "name": "中信金",
-  "close": 73.7,
+  "close": 73.4,
   "signal": "🟡 只有技術訊號，籌碼與情緒沒有明顯配合",
   "level": 0,
   "bias": "none",
@@ -510,14 +554,14 @@
   "ma13_state": "中性",
   "tech": "跌破13MA；13MA 中性",
   "chips": {
-   "inst_5d": 48004,
-   "trust_5d": 48678,
-   "data_date": "2026-11-17",
+   "inst_5d": 36416,
+   "trust_5d": 41499,
+   "data_date": "2026-11-18",
    "margin_5d": -543,
-   "foreign_5d": -674,
-   "inst_5d_pct": 19,
-   "trust_streak": 1,
-   "foreign_streak": -1
+   "foreign_5d": -5083,
+   "inst_5d_pct": 13,
+   "trust_streak": 2,
+   "foreign_streak": -2
   },
   "brokers": {
    "ups": 1,
@@ -546,7 +590,7 @@
    "heat_ratio": 0
   },
   "ebc": {
-   "count": 4,
+   "count": 5,
    "titles": [
     {
      "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTFBlbTkzSjFIV1lDMmlpTGV4Z2dYQ0ZaSHhkUVJ0bld6dFhtdVZZaGttODBvejN3d3R0NXZRX0prUmlmMEw1b21VX25Fa1ZiMWpac2FpcXNn?oc=5",
@@ -570,24 +614,24 @@
  },
  {
   "date": "2026-11-18",
-  "stock_id": "00878",
-  "name": "國泰永續高股息",
-  "close": 30.66,
+  "stock_id": "2886",
+  "name": "兆豐金",
+  "close": 52.6,
   "signal": "🟡 只有技術訊號，籌碼與情緒沒有明顯配合",
   "level": 0,
   "bias": "none",
-  "four_score": 1,
-  "ma13_state": "空頭",
-  "tech": "空頭成立；13MA 空頭",
+  "four_score": 2,
+  "ma13_state": "中性",
+  "tech": "跌破13MA；13MA 中性",
   "chips": {
-   "inst_5d": -7291,
-   "trust_5d": 3000,
-   "data_date": "2026-11-17",
-   "margin_5d": 4322,
-   "foreign_5d": -10291,
-   "inst_5d_pct": -1.3,
-   "trust_streak": 0,
-   "foreign_streak": 1
+   "inst_5d": -4395,
+   "trust_5d": -33121,
+   "data_date": "2026-11-18",
+   "margin_5d": -869,
+   "foreign_5d": 28726,
+   "inst_5d_pct": -3.4,
+   "trust_streak": -6,
+   "foreign_streak": 8
   },
   "brokers": {
    "ups": 0,
@@ -604,11 +648,19 @@
    "heat_ratio": 0
   },
   "ebc": {
-   "count": 1,
+   "count": 4,
    "titles": [
     {
-     "link": "https://news.google.com/rss/articles/CBMiVEFVX3lxTE5FbUxNbk1rVGRYWEl4VmZTLWxYZ05jUXdDZDFLRGFPbzBkQXNGTkRxcXA2S0lCUjQ3dGRIWm0zMENlY2VHUV9EUzNsaWI1NzdVcXRSRw?oc=5",
-     "title": "基金：27檔台股ETF本周迎除息潮，00878受益人數上周再增2.6萬人今最後買進日"
+     "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTFBTZF9RZkc2VkV2Y1hOajM1a2s4eVRyb0VRYXR4QUFPWlZvLTdzRjZKYWxla1lqS0s1ejZjSmtOMTVmeC1TWmppRFpRWGIxM2JCdXM3ajVn?oc=5",
+     "title": "0050高檔才買？小資族改搭00998A分散科技股風險 布局全球金融賺三重效益"
+    },
+    {
+     "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTFBNcjd2WmFyVVNxcmMwZG1ZQ1VqMnFscUNTaTd5eWMzZldtcHVDY05ldzZVd050ejN3Q2JLa095XzVwWndDa0tmeG1IT3gzSFFMM1VTemRB?oc=5",
+     "title": "台股跌832點！ 資安股狂奔 「這3檔」逆勢攻漲停"
+    },
+    {
+     "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTFA0dko1amhCYUhSYVhtQkh4aEhYeXNBR3dOM08ya21oRjVkdGFpOWJnaE5JXzVDMjhJSGhfZm1qUm5ESnJxVUQ0RHlxWmNwVjZ3MmhoR0FB?oc=5",
+     "title": "三大法人賣超1140億！ 網見1點抖了：不太妙啊"
     }
    ],
    "in_title": 0
@@ -620,23 +672,68 @@
  },
  {
   "date": "2026-11-18",
-  "stock_id": "2880",
-  "name": "華南金",
-  "close": 48.45,
+  "stock_id": "3138",
+  "name": "耀登",
+  "close": 80.3,
   "signal": "🟡 只有技術訊號，籌碼與情緒沒有明顯配合",
   "level": 0,
   "bias": "none",
-  "four_score": 1,
+  "four_score": 2,
   "ma13_state": "中性",
-  "tech": "跌破13MA；13MA 中性",
+  "tech": "站上13MA；13MA 中性",
   "chips": {
-   "inst_5d": 2168,
-   "trust_5d": -2923,
-   "data_date": "2026-11-17",
-   "margin_5d": -145,
-   "foreign_5d": 5091,
-   "inst_5d_pct": 2.9,
-   "trust_streak": 1,
+   "inst_5d": 327,
+   "trust_5d": 0,
+   "data_date": "2026-11-18",
+   "margin_5d": -59,
+   "foreign_5d": 327,
+   "inst_5d_pct": 9.1,
+   "trust_streak": 0,
+   "foreign_streak": 2
+  },
+  "brokers": {
+   "ups": 0,
+   "downs": 0,
+   "items": [],
+   "trend": "none",
+   "consensus": null
+  },
+  "retail": {
+   "hot": false,
+   "bear": 0,
+   "bull": 0,
+   "posts_7d": 0,
+   "heat_ratio": 0
+  },
+  "ebc": {
+   "count": 0,
+   "titles": [],
+   "in_title": 0
+  },
+  "ret_5d": null,
+  "mkt_ret_5d": null,
+  "ret_20d": null,
+  "mkt_ret_20d": null
+ },
+ {
+  "date": "2026-11-18",
+  "stock_id": "3380",
+  "name": "明泰",
+  "close": 28.4,
+  "signal": "🟡 只有技術訊號，籌碼與情緒沒有明顯配合",
+  "level": 0,
+  "bias": "none",
+  "four_score": 2,
+  "ma13_state": "中性",
+  "tech": "站上13MA；13MA 中性",
+  "chips": {
+   "inst_5d": -233,
+   "trust_5d": 3,
+   "data_date": "2026-11-18",
+   "margin_5d": 2,
+   "foreign_5d": -236,
+   "inst_5d_pct": -3.2,
+   "trust_streak": -2,
    "foreign_streak": 1
   },
   "brokers": {
@@ -665,9 +762,219 @@
  },
  {
   "date": "2026-11-18",
+  "stock_id": "6510",
+  "name": "精測",
+  "close": 2915,
+  "signal": "🟡 只有技術訊號，籌碼與情緒沒有明顯配合",
+  "level": 0,
+  "bias": "none",
+  "four_score": 2,
+  "ma13_state": "多頭",
+  "tech": "多頭成立、站上13MA；13MA 多頭",
+  "chips": {
+   "inst_5d": 930,
+   "trust_5d": 814,
+   "data_date": "2026-11-18",
+   "margin_5d": -139,
+   "foreign_5d": 116,
+   "inst_5d_pct": 16.9,
+   "trust_streak": 2,
+   "foreign_streak": -1
+  },
+  "brokers": {
+   "ups": 0,
+   "downs": 0,
+   "items": [],
+   "trend": "flat",
+   "consensus": {
+    "date": "2026-10-28",
+    "target": 4187.5,
+    "direction": "flat",
+    "change_pct": null
+   }
+  },
+  "retail": {
+   "hot": false,
+   "bear": 0,
+   "bull": 0,
+   "posts_7d": 0,
+   "heat_ratio": 0
+  },
+  "ebc": {
+   "count": 1,
+   "titles": [
+    {
+     "link": "https://news.google.com/rss/articles/CBMiVEFVX3lxTE0yTklPV2tsd0pIaXJlNy15WFlMSnV0RC03elhHMGFvTWNMSkktLU52U2hueDlIa0NNLVRrUlFacUMtUXJubXZFRkQ3NHRBVnp2dlRscA?oc=5",
+     "title": "基金：兆豐00913成分股調整3進3出今收盤後生效，納入南亞科、全新、精材"
+    }
+   ],
+   "in_title": 0
+  },
+  "ret_5d": null,
+  "mkt_ret_5d": null,
+  "ret_20d": null,
+  "mkt_ret_20d": null
+ },
+ {
+  "date": "2026-11-18",
+  "stock_id": "0056",
+  "name": "元大高股息",
+  "close": 49.48,
+  "signal": "🟡 只有技術訊號，籌碼與情緒沒有明顯配合",
+  "level": 0,
+  "bias": "none",
+  "four_score": 2,
+  "ma13_state": "空頭",
+  "tech": "空頭成立；13MA 空頭",
+  "chips": {
+   "inst_5d": -19027,
+   "trust_5d": 3089,
+   "data_date": "2026-11-18",
+   "margin_5d": 71,
+   "foreign_5d": -22116,
+   "inst_5d_pct": -5.8,
+   "trust_streak": 3,
+   "foreign_streak": 1
+  },
+  "brokers": {
+   "ups": 0,
+   "downs": 0,
+   "items": [],
+   "trend": "none",
+   "consensus": null
+  },
+  "retail": {
+   "hot": false,
+   "bear": 0,
+   "bull": 0,
+   "posts_7d": 0,
+   "heat_ratio": 0
+  },
+  "ebc": {
+   "count": 0,
+   "titles": [],
+   "in_title": 0
+  },
+  "ret_5d": null,
+  "mkt_ret_5d": null,
+  "ret_20d": null,
+  "mkt_ret_20d": null
+ },
+ {
+  "date": "2026-11-18",
+  "stock_id": "2313",
+  "name": "華通",
+  "close": 187.5,
+  "signal": "🟡 只有技術訊號，籌碼與情緒沒有明顯配合",
+  "level": 0,
+  "bias": "none",
+  "four_score": 1,
+  "ma13_state": "多頭",
+  "tech": "多頭成立、站上13MA；13MA 多頭",
+  "chips": {
+   "inst_5d": -296,
+   "trust_5d": -39,
+   "data_date": "2026-11-18",
+   "margin_5d": 3256,
+   "foreign_5d": -257,
+   "inst_5d_pct": -0.1,
+   "trust_streak": 1,
+   "foreign_streak": -4
+  },
+  "brokers": {
+   "ups": 0,
+   "downs": 0,
+   "items": [],
+   "trend": "flat",
+   "consensus": null
+  },
+  "retail": {
+   "hot": false,
+   "bear": 0,
+   "bull": 0,
+   "posts_7d": 0,
+   "heat_ratio": 0
+  },
+  "ebc": {
+   "count": 0,
+   "titles": [],
+   "in_title": 0
+  },
+  "ret_5d": null,
+  "mkt_ret_5d": null,
+  "ret_20d": null,
+  "mkt_ret_20d": null
+ },
+ {
+  "date": "2026-11-18",
+  "stock_id": "1303",
+  "name": "南亞",
+  "close": 253.5,
+  "signal": "🟡 只有技術訊號，籌碼與情緒沒有明顯配合",
+  "level": 0,
+  "bias": "none",
+  "four_score": 1,
+  "ma13_state": "空頭",
+  "tech": "空頭成立；13MA 空頭",
+  "chips": {
+   "inst_5d": -38909,
+   "trust_5d": 14307,
+   "data_date": "2026-11-18",
+   "margin_5d": 1729,
+   "foreign_5d": -53216,
+   "inst_5d_pct": -6.6,
+   "trust_streak": 1,
+   "foreign_streak": -6
+  },
+  "brokers": {
+   "ups": 1,
+   "downs": 0,
+   "items": [
+    {
+     "date": "2026-10-29",
+     "link": "https://news.google.com/rss/articles/CBMiWkFVX3lxTFBQZktVaTZxYkhuTDZQSUxoT21QV2ljVDZURVlHenhFRE1qUWloNjVETEVvTDBidlpQWml3ZHUxcmtnaDhDd1h2RU05SzhKU3dHSjdyaHpPRWh2UdIBX0FVX3lxTE4zRklnWE9yQ2ZFSDcwM01mN0pBeWRkdWpDYjhaaFVwTi1uQ0doYmhtRnVfUUQzbjhDTXpwamZWRmZjVUh6aEt1UDZpVkdxMHpoalROWnYxdmo0ajFKdDZJ?oc=5",
+     "title": "本業、業外皆美 法人調高南亞獲利預估值及目標價",
+     "direction": "up"
+    }
+   ],
+   "trend": "mixed",
+   "consensus": null
+  },
+  "retail": {
+   "hot": false,
+   "bear": 0,
+   "bull": 0,
+   "posts_7d": 1,
+   "heat_ratio": 0.7
+  },
+  "ebc": {
+   "count": 39,
+   "titles": [
+    {
+     "link": "https://news.google.com/rss/articles/CBMiVEFVX3lxTE0yTklPV2tsd0pIaXJlNy15WFlMSnV0RC03elhHMGFvTWNMSkktLU52U2hueDlIa0NNLVRrUlFacUMtUXJubXZFRkQ3NHRBVnp2dlRscA?oc=5",
+     "title": "基金：兆豐00913成分股調整3進3出今收盤後生效，納入南亞科、全新、精材"
+    },
+    {
+     "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE9QTUVfNGcwbjhGQzE5TmpwbnNUQ0tNOTBjOFBJYi1lUFRTUk5iTmx4bDFXLUlHZ09SRGhIS3JpbXJnMXdXbDcyRkxwSktXTTR5WTFtT0xB?oc=5",
+     "title": "千點殺盤撿便宜！00418A加碼5檔 隔天站回10元搶先反彈"
+    },
+    {
+     "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTFBNcjd2WmFyVVNxcmMwZG1ZQ1VqMnFscUNTaTd5eWMzZldtcHVDY05ldzZVd050ejN3Q2JLa095XzVwWndDa0tmeG1IT3gzSFFMM1VTemRB?oc=5",
+     "title": "台股跌832點！ 資安股狂奔 「這3檔」逆勢攻漲停"
+    }
+   ],
+   "in_title": 0
+  },
+  "ret_5d": null,
+  "mkt_ret_5d": null,
+  "ret_20d": null,
+  "mkt_ret_20d": null
+ },
+ {
+  "date": "2026-11-18",
   "stock_id": "7717",
   "name": "萊德光電-KY",
-  "close": 564,
+  "close": 570,
   "signal": "🟡 只有技術訊號，籌碼與情緒沒有明顯配合",
   "level": 0,
   "bias": "none",
@@ -675,14 +982,14 @@
   "ma13_state": "多頭",
   "tech": "飆股標記；13MA 多頭",
   "chips": {
-   "inst_5d": 421,
+   "inst_5d": 436,
    "trust_5d": 0,
-   "data_date": "2026-11-17",
+   "data_date": "2026-11-18",
    "margin_5d": 105,
-   "foreign_5d": 421,
+   "foreign_5d": 436,
    "inst_5d_pct": 4.7,
    "trust_streak": 0,
-   "foreign_streak": 4
+   "foreign_streak": -1
   },
   "brokers": {
    "ups": 0,
@@ -792,36 +1099,31 @@
  },
  {
   "date": "2026-11-18",
-  "stock_id": "6510",
-  "name": "精測",
-  "close": 2945,
+  "stock_id": "5880",
+  "name": "合庫金",
+  "close": 27.5,
   "signal": "🟡 只有技術訊號，籌碼與情緒沒有明顯配合",
   "level": 0,
   "bias": "none",
   "four_score": 1,
-  "ma13_state": "多頭",
-  "tech": "多頭成立、站上13MA；13MA 多頭",
+  "ma13_state": "空頭",
+  "tech": "空頭成立；13MA 空頭",
   "chips": {
-   "inst_5d": 1098,
-   "trust_5d": 1070,
-   "data_date": "2026-11-17",
-   "margin_5d": -139,
-   "foreign_5d": 28,
-   "inst_5d_pct": 20,
-   "trust_streak": 1,
-   "foreign_streak": 2
+   "inst_5d": 8749,
+   "trust_5d": -447,
+   "data_date": "2026-11-18",
+   "margin_5d": -16,
+   "foreign_5d": 9196,
+   "inst_5d_pct": 10.9,
+   "trust_streak": 2,
+   "foreign_streak": -1
   },
   "brokers": {
    "ups": 0,
    "downs": 0,
    "items": [],
-   "trend": "flat",
-   "consensus": {
-    "date": "2026-10-28",
-    "target": 4187.5,
-    "direction": "flat",
-    "change_pct": null
-   }
+   "trend": "none",
+   "consensus": null
   },
   "retail": {
    "hot": false,
@@ -834,8 +1136,8 @@
    "count": 1,
    "titles": [
     {
-     "link": "https://news.google.com/rss/articles/CBMiVEFVX3lxTE0yTklPV2tsd0pIaXJlNy15WFlMSnV0RC03elhHMGFvTWNMSkktLU52U2hueDlIa0NNLVRrUlFacUMtUXJubXZFRkQ3NHRBVnp2dlRscA?oc=5",
-     "title": "基金：兆豐00913成分股調整3進3出今收盤後生效，納入南亞科、全新、精材"
+     "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTFBNcjd2WmFyVVNxcmMwZG1ZQ1VqMnFscUNTaTd5eWMzZldtcHVDY05ldzZVd050ejN3Q2JLa095XzVwWndDa0tmeG1IT3gzSFFMM1VTemRB?oc=5",
+     "title": "台股跌832點！ 資安股狂奔 「這3檔」逆勢攻漲停"
     }
    ],
    "in_title": 0
@@ -847,30 +1149,30 @@
  },
  {
   "date": "2026-11-18",
-  "stock_id": "2313",
-  "name": "華通",
-  "close": 188,
+  "stock_id": "00878",
+  "name": "國泰永續高股息",
+  "close": 30.65,
   "signal": "🟡 只有技術訊號，籌碼與情緒沒有明顯配合",
   "level": 0,
   "bias": "none",
   "four_score": 1,
-  "ma13_state": "多頭",
-  "tech": "多頭成立、站上13MA；13MA 多頭",
+  "ma13_state": "空頭",
+  "tech": "空頭成立；13MA 空頭",
   "chips": {
-   "inst_5d": 703,
-   "trust_5d": -689,
-   "data_date": "2026-11-17",
-   "margin_5d": 3256,
-   "foreign_5d": 1392,
-   "inst_5d_pct": 0.3,
-   "trust_streak": -1,
-   "foreign_streak": -3
+   "inst_5d": -15123,
+   "trust_5d": 2000,
+   "data_date": "2026-11-18",
+   "margin_5d": 4322,
+   "foreign_5d": -17123,
+   "inst_5d_pct": -2.6,
+   "trust_streak": 0,
+   "foreign_streak": -1
   },
   "brokers": {
    "ups": 0,
    "downs": 0,
    "items": [],
-   "trend": "flat",
+   "trend": "none",
    "consensus": null
   },
   "retail": {
@@ -881,8 +1183,13 @@
    "heat_ratio": 0
   },
   "ebc": {
-   "count": 0,
-   "titles": [],
+   "count": 1,
+   "titles": [
+    {
+     "link": "https://news.google.com/rss/articles/CBMiVEFVX3lxTE5FbUxNbk1rVGRYWEl4VmZTLWxYZ05jUXdDZDFLRGFPbzBkQXNGTkRxcXA2S0lCUjQ3dGRIWm0zMENlY2VHUV9EUzNsaWI1NzdVcXRSRw?oc=5",
+     "title": "基金：27檔台股ETF本周迎除息潮，00878受益人數上周再增2.6萬人今最後買進日"
+    }
+   ],
    "in_title": 0
   },
   "ret_5d": null,
@@ -894,7 +1201,7 @@
   "date": "2026-11-18",
   "stock_id": "2884",
   "name": "玉山金",
-  "close": 42.3,
+  "close": 42.15,
   "signal": "🟡 只有技術訊號，籌碼與情緒沒有明顯配合",
   "level": 0,
   "bias": "none",
@@ -902,14 +1209,14 @@
   "ma13_state": "空頭",
   "tech": "空頭成立；13MA 空頭",
   "chips": {
-   "inst_5d": 5670,
-   "trust_5d": -43614,
-   "data_date": "2026-11-17",
+   "inst_5d": -47286,
+   "trust_5d": -42866,
+   "data_date": "2026-11-18",
    "margin_5d": 597,
-   "foreign_5d": 49284,
-   "inst_5d_pct": 3.1,
-   "trust_streak": -6,
-   "foreign_streak": 5
+   "foreign_5d": -4420,
+   "inst_5d_pct": -18.9,
+   "trust_streak": -7,
+   "foreign_streak": -1
   },
   "brokers": {
    "ups": 0,
@@ -927,11 +1234,11 @@
    "hot": false,
    "bear": 0,
    "bull": 0,
-   "posts_7d": 1,
+   "posts_7d": 2,
    "heat_ratio": null
   },
   "ebc": {
-   "count": 4,
+   "count": 5,
    "titles": [
     {
      "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTFBlbTkzSjFIV1lDMmlpTGV4Z2dYQ0ZaSHhkUVJ0bld6dFhtdVZZaGttODBvejN3d3R0NXZRX0prUmlmMEw1b21VX25Fa1ZiMWpac2FpcXNn?oc=5",
@@ -955,117 +1262,9 @@
  },
  {
   "date": "2026-11-18",
-  "stock_id": "2886",
-  "name": "兆豐金",
-  "close": 52.6,
-  "signal": "🟡 只有技術訊號，籌碼與情緒沒有明顯配合",
-  "level": 0,
-  "bias": "none",
-  "four_score": 1,
-  "ma13_state": "中性",
-  "tech": "跌破13MA；13MA 中性",
-  "chips": {
-   "inst_5d": 13435,
-   "trust_5d": -28034,
-   "data_date": "2026-11-17",
-   "margin_5d": -869,
-   "foreign_5d": 41469,
-   "inst_5d_pct": 10.2,
-   "trust_streak": -5,
-   "foreign_streak": 7
-  },
-  "brokers": {
-   "ups": 0,
-   "downs": 0,
-   "items": [],
-   "trend": "none",
-   "consensus": null
-  },
-  "retail": {
-   "hot": false,
-   "bear": 0,
-   "bull": 0,
-   "posts_7d": 0,
-   "heat_ratio": 0
-  },
-  "ebc": {
-   "count": 3,
-   "titles": [
-    {
-     "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTFBTZF9RZkc2VkV2Y1hOajM1a2s4eVRyb0VRYXR4QUFPWlZvLTdzRjZKYWxla1lqS0s1ejZjSmtOMTVmeC1TWmppRFpRWGIxM2JCdXM3ajVn?oc=5",
-     "title": "0050高檔才買？小資族改搭00998A分散科技股風險 布局全球金融賺三重效益"
-    },
-    {
-     "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTFBNcjd2WmFyVVNxcmMwZG1ZQ1VqMnFscUNTaTd5eWMzZldtcHVDY05ldzZVd050ejN3Q2JLa095XzVwWndDa0tmeG1IT3gzSFFMM1VTemRB?oc=5",
-     "title": "台股跌832點！ 資安股狂奔 「這3檔」逆勢攻漲停"
-    },
-    {
-     "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTFA0dko1amhCYUhSYVhtQkh4aEhYeXNBR3dOM08ya21oRjVkdGFpOWJnaE5JXzVDMjhJSGhfZm1qUm5ESnJxVUQ0RHlxWmNwVjZ3MmhoR0FB?oc=5",
-     "title": "三大法人賣超1140億！ 網見1點抖了：不太妙啊"
-    }
-   ],
-   "in_title": 0
-  },
-  "ret_5d": null,
-  "mkt_ret_5d": null,
-  "ret_20d": null,
-  "mkt_ret_20d": null
- },
- {
-  "date": "2026-11-18",
-  "stock_id": "5880",
-  "name": "合庫金",
-  "close": 27.4,
-  "signal": "🟡 只有技術訊號，籌碼與情緒沒有明顯配合",
-  "level": 0,
-  "bias": "none",
-  "four_score": 1,
-  "ma13_state": "空頭",
-  "tech": "空頭成立；13MA 空頭",
-  "chips": {
-   "inst_5d": 12913,
-   "trust_5d": -705,
-   "data_date": "2026-11-17",
-   "margin_5d": -16,
-   "foreign_5d": 13618,
-   "inst_5d_pct": 17,
-   "trust_streak": 1,
-   "foreign_streak": 5
-  },
-  "brokers": {
-   "ups": 0,
-   "downs": 0,
-   "items": [],
-   "trend": "none",
-   "consensus": null
-  },
-  "retail": {
-   "hot": false,
-   "bear": 0,
-   "bull": 0,
-   "posts_7d": 0,
-   "heat_ratio": 0
-  },
-  "ebc": {
-   "count": 1,
-   "titles": [
-    {
-     "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTFBNcjd2WmFyVVNxcmMwZG1ZQ1VqMnFscUNTaTd5eWMzZldtcHVDY05ldzZVd050ejN3Q2JLa095XzVwWndDa0tmeG1IT3gzSFFMM1VTemRB?oc=5",
-     "title": "台股跌832點！ 資安股狂奔 「這3檔」逆勢攻漲停"
-    }
-   ],
-   "in_title": 0
-  },
-  "ret_5d": null,
-  "mkt_ret_5d": null,
-  "ret_20d": null,
-  "mkt_ret_20d": null
- },
- {
-  "date": "2026-11-18",
   "stock_id": "3035",
   "name": "智原",
-  "close": 186.5,
+  "close": 186,
   "signal": "🟡 只有技術訊號，籌碼與情緒沒有明顯配合",
   "level": 0,
   "bias": "none",
@@ -1073,14 +1272,14 @@
   "ma13_state": "中性",
   "tech": "站上13MA；13MA 中性",
   "chips": {
-   "inst_5d": -1587,
-   "trust_5d": 64,
-   "data_date": "2026-11-17",
+   "inst_5d": -2184,
+   "trust_5d": 86,
+   "data_date": "2026-11-18",
    "margin_5d": 871,
-   "foreign_5d": -1651,
-   "inst_5d_pct": -2.7,
-   "trust_streak": 1,
-   "foreign_streak": -2
+   "foreign_5d": -2270,
+   "inst_5d_pct": -3.3,
+   "trust_streak": 2,
+   "foreign_streak": 1
   },
   "brokers": {
    "ups": 0,
@@ -1114,71 +1313,6 @@
     {
      "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE1kbjdrUFhlZUZINHNjN2pQOVIyQmpjbV83OVhYUTdwSXY1ZzZITWdxWWxkMEVIT2ZIanY5WkVwVHpwaVlVLUhZT1lKbzZrcE5ieWNROGln?oc=5",
      "title": "台股狂瀉2635點太扯！ 郭哲榮高喊「閉眼買」：沒45K發雞排"
-    }
-   ],
-   "in_title": 0
-  },
-  "ret_5d": null,
-  "mkt_ret_5d": null,
-  "ret_20d": null,
-  "mkt_ret_20d": null
- },
- {
-  "date": "2026-11-18",
-  "stock_id": "1303",
-  "name": "南亞",
-  "close": 251.5,
-  "signal": "🟡 只有技術訊號，籌碼與情緒沒有明顯配合",
-  "level": 0,
-  "bias": "none",
-  "four_score": 0,
-  "ma13_state": "空頭",
-  "tech": "空頭成立；13MA 空頭",
-  "chips": {
-   "inst_5d": -24062,
-   "trust_5d": 29433,
-   "data_date": "2026-11-17",
-   "margin_5d": 1729,
-   "foreign_5d": -53495,
-   "inst_5d_pct": -3.8,
-   "trust_streak": -1,
-   "foreign_streak": -5
-  },
-  "brokers": {
-   "ups": 1,
-   "downs": 0,
-   "items": [
-    {
-     "date": "2026-10-29",
-     "link": "https://news.google.com/rss/articles/CBMiWkFVX3lxTFBQZktVaTZxYkhuTDZQSUxoT21QV2ljVDZURVlHenhFRE1qUWloNjVETEVvTDBidlpQWml3ZHUxcmtnaDhDd1h2RU05SzhKU3dHSjdyaHpPRWh2UdIBX0FVX3lxTE4zRklnWE9yQ2ZFSDcwM01mN0pBeWRkdWpDYjhaaFVwTi1uQ0doYmhtRnVfUUQzbjhDTXpwamZWRmZjVUh6aEt1UDZpVkdxMHpoalROWnYxdmo0ajFKdDZJ?oc=5",
-     "title": "本業、業外皆美 法人調高南亞獲利預估值及目標價",
-     "direction": "up"
-    }
-   ],
-   "trend": "mixed",
-   "consensus": null
-  },
-  "retail": {
-   "hot": false,
-   "bear": 0,
-   "bull": 0,
-   "posts_7d": 1,
-   "heat_ratio": 0.7
-  },
-  "ebc": {
-   "count": 35,
-   "titles": [
-    {
-     "link": "https://news.google.com/rss/articles/CBMiVEFVX3lxTE0yTklPV2tsd0pIaXJlNy15WFlMSnV0RC03elhHMGFvTWNMSkktLU52U2hueDlIa0NNLVRrUlFacUMtUXJubXZFRkQ3NHRBVnp2dlRscA?oc=5",
-     "title": "基金：兆豐00913成分股調整3進3出今收盤後生效，納入南亞科、全新、精材"
-    },
-    {
-     "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE9QTUVfNGcwbjhGQzE5TmpwbnNUQ0tNOTBjOFBJYi1lUFRTUk5iTmx4bDFXLUlHZ09SRGhIS3JpbXJnMXdXbDcyRkxwSktXTTR5WTFtT0xB?oc=5",
-     "title": "千點殺盤撿便宜！00418A加碼5檔 隔天站回10元搶先反彈"
-    },
-    {
-     "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTFBNcjd2WmFyVVNxcmMwZG1ZQ1VqMnFscUNTaTd5eWMzZldtcHVDY05ldzZVd050ejN3Q2JLa095XzVwWndDa0tmeG1IT3gzSFFMM1VTemRB?oc=5",
-     "title": "台股跌832點！ 資安股狂奔 「這3檔」逆勢攻漲停"
     }
    ],
    "in_title": 0
