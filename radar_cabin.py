@@ -198,6 +198,44 @@ def _stock_detail(rows: list, stock_id: str, news: list):
         st.markdown(f"[📄 法說會簡報 PDF]({_safe_url(r['pdf_url'])})")
 
 
+def _scan_section():
+  """每天用本站「四維黑馬」「13MA 的魔力」掃 118 檔自選股，再比對籌碼與市場情緒（規則固定、不用 AI）。"""
+  st.markdown("---")
+  st.markdown("#### 🧭 每日技術×籌碼×情緒掃描")
+  st.caption("技術面來自本站「🚀 四維黑馬」（≥ 3 項）與「📐 13MA 的魔力」（多頭成立、空頭成立、站上／跌破 13MA、飆股標記）；"
+             "再比對法人買賣超與券商目標價、東森報導、PTT 熱度。")
+  try:
+    scan = load_json("scan.json")
+  except Exception:
+    st.caption("還沒有掃描資料。")
+    return
+  if not scan:
+    st.caption("還沒有掃描資料。")
+    return
+  df = pd.DataFrame(scan)
+  dates = sorted(df["date"].unique(), reverse=True)
+  c1, c2 = st.columns([1, 1])
+  day = c1.selectbox("掃描日期", dates, index=0, key="scan_day")
+  only_alert = c2.checkbox("只看籌碼／情緒有配合或矛盾的", value=True, key="scan_alert")
+  v = df[df["date"] == day]
+  if only_alert:
+    v = v[v["level"] >= 2]
+  chips = v["chips"].map(lambda c: c if isinstance(c, dict) else {})
+  ex5 = v["ret_5d"] - v["mkt_ret_5d"]
+  table = pd.DataFrame({
+      "代號": v["stock_id"], "名稱": v["name"], "收盤": v["close"], "訊號": v["signal"], "技術面": v["tech"],
+      "法人5日(張)": chips.map(lambda c: c.get("inst_5d")), "佔成交量%": chips.map(lambda c: c.get("inst_5d_pct")),
+      "融資5日(張)": chips.map(lambda c: c.get("margin_5d")),
+      "券商動向": v["brokers"].map(lambda b: BROKER_TXT.get((b or {}).get("trend"), "") if isinstance(b, dict) else ""),
+      "5日超額%": ex5,
+  })
+  st.caption(f"{day}：{int((df[df['date'] == day]['level'] >= 2).sum())} 檔值得注意，"
+             f"共 {int((df['date'] == day).sum())} 檔有技術訊號。")
+  st.dataframe(table, width="stretch", hide_index=True)
+  st.download_button("⬇️ 下載掃描結果 CSV", _no_formula(table).to_csv(index=False).encode("utf-8-sig"),
+                     file_name=f"技術籌碼情緒掃描_{day}.csv", mime="text/csv", key="scan_csv")
+
+
 def _ebc_section():
   """每天東森財經新聞標題提到哪些股票、各幾次（★＝自選股）。只用標題，不抓內文。"""
   st.markdown("---")
@@ -298,6 +336,9 @@ def render_radar_cabin(focus_stock: str | None = None):
     pick = st.selectbox("🔍 個股細節", detail_opts, index=detail_opts.index(default), key="radar_detail")
     _stock_detail(rows, pick.split(" ")[0], news)
 
+  # ---------- 每日技術×籌碼×情緒掃描 ----------
+  _scan_section()
+
   # ---------- 東森財經個股熱度 ----------
   _ebc_section()
 
@@ -311,6 +352,14 @@ def render_radar_cabin(focus_stock: str | None = None):
                                 "hit_rate_20d": "20日命中率%"})
     sig_v["方向"] = sig_v["方向"].map({"bear": "看空", "bull": "看多", "none": "—"})
     st.dataframe(sig_v, width="stretch", hide_index=True)
+  scan_sc = pd.DataFrame(score.get("scan") or [])
+  if not scan_sc.empty:
+    st.markdown("**每日技術×籌碼×情緒掃描**")
+    sc_v = scan_sc.rename(columns={"signal_type": "訊號", "bias": "方向", "n_5d": "5日樣本", "avg_excess_5d": "5日平均超額%",
+                                   "hit_rate_5d": "5日命中率%", "n_20d": "20日樣本", "avg_excess_20d": "20日平均超額%",
+                                   "hit_rate_20d": "20日命中率%", "n_total": "總筆數"})
+    sc_v["方向"] = sc_v["方向"].map({"bear": "看空", "bull": "看多"})
+    st.dataframe(sc_v, width="stretch", hide_index=True)
   if not brk.empty:
     brk_v = brk.rename(columns={"broker": "券商", "direction": "方向", "n_20d": "20日樣本", "avg_excess_20d": "20日平均超額%",
                                 "hit_rate_20d": "20日命中率%", "n_total": "總則數"})
