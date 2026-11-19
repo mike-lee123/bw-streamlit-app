@@ -1,6 +1,17 @@
 {
  "scan": [
   {
+   "signal_type": "🔴 轉弱但情緒還熱",
+   "bias": "bear",
+   "n_5d": 0,
+   "avg_excess_5d": null,
+   "hit_rate_5d": null,
+   "n_20d": 0,
+   "avg_excess_20d": null,
+   "hit_rate_20d": null,
+   "n_total": 3
+  },
+  {
    "signal_type": "🟠 黑馬但法人倒貨",
    "bias": "bear",
    "n_5d": 0,
@@ -65,6 +76,16 @@
    "hit_rate_20d": null
   },
   {
+   "signal_type": "⚪ 簡報是圖片，讀不到文字，只列籌碼",
+   "bias": "none",
+   "n_5d": 0,
+   "avg_excess_5d": null,
+   "hit_rate_5d": null,
+   "n_20d": 0,
+   "avg_excess_20d": null,
+   "hit_rate_20d": null
+  },
+  {
    "signal_type": "🟡 訊號不明顯",
    "bias": "none",
    "n_5d": 0,
@@ -77,6 +98,22 @@
  ],
  "brokers": [
   {
+   "broker": "（未具名）",
+   "direction": "up",
+   "n_20d": 1,
+   "avg_excess_20d": 22.28,
+   "hit_rate_20d": 100,
+   "n_total": 4
+  },
+  {
+   "broker": "外資",
+   "direction": "up",
+   "n_20d": 1,
+   "avg_excess_20d": -1.59,
+   "hit_rate_20d": 0,
+   "n_total": 2
+  },
+  {
    "broker": "瑞銀",
    "direction": "up",
    "n_20d": 1,
@@ -85,20 +122,20 @@
    "n_total": 1
   },
   {
-   "broker": "外資",
+   "broker": "FactSet 共識",
    "direction": "up",
-   "n_20d": 1,
-   "avg_excess_20d": -1.59,
-   "hit_rate_20d": 0,
-   "n_total": 1
+   "n_20d": 0,
+   "avg_excess_20d": null,
+   "hit_rate_20d": null,
+   "n_total": 11
   },
   {
-   "broker": "（未具名）",
+   "broker": "法人",
    "direction": "up",
-   "n_20d": 1,
-   "avg_excess_20d": 22.28,
-   "hit_rate_20d": 100,
-   "n_total": 1
+   "n_20d": 0,
+   "avg_excess_20d": null,
+   "hit_rate_20d": null,
+   "n_total": 6
   },
   {
    "broker": "外資",
@@ -106,7 +143,7 @@
    "n_20d": 0,
    "avg_excess_20d": null,
    "hit_rate_20d": null,
-   "n_total": 2
+   "n_total": 3
   },
   {
    "broker": "FactSet 共識",
@@ -114,7 +151,7 @@
    "n_20d": 0,
    "avg_excess_20d": null,
    "hit_rate_20d": null,
-   "n_total": 2
+   "n_total": 3
   },
   {
    "broker": "法人",
@@ -122,10 +159,58 @@
    "n_20d": 0,
    "avg_excess_20d": null,
    "hit_rate_20d": null,
-   "n_total": 1
+   "n_total": 2
   },
   {
    "broker": "（未具名）",
+   "direction": "down",
+   "n_20d": 0,
+   "avg_excess_20d": null,
+   "hit_rate_20d": null,
+   "n_total": 2
+  },
+  {
+   "broker": "美銀",
+   "direction": "up",
+   "n_20d": 0,
+   "avg_excess_20d": null,
+   "hit_rate_20d": null,
+   "n_total": 1
+  },
+  {
+   "broker": "日系外資",
+   "direction": "up",
+   "n_20d": 0,
+   "avg_excess_20d": null,
+   "hit_rate_20d": null,
+   "n_total": 1
+  },
+  {
+   "broker": "里昂",
+   "direction": "up",
+   "n_20d": 0,
+   "avg_excess_20d": null,
+   "hit_rate_20d": null,
+   "n_total": 1
+  },
+  {
+   "broker": "高盛",
+   "direction": "up",
+   "n_20d": 0,
+   "avg_excess_20d": null,
+   "hit_rate_20d": null,
+   "n_total": 1
+  },
+  {
+   "broker": "歐系外資",
+   "direction": "up",
+   "n_20d": 0,
+   "avg_excess_20d": null,
+   "hit_rate_20d": null,
+   "n_total": 1
+  },
+  {
+   "broker": "高盛",
    "direction": "down",
    "n_20d": 0,
    "avg_excess_20d": null,
