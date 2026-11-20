@@ -36,6 +36,16 @@
  ],
  "signals": [
   {
+   "signal_type": "⚫ 一致偏空",
+   "bias": "bear",
+   "n_5d": 0,
+   "avg_excess_5d": null,
+   "hit_rate_5d": null,
+   "n_20d": 0,
+   "avg_excess_20d": null,
+   "hit_rate_20d": null
+  },
+  {
    "signal_type": "🔴 背離警報",
    "bias": "bear",
    "n_5d": 10,
@@ -113,7 +123,7 @@
    "n_20d": 11,
    "avg_excess_20d": 9.51,
    "hit_rate_20d": 82,
-   "n_total": 13
+   "n_total": 15
   },
   {
    "broker": "法人",
@@ -121,7 +131,7 @@
    "n_20d": 6,
    "avg_excess_20d": 8.14,
    "hit_rate_20d": 67,
-   "n_total": 8
+   "n_total": 9
   },
   {
    "broker": "（未具名）",
@@ -129,7 +139,7 @@
    "n_20d": 4,
    "avg_excess_20d": 15.51,
    "hit_rate_20d": 75,
-   "n_total": 4
+   "n_total": 8
   },
   {
    "broker": "外資",
@@ -137,7 +147,7 @@
    "n_20d": 2,
    "avg_excess_20d": -7.44,
    "hit_rate_20d": 0,
-   "n_total": 2
+   "n_total": 6
   },
   {
    "broker": "FactSet 共識",
@@ -145,7 +155,7 @@
    "n_20d": 1,
    "avg_excess_20d": -7.19,
    "hit_rate_20d": 100,
-   "n_total": 3
+   "n_total": 4
   },
   {
    "broker": "外資",
@@ -153,14 +163,22 @@
    "n_20d": 1,
    "avg_excess_20d": -4.7,
    "hit_rate_20d": 100,
-   "n_total": 3
+   "n_total": 4
   },
   {
-   "broker": "法人",
-   "direction": "down",
+   "broker": "美銀",
+   "direction": "up",
    "n_20d": 1,
-   "avg_excess_20d": 1.46,
+   "avg_excess_20d": -8.42,
    "hit_rate_20d": 0,
+   "n_total": 2
+  },
+  {
+   "broker": "瑞銀",
+   "direction": "up",
+   "n_20d": 1,
+   "avg_excess_20d": 18.64,
+   "hit_rate_20d": 100,
    "n_total": 2
   },
   {
@@ -172,42 +190,26 @@
    "n_total": 2
   },
   {
-   "broker": "美銀",
-   "direction": "up",
-   "n_20d": 1,
-   "avg_excess_20d": -8.42,
-   "hit_rate_20d": 0,
-   "n_total": 1
-  },
-  {
-   "broker": "瑞銀",
-   "direction": "up",
-   "n_20d": 1,
-   "avg_excess_20d": 18.64,
-   "hit_rate_20d": 100,
-   "n_total": 1
-  },
-  {
-   "broker": "日系外資",
-   "direction": "up",
-   "n_20d": 1,
-   "avg_excess_20d": -6.2,
-   "hit_rate_20d": 0,
-   "n_total": 1
-  },
-  {
-   "broker": "里昂",
-   "direction": "up",
-   "n_20d": 1,
-   "avg_excess_20d": -0.24,
-   "hit_rate_20d": 0,
-   "n_total": 1
-  },
-  {
    "broker": "高盛",
    "direction": "up",
    "n_20d": 1,
    "avg_excess_20d": 12.33,
+   "hit_rate_20d": 100,
+   "n_total": 2
+  },
+  {
+   "broker": "法人",
+   "direction": "down",
+   "n_20d": 1,
+   "avg_excess_20d": 1.46,
+   "hit_rate_20d": 0,
+   "n_total": 2
+  },
+  {
+   "broker": "高盛",
+   "direction": "down",
+   "n_20d": 1,
+   "avg_excess_20d": -0.92,
    "hit_rate_20d": 100,
    "n_total": 1
   },
@@ -220,11 +222,43 @@
    "n_total": 1
   },
   {
-   "broker": "高盛",
-   "direction": "down",
+   "broker": "里昂",
+   "direction": "up",
    "n_20d": 1,
-   "avg_excess_20d": -0.92,
-   "hit_rate_20d": 100,
+   "avg_excess_20d": -0.24,
+   "hit_rate_20d": 0,
+   "n_total": 1
+  },
+  {
+   "broker": "日系外資",
+   "direction": "up",
+   "n_20d": 1,
+   "avg_excess_20d": -6.2,
+   "hit_rate_20d": 0,
+   "n_total": 1
+  },
+  {
+   "broker": "元大",
+   "direction": "up",
+   "n_20d": 0,
+   "avg_excess_20d": null,
+   "hit_rate_20d": null,
+   "n_total": 1
+  },
+  {
+   "broker": "小摩",
+   "direction": "down",
+   "n_20d": 0,
+   "avg_excess_20d": null,
+   "hit_rate_20d": null,
+   "n_total": 1
+  },
+  {
+   "broker": "花旗",
+   "direction": "up",
+   "n_20d": 0,
+   "avg_excess_20d": null,
+   "hit_rate_20d": null,
    "n_total": 1
   }
  ]
