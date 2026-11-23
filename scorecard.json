@@ -49,9 +49,9 @@
   {
    "signal_type": "⚫ 一致偏空",
    "bias": "bear",
-   "n_5d": 0,
-   "avg_excess_5d": null,
-   "hit_rate_5d": null,
+   "n_5d": 2,
+   "avg_excess_5d": -5.06,
+   "hit_rate_5d": 100,
    "n_20d": 0,
    "avg_excess_20d": null,
    "hit_rate_20d": null
@@ -59,52 +59,52 @@
   {
    "signal_type": "🔴 背離警報",
    "bias": "bear",
-   "n_5d": 10,
-   "avg_excess_5d": -1.78,
-   "hit_rate_5d": 40,
-   "n_20d": 10,
-   "avg_excess_20d": 3.84,
-   "hit_rate_20d": 40
+   "n_5d": 14,
+   "avg_excess_5d": -0.63,
+   "hit_rate_5d": 50,
+   "n_20d": 14,
+   "avg_excess_20d": 4.88,
+   "hit_rate_20d": 36
   },
   {
    "signal_type": "🟠 背離",
    "bias": "bear",
-   "n_5d": 1,
-   "avg_excess_5d": -1.2,
+   "n_5d": 3,
+   "avg_excess_5d": -7.19,
    "hit_rate_5d": 100,
-   "n_20d": 1,
-   "avg_excess_20d": -6.99,
+   "n_20d": 2,
+   "avg_excess_20d": -6.91,
    "hit_rate_20d": 100
   },
   {
    "signal_type": "🔵 戴維斯雙擊候選",
    "bias": "bull",
-   "n_5d": 4,
-   "avg_excess_5d": -0.42,
-   "hit_rate_5d": 50,
-   "n_20d": 4,
-   "avg_excess_20d": 0.83,
-   "hit_rate_20d": 75
+   "n_5d": 5,
+   "avg_excess_5d": -0.07,
+   "hit_rate_5d": 60,
+   "n_20d": 5,
+   "avg_excess_20d": 2.24,
+   "hit_rate_20d": 80
   },
   {
    "signal_type": "🔵 順風車",
    "bias": "bull",
-   "n_5d": 10,
-   "avg_excess_5d": 1.63,
-   "hit_rate_5d": 50,
-   "n_20d": 10,
-   "avg_excess_20d": -4.99,
-   "hit_rate_20d": 20
+   "n_5d": 14,
+   "avg_excess_5d": 0.69,
+   "hit_rate_5d": 43,
+   "n_20d": 13,
+   "avg_excess_20d": -6.73,
+   "hit_rate_20d": 15
   },
   {
    "signal_type": "⚪ 簡報下載或解析失敗，只列籌碼",
    "bias": "none",
-   "n_5d": 0,
-   "avg_excess_5d": null,
-   "hit_rate_5d": null,
-   "n_20d": 0,
-   "avg_excess_20d": null,
-   "hit_rate_20d": null
+   "n_5d": 1,
+   "avg_excess_5d": 6.44,
+   "hit_rate_5d": 0,
+   "n_20d": 1,
+   "avg_excess_20d": -0.02,
+   "hit_rate_20d": 0
   },
   {
    "signal_type": "⚪ 簡報是圖片，讀不到文字，只列籌碼",
@@ -119,11 +119,11 @@
   {
    "signal_type": "🟡 訊號不明顯",
    "bias": "none",
-   "n_5d": 43,
-   "avg_excess_5d": 0.28,
+   "n_5d": 59,
+   "avg_excess_5d": -0.4,
    "hit_rate_5d": 0,
-   "n_20d": 43,
-   "avg_excess_20d": -0.59,
+   "n_20d": 47,
+   "avg_excess_20d": 0.62,
    "hit_rate_20d": 0
   }
  ],
@@ -131,34 +131,66 @@
   {
    "broker": "FactSet 共識",
    "direction": "up",
-   "n_20d": 11,
-   "avg_excess_20d": 9.51,
-   "hit_rate_20d": 82,
+   "n_20d": 13,
+   "avg_excess_20d": 8.61,
+   "hit_rate_20d": 77,
    "n_total": 15
-  },
-  {
-   "broker": "法人",
-   "direction": "up",
-   "n_20d": 6,
-   "avg_excess_20d": 8.14,
-   "hit_rate_20d": 67,
-   "n_total": 9
   },
   {
    "broker": "（未具名）",
    "direction": "up",
-   "n_20d": 4,
-   "avg_excess_20d": 15.51,
+   "n_20d": 8,
+   "avg_excess_20d": 14.99,
    "hit_rate_20d": 75,
    "n_total": 8
   },
   {
+   "broker": "法人",
+   "direction": "up",
+   "n_20d": 7,
+   "avg_excess_20d": 10.35,
+   "hit_rate_20d": 71,
+   "n_total": 9
+  },
+  {
    "broker": "外資",
    "direction": "up",
-   "n_20d": 2,
-   "avg_excess_20d": -7.44,
-   "hit_rate_20d": 0,
+   "n_20d": 6,
+   "avg_excess_20d": 7.38,
+   "hit_rate_20d": 67,
    "n_total": 6
+  },
+  {
+   "broker": "美銀",
+   "direction": "up",
+   "n_20d": 2,
+   "avg_excess_20d": -1.79,
+   "hit_rate_20d": 50,
+   "n_total": 2
+  },
+  {
+   "broker": "瑞銀",
+   "direction": "up",
+   "n_20d": 2,
+   "avg_excess_20d": 4.17,
+   "hit_rate_20d": 50,
+   "n_total": 2
+  },
+  {
+   "broker": "（未具名）",
+   "direction": "down",
+   "n_20d": 2,
+   "avg_excess_20d": -2.45,
+   "hit_rate_20d": 100,
+   "n_total": 2
+  },
+  {
+   "broker": "高盛",
+   "direction": "up",
+   "n_20d": 2,
+   "avg_excess_20d": 7.62,
+   "hit_rate_20d": 100,
+   "n_total": 2
   },
   {
    "broker": "FactSet 共識",
@@ -177,38 +209,6 @@
    "n_total": 4
   },
   {
-   "broker": "美銀",
-   "direction": "up",
-   "n_20d": 1,
-   "avg_excess_20d": -8.42,
-   "hit_rate_20d": 0,
-   "n_total": 2
-  },
-  {
-   "broker": "瑞銀",
-   "direction": "up",
-   "n_20d": 1,
-   "avg_excess_20d": 18.64,
-   "hit_rate_20d": 100,
-   "n_total": 2
-  },
-  {
-   "broker": "（未具名）",
-   "direction": "down",
-   "n_20d": 1,
-   "avg_excess_20d": -4.76,
-   "hit_rate_20d": 100,
-   "n_total": 2
-  },
-  {
-   "broker": "高盛",
-   "direction": "up",
-   "n_20d": 1,
-   "avg_excess_20d": 12.33,
-   "hit_rate_20d": 100,
-   "n_total": 2
-  },
-  {
    "broker": "法人",
    "direction": "down",
    "n_20d": 1,
@@ -217,10 +217,10 @@
    "n_total": 2
   },
   {
-   "broker": "高盛",
-   "direction": "down",
+   "broker": "花旗",
+   "direction": "up",
    "n_20d": 1,
-   "avg_excess_20d": -0.92,
+   "avg_excess_20d": 3.0,
    "hit_rate_20d": 100,
    "n_total": 1
   },
@@ -233,11 +233,11 @@
    "n_total": 1
   },
   {
-   "broker": "里昂",
+   "broker": "元大",
    "direction": "up",
    "n_20d": 1,
-   "avg_excess_20d": -0.24,
-   "hit_rate_20d": 0,
+   "avg_excess_20d": 3.0,
+   "hit_rate_20d": 100,
    "n_total": 1
   },
   {
@@ -249,24 +249,24 @@
    "n_total": 1
   },
   {
-   "broker": "元大",
+   "broker": "里昂",
    "direction": "up",
-   "n_20d": 0,
-   "avg_excess_20d": null,
-   "hit_rate_20d": null,
+   "n_20d": 1,
+   "avg_excess_20d": -0.24,
+   "hit_rate_20d": 0,
+   "n_total": 1
+  },
+  {
+   "broker": "高盛",
+   "direction": "down",
+   "n_20d": 1,
+   "avg_excess_20d": -0.92,
+   "hit_rate_20d": 100,
    "n_total": 1
   },
   {
    "broker": "小摩",
    "direction": "down",
-   "n_20d": 0,
-   "avg_excess_20d": null,
-   "hit_rate_20d": null,
-   "n_total": 1
-  },
-  {
-   "broker": "花旗",
-   "direction": "up",
    "n_20d": 0,
    "avg_excess_20d": null,
    "hit_rate_20d": null,
