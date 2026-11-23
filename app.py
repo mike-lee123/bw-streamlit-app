@@ -2114,18 +2114,21 @@ def resolve_contract(api, code: str):
         if _is_contract(c):
             return c
     if not code.isdigit() and code[:3] not in ("TSE", "OTC"):
-        try:   # 共用的連線可能只下載了股票合約（併武左側控制台），補抓期貨合約再試
-            api.fetch_contracts(contract_type="Future")
-            for t in (lambda: api.Contracts.Futures[code],
-                      lambda: getattr(api.Contracts.Futures, code[:3])[code]):
-                try:
-                    c = t()
-                except Exception:  # noqa: BLE001
-                    continue
-                if _is_contract(c):
-                    return c
+        # 共用的連線可能沒載入期貨合約（併武左側控制台）：重新下載合約表再試。
+        # shioaji 1.7.x 的 fetch_contracts 沒有 contract_type 參數，傳了會直接 TypeError。
+        try:
+            api.fetch_contracts(contract_download=True)
         except Exception:  # noqa: BLE001
             pass
+        for t in (lambda: api.Contracts.Futures[code],
+                  lambda: getattr(api.Contracts.Futures, code[:3])[code],
+                  lambda: getattr(getattr(api.Contracts.Futures, code[:3]), code)):
+            try:
+                c = t()
+            except Exception:  # noqa: BLE001
+                continue
+            if _is_contract(c):
+                return c
     if code[:3] in ("TSE", "OTC") and code[3:].isdigit():
         c = _scan_index(C, code[:3], code[3:])
         if c is not None:
@@ -2858,6 +2861,41 @@ TW_CODES_B64 = (
 )
 
 
+SJ_SESSION_ERRORS = ("SessionNotEstablished", "NotReady", "Session error")
+SJ_SESSION_HELP = ("永豐的行情連線建立不起來（SessionNotEstablished），已自動重新登入一次仍失敗。"
+                   "若在 Streamlit Cloud 上一直出現，通常是雲端主機（美國）連不上永豐的行情伺服器，"
+                   "請改在本機執行（雙擊 start_dashboard.bat）；本機也出現的話，稍後再試，"
+                   "或在左側重新輸入金鑰。現貨可改用 Yahoo。")
+
+
+def bw_sj_retry(fn, sess: dict):
+    """執行 fn(api)；遇到永豐行情連線中斷（左側控制台快取的連線過期等），清掉快取、重新登入一次再試。
+    13MA 艙與期現對照艙共用；成功重新登入時，也一併更新左側控制台的 global_sj_api。"""
+    try:
+        return fn(sess["api"])
+    except Exception as e:  # noqa: BLE001
+        if not any(k in str(e) for k in SJ_SESSION_ERRORS):
+            raise
+        first = e
+    g = globals()
+    try:
+        _bw_shioaji_login.clear()
+    except Exception:  # noqa: BLE001
+        pass
+    api, msg = get_enhanced_shioaji_client(g.get("sidebar_sj_key", ""), g.get("sidebar_sj_sec", ""),
+                                           g.get("global_is_simulation", True))
+    if api is None:
+        raise RuntimeError(f"永豐行情連線中斷，重新登入失敗：{msg}") from first
+    g["global_sj_api"] = api
+    sess["api"], sess["id"] = api, f"{id(api)}_{sess.get('sim')}"
+    try:
+        return fn(api)
+    except Exception as e:  # noqa: BLE001
+        if any(k in str(e) for k in SJ_SESSION_ERRORS):
+            raise RuntimeError(SJ_SESSION_HELP) from e
+        raise
+
+
 def render_ma13_cabin():
     """第 22 艙：13MA 的魔力（原 ma13_dashboard.py 整頁，規則與計算見上方 13MA 函式庫）"""
     BIAS_OPTS = {"strict": "三條件齊（13MA＋K 50＋MACD 柱 0）", "ma": "只看 30 分K 在 13MA 之上／下"}
@@ -3065,7 +3103,8 @@ def render_ma13_cabin():
                 st.error("起始日不能晚於結束日。")
                 st.stop()
             try:
-                sj_m1 = fetch_sj(sj_sess["api"], sj_sess["id"], symbol.strip().upper(), sj_start, sj_end, sj_day_only)
+                sj_m1 = bw_sj_retry(lambda api: fetch_sj(api, sj_sess["id"], symbol.strip().upper(),
+                                                         sj_start, sj_end, sj_day_only), sj_sess)
             except EmptyData:
                 sj_m1 = pd.DataFrame(columns=["Open", "High", "Low", "Close"])
             raw_df = to_interval(sj_m1, interval)
@@ -3858,7 +3897,7 @@ def render_futspot_cabin():
 
     def fetch_sj(sess: dict, code: str, start: dt.date, end: dt.date, day_only: bool) -> pd.DataFrame:
         try:
-            return _sj_download(sess["api"], sess["id"], code, start, end, day_only)
+            return bw_sj_retry(lambda api: _sj_download(api, sess["id"], code, start, end, day_only), sess)
         except Exception as e:  # noqa: BLE001
             st.session_state.setdefault("sj_errs", []).append(f"{code}：{e}")
             return pd.DataFrame(columns=OHLC)
