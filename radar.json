@@ -1,5 +1,220 @@
 [
  {
+  "call_key": "6285_628520261119M001.pdf",
+  "stock_id": "6285",
+  "name": "啟碁",
+  "call_date": "2026-11-23",
+  "signal": "🟡 訊號不明顯",
+  "level": 0,
+  "market": "上市",
+  "tone": "中性",
+  "tone_score": 0,
+  "news_sentiment": 0,
+  "one_line": "啟碁2026年第3季財報表現穩健，但未明確展望未來業務發展。",
+  "guidance": [
+   "管理層回顧過去營收表現，未明確展望未來。",
+   "財報顯示營業毛利和稅後淨利皆有成長，但幅度不大。",
+   "營運成本控制得宜，但未提及具體擴產或新市場開拓計劃。"
+  ],
+  "risks": [],
+  "notes": [],
+  "news_reason": "多篇新聞涉及漲跌動態，但無顯著偏向正面或負面",
+  "pdf_url": "https://mopsov.twse.com.tw/nas/STR/628520261119M001.pdf",
+  "chips": {
+   "close": 177,
+   "inst_5d": -4872,
+   "trust_5d": 4188,
+   "data_date": "2026-11-23",
+   "dealer_5d": 96,
+   "margin_5d": -1051,
+   "volume_5d": 116097,
+   "foreign_5d": -9060,
+   "inst_5d_pct": -4.2,
+   "price_5d_pct": -1.1,
+   "trust_streak": -1,
+   "foreign_streak": -2,
+   "after_call_days": 0,
+   "after_call_inst": 0,
+   "price_since_call_pct": 0
+  },
+  "brokers": {
+   "ups": 0,
+   "downs": 0,
+   "items": [
+    {
+     "date": "2026-11-14",
+     "link": "https://news.google.com/rss/articles/CBMiZEFVX3lxTE13cFU0c21WaVhJb3RjMEo3UTdhb0VDQTJnNjJLd3FwV1pKZWNBekZTNjV0bUNxQ2VVLUVHaG1QdWhGTUVuMFc5R2JrbXZzel9uVHhJX0NsbTNTVUdlVU5IcTh5aXE?oc=5",
+     "title": "鉅亨速報 - Factset 最新調查：啟碁(6285-TW)目標價調降至235元，幅度約10.48%",
+     "broker": "FactSet 共識",
+     "source": "TradingView",
+     "target": 235,
+     "direction": "down"
+    }
+   ],
+   "trend": "down",
+   "consensus": {
+    "date": "2026-11-14",
+    "target": 235,
+    "direction": "down",
+    "change_pct": -10.48
+   },
+   "upside_pct": 32.8
+  },
+  "retail": {
+   "ok": true,
+   "hot": false,
+   "bear": 0,
+   "bull": 0,
+   "titles": [],
+   "posts_7d": 0,
+   "posts_30d": 0,
+   "heat_ratio": 0
+  },
+  "ebc": {
+   "ok": true,
+   "count": 0,
+   "titles": [],
+   "in_title": 0
+  },
+  "base_date": null,
+  "price_at_report": 177,
+  "ret_5d": null,
+  "mkt_ret_5d": null,
+  "ret_20d": null,
+  "mkt_ret_20d": null,
+  "inst_20d": null,
+  "analyzed_at": "2026-11-23 17:33"
+ },
+ {
+  "call_key": "6213_621320261117M001.pdf",
+  "stock_id": "6213",
+  "name": "聯茂",
+  "call_date": "2026-11-19",
+  "signal": "🟡 訊號不明顯",
+  "level": 0,
+  "market": "上市",
+  "tone": "非常樂觀",
+  "tone_score": 2,
+  "news_sentiment": -1,
+  "one_line": "聯茂法說會強調未來市場對高頻高速材料需求看好， ITEQ市占率及產能將擴大。",
+  "guidance": [
+   " ITEQ在高頻高速材料市場的市占率將顯著提升。",
+   "隨著電動車、車聯網和主動式安全駕駛系統需求增加，高性能車用銅箔基板之需求將成長。",
+   "公司預期因AI伺服器升級等需求，帶動高頻高速材料需求高度成長。"
+  ],
+  "risks": [],
+  "notes": [],
+  "news_reason": "多篇報導提到聯茂股價下跌及法人調降目標價，但也有正面新聞如營收翻倍。",
+  "pdf_url": "https://mopsov.twse.com.tw/nas/STR/621320261117M001.pdf",
+  "chips": {
+   "close": 395,
+   "inst_5d": 263,
+   "trust_5d": -2034,
+   "data_date": "2026-11-19",
+   "dealer_5d": -229,
+   "margin_5d": 1855,
+   "volume_5d": 88320,
+   "foreign_5d": 2297,
+   "inst_5d_pct": 0.3,
+   "price_5d_pct": -24.3,
+   "trust_streak": -3,
+   "foreign_streak": 3,
+   "after_call_days": 0,
+   "after_call_inst": 0,
+   "price_since_call_pct": 0
+  },
+  "brokers": {
+   "ups": 1,
+   "downs": 0,
+   "items": [
+    {
+     "date": "2026-11-18",
+     "link": "https://news.google.com/rss/articles/CBMiXEFVX3lxTE5mdmNaSzJBMGtYb0swLXBCSURlNFhreEdERmV0VGhzZnV2WGtveDFnS1NqcmoxTzgyQWNvVGRHOXRRME80dTNLcmpMcjZ5MmxEN1FMRTFhVm5wcld50gFiQVVfeXFMTzJsaUxnR3NsdDBVa2xsdTh5S3llUkZBUGNyV3NQVWxHeXdHNkNRMllKLUlmZVFpZGJDRDc3U2xtcjFJck50TUpiVnZxM0tMeGFhZzAtV3FuOTZ0eDNTbWlvOUE?oc=5",
+     "title": "聯茂目標價喊1030元　明年EPS上看46.8元",
+     "broker": "",
+     "source": "鏡週刊Mirror Media",
+     "target": null,
+     "direction": "flat"
+    },
+    {
+     "date": "2026-11-08",
+     "link": "https://news.google.com/rss/articles/CBMidkFVX3lxTE9HYU5kTUd5SGNmMHdtXzJOZGdva1VrYU5PV3N1WTN6dDF5VndfX252UDBReGpnRFVfQUFabVphSUxVelM3MU1MaFdkTHZMZVBYSS1ZWFlWUGZCdXpxenhTQ3VUeE55NnlfOGdyOGIxQ0xlelRTN1E?oc=5",
+     "title": "Factset 最新調查：聯茂(6213-TW)目標價調升至713.5元，幅度約7.29%｜新聞快訊｜豐雲學堂",
+     "broker": "FactSet 共識",
+     "source": "永豐金證券",
+     "target": 713.5,
+     "direction": "up"
+    },
+    {
+     "date": "2026-10-29",
+     "link": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE56VllXb1RMWVdtbXdxbEE1VGw3M2QxZllCcEZvYmJKR2hwZ1RjYTR0S1M2R2ZCOFVHZVVLRF80T3l0M3oyWFlwWm5saUFLTjdDTWlfaGJuQ2xRZ9IBX0FVX3lxTE96QjJhZUxCMXlfWHVQY0dsZ1Q4U3BPWXppS1NJSDRkQVVuVVpkckZnNks4bnppMXMzclZGS0NWUlVuTFczckM5d2xqbWcyTVdyZUprdmlMRHVzeGhONWQ4?oc=5",
+     "title": "漲價趨勢未歇 法人調升聯茂獲利預估值及目標價",
+     "broker": "法人",
+     "source": "經濟日報",
+     "target": null,
+     "direction": "up"
+    },
+    {
+     "date": "2026-10-27",
+     "link": "https://news.google.com/rss/articles/CBMiakFVX3lxTFBQaXlwOFdGV1ctYkNOdlZ0QkIwa1Z1UE9SMVB0Z29TNWJhUDdPZU9sRFBNSEN0bGxMOVZ3SHJqbFRQRmNvMnJ3WWhUeHNnZmZtQ3I5OEhHbHRLVlAxRk9jZ0tLOFRCMDV3elE?oc=5",
+     "title": "PCB他們最香！CCL報價漲10倍、毛利率看70％ 臻鼎、金居、台光電、聯茂...高盛喊買「這4檔」 最新目標價出爐了- 上市櫃",
+     "broker": "高盛",
+     "source": "旺得富理財網",
+     "target": null,
+     "direction": "flat"
+    }
+   ],
+   "trend": "up",
+   "consensus": {
+    "date": "2026-11-08",
+    "target": 713.5,
+    "direction": "up",
+    "change_pct": 7.29
+   },
+   "upside_pct": 80.6
+  },
+  "retail": {
+   "ok": true,
+   "hot": false,
+   "bear": 0,
+   "bull": 0,
+   "titles": [],
+   "posts_7d": 0,
+   "posts_30d": 1,
+   "heat_ratio": 0
+  },
+  "ebc": {
+   "ok": true,
+   "count": 3,
+   "titles": [
+    {
+     "date": "11-17",
+     "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTFBwZkx6bzVGTF9GWFdQSDZSMFhGMDZKSW1md2RWa2s1OFc5MnNWWmIwelhaMW1sQmtjT3hGdjdrT1dHalJjZWR6WnJ1NGpDVTBCMUZFQi1B?oc=5",
+     "title": "台股急拉千點「午盤又殺回去」 專家見台幣爆量嘆：外資還想跑"
+    },
+    {
+     "date": "11-19",
+     "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE5ZZWV2akNoQkw2WGRjTFBLTG5ydzJ4QzdROG9YdW5aUW9DWGhjTy1kdVQyVVpyMUFLcjZESUVZSzNSTjlpZGJWNThfSDQxWWxhd1Nfdnl3?oc=5",
+     "title": "台股重挫1768點破年線！台積電力守2100元 上市櫃280家跌停"
+    },
+    {
+     "date": "11-19",
+     "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE9yM1YtZHgwdWd2TnZXQzl1WUJjWlFrYlZmUlExNFNyZDNDSXh2eXZXZ1dwT05kN1Jpb1dic25EbEIwWVowLXdSblpFb2NVb3Y0dmNtS3hB?oc=5",
+     "title": "台股暴跌1500點！ 他喊「乾脆別護盤」網搖頭：選完就知道"
+    }
+   ],
+   "in_title": 0
+  },
+  "base_date": null,
+  "price_at_report": 395,
+  "ret_5d": null,
+  "mkt_ret_5d": null,
+  "ret_20d": null,
+  "mkt_ret_20d": null,
+  "inst_20d": null,
+  "analyzed_at": "2026-11-19 17:46"
+ },
+ {
   "call_key": "1303_130320261118M002.pdf",
   "stock_id": "1303",
   "name": "南亞",
@@ -131,135 +346,6 @@
   },
   "base_date": null,
   "price_at_report": 228.5,
-  "ret_5d": null,
-  "mkt_ret_5d": null,
-  "ret_20d": null,
-  "mkt_ret_20d": null,
-  "inst_20d": null,
-  "analyzed_at": "2026-11-19 17:46"
- },
- {
-  "call_key": "6213_621320261117M001.pdf",
-  "stock_id": "6213",
-  "name": "聯茂",
-  "call_date": "2026-11-19",
-  "signal": "🟡 訊號不明顯",
-  "level": 0,
-  "market": "上市",
-  "tone": "非常樂觀",
-  "tone_score": 2,
-  "news_sentiment": -1,
-  "one_line": "聯茂法說會強調未來市場對高頻高速材料需求看好， ITEQ市占率及產能將擴大。",
-  "guidance": [
-   " ITEQ在高頻高速材料市場的市占率將顯著提升。",
-   "隨著電動車、車聯網和主動式安全駕駛系統需求增加，高性能車用銅箔基板之需求將成長。",
-   "公司預期因AI伺服器升級等需求，帶動高頻高速材料需求高度成長。"
-  ],
-  "risks": [],
-  "notes": [],
-  "news_reason": "多篇報導提到聯茂股價下跌及法人調降目標價，但也有正面新聞如營收翻倍。",
-  "pdf_url": "https://mopsov.twse.com.tw/nas/STR/621320261117M001.pdf",
-  "chips": {
-   "close": 395,
-   "inst_5d": 263,
-   "trust_5d": -2034,
-   "data_date": "2026-11-19",
-   "dealer_5d": -229,
-   "margin_5d": 1855,
-   "volume_5d": 88320,
-   "foreign_5d": 2297,
-   "inst_5d_pct": 0.3,
-   "price_5d_pct": -24.3,
-   "trust_streak": -3,
-   "foreign_streak": 3,
-   "after_call_days": 0,
-   "after_call_inst": 0,
-   "price_since_call_pct": 0
-  },
-  "brokers": {
-   "ups": 1,
-   "downs": 0,
-   "items": [
-    {
-     "date": "2026-11-18",
-     "link": "https://news.google.com/rss/articles/CBMiXEFVX3lxTE5mdmNaSzJBMGtYb0swLXBCSURlNFhreEdERmV0VGhzZnV2WGtveDFnS1NqcmoxTzgyQWNvVGRHOXRRME80dTNLcmpMcjZ5MmxEN1FMRTFhVm5wcld50gFiQVVfeXFMTzJsaUxnR3NsdDBVa2xsdTh5S3llUkZBUGNyV3NQVWxHeXdHNkNRMllKLUlmZVFpZGJDRDc3U2xtcjFJck50TUpiVnZxM0tMeGFhZzAtV3FuOTZ0eDNTbWlvOUE?oc=5",
-     "title": "聯茂目標價喊1030元　明年EPS上看46.8元",
-     "broker": "",
-     "source": "鏡週刊Mirror Media",
-     "target": null,
-     "direction": "flat"
-    },
-    {
-     "date": "2026-11-08",
-     "link": "https://news.google.com/rss/articles/CBMidkFVX3lxTE9HYU5kTUd5SGNmMHdtXzJOZGdva1VrYU5PV3N1WTN6dDF5VndfX252UDBReGpnRFVfQUFabVphSUxVelM3MU1MaFdkTHZMZVBYSS1ZWFlWUGZCdXpxenhTQ3VUeE55NnlfOGdyOGIxQ0xlelRTN1E?oc=5",
-     "title": "Factset 最新調查：聯茂(6213-TW)目標價調升至713.5元，幅度約7.29%｜新聞快訊｜豐雲學堂",
-     "broker": "FactSet 共識",
-     "source": "永豐金證券",
-     "target": 713.5,
-     "direction": "up"
-    },
-    {
-     "date": "2026-10-29",
-     "link": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE56VllXb1RMWVdtbXdxbEE1VGw3M2QxZllCcEZvYmJKR2hwZ1RjYTR0S1M2R2ZCOFVHZVVLRF80T3l0M3oyWFlwWm5saUFLTjdDTWlfaGJuQ2xRZ9IBX0FVX3lxTE96QjJhZUxCMXlfWHVQY0dsZ1Q4U3BPWXppS1NJSDRkQVVuVVpkckZnNks4bnppMXMzclZGS0NWUlVuTFczckM5d2xqbWcyTVdyZUprdmlMRHVzeGhONWQ4?oc=5",
-     "title": "漲價趨勢未歇 法人調升聯茂獲利預估值及目標價",
-     "broker": "法人",
-     "source": "經濟日報",
-     "target": null,
-     "direction": "up"
-    },
-    {
-     "date": "2026-10-27",
-     "link": "https://news.google.com/rss/articles/CBMiakFVX3lxTFBQaXlwOFdGV1ctYkNOdlZ0QkIwa1Z1UE9SMVB0Z29TNWJhUDdPZU9sRFBNSEN0bGxMOVZ3SHJqbFRQRmNvMnJ3WWhUeHNnZmZtQ3I5OEhHbHRLVlAxRk9jZ0tLOFRCMDV3elE?oc=5",
-     "title": "PCB他們最香！CCL報價漲10倍、毛利率看70％ 臻鼎、金居、台光電、聯茂...高盛喊買「這4檔」 最新目標價出爐了- 上市櫃",
-     "broker": "高盛",
-     "source": "旺得富理財網",
-     "target": null,
-     "direction": "flat"
-    }
-   ],
-   "trend": "up",
-   "consensus": {
-    "date": "2026-11-08",
-    "target": 713.5,
-    "direction": "up",
-    "change_pct": 7.29
-   },
-   "upside_pct": 80.6
-  },
-  "retail": {
-   "ok": true,
-   "hot": false,
-   "bear": 0,
-   "bull": 0,
-   "titles": [],
-   "posts_7d": 0,
-   "posts_30d": 1,
-   "heat_ratio": 0
-  },
-  "ebc": {
-   "ok": true,
-   "count": 3,
-   "titles": [
-    {
-     "date": "11-17",
-     "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTFBwZkx6bzVGTF9GWFdQSDZSMFhGMDZKSW1md2RWa2s1OFc5MnNWWmIwelhaMW1sQmtjT3hGdjdrT1dHalJjZWR6WnJ1NGpDVTBCMUZFQi1B?oc=5",
-     "title": "台股急拉千點「午盤又殺回去」 專家見台幣爆量嘆：外資還想跑"
-    },
-    {
-     "date": "11-19",
-     "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE5ZZWV2akNoQkw2WGRjTFBLTG5ydzJ4QzdROG9YdW5aUW9DWGhjTy1kdVQyVVpyMUFLcjZESUVZSzNSTjlpZGJWNThfSDQxWWxhd1Nfdnl3?oc=5",
-     "title": "台股重挫1768點破年線！台積電力守2100元 上市櫃280家跌停"
-    },
-    {
-     "date": "11-19",
-     "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE9yM1YtZHgwdWd2TnZXQzl1WUJjWlFrYlZmUlExNFNyZDNDSXh2eXZXZ1dwT05kN1Jpb1dic25EbEIwWVowLXdSblpFb2NVb3Y0dmNtS3hB?oc=5",
-     "title": "台股暴跌1500點！ 他喊「乾脆別護盤」網搖頭：選完就知道"
-    }
-   ],
-   "in_title": 0
-  },
-  "base_date": null,
-  "price_at_report": 395,
   "ret_5d": null,
   "mkt_ret_5d": null,
   "ret_20d": null,
@@ -411,6 +497,92 @@
   "analyzed_at": "2026-11-18 00:25"
  },
  {
+  "call_key": "6187_618720261111M001.pdf",
+  "stock_id": "6187",
+  "name": "萬潤",
+  "call_date": "2026-11-18",
+  "signal": "⚪ 簡報下載或解析失敗，只列籌碼",
+  "level": 0,
+  "market": "上櫃",
+  "tone": "中性",
+  "tone_score": 0,
+  "news_sentiment": -1,
+  "one_line": "萬潤在法說會中提到供應鏈問題可能影響生產，未對未來展望作出明確預測。",
+  "guidance": [],
+  "risks": [
+   "供應鏈不穩定影響生產"
+  ],
+  "notes": [
+   "會後 1 個交易日法人合計 +167 張"
+  ],
+  "news_reason": "有跌價及獲獎消息，但以負面消息為主",
+  "pdf_url": "https://mopsov.twse.com.tw/nas/STR/618720261111M001.pdf",
+  "chips": {
+   "close": 694,
+   "inst_5d": -487,
+   "trust_5d": -431,
+   "data_date": "2026-11-19",
+   "dealer_5d": -135,
+   "margin_5d": -42,
+   "volume_5d": 13379,
+   "foreign_5d": -56,
+   "inst_5d_pct": -3.6,
+   "price_5d_pct": -26.9,
+   "trust_streak": 1,
+   "foreign_streak": -1,
+   "after_call_days": 1,
+   "after_call_inst": 167,
+   "price_since_call_pct": -10
+  },
+  "brokers": {
+   "ups": 0,
+   "downs": 0,
+   "items": [
+    {
+     "date": "2026-11-12",
+     "link": "https://news.google.com/rss/articles/CBMiZEFVX3lxTE0zdGF1T2VqVGd5ZDh1UWVqbWk3bnAySC1PSDFpcXZRdFVZcjU4WmJGYUp4T2FZNkJheFVpYVhSWFZPcHJSaUNOVzZnN2pPRVFBendrNnRHX0E0aXFGekFsSHVFcWc?oc=5",
+     "title": "討論牆| 鉅亨速報- Factset 最新調查：萬潤(6187-TW)EPS預估上修至28.77元，預估目標價為1500元",
+     "broker": "FactSet 共識",
+     "source": "LINE TODAY",
+     "target": 1500,
+     "direction": "flat"
+    }
+   ],
+   "trend": "flat",
+   "consensus": {
+    "date": "2026-11-12",
+    "target": 1500,
+    "direction": "flat",
+    "change_pct": null
+   },
+   "upside_pct": 116.1
+  },
+  "retail": {
+   "ok": true,
+   "hot": false,
+   "bear": 0,
+   "bull": 0,
+   "titles": [],
+   "posts_7d": 0,
+   "posts_30d": 0,
+   "heat_ratio": 0
+  },
+  "ebc": {
+   "ok": true,
+   "count": 0,
+   "titles": [],
+   "in_title": 0
+  },
+  "base_date": null,
+  "price_at_report": 694,
+  "ret_5d": null,
+  "mkt_ret_5d": null,
+  "ret_20d": null,
+  "mkt_ret_20d": null,
+  "inst_20d": null,
+  "analyzed_at": "2026-11-19 17:46"
+ },
+ {
   "call_key": "3711_371120261029M001.pdf",
   "stock_id": "3711",
   "name": "日月光投控",
@@ -545,92 +717,6 @@
   "analyzed_at": "2026-11-19 17:46"
  },
  {
-  "call_key": "6187_618720261111M001.pdf",
-  "stock_id": "6187",
-  "name": "萬潤",
-  "call_date": "2026-11-18",
-  "signal": "⚪ 簡報下載或解析失敗，只列籌碼",
-  "level": 0,
-  "market": "上櫃",
-  "tone": "中性",
-  "tone_score": 0,
-  "news_sentiment": -1,
-  "one_line": "萬潤在法說會中提到供應鏈問題可能影響生產，未對未來展望作出明確預測。",
-  "guidance": [],
-  "risks": [
-   "供應鏈不穩定影響生產"
-  ],
-  "notes": [
-   "會後 1 個交易日法人合計 +167 張"
-  ],
-  "news_reason": "有跌價及獲獎消息，但以負面消息為主",
-  "pdf_url": "https://mopsov.twse.com.tw/nas/STR/618720261111M001.pdf",
-  "chips": {
-   "close": 694,
-   "inst_5d": -487,
-   "trust_5d": -431,
-   "data_date": "2026-11-19",
-   "dealer_5d": -135,
-   "margin_5d": -42,
-   "volume_5d": 13379,
-   "foreign_5d": -56,
-   "inst_5d_pct": -3.6,
-   "price_5d_pct": -26.9,
-   "trust_streak": 1,
-   "foreign_streak": -1,
-   "after_call_days": 1,
-   "after_call_inst": 167,
-   "price_since_call_pct": -10
-  },
-  "brokers": {
-   "ups": 0,
-   "downs": 0,
-   "items": [
-    {
-     "date": "2026-11-12",
-     "link": "https://news.google.com/rss/articles/CBMiZEFVX3lxTE0zdGF1T2VqVGd5ZDh1UWVqbWk3bnAySC1PSDFpcXZRdFVZcjU4WmJGYUp4T2FZNkJheFVpYVhSWFZPcHJSaUNOVzZnN2pPRVFBendrNnRHX0E0aXFGekFsSHVFcWc?oc=5",
-     "title": "討論牆| 鉅亨速報- Factset 最新調查：萬潤(6187-TW)EPS預估上修至28.77元，預估目標價為1500元",
-     "broker": "FactSet 共識",
-     "source": "LINE TODAY",
-     "target": 1500,
-     "direction": "flat"
-    }
-   ],
-   "trend": "flat",
-   "consensus": {
-    "date": "2026-11-12",
-    "target": 1500,
-    "direction": "flat",
-    "change_pct": null
-   },
-   "upside_pct": 116.1
-  },
-  "retail": {
-   "ok": true,
-   "hot": false,
-   "bear": 0,
-   "bull": 0,
-   "titles": [],
-   "posts_7d": 0,
-   "posts_30d": 0,
-   "heat_ratio": 0
-  },
-  "ebc": {
-   "ok": true,
-   "count": 0,
-   "titles": [],
-   "in_title": 0
-  },
-  "base_date": null,
-  "price_at_report": 694,
-  "ret_5d": null,
-  "mkt_ret_5d": null,
-  "ret_20d": null,
-  "mkt_ret_20d": null,
-  "inst_20d": null,
-  "analyzed_at": "2026-11-19 17:46"
- },
- {
   "call_key": "3231_323120261111M002.pdf",
   "stock_id": "3231",
   "name": "緯創",
@@ -721,58 +807,6 @@
   "mkt_ret_20d": null,
   "inst_20d": null,
   "analyzed_at": "2026-11-18 00:25"
- },
- {
-  "call_key": "7717_771720261116M002.pdf",
-  "stock_id": "7717",
-  "name": "萊德光電-KY",
-  "call_date": "2026-11-17",
-  "signal": "🔵 順風車：展望樂觀，法人同步買、股價走揚",
-  "level": 2,
-  "market": "上櫃",
-  "tone": "樂觀",
-  "tone_score": 1,
-  "news_sentiment": 2,
-  "one_line": "萊德光電-KY法說會展望未來營收穩健增長，強調AI資料中心及低軌衛星需求驅動升級。",
-  "guidance": [
-   "未來營收穩健增長，毛利率維持高水準。",
-   "強調AI資料中心及低軌衛星需求驅動升級。",
-   "預期2027年業務優於2026年。"
-  ],
-  "risks": [
-   "技術迭代遇困難"
-  ],
-  "notes": [],
-  "news_reason": "多篇新聞標題顯示萊德光電股價上漲，且提到漲停和營運看俏",
-  "pdf_url": "https://mopsov.twse.com.tw/nas/STR/771720261116M002.pdf",
-  "chips": {
-   "close": 533,
-   "inst_5d": 421,
-   "trust_5d": 0,
-   "data_date": "2026-11-17",
-   "dealer_5d": 63,
-   "margin_5d": 105,
-   "volume_5d": 8948,
-   "foreign_5d": 421,
-   "inst_5d_pct": 4.7,
-   "price_5d_pct": 36.3,
-   "trust_streak": 0,
-   "foreign_streak": 4,
-   "after_call_days": 0,
-   "after_call_inst": 0,
-   "price_since_call_pct": 0
-  },
-  "brokers": null,
-  "retail": null,
-  "ebc": null,
-  "base_date": null,
-  "price_at_report": 533,
-  "ret_5d": null,
-  "mkt_ret_5d": null,
-  "ret_20d": null,
-  "mkt_ret_20d": null,
-  "inst_20d": null,
-  "analyzed_at": "2026-11-17 23:40"
  },
  {
   "call_key": "2382_238220261111M001.pdf",
@@ -898,39 +932,41 @@
   "analyzed_at": "2026-11-18 00:25"
  },
  {
-  "call_key": "6223_622320261113M003.pdf",
-  "stock_id": "6223",
-  "name": "旺矽",
+  "call_key": "7717_771720261116M002.pdf",
+  "stock_id": "7717",
+  "name": "萊德光電-KY",
   "call_date": "2026-11-17",
-  "signal": "🟡 訊號不明顯",
-  "level": 0,
+  "signal": "🔵 順風車：展望樂觀，法人同步買、股價走揚",
+  "level": 2,
   "market": "上櫃",
   "tone": "樂觀",
   "tone_score": 1,
-  "news_sentiment": -2,
-  "one_line": "旺矽第三季財報表現亮眼，管理層預期第四季營收續增並積極擴產。",
+  "news_sentiment": 2,
+  "one_line": "萊德光電-KY法說會展望未來營收穩健增長，強調AI資料中心及低軌衛星需求驅動升級。",
   "guidance": [
-   "管理層預期第四季營收將持續成長。",
-   "未來將擴產以應對市場需求。",
-   "第三季淨利年增率高達114.4%。"
+   "未來營收穩健增長，毛利率維持高水準。",
+   "強調AI資料中心及低軌衛星需求驅動升級。",
+   "預期2027年業務優於2026年。"
   ],
-  "risks": [],
+  "risks": [
+   "技術迭代遇困難"
+  ],
   "notes": [],
-  "news_reason": "多篇新聞報導旺矽發生違約交割問題，顯示公司可能面臨經營風險，對股價不利。",
-  "pdf_url": "https://mopsov.twse.com.tw/nas/STR/622320261113M003.pdf",
+  "news_reason": "多篇新聞標題顯示萊德光電股價上漲，且提到漲停和營運看俏",
+  "pdf_url": "https://mopsov.twse.com.tw/nas/STR/771720261116M002.pdf",
   "chips": {
-   "close": 3995,
-   "inst_5d": 328,
-   "trust_5d": 1581,
+   "close": 533,
+   "inst_5d": 421,
+   "trust_5d": 0,
    "data_date": "2026-11-17",
-   "dealer_5d": -55,
-   "margin_5d": -70,
-   "volume_5d": 8624,
-   "foreign_5d": -1253,
-   "inst_5d_pct": 3.8,
-   "price_5d_pct": -2,
-   "trust_streak": 9,
-   "foreign_streak": -1,
+   "dealer_5d": 63,
+   "margin_5d": 105,
+   "volume_5d": 8948,
+   "foreign_5d": 421,
+   "inst_5d_pct": 4.7,
+   "price_5d_pct": 36.3,
+   "trust_streak": 0,
+   "foreign_streak": 4,
    "after_call_days": 0,
    "after_call_inst": 0,
    "price_since_call_pct": 0
@@ -939,7 +975,56 @@
   "retail": null,
   "ebc": null,
   "base_date": null,
-  "price_at_report": 3995,
+  "price_at_report": 533,
+  "ret_5d": null,
+  "mkt_ret_5d": null,
+  "ret_20d": null,
+  "mkt_ret_20d": null,
+  "inst_20d": null,
+  "analyzed_at": "2026-11-17 23:40"
+ },
+ {
+  "call_key": "2467_246720261116M001.pdf",
+  "stock_id": "2467",
+  "name": "志聖",
+  "call_date": "2026-11-17",
+  "signal": "🟡 訊號不明顯",
+  "level": 0,
+  "market": "上市",
+  "tone": "中性",
+  "tone_score": 0,
+  "news_sentiment": 0,
+  "one_line": "簡報主要回顧產業組合，未提供未來展望或風險說明。",
+  "guidance": [],
+  "risks": [
+   "SEMI及高階PCB占比達73%，但未明確展望未來營收。",
+   "過去幾年SEMI及高階PCB比例波動大，顯示市場需求不穩定。"
+  ],
+  "notes": [],
+  "news_reason": "多篇新聞為中性消息，如股價走勢、捐款活動等，未見對股價有顯著影響的正面或負面新聞。",
+  "pdf_url": "https://mopsov.twse.com.tw/nas/STR/246720261116M001.pdf",
+  "chips": {
+   "close": 259.5,
+   "inst_5d": 157,
+   "trust_5d": -356,
+   "data_date": "2026-11-17",
+   "dealer_5d": 15,
+   "margin_5d": -196,
+   "volume_5d": 8209,
+   "foreign_5d": 513,
+   "inst_5d_pct": 1.9,
+   "price_5d_pct": -17.7,
+   "trust_streak": -3,
+   "foreign_streak": 4,
+   "after_call_days": 0,
+   "after_call_inst": 0,
+   "price_since_call_pct": 0
+  },
+  "brokers": null,
+  "retail": null,
+  "ebc": null,
+  "base_date": null,
+  "price_at_report": 259.5,
   "ret_5d": null,
   "mkt_ret_5d": null,
   "ret_20d": null,
@@ -1105,6 +1190,56 @@
   "analyzed_at": "2026-11-18 00:25"
  },
  {
+  "call_key": "6223_622320261113M003.pdf",
+  "stock_id": "6223",
+  "name": "旺矽",
+  "call_date": "2026-11-17",
+  "signal": "🟡 訊號不明顯",
+  "level": 0,
+  "market": "上櫃",
+  "tone": "樂觀",
+  "tone_score": 1,
+  "news_sentiment": -2,
+  "one_line": "旺矽第三季財報表現亮眼，管理層預期第四季營收續增並積極擴產。",
+  "guidance": [
+   "管理層預期第四季營收將持續成長。",
+   "未來將擴產以應對市場需求。",
+   "第三季淨利年增率高達114.4%。"
+  ],
+  "risks": [],
+  "notes": [],
+  "news_reason": "多篇新聞報導旺矽發生違約交割問題，顯示公司可能面臨經營風險，對股價不利。",
+  "pdf_url": "https://mopsov.twse.com.tw/nas/STR/622320261113M003.pdf",
+  "chips": {
+   "close": 3995,
+   "inst_5d": 328,
+   "trust_5d": 1581,
+   "data_date": "2026-11-17",
+   "dealer_5d": -55,
+   "margin_5d": -70,
+   "volume_5d": 8624,
+   "foreign_5d": -1253,
+   "inst_5d_pct": 3.8,
+   "price_5d_pct": -2,
+   "trust_streak": 9,
+   "foreign_streak": -1,
+   "after_call_days": 0,
+   "after_call_inst": 0,
+   "price_since_call_pct": 0
+  },
+  "brokers": null,
+  "retail": null,
+  "ebc": null,
+  "base_date": null,
+  "price_at_report": 3995,
+  "ret_5d": null,
+  "mkt_ret_5d": null,
+  "ret_20d": null,
+  "mkt_ret_20d": null,
+  "inst_20d": null,
+  "analyzed_at": "2026-11-17 23:40"
+ },
+ {
   "call_key": "2884_288420261117M001.pdf",
   "stock_id": "2884",
   "name": "玉山金",
@@ -1150,55 +1285,6 @@
   "ebc": null,
   "base_date": null,
   "price_at_report": 46.65,
-  "ret_5d": null,
-  "mkt_ret_5d": null,
-  "ret_20d": null,
-  "mkt_ret_20d": null,
-  "inst_20d": null,
-  "analyzed_at": "2026-11-17 23:40"
- },
- {
-  "call_key": "2467_246720261116M001.pdf",
-  "stock_id": "2467",
-  "name": "志聖",
-  "call_date": "2026-11-17",
-  "signal": "🟡 訊號不明顯",
-  "level": 0,
-  "market": "上市",
-  "tone": "中性",
-  "tone_score": 0,
-  "news_sentiment": 0,
-  "one_line": "簡報主要回顧產業組合，未提供未來展望或風險說明。",
-  "guidance": [],
-  "risks": [
-   "SEMI及高階PCB占比達73%，但未明確展望未來營收。",
-   "過去幾年SEMI及高階PCB比例波動大，顯示市場需求不穩定。"
-  ],
-  "notes": [],
-  "news_reason": "多篇新聞為中性消息，如股價走勢、捐款活動等，未見對股價有顯著影響的正面或負面新聞。",
-  "pdf_url": "https://mopsov.twse.com.tw/nas/STR/246720261116M001.pdf",
-  "chips": {
-   "close": 259.5,
-   "inst_5d": 157,
-   "trust_5d": -356,
-   "data_date": "2026-11-17",
-   "dealer_5d": 15,
-   "margin_5d": -196,
-   "volume_5d": 8209,
-   "foreign_5d": 513,
-   "inst_5d_pct": 1.9,
-   "price_5d_pct": -17.7,
-   "trust_streak": -3,
-   "foreign_streak": 4,
-   "after_call_days": 0,
-   "after_call_inst": 0,
-   "price_since_call_pct": 0
-  },
-  "brokers": null,
-  "retail": null,
-  "ebc": null,
-  "base_date": null,
-  "price_at_report": 259.5,
   "ret_5d": null,
   "mkt_ret_5d": null,
   "ret_20d": null,
@@ -1372,181 +1458,6 @@
   "ebc": null,
   "base_date": null,
   "price_at_report": 4390,
-  "ret_5d": null,
-  "mkt_ret_5d": null,
-  "ret_20d": null,
-  "mkt_ret_20d": null,
-  "inst_20d": null,
-  "analyzed_at": "2026-11-18 17:43"
- },
- {
-  "call_key": "3131_313120261110M001.pdf",
-  "stock_id": "3131",
-  "name": "弘塑",
-  "call_date": "2026-11-16",
-  "signal": "🟡 訊號不明顯",
-  "level": 0,
-  "market": "上櫃",
-  "tone": "中性",
-  "tone_score": 0,
-  "news_sentiment": 0,
-  "one_line": "弘塑科技法說會主要回顧過去業績，並強調未來擴充產能及提升生產力。",
-  "guidance": [
-   "無明確未來展望",
-   "強調擴充產能與提升生產力",
-   "未提及具體營收或毛利目標"
-  ],
-  "risks": [],
-  "notes": [
-   "會後 2 個交易日法人合計 +3 張"
-  ],
-  "news_reason": "標題多為中性資訊，無顯著正面或負面新聞",
-  "pdf_url": "https://mopsov.twse.com.tw/nas/STR/313120261110M001.pdf",
-  "chips": {
-   "close": 1620,
-   "inst_5d": -113,
-   "trust_5d": -107,
-   "data_date": "2026-11-18",
-   "dealer_5d": -1,
-   "margin_5d": -9,
-   "volume_5d": 1571,
-   "foreign_5d": -6,
-   "inst_5d_pct": -7.2,
-   "price_5d_pct": -8.2,
-   "trust_streak": -3,
-   "foreign_streak": -1,
-   "after_call_days": 2,
-   "after_call_inst": 3,
-   "price_since_call_pct": 3.5
-  },
-  "brokers": {
-   "ups": 0,
-   "downs": 0,
-   "items": [
-    {
-     "date": "2026-10-20",
-     "link": "https://news.google.com/rss/articles/CBMidkFVX3lxTE9tQ1hmRm5LSzhmaWxGWDlYNjdxd2xoSlBad1ptX0tJVTdXXzZDZkE1ZTA3UXlEVG8zUzhCX2lndGJldXBpVEZ0SmRmVWFUVGtQN1J2MkRLRGV6UFFfejlFTjFZSXhLTkVlYnVteW5yQ080alc1OEE?oc=5",
-     "title": "Factset 最新調查：弘塑(3131-TW)EPS預估上修至62.73元，預估目標價為3900元｜新聞快訊｜豐雲學堂",
-     "broker": "FactSet 共識",
-     "source": "永豐金證券",
-     "target": 3900,
-     "direction": "flat"
-    }
-   ],
-   "trend": "flat",
-   "consensus": {
-    "date": "2026-10-20",
-    "target": 3900,
-    "direction": "flat",
-    "change_pct": null
-   },
-   "upside_pct": 140.7
-  },
-  "retail": {
-   "ok": true,
-   "hot": false,
-   "bear": 0,
-   "bull": 0,
-   "titles": [],
-   "posts_7d": 0,
-   "posts_30d": 0,
-   "heat_ratio": 0
-  },
-  "ebc": null,
-  "base_date": null,
-  "price_at_report": 1620,
-  "ret_5d": null,
-  "mkt_ret_5d": null,
-  "ret_20d": null,
-  "mkt_ret_20d": null,
-  "inst_20d": null,
-  "analyzed_at": "2026-11-18 17:43"
- },
- {
-  "call_key": "6510_651020261102M001.pdf",
-  "stock_id": "6510",
-  "name": "精測",
-  "call_date": "2026-11-16",
-  "signal": "🟡 訊號不明顯",
-  "level": 0,
-  "market": "上櫃",
-  "tone": "樂觀",
-  "tone_score": 1,
-  "news_sentiment": 2,
-  "one_line": "中華精測第三季營收和毛利率雙雙上揚，展望未來市場前景樂觀。",
-  "guidance": [
-   "第三季營收年增53%，毛利率提升至57.3%。",
-   "各應用市場如HPC、AP等表現強勁，佔比分別達65.9%及32%。",
-   "公司預期未來半導體市場將持續成長。"
-  ],
-  "risks": [],
-  "notes": [
-   "會後 2 個交易日法人合計 +98 張"
-  ],
-  "news_reason": "多篇新聞標題顯示精測股價走強及創新高，且有漲停現象。",
-  "pdf_url": "https://mopsov.twse.com.tw/nas/STR/651020261102M001.pdf",
-  "chips": {
-   "close": 2915,
-   "inst_5d": 930,
-   "trust_5d": 814,
-   "data_date": "2026-11-18",
-   "dealer_5d": 103,
-   "margin_5d": -139,
-   "volume_5d": 5519,
-   "foreign_5d": 116,
-   "inst_5d_pct": 16.9,
-   "price_5d_pct": -4.7,
-   "trust_streak": 2,
-   "foreign_streak": -1,
-   "after_call_days": 2,
-   "after_call_inst": 98,
-   "price_since_call_pct": -3
-  },
-  "brokers": {
-   "ups": 0,
-   "downs": 0,
-   "items": [
-    {
-     "date": "2026-10-28",
-     "link": "https://news.google.com/rss/articles/CBMidkFVX3lxTE9MM2x4cktIaWhidlo2UmQwOXJod0xWUXVOelZxUDZFMms4TWtYc0RISTM0Sk14V1dtUDNELVoyNVVxeVRSbWdodUlXQXM1SUlZQnhkLVJLUXF1MEdUa2pJSGsyUVQyTDJUalQ3UHdteXhmcmtKX1E?oc=5",
-     "title": "Factset 最新調查：精測(6510-TW)EPS預估下修至62.25元，預估目標價為4187.5元｜新聞快訊｜豐雲學堂",
-     "broker": "FactSet 共識",
-     "source": "永豐金證券",
-     "target": 4187.5,
-     "direction": "flat"
-    },
-    {
-     "date": "2026-10-23",
-     "link": "https://news.google.com/rss/articles/CBMiakFVX3lxTE5OLXdMSjAwZmpDZzNicFlJLVJwWkYzNzNtZnFGcHdTRE54WVhBcG9MbTVhcWJUcWo1X0FIY3p2NXJsNFN3WmZpWjF1SzlqOFpTZlBncjU1RnhBMXlrSUlYeUFYcUJoUFdydEE?oc=5",
-     "title": "封測廠目標價1表看》日月光、京元電、矽格、精測、頎邦...老牌法人「18選5」：這3檔雙位數季增- 上市櫃",
-     "broker": "法人",
-     "source": "旺得富理財網",
-     "target": null,
-     "direction": "flat"
-    }
-   ],
-   "trend": "flat",
-   "consensus": {
-    "date": "2026-10-28",
-    "target": 4187.5,
-    "direction": "flat",
-    "change_pct": null
-   },
-   "upside_pct": 43.7
-  },
-  "retail": {
-   "ok": true,
-   "hot": false,
-   "bear": 0,
-   "bull": 0,
-   "titles": [],
-   "posts_7d": 0,
-   "posts_30d": 1,
-   "heat_ratio": 0
-  },
-  "ebc": null,
-  "base_date": null,
-  "price_at_report": 2915,
   "ret_5d": null,
   "mkt_ret_5d": null,
   "ret_20d": null,
@@ -1774,6 +1685,181 @@
   "ebc": null,
   "base_date": null,
   "price_at_report": 768,
+  "ret_5d": null,
+  "mkt_ret_5d": null,
+  "ret_20d": null,
+  "mkt_ret_20d": null,
+  "inst_20d": null,
+  "analyzed_at": "2026-11-18 17:43"
+ },
+ {
+  "call_key": "3131_313120261110M001.pdf",
+  "stock_id": "3131",
+  "name": "弘塑",
+  "call_date": "2026-11-16",
+  "signal": "🟡 訊號不明顯",
+  "level": 0,
+  "market": "上櫃",
+  "tone": "中性",
+  "tone_score": 0,
+  "news_sentiment": 0,
+  "one_line": "弘塑科技法說會主要回顧過去業績，並強調未來擴充產能及提升生產力。",
+  "guidance": [
+   "無明確未來展望",
+   "強調擴充產能與提升生產力",
+   "未提及具體營收或毛利目標"
+  ],
+  "risks": [],
+  "notes": [
+   "會後 2 個交易日法人合計 +3 張"
+  ],
+  "news_reason": "標題多為中性資訊，無顯著正面或負面新聞",
+  "pdf_url": "https://mopsov.twse.com.tw/nas/STR/313120261110M001.pdf",
+  "chips": {
+   "close": 1620,
+   "inst_5d": -113,
+   "trust_5d": -107,
+   "data_date": "2026-11-18",
+   "dealer_5d": -1,
+   "margin_5d": -9,
+   "volume_5d": 1571,
+   "foreign_5d": -6,
+   "inst_5d_pct": -7.2,
+   "price_5d_pct": -8.2,
+   "trust_streak": -3,
+   "foreign_streak": -1,
+   "after_call_days": 2,
+   "after_call_inst": 3,
+   "price_since_call_pct": 3.5
+  },
+  "brokers": {
+   "ups": 0,
+   "downs": 0,
+   "items": [
+    {
+     "date": "2026-10-20",
+     "link": "https://news.google.com/rss/articles/CBMidkFVX3lxTE9tQ1hmRm5LSzhmaWxGWDlYNjdxd2xoSlBad1ptX0tJVTdXXzZDZkE1ZTA3UXlEVG8zUzhCX2lndGJldXBpVEZ0SmRmVWFUVGtQN1J2MkRLRGV6UFFfejlFTjFZSXhLTkVlYnVteW5yQ080alc1OEE?oc=5",
+     "title": "Factset 最新調查：弘塑(3131-TW)EPS預估上修至62.73元，預估目標價為3900元｜新聞快訊｜豐雲學堂",
+     "broker": "FactSet 共識",
+     "source": "永豐金證券",
+     "target": 3900,
+     "direction": "flat"
+    }
+   ],
+   "trend": "flat",
+   "consensus": {
+    "date": "2026-10-20",
+    "target": 3900,
+    "direction": "flat",
+    "change_pct": null
+   },
+   "upside_pct": 140.7
+  },
+  "retail": {
+   "ok": true,
+   "hot": false,
+   "bear": 0,
+   "bull": 0,
+   "titles": [],
+   "posts_7d": 0,
+   "posts_30d": 0,
+   "heat_ratio": 0
+  },
+  "ebc": null,
+  "base_date": null,
+  "price_at_report": 1620,
+  "ret_5d": null,
+  "mkt_ret_5d": null,
+  "ret_20d": null,
+  "mkt_ret_20d": null,
+  "inst_20d": null,
+  "analyzed_at": "2026-11-18 17:43"
+ },
+ {
+  "call_key": "6510_651020261102M001.pdf",
+  "stock_id": "6510",
+  "name": "精測",
+  "call_date": "2026-11-16",
+  "signal": "🟡 訊號不明顯",
+  "level": 0,
+  "market": "上櫃",
+  "tone": "樂觀",
+  "tone_score": 1,
+  "news_sentiment": 2,
+  "one_line": "中華精測第三季營收和毛利率雙雙上揚，展望未來市場前景樂觀。",
+  "guidance": [
+   "第三季營收年增53%，毛利率提升至57.3%。",
+   "各應用市場如HPC、AP等表現強勁，佔比分別達65.9%及32%。",
+   "公司預期未來半導體市場將持續成長。"
+  ],
+  "risks": [],
+  "notes": [
+   "會後 2 個交易日法人合計 +98 張"
+  ],
+  "news_reason": "多篇新聞標題顯示精測股價走強及創新高，且有漲停現象。",
+  "pdf_url": "https://mopsov.twse.com.tw/nas/STR/651020261102M001.pdf",
+  "chips": {
+   "close": 2915,
+   "inst_5d": 930,
+   "trust_5d": 814,
+   "data_date": "2026-11-18",
+   "dealer_5d": 103,
+   "margin_5d": -139,
+   "volume_5d": 5519,
+   "foreign_5d": 116,
+   "inst_5d_pct": 16.9,
+   "price_5d_pct": -4.7,
+   "trust_streak": 2,
+   "foreign_streak": -1,
+   "after_call_days": 2,
+   "after_call_inst": 98,
+   "price_since_call_pct": -3
+  },
+  "brokers": {
+   "ups": 0,
+   "downs": 0,
+   "items": [
+    {
+     "date": "2026-10-28",
+     "link": "https://news.google.com/rss/articles/CBMidkFVX3lxTE9MM2x4cktIaWhidlo2UmQwOXJod0xWUXVOelZxUDZFMms4TWtYc0RISTM0Sk14V1dtUDNELVoyNVVxeVRSbWdodUlXQXM1SUlZQnhkLVJLUXF1MEdUa2pJSGsyUVQyTDJUalQ3UHdteXhmcmtKX1E?oc=5",
+     "title": "Factset 最新調查：精測(6510-TW)EPS預估下修至62.25元，預估目標價為4187.5元｜新聞快訊｜豐雲學堂",
+     "broker": "FactSet 共識",
+     "source": "永豐金證券",
+     "target": 4187.5,
+     "direction": "flat"
+    },
+    {
+     "date": "2026-10-23",
+     "link": "https://news.google.com/rss/articles/CBMiakFVX3lxTE5OLXdMSjAwZmpDZzNicFlJLVJwWkYzNzNtZnFGcHdTRE54WVhBcG9MbTVhcWJUcWo1X0FIY3p2NXJsNFN3WmZpWjF1SzlqOFpTZlBncjU1RnhBMXlrSUlYeUFYcUJoUFdydEE?oc=5",
+     "title": "封測廠目標價1表看》日月光、京元電、矽格、精測、頎邦...老牌法人「18選5」：這3檔雙位數季增- 上市櫃",
+     "broker": "法人",
+     "source": "旺得富理財網",
+     "target": null,
+     "direction": "flat"
+    }
+   ],
+   "trend": "flat",
+   "consensus": {
+    "date": "2026-10-28",
+    "target": 4187.5,
+    "direction": "flat",
+    "change_pct": null
+   },
+   "upside_pct": 43.7
+  },
+  "retail": {
+   "ok": true,
+   "hot": false,
+   "bear": 0,
+   "bull": 0,
+   "titles": [],
+   "posts_7d": 0,
+   "posts_30d": 1,
+   "heat_ratio": 0
+  },
+  "ebc": null,
+  "base_date": null,
+  "price_at_report": 2915,
   "ret_5d": null,
   "mkt_ret_5d": null,
   "ret_20d": null,
@@ -2080,41 +2166,41 @@
   "analyzed_at": "2026-11-19 21:13"
  },
  {
-  "call_key": "2630_263020261030M001.pdf",
-  "stock_id": "2630",
-  "name": "亞航",
+  "call_key": "6271_627120261030M001.pdf",
+  "stock_id": "6271",
+  "name": "同欣電",
   "call_date": "2026-10-30",
   "signal": "🟡 訊號不明顯",
   "level": 0,
   "market": "上市",
   "tone": "中性",
   "tone_score": 0,
-  "news_sentiment": -1,
-  "one_line": "亞航2026年上半年營收下滑，但公司仍看好未來市場並積極拓展新業務。",
+  "news_sentiment": 2,
+  "one_line": "同欣電法說會主要回顧第三季財務表現，並預估第四季營收成長力道趨緩。",
   "guidance": [
-   "2026年上半年營收下滑至2,095,551仟元。",
-   "毛利降至8%，較去年下降。",
-   "積極開拓澳洲市場及爭取新約業務。"
+   "預估第四季營收仍將成長，但力道趨於平緩。",
+   "未明確提及具體的未來營收、毛利或需求展望。",
+   "未明確提及產能相關展望"
   ],
-  "risks": [
-   "全球機隊平均機齡增加，維修需求上升。"
+  "risks": [],
+  "notes": [
+   "融資 5 日增 111 張、法人賣超，籌碼由法人流向散戶"
   ],
-  "notes": [],
-  "news_reason": "有負面事件報導，如乘客大鬧致全機乘客下機，但也有營運相關正面消息",
-  "pdf_url": "https://mopsov.twse.com.tw/nas/STR/263020261030M001.pdf",
+  "news_reason": "多篇新聞標題提到同欣電的財報表現良好，且受AI需求帶動，預期未來營收增長，股價可能上漲。",
+  "pdf_url": "https://mopsov.twse.com.tw/nas/STR/627120261030M001.pdf",
   "chips": {
-   "close": 39.6,
-   "inst_5d": -150,
-   "trust_5d": 0,
+   "close": 197,
+   "inst_5d": -692,
+   "trust_5d": 154,
    "data_date": "2026-10-30",
-   "dealer_5d": -3,
-   "margin_5d": -158,
-   "volume_5d": 2926,
-   "foreign_5d": -150,
-   "inst_5d_pct": -5.1,
-   "price_5d_pct": -7.7,
-   "trust_streak": 0,
-   "foreign_streak": -3,
+   "dealer_5d": -301,
+   "margin_5d": 111,
+   "volume_5d": 10735,
+   "foreign_5d": -846,
+   "inst_5d_pct": -6.4,
+   "price_5d_pct": -15.1,
+   "trust_streak": 1,
+   "foreign_streak": -2,
    "after_call_days": 0,
    "after_call_inst": 0,
    "price_since_call_pct": 0
@@ -2134,29 +2220,23 @@
    "bull": 0,
    "titles": [],
    "posts_7d": 0,
-   "posts_30d": 1,
+   "posts_30d": 0,
    "heat_ratio": 0
   },
   "ebc": {
    "ok": true,
-   "count": 1,
-   "titles": [
-    {
-     "date": "10-27",
-     "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE5iWEhpbWx3empxa2l3NDJ3N0p1cExJTzczcGJxal92akdiQURYMm9pS19jVzdEZmtKNGpJUnNKQlpHVHlkWHFGQ01vVVJFZDg4a1dpeGp3?oc=5",
-     "title": "個股：星宇航空(2646)台中－名古屋航線25日正式開航，11月起天天直飛"
-    }
-   ],
+   "count": 0,
+   "titles": [],
    "in_title": 0
   },
   "base_date": null,
-  "price_at_report": 39.6,
+  "price_at_report": 197,
   "ret_5d": null,
   "mkt_ret_5d": null,
   "ret_20d": null,
   "mkt_ret_20d": null,
   "inst_20d": null,
-  "analyzed_at": "2026-11-19 21:19"
+  "analyzed_at": "2026-11-19 21:29"
  },
  {
   "call_key": "4968_496820261030M001.pdf",
@@ -2234,41 +2314,41 @@
   "analyzed_at": "2026-11-19 21:24"
  },
  {
-  "call_key": "6271_627120261030M001.pdf",
-  "stock_id": "6271",
-  "name": "同欣電",
+  "call_key": "2630_263020261030M001.pdf",
+  "stock_id": "2630",
+  "name": "亞航",
   "call_date": "2026-10-30",
   "signal": "🟡 訊號不明顯",
   "level": 0,
   "market": "上市",
   "tone": "中性",
   "tone_score": 0,
-  "news_sentiment": 2,
-  "one_line": "同欣電法說會主要回顧第三季財務表現，並預估第四季營收成長力道趨緩。",
+  "news_sentiment": -1,
+  "one_line": "亞航2026年上半年營收下滑，但公司仍看好未來市場並積極拓展新業務。",
   "guidance": [
-   "預估第四季營收仍將成長，但力道趨於平緩。",
-   "未明確提及具體的未來營收、毛利或需求展望。",
-   "未明確提及產能相關展望"
+   "2026年上半年營收下滑至2,095,551仟元。",
+   "毛利降至8%，較去年下降。",
+   "積極開拓澳洲市場及爭取新約業務。"
   ],
-  "risks": [],
-  "notes": [
-   "融資 5 日增 111 張、法人賣超，籌碼由法人流向散戶"
+  "risks": [
+   "全球機隊平均機齡增加，維修需求上升。"
   ],
-  "news_reason": "多篇新聞標題提到同欣電的財報表現良好，且受AI需求帶動，預期未來營收增長，股價可能上漲。",
-  "pdf_url": "https://mopsov.twse.com.tw/nas/STR/627120261030M001.pdf",
+  "notes": [],
+  "news_reason": "有負面事件報導，如乘客大鬧致全機乘客下機，但也有營運相關正面消息",
+  "pdf_url": "https://mopsov.twse.com.tw/nas/STR/263020261030M001.pdf",
   "chips": {
-   "close": 197,
-   "inst_5d": -692,
-   "trust_5d": 154,
+   "close": 39.6,
+   "inst_5d": -150,
+   "trust_5d": 0,
    "data_date": "2026-10-30",
-   "dealer_5d": -301,
-   "margin_5d": 111,
-   "volume_5d": 10735,
-   "foreign_5d": -846,
-   "inst_5d_pct": -6.4,
-   "price_5d_pct": -15.1,
-   "trust_streak": 1,
-   "foreign_streak": -2,
+   "dealer_5d": -3,
+   "margin_5d": -158,
+   "volume_5d": 2926,
+   "foreign_5d": -150,
+   "inst_5d_pct": -5.1,
+   "price_5d_pct": -7.7,
+   "trust_streak": 0,
+   "foreign_streak": -3,
    "after_call_days": 0,
    "after_call_inst": 0,
    "price_since_call_pct": 0
@@ -2288,23 +2368,29 @@
    "bull": 0,
    "titles": [],
    "posts_7d": 0,
-   "posts_30d": 0,
+   "posts_30d": 1,
    "heat_ratio": 0
   },
   "ebc": {
    "ok": true,
-   "count": 0,
-   "titles": [],
+   "count": 1,
+   "titles": [
+    {
+     "date": "10-27",
+     "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE5iWEhpbWx3empxa2l3NDJ3N0p1cExJTzczcGJxal92akdiQURYMm9pS19jVzdEZmtKNGpJUnNKQlpHVHlkWHFGQ01vVVJFZDg4a1dpeGp3?oc=5",
+     "title": "個股：星宇航空(2646)台中－名古屋航線25日正式開航，11月起天天直飛"
+    }
+   ],
    "in_title": 0
   },
   "base_date": null,
-  "price_at_report": 197,
+  "price_at_report": 39.6,
   "ret_5d": null,
   "mkt_ret_5d": null,
   "ret_20d": null,
   "mkt_ret_20d": null,
   "inst_20d": null,
-  "analyzed_at": "2026-11-19 21:29"
+  "analyzed_at": "2026-11-19 21:19"
  },
  {
   "call_key": "2308_230820261029M001.pdf",
@@ -3012,6 +3098,103 @@
   "analyzed_at": "2026-11-19 20:45"
  },
  {
+  "call_key": "3081_308120261028M001.pdf",
+  "stock_id": "3081",
+  "name": "聯亞",
+  "call_date": "2026-10-28",
+  "signal": "🟡 訊號不明顯",
+  "level": 0,
+  "market": "上櫃",
+  "tone": "中性",
+  "tone_score": 0,
+  "news_sentiment": 2,
+  "one_line": "聯亞光電在本季表現強勁，營收及利潤均有顯著成長，但未對未來作出具體展望。",
+  "guidance": [
+   "營收成長28%，毛利率及淨利率皆有提升。",
+   "未明確表達未來展望，僅回顧過去業績。",
+   "無明確提及未來產能或需求預測。"
+  ],
+  "risks": [],
+  "notes": [],
+  "news_reason": "多篇新聞標題顯示聯亞營收、EPS創高，且有擴產計劃，股價表現強勁。",
+  "pdf_url": "https://mopsov.twse.com.tw/nas/STR/308120261028M001.pdf",
+  "chips": {
+   "close": 2580,
+   "inst_5d": -117,
+   "trust_5d": 379,
+   "data_date": "2026-10-28",
+   "dealer_5d": -149,
+   "margin_5d": -263,
+   "volume_5d": 13501,
+   "foreign_5d": -496,
+   "inst_5d_pct": -0.9,
+   "price_5d_pct": 0.4,
+   "trust_streak": -1,
+   "foreign_streak": -5,
+   "after_call_days": 0,
+   "after_call_inst": 0,
+   "price_since_call_pct": 0
+  },
+  "brokers": {
+   "ups": 0,
+   "downs": 0,
+   "items": [
+    {
+     "date": "2026-10-21",
+     "link": "https://news.google.com/rss/articles/CBMiakFVX3lxTE1yYTlWZDUyRHJGUk1SZ2NueFBIYXdiaU1RYTRNby1HTVY1XzBSbTAza0VfQjFJREVCb2JaTXdFcU1qajBxS2UwVkpFdGcwQjJwREcwZjdCTkpiamh6Tm9oS20xNk1hUGFXUlE?oc=5",
+     "title": "瘋了嗎？矽光子妖風再起！聯亞目標價喊上4字頭、上詮看900元法人卻偷買「第三匹防禦型黑馬」 - 上市櫃",
+     "broker": "法人",
+     "source": "旺得富理財網",
+     "target": 900,
+     "direction": "flat"
+    }
+   ],
+   "trend": "flat",
+   "consensus": null,
+   "upside_pct": null
+  },
+  "retail": {
+   "ok": true,
+   "hot": false,
+   "bear": 0,
+   "bull": 0,
+   "titles": [],
+   "posts_7d": 0,
+   "posts_30d": 0,
+   "heat_ratio": 0
+  },
+  "ebc": {
+   "ok": true,
+   "count": 3,
+   "titles": [
+    {
+     "date": "10-28",
+     "link": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE5PSkpoUTNpdDB0dFd1cXVuMlRsdnZGbmV0M0d5MW9YWGdDdUliNVlXdGxwcW96RHY5NG1pQlc2dG42aW1zMjlUUFhFTWt4bERlVlMwMlEzUW5Fdw?oc=5",
+     "title": "股價有救？聯電砸千億擴產 聯亞手握逾半年長單"
+    },
+    {
+     "date": "10-28",
+     "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE9YdElzYVpDT1U2NzR4VzRTMDZoQm1Kd2RhVGY3Z0gyZDd3NTF0QkVzUnZSakdjTll3dVFHZmFTUWNDVzk4cVQwenJ1VjJfRHBmWEVFbm1B?oc=5",
+     "title": "台股季線測完「要攻5萬了」？ 法人拋出2劇本：快買3族群"
+    },
+    {
+     "date": "10-28",
+     "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE5jSHYtUHF6TDFZaWxFdDk0bk1CaGw4T3h5Yl8zVWEzZVFpMER1eUZMRHo1cGQ0Ml9lV1ZRcFdHdlBIazJORFo2MDVhaTJuTFZJV3RKcTZ3?oc=5",
+     "title": "台股大漲939點！ 網見三大法人買賣驚：散戶急惹"
+    }
+   ],
+   "in_title": 0
+  },
+  "base_date": null,
+  "price_at_report": 2580,
+  "ret_5d": null,
+  "mkt_ret_5d": null,
+  "ret_20d": null,
+  "mkt_ret_20d": null,
+  "inst_20d": null,
+  "analyzed_at": "2026-11-19 20:48"
+ },
+ {
   "call_key": "3105_310520261028M001.pdf",
   "stock_id": "3105",
   "name": "穩懋",
@@ -3122,213 +3305,6 @@
   "analyzed_at": "2026-11-19 20:53"
  },
  {
-  "call_key": "3081_308120261028M001.pdf",
-  "stock_id": "3081",
-  "name": "聯亞",
-  "call_date": "2026-10-28",
-  "signal": "🟡 訊號不明顯",
-  "level": 0,
-  "market": "上櫃",
-  "tone": "中性",
-  "tone_score": 0,
-  "news_sentiment": 2,
-  "one_line": "聯亞光電在本季表現強勁，營收及利潤均有顯著成長，但未對未來作出具體展望。",
-  "guidance": [
-   "營收成長28%，毛利率及淨利率皆有提升。",
-   "未明確表達未來展望，僅回顧過去業績。",
-   "無明確提及未來產能或需求預測。"
-  ],
-  "risks": [],
-  "notes": [],
-  "news_reason": "多篇新聞標題顯示聯亞營收、EPS創高，且有擴產計劃，股價表現強勁。",
-  "pdf_url": "https://mopsov.twse.com.tw/nas/STR/308120261028M001.pdf",
-  "chips": {
-   "close": 2580,
-   "inst_5d": -117,
-   "trust_5d": 379,
-   "data_date": "2026-10-28",
-   "dealer_5d": -149,
-   "margin_5d": -263,
-   "volume_5d": 13501,
-   "foreign_5d": -496,
-   "inst_5d_pct": -0.9,
-   "price_5d_pct": 0.4,
-   "trust_streak": -1,
-   "foreign_streak": -5,
-   "after_call_days": 0,
-   "after_call_inst": 0,
-   "price_since_call_pct": 0
-  },
-  "brokers": {
-   "ups": 0,
-   "downs": 0,
-   "items": [
-    {
-     "date": "2026-10-21",
-     "link": "https://news.google.com/rss/articles/CBMiakFVX3lxTE1yYTlWZDUyRHJGUk1SZ2NueFBIYXdiaU1RYTRNby1HTVY1XzBSbTAza0VfQjFJREVCb2JaTXdFcU1qajBxS2UwVkpFdGcwQjJwREcwZjdCTkpiamh6Tm9oS20xNk1hUGFXUlE?oc=5",
-     "title": "瘋了嗎？矽光子妖風再起！聯亞目標價喊上4字頭、上詮看900元法人卻偷買「第三匹防禦型黑馬」 - 上市櫃",
-     "broker": "法人",
-     "source": "旺得富理財網",
-     "target": 900,
-     "direction": "flat"
-    }
-   ],
-   "trend": "flat",
-   "consensus": null,
-   "upside_pct": null
-  },
-  "retail": {
-   "ok": true,
-   "hot": false,
-   "bear": 0,
-   "bull": 0,
-   "titles": [],
-   "posts_7d": 0,
-   "posts_30d": 0,
-   "heat_ratio": 0
-  },
-  "ebc": {
-   "ok": true,
-   "count": 3,
-   "titles": [
-    {
-     "date": "10-28",
-     "link": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE5PSkpoUTNpdDB0dFd1cXVuMlRsdnZGbmV0M0d5MW9YWGdDdUliNVlXdGxwcW96RHY5NG1pQlc2dG42aW1zMjlUUFhFTWt4bERlVlMwMlEzUW5Fdw?oc=5",
-     "title": "股價有救？聯電砸千億擴產 聯亞手握逾半年長單"
-    },
-    {
-     "date": "10-28",
-     "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE9YdElzYVpDT1U2NzR4VzRTMDZoQm1Kd2RhVGY3Z0gyZDd3NTF0QkVzUnZSakdjTll3dVFHZmFTUWNDVzk4cVQwenJ1VjJfRHBmWEVFbm1B?oc=5",
-     "title": "台股季線測完「要攻5萬了」？ 法人拋出2劇本：快買3族群"
-    },
-    {
-     "date": "10-28",
-     "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE5jSHYtUHF6TDFZaWxFdDk0bk1CaGw4T3h5Yl8zVWEzZVFpMER1eUZMRHo1cGQ0Ml9lV1ZRcFdHdlBIazJORFo2MDVhaTJuTFZJV3RKcTZ3?oc=5",
-     "title": "台股大漲939點！ 網見三大法人買賣驚：散戶急惹"
-    }
-   ],
-   "in_title": 0
-  },
-  "base_date": null,
-  "price_at_report": 2580,
-  "ret_5d": null,
-  "mkt_ret_5d": null,
-  "ret_20d": null,
-  "mkt_ret_20d": null,
-  "inst_20d": null,
-  "analyzed_at": "2026-11-19 20:48"
- },
- {
-  "call_key": "6239_623920261106M001.pdf",
-  "stock_id": "6239",
-  "name": "力成",
-  "call_date": "2026-10-27",
-  "signal": "🟡 訊號不明顯",
-  "level": 0,
-  "market": "上市",
-  "tone": "樂觀",
-  "tone_score": 1,
-  "news_sentiment": 2,
-  "one_line": "力成法說會指出第四季半導體產業樂觀，AI應用將是主要成長動力。",
-  "guidance": [
-   "第四季半導體產業展望維持樂觀，AI相關應用將持續扮演主要成長引擎。",
-   "DRAM及NAND Flash需求仍大於供給，產品價格趨勢有利於記憶體產業營收成長。",
-   "訂單能見度高，推升營收表現穩定增長。"
-  ],
-  "risks": [
-   "車用部分屬於高規格需求, 目前訂單能見度處於穩定狀態。"
-  ],
-  "notes": [
-   "公司展望樂觀，但券商近 30 天以調降目標價為主"
-  ],
-  "news_reason": "多篇新聞提到力成的EPS創新高及未來成長動能，股價情緒正面",
-  "pdf_url": "https://mopsov.twse.com.tw/nas/STR/623920261106M001.pdf",
-  "chips": {
-   "close": 254.5,
-   "inst_5d": -1233,
-   "trust_5d": -1217,
-   "data_date": "2026-10-27",
-   "dealer_5d": 970,
-   "margin_5d": -887,
-   "volume_5d": 61038,
-   "foreign_5d": -16,
-   "inst_5d_pct": -2,
-   "price_5d_pct": -7.1,
-   "trust_streak": -2,
-   "foreign_streak": 1,
-   "after_call_days": 0,
-   "after_call_inst": 0,
-   "price_since_call_pct": 0
-  },
-  "brokers": {
-   "ups": 0,
-   "downs": 0,
-   "items": [
-    {
-     "date": "2026-10-27",
-     "link": "https://news.google.com/rss/articles/CBMidkFVX3lxTFB4dTJ3NngyeElNd3JSelYtb1ZoYk1yT2ZzRFRjT2hkYnE5U3RFQWlLbmJDZktCNjh3cW5PVFl0WVpKV3NCOGRkVDdaX0NCMjJUYzFxMzhxUFVETnlOZFJJdlpTX3RqSTIzLXBPSEFDZ0RpV3NubkE?oc=5",
-     "title": "Factset 最新調查：力成(6239-TW)目標價調降至340元，幅度約6.85%｜新聞快訊｜豐雲學堂",
-     "broker": "FactSet 共識",
-     "source": "永豐金證券",
-     "target": 340,
-     "direction": "down"
-    },
-    {
-     "date": "2026-10-19",
-     "link": "https://news.google.com/rss/articles/CBMiakFVX3lxTE5jOWNIZlQtRHk2b3hENG1BZkdLUUt4ZVlPQmszdHd6X0tvQnN4RmN1MlNiTGtRUzVLZThVODQyekR4X0tpcVpscHZ1UWRjVVFxbWlaUEtlZVlrUmtCUWR1SUVKa1dOdlI4anc?oc=5",
-     "title": "記憶體股1表評》狗都嫌？南亞科、華邦電、群聯、旺宏、力成、十銓、威剛...法人「13選2」：目標價也說了- 上市櫃",
-     "broker": "法人",
-     "source": "旺得富理財網",
-     "target": null,
-     "direction": "flat"
-    }
-   ],
-   "trend": "down",
-   "consensus": {
-    "date": "2026-10-27",
-    "target": 340,
-    "direction": "down",
-    "change_pct": -6.85
-   },
-   "upside_pct": 33.6
-  },
-  "retail": {
-   "ok": true,
-   "hot": false,
-   "bear": 0,
-   "bull": 0,
-   "titles": [],
-   "posts_7d": 0,
-   "posts_30d": 0,
-   "heat_ratio": 0
-  },
-  "ebc": {
-   "ok": true,
-   "count": 2,
-   "titles": [
-    {
-     "date": "10-27",
-     "link": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE5fcXI4dElUeVNPZm5EdEM5MFhodWs3b1BWd3JxYi1yRXpCRlcxODJyclJSNHFVWFlLWEdRZTl2MTZUaE95eTJRRS1nQ3RCbjd2cW5ycVg5eVpKQQ?oc=5",
-     "title": "創新高！力成Q3 EPS 3.55元 蔡篤恭：第4季樂觀看待"
-    },
-    {
-     "date": "10-27",
-     "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTFBSWDVET3h2UndZcmlyZDUwOVB6bVd6S1JDLXVlTHJHSHFoVnNWaGowR2QtYTVHTW0xYlhIUHdqY1NwcW10N24wR055NEJrZ3VYSjJ0WXZ3?oc=5",
-     "title": "台股急殺失守46K！ 記憶體力挺撐盤 南亞科一度飆8%"
-    }
-   ],
-   "in_title": 1
-  },
-  "base_date": null,
-  "price_at_report": 254.5,
-  "ret_5d": null,
-  "mkt_ret_5d": null,
-  "ret_20d": null,
-  "mkt_ret_20d": null,
-  "inst_20d": null,
-  "analyzed_at": "2026-11-19 20:40"
- },
- {
   "call_key": "6530_653020261027M001.pdf",
   "stock_id": "6530",
   "name": "創威",
@@ -3398,100 +3374,6 @@
   "mkt_ret_20d": null,
   "inst_20d": null,
   "analyzed_at": "2026-11-19 20:43"
- },
- {
-  "call_key": "3035_303520261027M001.pdf",
-  "stock_id": "3035",
-  "name": "智原",
-  "call_date": "2026-10-27",
-  "signal": "🟡 訊號不明顯",
-  "level": 0,
-  "market": "上市",
-  "tone": "中性",
-  "tone_score": 0,
-  "news_sentiment": 1,
-  "one_line": "智原科技第三季財報顯示營收年增13.2%，主要來自量產產品成長，但委託設計服務收入減少。",
-  "guidance": [
-   "第三季營收年增13.2%，主要來自量產產品成長。",
-   "委託設計服務收入減少，但IP收入穩健。",
-   "管理層未明確展望未來營運表現。"
-  ],
-  "risks": [],
-  "notes": [],
-  "news_reason": "多篇報導提到智原獲得大型專案及合作，有助於股價上漲",
-  "pdf_url": "https://mopsov.twse.com.tw/nas/STR/303520261027M001.pdf",
-  "chips": {
-   "close": 191.5,
-   "inst_5d": -244,
-   "trust_5d": 522,
-   "data_date": "2026-10-27",
-   "dealer_5d": -364,
-   "margin_5d": -66,
-   "volume_5d": 15551,
-   "foreign_5d": -766,
-   "inst_5d_pct": -1.6,
-   "price_5d_pct": -3,
-   "trust_streak": 5,
-   "foreign_streak": -2,
-   "after_call_days": 0,
-   "after_call_inst": 0,
-   "price_since_call_pct": 0
-  },
-  "brokers": {
-   "ups": 0,
-   "downs": 0,
-   "items": [
-    {
-     "date": "2026-10-27",
-     "link": "https://news.google.com/rss/articles/CBMidkFVX3lxTE9naEtKUmNyUkFaY3VxaHdJd0NTUGU0X3dyQjNidEFDdmFxNnJMNTlzQTc5Ml9lQzNlSVByNUx3N2dyQ1VhcU1MQjRCaVRkQ1FyNHpmdU1fajM1QVZJTFRhTTVKRmIzZ0hBeVRkZTNhTTFmNjlncUE?oc=5",
-     "title": "Factset 最新調查：智原(3035-TW)EPS預估下修至3.19元，預估目標價為195元｜新聞快訊｜豐雲學堂",
-     "broker": "FactSet 共識",
-     "source": "永豐金證券",
-     "target": 195,
-     "direction": "flat"
-    }
-   ],
-   "trend": "flat",
-   "consensus": {
-    "date": "2026-10-27",
-    "target": 195,
-    "direction": "flat",
-    "change_pct": null
-   },
-   "upside_pct": 1.8
-  },
-  "retail": {
-   "ok": true,
-   "hot": false,
-   "bear": 0,
-   "bull": 0,
-   "titles": [
-    {
-     "url": "https://www.ptt.cc/bbs/Stock/M.1793091331.A.1E5.html",
-     "date": "10-27",
-     "nrec": 32,
-     "side": "",
-     "title": "[新聞] 智原攜手三星、聯電 搶下美國2奈米雲端AI"
-    }
-   ],
-   "posts_7d": 1,
-   "posts_30d": 0,
-   "heat_ratio": null
-  },
-  "ebc": {
-   "ok": true,
-   "count": 0,
-   "titles": [],
-   "in_title": 0
-  },
-  "base_date": null,
-  "price_at_report": 191.5,
-  "ret_5d": null,
-  "mkt_ret_5d": null,
-  "ret_20d": null,
-  "mkt_ret_20d": null,
-  "inst_20d": null,
-  "analyzed_at": "2026-11-19 20:35"
  },
  {
   "call_key": "1303_130320261027M001.pdf",
@@ -3676,6 +3558,210 @@
   "mkt_ret_20d": null,
   "inst_20d": null,
   "analyzed_at": "2026-11-19 20:32"
+ },
+ {
+  "call_key": "3035_303520261027M001.pdf",
+  "stock_id": "3035",
+  "name": "智原",
+  "call_date": "2026-10-27",
+  "signal": "🟡 訊號不明顯",
+  "level": 0,
+  "market": "上市",
+  "tone": "中性",
+  "tone_score": 0,
+  "news_sentiment": 1,
+  "one_line": "智原科技第三季財報顯示營收年增13.2%，主要來自量產產品成長，但委託設計服務收入減少。",
+  "guidance": [
+   "第三季營收年增13.2%，主要來自量產產品成長。",
+   "委託設計服務收入減少，但IP收入穩健。",
+   "管理層未明確展望未來營運表現。"
+  ],
+  "risks": [],
+  "notes": [],
+  "news_reason": "多篇報導提到智原獲得大型專案及合作，有助於股價上漲",
+  "pdf_url": "https://mopsov.twse.com.tw/nas/STR/303520261027M001.pdf",
+  "chips": {
+   "close": 191.5,
+   "inst_5d": -244,
+   "trust_5d": 522,
+   "data_date": "2026-10-27",
+   "dealer_5d": -364,
+   "margin_5d": -66,
+   "volume_5d": 15551,
+   "foreign_5d": -766,
+   "inst_5d_pct": -1.6,
+   "price_5d_pct": -3,
+   "trust_streak": 5,
+   "foreign_streak": -2,
+   "after_call_days": 0,
+   "after_call_inst": 0,
+   "price_since_call_pct": 0
+  },
+  "brokers": {
+   "ups": 0,
+   "downs": 0,
+   "items": [
+    {
+     "date": "2026-10-27",
+     "link": "https://news.google.com/rss/articles/CBMidkFVX3lxTE9naEtKUmNyUkFaY3VxaHdJd0NTUGU0X3dyQjNidEFDdmFxNnJMNTlzQTc5Ml9lQzNlSVByNUx3N2dyQ1VhcU1MQjRCaVRkQ1FyNHpmdU1fajM1QVZJTFRhTTVKRmIzZ0hBeVRkZTNhTTFmNjlncUE?oc=5",
+     "title": "Factset 最新調查：智原(3035-TW)EPS預估下修至3.19元，預估目標價為195元｜新聞快訊｜豐雲學堂",
+     "broker": "FactSet 共識",
+     "source": "永豐金證券",
+     "target": 195,
+     "direction": "flat"
+    }
+   ],
+   "trend": "flat",
+   "consensus": {
+    "date": "2026-10-27",
+    "target": 195,
+    "direction": "flat",
+    "change_pct": null
+   },
+   "upside_pct": 1.8
+  },
+  "retail": {
+   "ok": true,
+   "hot": false,
+   "bear": 0,
+   "bull": 0,
+   "titles": [
+    {
+     "url": "https://www.ptt.cc/bbs/Stock/M.1793091331.A.1E5.html",
+     "date": "10-27",
+     "nrec": 32,
+     "side": "",
+     "title": "[新聞] 智原攜手三星、聯電 搶下美國2奈米雲端AI"
+    }
+   ],
+   "posts_7d": 1,
+   "posts_30d": 0,
+   "heat_ratio": null
+  },
+  "ebc": {
+   "ok": true,
+   "count": 0,
+   "titles": [],
+   "in_title": 0
+  },
+  "base_date": null,
+  "price_at_report": 191.5,
+  "ret_5d": null,
+  "mkt_ret_5d": null,
+  "ret_20d": null,
+  "mkt_ret_20d": null,
+  "inst_20d": null,
+  "analyzed_at": "2026-11-19 20:35"
+ },
+ {
+  "call_key": "6239_623920261106M001.pdf",
+  "stock_id": "6239",
+  "name": "力成",
+  "call_date": "2026-10-27",
+  "signal": "🟡 訊號不明顯",
+  "level": 0,
+  "market": "上市",
+  "tone": "樂觀",
+  "tone_score": 1,
+  "news_sentiment": 2,
+  "one_line": "力成法說會指出第四季半導體產業樂觀，AI應用將是主要成長動力。",
+  "guidance": [
+   "第四季半導體產業展望維持樂觀，AI相關應用將持續扮演主要成長引擎。",
+   "DRAM及NAND Flash需求仍大於供給，產品價格趨勢有利於記憶體產業營收成長。",
+   "訂單能見度高，推升營收表現穩定增長。"
+  ],
+  "risks": [
+   "車用部分屬於高規格需求, 目前訂單能見度處於穩定狀態。"
+  ],
+  "notes": [
+   "公司展望樂觀，但券商近 30 天以調降目標價為主"
+  ],
+  "news_reason": "多篇新聞提到力成的EPS創新高及未來成長動能，股價情緒正面",
+  "pdf_url": "https://mopsov.twse.com.tw/nas/STR/623920261106M001.pdf",
+  "chips": {
+   "close": 254.5,
+   "inst_5d": -1233,
+   "trust_5d": -1217,
+   "data_date": "2026-10-27",
+   "dealer_5d": 970,
+   "margin_5d": -887,
+   "volume_5d": 61038,
+   "foreign_5d": -16,
+   "inst_5d_pct": -2,
+   "price_5d_pct": -7.1,
+   "trust_streak": -2,
+   "foreign_streak": 1,
+   "after_call_days": 0,
+   "after_call_inst": 0,
+   "price_since_call_pct": 0
+  },
+  "brokers": {
+   "ups": 0,
+   "downs": 0,
+   "items": [
+    {
+     "date": "2026-10-27",
+     "link": "https://news.google.com/rss/articles/CBMidkFVX3lxTFB4dTJ3NngyeElNd3JSelYtb1ZoYk1yT2ZzRFRjT2hkYnE5U3RFQWlLbmJDZktCNjh3cW5PVFl0WVpKV3NCOGRkVDdaX0NCMjJUYzFxMzhxUFVETnlOZFJJdlpTX3RqSTIzLXBPSEFDZ0RpV3NubkE?oc=5",
+     "title": "Factset 最新調查：力成(6239-TW)目標價調降至340元，幅度約6.85%｜新聞快訊｜豐雲學堂",
+     "broker": "FactSet 共識",
+     "source": "永豐金證券",
+     "target": 340,
+     "direction": "down"
+    },
+    {
+     "date": "2026-10-19",
+     "link": "https://news.google.com/rss/articles/CBMiakFVX3lxTE5jOWNIZlQtRHk2b3hENG1BZkdLUUt4ZVlPQmszdHd6X0tvQnN4RmN1MlNiTGtRUzVLZThVODQyekR4X0tpcVpscHZ1UWRjVVFxbWlaUEtlZVlrUmtCUWR1SUVKa1dOdlI4anc?oc=5",
+     "title": "記憶體股1表評》狗都嫌？南亞科、華邦電、群聯、旺宏、力成、十銓、威剛...法人「13選2」：目標價也說了- 上市櫃",
+     "broker": "法人",
+     "source": "旺得富理財網",
+     "target": null,
+     "direction": "flat"
+    }
+   ],
+   "trend": "down",
+   "consensus": {
+    "date": "2026-10-27",
+    "target": 340,
+    "direction": "down",
+    "change_pct": -6.85
+   },
+   "upside_pct": 33.6
+  },
+  "retail": {
+   "ok": true,
+   "hot": false,
+   "bear": 0,
+   "bull": 0,
+   "titles": [],
+   "posts_7d": 0,
+   "posts_30d": 0,
+   "heat_ratio": 0
+  },
+  "ebc": {
+   "ok": true,
+   "count": 2,
+   "titles": [
+    {
+     "date": "10-27",
+     "link": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE5fcXI4dElUeVNPZm5EdEM5MFhodWs3b1BWd3JxYi1yRXpCRlcxODJyclJSNHFVWFlLWEdRZTl2MTZUaE95eTJRRS1nQ3RCbjd2cW5ycVg5eVpKQQ?oc=5",
+     "title": "創新高！力成Q3 EPS 3.55元 蔡篤恭：第4季樂觀看待"
+    },
+    {
+     "date": "10-27",
+     "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTFBSWDVET3h2UndZcmlyZDUwOVB6bVd6S1JDLXVlTHJHSHFoVnNWaGowR2QtYTVHTW0xYlhIUHdqY1NwcW10N24wR055NEJrZ3VYSjJ0WXZ3?oc=5",
+     "title": "台股急殺失守46K！ 記憶體力挺撐盤 南亞科一度飆8%"
+    }
+   ],
+   "in_title": 1
+  },
+  "base_date": null,
+  "price_at_report": 254.5,
+  "ret_5d": null,
+  "mkt_ret_5d": null,
+  "ret_20d": null,
+  "mkt_ret_20d": null,
+  "inst_20d": null,
+  "analyzed_at": "2026-11-19 20:40"
  },
  {
   "call_key": "4541_454120261021M001.pdf",
@@ -4776,85 +4862,6 @@
   "analyzed_at": "2026-11-19 19:54"
  },
  {
-  "call_key": "1402_140220260921M001.pdf",
-  "stock_id": "1402",
-  "name": "遠東新",
-  "call_date": "2026-09-23",
-  "signal": "🟡 訊號不明顯",
-  "level": 0,
-  "market": "上市",
-  "tone": "樂觀",
-  "tone_score": 1,
-  "news_sentiment": 0,
-  "one_line": "遠東新法說會強調生產事業轉虧為盈及綠色產品營收成長，語氣樂觀。",
-  "guidance": [
-   "生產事業今年起轉虧為盈，上半年EPS獲利成長。",
-   "原生酯粒與再生酯粒需求同步增溫，供應布局優勢凸顯。",
-   "綠色產品營收占比持續提升，未來成長可期。"
-  ],
-  "risks": [
-   "新竹廠區發生事件導致相關資產減損，但已恢復正常運作。"
-  ],
-  "notes": [],
-  "news_reason": "多為轉讓及資產活化消息，無顯著正面或負面影響",
-  "pdf_url": "https://mopsov.twse.com.tw/nas/STR/140220260921M001.pdf",
-  "chips": {
-   "close": 27.9,
-   "inst_5d": 2097,
-   "trust_5d": -4773,
-   "data_date": "2026-09-23",
-   "dealer_5d": 450,
-   "margin_5d": -254,
-   "volume_5d": 45390,
-   "foreign_5d": 6870,
-   "inst_5d_pct": 4.6,
-   "price_5d_pct": 1.8,
-   "trust_streak": 2,
-   "foreign_streak": 1,
-   "after_call_days": 0,
-   "after_call_inst": 0,
-   "price_since_call_pct": 0
-  },
-  "brokers": {
-   "ups": 0,
-   "downs": 0,
-   "items": [],
-   "trend": "none",
-   "consensus": null,
-   "upside_pct": null
-  },
-  "retail": {
-   "ok": true,
-   "hot": false,
-   "bear": 0,
-   "bull": 0,
-   "titles": [],
-   "posts_7d": 0,
-   "posts_30d": 0,
-   "heat_ratio": 0
-  },
-  "ebc": {
-   "ok": true,
-   "count": 1,
-   "titles": [
-    {
-     "date": "09-21",
-     "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTFBfbzJsOU1Ebng1U1FwTzNzOWVjMy1ZY3MwRzBVNGRuMTVqZEtkLXFFbTFiMkdsUjI5ZWtwa3AyOHVaQ3BwLUZ2QzFpRTBjY3B2N21PX0d3?oc=5",
-     "title": "台股收漲538點 網見「自營大買」驚：要割一波？"
-    }
-   ],
-   "in_title": 0
-  },
-  "base_date": null,
-  "price_at_report": 27.9,
-  "ret_5d": null,
-  "mkt_ret_5d": null,
-  "ret_20d": null,
-  "mkt_ret_20d": null,
-  "inst_20d": null,
-  "analyzed_at": "2026-11-19 19:42"
- },
- {
   "call_key": "2002_200220260922M001.pdf",
   "stock_id": "2002",
   "name": "中鋼",
@@ -4961,6 +4968,376 @@
   "mkt_ret_20d": null,
   "inst_20d": null,
   "analyzed_at": "2026-11-19 19:48"
+ },
+ {
+  "call_key": "1402_140220260921M001.pdf",
+  "stock_id": "1402",
+  "name": "遠東新",
+  "call_date": "2026-09-23",
+  "signal": "🟡 訊號不明顯",
+  "level": 0,
+  "market": "上市",
+  "tone": "樂觀",
+  "tone_score": 1,
+  "news_sentiment": 0,
+  "one_line": "遠東新法說會強調生產事業轉虧為盈及綠色產品營收成長，語氣樂觀。",
+  "guidance": [
+   "生產事業今年起轉虧為盈，上半年EPS獲利成長。",
+   "原生酯粒與再生酯粒需求同步增溫，供應布局優勢凸顯。",
+   "綠色產品營收占比持續提升，未來成長可期。"
+  ],
+  "risks": [
+   "新竹廠區發生事件導致相關資產減損，但已恢復正常運作。"
+  ],
+  "notes": [],
+  "news_reason": "多為轉讓及資產活化消息，無顯著正面或負面影響",
+  "pdf_url": "https://mopsov.twse.com.tw/nas/STR/140220260921M001.pdf",
+  "chips": {
+   "close": 27.9,
+   "inst_5d": 2097,
+   "trust_5d": -4773,
+   "data_date": "2026-09-23",
+   "dealer_5d": 450,
+   "margin_5d": -254,
+   "volume_5d": 45390,
+   "foreign_5d": 6870,
+   "inst_5d_pct": 4.6,
+   "price_5d_pct": 1.8,
+   "trust_streak": 2,
+   "foreign_streak": 1,
+   "after_call_days": 0,
+   "after_call_inst": 0,
+   "price_since_call_pct": 0
+  },
+  "brokers": {
+   "ups": 0,
+   "downs": 0,
+   "items": [],
+   "trend": "none",
+   "consensus": null,
+   "upside_pct": null
+  },
+  "retail": {
+   "ok": true,
+   "hot": false,
+   "bear": 0,
+   "bull": 0,
+   "titles": [],
+   "posts_7d": 0,
+   "posts_30d": 0,
+   "heat_ratio": 0
+  },
+  "ebc": {
+   "ok": true,
+   "count": 1,
+   "titles": [
+    {
+     "date": "09-21",
+     "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTFBfbzJsOU1Ebng1U1FwTzNzOWVjMy1ZY3MwRzBVNGRuMTVqZEtkLXFFbTFiMkdsUjI5ZWtwa3AyOHVaQ3BwLUZ2QzFpRTBjY3B2N21PX0d3?oc=5",
+     "title": "台股收漲538點 網見「自營大買」驚：要割一波？"
+    }
+   ],
+   "in_title": 0
+  },
+  "base_date": null,
+  "price_at_report": 27.9,
+  "ret_5d": null,
+  "mkt_ret_5d": null,
+  "ret_20d": null,
+  "mkt_ret_20d": null,
+  "inst_20d": null,
+  "analyzed_at": "2026-11-19 19:42"
+ },
+ {
+  "call_key": "3711_371120260730M001.pdf",
+  "stock_id": "3711",
+  "name": "日月光投控",
+  "call_date": "2026-09-22",
+  "signal": "🔵 順風車：展望樂觀，法人同步買、股價走揚",
+  "level": 2,
+  "market": "上市",
+  "tone": "樂觀",
+  "tone_score": 1,
+  "news_sentiment": 1,
+  "one_line": "日月光投控法說會樂觀看待下半年及未來業績，強調技術與產能優勢。",
+  "guidance": [
+   "封測業務營收預期維持成長動能進入下半年。",
+   "LEAP服務全年營收預期將超過先前預估。",
+   "2026年第三季業績展望正面，毛利率及營業利益率皆有提升。"
+  ],
+  "risks": [],
+  "notes": [],
+  "news_reason": "多篇新聞提到日月光投控股價走強及產能旺，表正面情緒",
+  "pdf_url": "https://mopsov.twse.com.tw/nas/STR/371120260730M001.pdf",
+  "chips": {
+   "close": 693,
+   "inst_5d": 26368,
+   "trust_5d": 481,
+   "data_date": "2026-09-22",
+   "dealer_5d": 3445,
+   "margin_5d": -1881,
+   "volume_5d": 90713,
+   "foreign_5d": 25887,
+   "inst_5d_pct": 29.1,
+   "price_5d_pct": 17.1,
+   "trust_streak": 2,
+   "foreign_streak": 5,
+   "after_call_days": 0,
+   "after_call_inst": 0,
+   "price_since_call_pct": 0
+  },
+  "brokers": {
+   "ups": 0,
+   "downs": 0,
+   "items": [],
+   "trend": "none",
+   "consensus": null,
+   "upside_pct": null
+  },
+  "retail": {
+   "ok": true,
+   "hot": false,
+   "bear": 0,
+   "bull": 0,
+   "titles": [],
+   "posts_7d": 0,
+   "posts_30d": 0,
+   "heat_ratio": 0
+  },
+  "ebc": {
+   "ok": false,
+   "count": 0,
+   "titles": []
+  },
+  "base_date": null,
+  "price_at_report": 693,
+  "ret_5d": null,
+  "mkt_ret_5d": null,
+  "ret_20d": null,
+  "mkt_ret_20d": null,
+  "inst_20d": null,
+  "analyzed_at": "2026-11-19 19:35"
+ },
+ {
+  "call_key": "6223_622320260918M001.pdf",
+  "stock_id": "6223",
+  "name": "旺矽",
+  "call_date": "2026-09-22",
+  "signal": "🟠 背離：展望樂觀但法人連賣",
+  "level": 2,
+  "market": "上櫃",
+  "tone": "樂觀",
+  "tone_score": 1,
+  "news_sentiment": -1,
+  "one_line": "旺矽法說會表示未來營收將持續成長，主要來自高客戶滿意度與強勁研發投資。",
+  "guidance": [
+   "未來營收持續成長，主要來自高客戶滿意度。",
+   "毛利率擴張源自強勁研發投資。",
+   "產品應用範圍擴大至汽車、5G/RF通訊、光纖及感測領域。"
+  ],
+  "risks": [],
+  "notes": [
+   "融資 5 日增 97 張、法人賣超，籌碼由法人流向散戶"
+  ],
+  "news_reason": "有加碼和減碼的訊息，整體偏中性",
+  "pdf_url": "https://mopsov.twse.com.tw/nas/STR/622320260918M001.pdf",
+  "chips": {
+   "close": 5345,
+   "inst_5d": -549,
+   "trust_5d": -1079,
+   "data_date": "2026-09-22",
+   "dealer_5d": 96,
+   "margin_5d": 97,
+   "volume_5d": 5572,
+   "foreign_5d": 530,
+   "inst_5d_pct": -9.9,
+   "price_5d_pct": -1.7,
+   "trust_streak": -3,
+   "foreign_streak": 1,
+   "after_call_days": 0,
+   "after_call_inst": 0,
+   "price_since_call_pct": 0
+  },
+  "brokers": {
+   "ups": 0,
+   "downs": 0,
+   "items": [
+    {
+     "date": "2026-09-12",
+     "link": "https://news.google.com/rss/articles/CBMiW0FVX3lxTFB1YThVdVllZHV3UWJFQWZxMmpfTDItaUVOOWxuNkZmMXo4MUVSY3BYV1ZJQXZLUE81M1FEMXRwTDk4ekhaNnRQWGpnU1Z2RjF4dVJRUDA3SzVVc2_SAWBBVV95cUxOTlpzaFJoUV9YdTdjSDRiS1JCRnJEc3c5cy11ak5DVmY0Y1AwYzRFRWJHVFRkUXlUT0xWbGpoV0RoamRjRnY4NFBvdEdPeERSaF9hODdTbFEwTVFyTDBHdWE?oc=5",
+     "title": "Aletheia 喊出旺矽目標價12,000元",
+     "broker": "",
+     "source": "經濟日報",
+     "target": null,
+     "direction": "flat"
+    },
+    {
+     "date": "2026-09-10",
+     "link": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE9NTFN3ekRnbFVlLThjWGFpVXBfbWYtOFlFTzR1U3E0ZDkxZ281NkxpV0RhWDBoc1lENmNaTGJkUGxSUTRrODZHZlZnZWZ4WVd2WWEzREo3TGNKRFVYel84?oc=5",
+     "title": "CPO帶旺光測試 外資齊聲唱多致茂、旺矽 目標價太驚人！",
+     "broker": "外資",
+     "source": "工商時報",
+     "target": null,
+     "direction": "flat"
+    },
+    {
+     "date": "2026-08-24",
+     "link": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE9PUllnVzhxX1JIdFpMTlQteDJMVjFLakh4Wl9WQUJLSmwwOVFtR1pRVzNRY3RmM21saVd1dGduVXlKeEVUYTZoLS02SENZN05k0gFWQVVfeXFMT0Qxb2p2ckdneHphTVlBSVRyTVZZVkZPa3k1WThhcUR5bGc0NTgtN1lMbi1sSUwxY0xseklQQVJIclJpRFlhOF92cUxPaTBpT3JpUjdfWEE?oc=5",
+     "title": "旺矽目標價 喊到9,500元",
+     "broker": "",
+     "source": "UDN",
+     "target": null,
+     "direction": "flat"
+    }
+   ],
+   "trend": "flat",
+   "consensus": null,
+   "upside_pct": null
+  },
+  "retail": {
+   "ok": true,
+   "hot": false,
+   "bear": 0,
+   "bull": 0,
+   "titles": [],
+   "posts_7d": 0,
+   "posts_30d": 1,
+   "heat_ratio": 0
+  },
+  "ebc": {
+   "ok": true,
+   "count": 0,
+   "titles": [],
+   "in_title": 0
+  },
+  "base_date": null,
+  "price_at_report": 5345,
+  "ret_5d": null,
+  "mkt_ret_5d": null,
+  "ret_20d": null,
+  "mkt_ret_20d": null,
+  "inst_20d": null,
+  "analyzed_at": "2026-11-19 19:38"
+ },
+ {
+  "call_key": "2881_288120260902M001.pdf",
+  "stock_id": "2881",
+  "name": "富邦金",
+  "call_date": "2026-09-22",
+  "signal": "🔵 戴維斯雙擊候選：展望樂觀、券商調升、法人同步買",
+  "level": 2,
+  "market": "上市",
+  "tone": "樂觀",
+  "tone_score": 1,
+  "news_sentiment": 1,
+  "one_line": "富邦金控強調台股交投熱絡，稅後淨利創新高，並預期多項業務穩健成長。",
+  "guidance": [
+   "富邦金控預期2026年上半年台股交投熱絡，稅後淨利超越去年全年。",
+   "富邦人壽將透過多元保單銷售創造跨售價值。",
+   "台北富邦銀行將持續提升淨利差及加速較高利差的放款成長。"
+  ],
+  "risks": [],
+  "notes": [],
+  "news_reason": "多篇新聞提到富邦金的配息能力和獲利表現，對股價有正面影響。",
+  "pdf_url": "https://mopsov.twse.com.tw/nas/STR/288120260902M001.pdf",
+  "chips": {
+   "close": 154.5,
+   "inst_5d": 2912,
+   "trust_5d": 19,
+   "data_date": "2026-09-22",
+   "dealer_5d": 1495,
+   "margin_5d": -855,
+   "volume_5d": 95380,
+   "foreign_5d": 2893,
+   "inst_5d_pct": 3.1,
+   "price_5d_pct": 2.3,
+   "trust_streak": -4,
+   "foreign_streak": 2,
+   "after_call_days": 0,
+   "after_call_inst": 0,
+   "price_since_call_pct": 0
+  },
+  "brokers": {
+   "ups": 0,
+   "downs": 0,
+   "items": [
+    {
+     "date": "2026-09-02",
+     "link": "https://news.google.com/rss/articles/CBMiZEFVX3lxTE40SDRERDNuMWFVYjluTUs3bjZSR0tZR0JUOG90RmowRzZlVVVzTndONU9FMHRYaU9kQ1g2eHItaGRUR0tlLVJOeTNsdjNqNjQ1a3VqTVB4N0VBNUQ2SzhoMWhHY1I?oc=5",
+     "title": "鉅亨速報 - Factset 最新調查：富邦金(2881-TW)EPS預估上修至10.95元，預估目標價為141元",
+     "broker": "FactSet 共識",
+     "source": "TradingView",
+     "target": 141,
+     "direction": "up"
+    },
+    {
+     "date": "2026-08-25",
+     "link": "https://news.google.com/rss/articles/CBMiakFVX3lxTE5VV3NIZ3ZmSEFtb3NTU3YzV1BYYmFPRGsxVkdRY2E2TGpBMHB2WGZaT2J4ZmNNVE1yQWItekhycGVkNUttUFlEZTJjdndsT3lKbHNFenVicnpDaWtmVExfODNoVTY4ZVRpdHc?oc=5",
+     "title": "股價噴7％還沒完？富邦金「單月虧損藏玄機」 法人揭3大亮點、目標價喊160元 - 上市櫃",
+     "broker": "富邦",
+     "source": "旺得富理財網",
+     "target": 160,
+     "direction": "flat"
+    },
+    {
+     "date": "2026-08-24",
+     "link": "https://news.google.com/rss/articles/CBMidkFVX3lxTE5uRGhtNGpJeXJ4LXpPNnpJLTJZb2lGQzZ5U0ctSm1HbWJhNENabGhpcU1UdGlydTc2bWVWbDFPVHd3dDBFSFJmeHFpTS1VWjdsUDlCRk9oOHZPNnNIZnlmMEVlYXowSHQzTlZpODhROXIyQnBtanc?oc=5",
+     "title": "Factset 最新調查：富邦金(2881-TW)目標價調升至123元，幅度約11.82%｜新聞快訊｜豐雲學堂",
+     "broker": "FactSet 共識",
+     "source": "永豐金證券",
+     "target": 123,
+     "direction": "up"
+    }
+   ],
+   "trend": "up",
+   "consensus": {
+    "date": "2026-09-02",
+    "target": 141,
+    "direction": "up",
+    "change_pct": 14.6
+   },
+   "upside_pct": -8.7
+  },
+  "retail": {
+   "ok": true,
+   "hot": false,
+   "bear": 0,
+   "bull": 0,
+   "titles": [],
+   "posts_7d": 0,
+   "posts_30d": 0,
+   "heat_ratio": 0
+  },
+  "ebc": {
+   "ok": true,
+   "count": 3,
+   "titles": [
+    {
+     "date": "09-21",
+     "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTFBfbzJsOU1Ebng1U1FwTzNzOWVjMy1ZY3MwRzBVNGRuMTVqZEtkLXFFbTFiMkdsUjI5ZWtwa3AyOHVaQ3BwLUZ2QzFpRTBjY3B2N21PX0d3?oc=5",
+     "title": "台股收漲538點 網見「自營大買」驚：要割一波？"
+    },
+    {
+     "date": "09-22",
+     "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE9zcUQxek5JUk9uVFlVaUhKaDk4WEFZVzFGVlJ4Q2RjV0RUYng2SktxcC1LaUlLamVSaThZODkxYlRsUG5NQWdteGJQcDhiZHctTWduTUtR?oc=5",
+     "title": "三大法人買超608億 台股只漲81點 網傻眼：留外資山頂洗碗？"
+    },
+    {
+     "date": "09-22",
+     "link": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE02YnR4c3dqRUl6RDFrUkxzUy1RLTJ6ZmZtOTl1dXBMTGZTbE9YNjdKa3pnTmpPMmx3eXRMcjNZNk8tU1JpQ2lLMWxMVVpXRnk5WkYzTmxRU1lkUQ?oc=5",
+     "title": "中秋變盤來了？ 杜金龍最新操作曝光 點名「這6檔 」"
+    }
+   ],
+   "in_title": 0
+  },
+  "base_date": "2026-09-22",
+  "price_at_report": 154.5,
+  "ret_5d": -2.59,
+  "mkt_ret_5d": 1.16,
+  "ret_20d": 4.85,
+  "mkt_ret_20d": -3.56,
+  "inst_20d": 21173,
+  "analyzed_at": "2026-11-19 00:29"
  },
  {
   "call_key": "2308_230820260730M001.pdf",
@@ -5087,39 +5464,41 @@
   "analyzed_at": "2026-11-19 00:25"
  },
  {
-  "call_key": "3711_371120260730M001.pdf",
-  "stock_id": "3711",
-  "name": "日月光投控",
-  "call_date": "2026-09-22",
-  "signal": "🔵 順風車：展望樂觀，法人同步買、股價走揚",
-  "level": 2,
+  "call_key": "3035_303520260728M001.pdf",
+  "stock_id": "3035",
+  "name": "智原",
+  "call_date": "2026-09-16",
+  "signal": "🟡 訊號不明顯",
+  "level": 0,
   "market": "上市",
-  "tone": "樂觀",
-  "tone_score": 1,
-  "news_sentiment": 1,
-  "one_line": "日月光投控法說會樂觀看待下半年及未來業績，強調技術與產能優勢。",
+  "tone": "中性",
+  "tone_score": 0,
+  "news_sentiment": 0,
+  "one_line": "智原科技第二季財報顯示收入年減，但毛利率和營業利益率均有提升，未來展望未見明確樂觀或保守之言。",
   "guidance": [
-   "封測業務營收預期維持成長動能進入下半年。",
-   "LEAP服務全年營收預期將超過先前預估。",
-   "2026年第三季業績展望正面，毛利率及營業利益率皆有提升。"
+   "管理層回顧過去營收表現，第二季收入較上季成長28%，但年減26.6%。",
+   "營業毛利和營業利益率分別為45.2%及8.2%，與去年同期相比有所改善。",
+   "委託設計服務和量產業務的比重分析顯示各應用領域的營收分布穩定。"
   ],
   "risks": [],
-  "notes": [],
-  "news_reason": "多篇新聞提到日月光投控股價走強及產能旺，表正面情緒",
-  "pdf_url": "https://mopsov.twse.com.tw/nas/STR/371120260730M001.pdf",
+  "notes": [
+   "融資 5 日增 159 張、法人賣超，籌碼由法人流向散戶"
+  ],
+  "news_reason": "僅提及法說會安排，無明確正面或負面信息",
+  "pdf_url": "https://mopsov.twse.com.tw/nas/STR/303520260728M001.pdf",
   "chips": {
-   "close": 693,
-   "inst_5d": 26368,
-   "trust_5d": 481,
-   "data_date": "2026-09-22",
-   "dealer_5d": 3445,
-   "margin_5d": -1881,
-   "volume_5d": 90713,
-   "foreign_5d": 25887,
-   "inst_5d_pct": 29.1,
-   "price_5d_pct": 17.1,
-   "trust_streak": 2,
-   "foreign_streak": 5,
+   "close": 173.5,
+   "inst_5d": -200,
+   "trust_5d": 0,
+   "data_date": "2026-09-16",
+   "dealer_5d": -331,
+   "margin_5d": 159,
+   "volume_5d": 11058,
+   "foreign_5d": -200,
+   "inst_5d_pct": -1.8,
+   "price_5d_pct": -1.7,
+   "trust_streak": 0,
+   "foreign_streak": 1,
    "after_call_days": 0,
    "after_call_inst": 0,
    "price_since_call_pct": 0
@@ -5143,239 +5522,19 @@
    "heat_ratio": 0
   },
   "ebc": {
-   "ok": false,
-   "count": 0,
-   "titles": []
-  },
-  "base_date": null,
-  "price_at_report": 693,
-  "ret_5d": null,
-  "mkt_ret_5d": null,
-  "ret_20d": null,
-  "mkt_ret_20d": null,
-  "inst_20d": null,
-  "analyzed_at": "2026-11-19 19:35"
- },
- {
-  "call_key": "2881_288120260902M001.pdf",
-  "stock_id": "2881",
-  "name": "富邦金",
-  "call_date": "2026-09-22",
-  "signal": "🔵 戴維斯雙擊候選：展望樂觀、券商調升、法人同步買",
-  "level": 2,
-  "market": "上市",
-  "tone": "樂觀",
-  "tone_score": 1,
-  "news_sentiment": 1,
-  "one_line": "富邦金控強調台股交投熱絡，稅後淨利創新高，並預期多項業務穩健成長。",
-  "guidance": [
-   "富邦金控預期2026年上半年台股交投熱絡，稅後淨利超越去年全年。",
-   "富邦人壽將透過多元保單銷售創造跨售價值。",
-   "台北富邦銀行將持續提升淨利差及加速較高利差的放款成長。"
-  ],
-  "risks": [],
-  "notes": [],
-  "news_reason": "多篇新聞提到富邦金的配息能力和獲利表現，對股價有正面影響。",
-  "pdf_url": "https://mopsov.twse.com.tw/nas/STR/288120260902M001.pdf",
-  "chips": {
-   "close": 154.5,
-   "inst_5d": 2912,
-   "trust_5d": 19,
-   "data_date": "2026-09-22",
-   "dealer_5d": 1495,
-   "margin_5d": -855,
-   "volume_5d": 95380,
-   "foreign_5d": 2893,
-   "inst_5d_pct": 3.1,
-   "price_5d_pct": 2.3,
-   "trust_streak": -4,
-   "foreign_streak": 2,
-   "after_call_days": 0,
-   "after_call_inst": 0,
-   "price_since_call_pct": 0
-  },
-  "brokers": {
-   "ups": 0,
-   "downs": 0,
-   "items": [
-    {
-     "date": "2026-09-02",
-     "link": "https://news.google.com/rss/articles/CBMiZEFVX3lxTE40SDRERDNuMWFVYjluTUs3bjZSR0tZR0JUOG90RmowRzZlVVVzTndONU9FMHRYaU9kQ1g2eHItaGRUR0tlLVJOeTNsdjNqNjQ1a3VqTVB4N0VBNUQ2SzhoMWhHY1I?oc=5",
-     "title": "鉅亨速報 - Factset 最新調查：富邦金(2881-TW)EPS預估上修至10.95元，預估目標價為141元",
-     "broker": "FactSet 共識",
-     "source": "TradingView",
-     "target": 141,
-     "direction": "up"
-    },
-    {
-     "date": "2026-08-25",
-     "link": "https://news.google.com/rss/articles/CBMiakFVX3lxTE5VV3NIZ3ZmSEFtb3NTU3YzV1BYYmFPRGsxVkdRY2E2TGpBMHB2WGZaT2J4ZmNNVE1yQWItekhycGVkNUttUFlEZTJjdndsT3lKbHNFenVicnpDaWtmVExfODNoVTY4ZVRpdHc?oc=5",
-     "title": "股價噴7％還沒完？富邦金「單月虧損藏玄機」 法人揭3大亮點、目標價喊160元 - 上市櫃",
-     "broker": "富邦",
-     "source": "旺得富理財網",
-     "target": 160,
-     "direction": "flat"
-    },
-    {
-     "date": "2026-08-24",
-     "link": "https://news.google.com/rss/articles/CBMidkFVX3lxTE5uRGhtNGpJeXJ4LXpPNnpJLTJZb2lGQzZ5U0ctSm1HbWJhNENabGhpcU1UdGlydTc2bWVWbDFPVHd3dDBFSFJmeHFpTS1VWjdsUDlCRk9oOHZPNnNIZnlmMEVlYXowSHQzTlZpODhROXIyQnBtanc?oc=5",
-     "title": "Factset 最新調查：富邦金(2881-TW)目標價調升至123元，幅度約11.82%｜新聞快訊｜豐雲學堂",
-     "broker": "FactSet 共識",
-     "source": "永豐金證券",
-     "target": 123,
-     "direction": "up"
-    }
-   ],
-   "trend": "up",
-   "consensus": {
-    "date": "2026-09-02",
-    "target": 141,
-    "direction": "up",
-    "change_pct": 14.6
-   },
-   "upside_pct": -8.7
-  },
-  "retail": {
-   "ok": true,
-   "hot": false,
-   "bear": 0,
-   "bull": 0,
-   "titles": [],
-   "posts_7d": 0,
-   "posts_30d": 0,
-   "heat_ratio": 0
-  },
-  "ebc": {
-   "ok": true,
-   "count": 3,
-   "titles": [
-    {
-     "date": "09-21",
-     "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTFBfbzJsOU1Ebng1U1FwTzNzOWVjMy1ZY3MwRzBVNGRuMTVqZEtkLXFFbTFiMkdsUjI5ZWtwa3AyOHVaQ3BwLUZ2QzFpRTBjY3B2N21PX0d3?oc=5",
-     "title": "台股收漲538點 網見「自營大買」驚：要割一波？"
-    },
-    {
-     "date": "09-22",
-     "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE9zcUQxek5JUk9uVFlVaUhKaDk4WEFZVzFGVlJ4Q2RjV0RUYng2SktxcC1LaUlLamVSaThZODkxYlRsUG5NQWdteGJQcDhiZHctTWduTUtR?oc=5",
-     "title": "三大法人買超608億 台股只漲81點 網傻眼：留外資山頂洗碗？"
-    },
-    {
-     "date": "09-22",
-     "link": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE02YnR4c3dqRUl6RDFrUkxzUy1RLTJ6ZmZtOTl1dXBMTGZTbE9YNjdKa3pnTmpPMmx3eXRMcjNZNk8tU1JpQ2lLMWxMVVpXRnk5WkYzTmxRU1lkUQ?oc=5",
-     "title": "中秋變盤來了？ 杜金龍最新操作曝光 點名「這6檔 」"
-    }
-   ],
-   "in_title": 0
-  },
-  "base_date": "2026-09-22",
-  "price_at_report": 154.5,
-  "ret_5d": -2.59,
-  "mkt_ret_5d": 1.16,
-  "ret_20d": 4.85,
-  "mkt_ret_20d": -3.56,
-  "inst_20d": 21173,
-  "analyzed_at": "2026-11-19 00:29"
- },
- {
-  "call_key": "6223_622320260918M001.pdf",
-  "stock_id": "6223",
-  "name": "旺矽",
-  "call_date": "2026-09-22",
-  "signal": "🟠 背離：展望樂觀但法人連賣",
-  "level": 2,
-  "market": "上櫃",
-  "tone": "樂觀",
-  "tone_score": 1,
-  "news_sentiment": -1,
-  "one_line": "旺矽法說會表示未來營收將持續成長，主要來自高客戶滿意度與強勁研發投資。",
-  "guidance": [
-   "未來營收持續成長，主要來自高客戶滿意度。",
-   "毛利率擴張源自強勁研發投資。",
-   "產品應用範圍擴大至汽車、5G/RF通訊、光纖及感測領域。"
-  ],
-  "risks": [],
-  "notes": [
-   "融資 5 日增 97 張、法人賣超，籌碼由法人流向散戶"
-  ],
-  "news_reason": "有加碼和減碼的訊息，整體偏中性",
-  "pdf_url": "https://mopsov.twse.com.tw/nas/STR/622320260918M001.pdf",
-  "chips": {
-   "close": 5345,
-   "inst_5d": -549,
-   "trust_5d": -1079,
-   "data_date": "2026-09-22",
-   "dealer_5d": 96,
-   "margin_5d": 97,
-   "volume_5d": 5572,
-   "foreign_5d": 530,
-   "inst_5d_pct": -9.9,
-   "price_5d_pct": -1.7,
-   "trust_streak": -3,
-   "foreign_streak": 1,
-   "after_call_days": 0,
-   "after_call_inst": 0,
-   "price_since_call_pct": 0
-  },
-  "brokers": {
-   "ups": 0,
-   "downs": 0,
-   "items": [
-    {
-     "date": "2026-09-12",
-     "link": "https://news.google.com/rss/articles/CBMiW0FVX3lxTFB1YThVdVllZHV3UWJFQWZxMmpfTDItaUVOOWxuNkZmMXo4MUVSY3BYV1ZJQXZLUE81M1FEMXRwTDk4ekhaNnRQWGpnU1Z2RjF4dVJRUDA3SzVVc2_SAWBBVV95cUxOTlpzaFJoUV9YdTdjSDRiS1JCRnJEc3c5cy11ak5DVmY0Y1AwYzRFRWJHVFRkUXlUT0xWbGpoV0RoamRjRnY4NFBvdEdPeERSaF9hODdTbFEwTVFyTDBHdWE?oc=5",
-     "title": "Aletheia 喊出旺矽目標價12,000元",
-     "broker": "",
-     "source": "經濟日報",
-     "target": null,
-     "direction": "flat"
-    },
-    {
-     "date": "2026-09-10",
-     "link": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE9NTFN3ekRnbFVlLThjWGFpVXBfbWYtOFlFTzR1U3E0ZDkxZ281NkxpV0RhWDBoc1lENmNaTGJkUGxSUTRrODZHZlZnZWZ4WVd2WWEzREo3TGNKRFVYel84?oc=5",
-     "title": "CPO帶旺光測試 外資齊聲唱多致茂、旺矽 目標價太驚人！",
-     "broker": "外資",
-     "source": "工商時報",
-     "target": null,
-     "direction": "flat"
-    },
-    {
-     "date": "2026-08-24",
-     "link": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE9PUllnVzhxX1JIdFpMTlQteDJMVjFLakh4Wl9WQUJLSmwwOVFtR1pRVzNRY3RmM21saVd1dGduVXlKeEVUYTZoLS02SENZN05k0gFWQVVfeXFMT0Qxb2p2ckdneHphTVlBSVRyTVZZVkZPa3k1WThhcUR5bGc0NTgtN1lMbi1sSUwxY0xseklQQVJIclJpRFlhOF92cUxPaTBpT3JpUjdfWEE?oc=5",
-     "title": "旺矽目標價 喊到9,500元",
-     "broker": "",
-     "source": "UDN",
-     "target": null,
-     "direction": "flat"
-    }
-   ],
-   "trend": "flat",
-   "consensus": null,
-   "upside_pct": null
-  },
-  "retail": {
-   "ok": true,
-   "hot": false,
-   "bear": 0,
-   "bull": 0,
-   "titles": [],
-   "posts_7d": 0,
-   "posts_30d": 1,
-   "heat_ratio": 0
-  },
-  "ebc": {
    "ok": true,
    "count": 0,
    "titles": [],
    "in_title": 0
   },
-  "base_date": null,
-  "price_at_report": 5345,
-  "ret_5d": null,
-  "mkt_ret_5d": null,
-  "ret_20d": null,
-  "mkt_ret_20d": null,
-  "inst_20d": null,
-  "analyzed_at": "2026-11-19 19:38"
+  "base_date": "2026-09-16",
+  "price_at_report": 173.5,
+  "ret_5d": 17.58,
+  "mkt_ret_5d": 5.03,
+  "ret_20d": 12.68,
+  "mkt_ret_20d": 2.12,
+  "inst_20d": 13198,
+  "analyzed_at": "2026-11-19 00:14"
  },
  {
   "call_key": "3363_336320260902M001.pdf",
@@ -5527,79 +5686,6 @@
   "mkt_ret_20d": 2.12,
   "inst_20d": 86710,
   "analyzed_at": "2026-11-19 00:10"
- },
- {
-  "call_key": "3035_303520260728M001.pdf",
-  "stock_id": "3035",
-  "name": "智原",
-  "call_date": "2026-09-16",
-  "signal": "🟡 訊號不明顯",
-  "level": 0,
-  "market": "上市",
-  "tone": "中性",
-  "tone_score": 0,
-  "news_sentiment": 0,
-  "one_line": "智原科技第二季財報顯示收入年減，但毛利率和營業利益率均有提升，未來展望未見明確樂觀或保守之言。",
-  "guidance": [
-   "管理層回顧過去營收表現，第二季收入較上季成長28%，但年減26.6%。",
-   "營業毛利和營業利益率分別為45.2%及8.2%，與去年同期相比有所改善。",
-   "委託設計服務和量產業務的比重分析顯示各應用領域的營收分布穩定。"
-  ],
-  "risks": [],
-  "notes": [
-   "融資 5 日增 159 張、法人賣超，籌碼由法人流向散戶"
-  ],
-  "news_reason": "僅提及法說會安排，無明確正面或負面信息",
-  "pdf_url": "https://mopsov.twse.com.tw/nas/STR/303520260728M001.pdf",
-  "chips": {
-   "close": 173.5,
-   "inst_5d": -200,
-   "trust_5d": 0,
-   "data_date": "2026-09-16",
-   "dealer_5d": -331,
-   "margin_5d": 159,
-   "volume_5d": 11058,
-   "foreign_5d": -200,
-   "inst_5d_pct": -1.8,
-   "price_5d_pct": -1.7,
-   "trust_streak": 0,
-   "foreign_streak": 1,
-   "after_call_days": 0,
-   "after_call_inst": 0,
-   "price_since_call_pct": 0
-  },
-  "brokers": {
-   "ups": 0,
-   "downs": 0,
-   "items": [],
-   "trend": "none",
-   "consensus": null,
-   "upside_pct": null
-  },
-  "retail": {
-   "ok": true,
-   "hot": false,
-   "bear": 0,
-   "bull": 0,
-   "titles": [],
-   "posts_7d": 0,
-   "posts_30d": 0,
-   "heat_ratio": 0
-  },
-  "ebc": {
-   "ok": true,
-   "count": 0,
-   "titles": [],
-   "in_title": 0
-  },
-  "base_date": "2026-09-16",
-  "price_at_report": 173.5,
-  "ret_5d": 17.58,
-  "mkt_ret_5d": 5.03,
-  "ret_20d": 12.68,
-  "mkt_ret_20d": 2.12,
-  "inst_20d": 13198,
-  "analyzed_at": "2026-11-19 00:14"
  },
  {
   "call_key": "6239_623920260728M002.pdf",
@@ -5923,87 +6009,6 @@
   "analyzed_at": "2026-11-19 00:07"
  },
  {
-  "call_key": "3105_310520260909M001.pdf",
-  "stock_id": "3105",
-  "name": "穩懋",
-  "call_date": "2026-09-14",
-  "signal": "🟡 訊號不明顯",
-  "level": 0,
-  "market": "上櫃",
-  "tone": "樂觀",
-  "tone_score": 1,
-  "news_sentiment": 0,
-  "one_line": "穩懋法說會指出第三季營收和毛利率展望正面，並強調在中高階手機市場的布局。",
-  "guidance": [
-   "第三季營收預計成長低雙位數百分比。",
-   "第三季毛利率預計約為低三十分比。",
-   "公司持續關注中高階及高端手機市場。"
-  ],
-  "risks": [],
-  "notes": [],
-  "news_reason": "標題主要為公司策略及市場分析，無顯著正面或負面情緒",
-  "pdf_url": "https://mopsov.twse.com.tw/nas/STR/310520260909M001.pdf",
-  "chips": {
-   "close": 444,
-   "inst_5d": 5335,
-   "trust_5d": 7411,
-   "data_date": "2026-09-14",
-   "dealer_5d": -578,
-   "margin_5d": -1875,
-   "volume_5d": 97142,
-   "foreign_5d": -2076,
-   "inst_5d_pct": 5.5,
-   "price_5d_pct": -1.4,
-   "trust_streak": 6,
-   "foreign_streak": 1,
-   "after_call_days": 0,
-   "after_call_inst": 0,
-   "price_since_call_pct": 0
-  },
-  "brokers": {
-   "ups": 0,
-   "downs": 0,
-   "items": [
-    {
-     "date": "2026-09-01",
-     "link": "https://news.google.com/rss/articles/CBMinwNBVV95cUxOUWRBMlpMMWlqMmNRMElKS0RLSWdmVGtxOGtrb3VXSjlScGZva2tOQjFWUTVneVhPbmRJX1A0d0t3VzhPWnVyWU1qYzZpWklfT1VOOWZGc1NQdE1CV09qOXR6SFdNR3BLRE1jbDR1NmgxOFdzTlVreEQtcHJXVkdYVnNFdWdrSUNYYzAweG5vdl94ZVpJRGRGR0Fma3hvdkhUUFFOdWNIbzJzcFdveERvVDFmcFpaVGNYWjMxRUFCNm9qRl9GWG5RU2VnUjVaZHpKeWhtaGt0OG43SG1Kc01jeVROMnItd2UydzZCdTg4TUlLdmxuVG1QVlBBUzdwWUJYenNaQ2xDaURJczVFUGl4Qm0ybV95YmxMSXJYejZHay1VY0ZIcGxjUGJEVlNhYkZIX2EzQzBmb3ZWOGtzaUYwbk9sMXVVeWs4MkhfRmFjMEhyYkVOeWFBQ2ZxX21VMVU1T2twM0YzbXJtaERTdG45UWpSQm1HbjlVTVVBZWF1eW16elF6eHpTbTJfeWQ1em94UHlqRzVKMENOcEs2Ukxj?oc=5",
-     "title": "光通訊狂亮8顆燈！「這磊晶廠」656元目標價達標、全新喜收連6紅 「前股后」飆漲625元、穩懋、汎銓都攻頂",
-     "broker": "",
-     "source": "Yahoo股市",
-     "target": null,
-     "direction": "flat"
-    }
-   ],
-   "trend": "flat",
-   "consensus": null,
-   "upside_pct": null
-  },
-  "retail": {
-   "ok": true,
-   "hot": false,
-   "bear": 0,
-   "bull": 0,
-   "titles": [],
-   "posts_7d": 0,
-   "posts_30d": 0,
-   "heat_ratio": 0
-  },
-  "ebc": {
-   "ok": true,
-   "count": 0,
-   "titles": [],
-   "in_title": 0
-  },
-  "base_date": "2026-09-14",
-  "price_at_report": 444,
-  "ret_5d": 10.47,
-  "mkt_ret_5d": 4.05,
-  "ret_20d": 13.06,
-  "mkt_ret_20d": 2.41,
-  "inst_20d": 41718,
-  "analyzed_at": "2026-11-18 23:50"
- },
- {
   "call_key": "2303_230320260729M001.pdf",
   "stock_id": "2303",
   "name": "聯電",
@@ -6110,6 +6115,87 @@
   "mkt_ret_20d": 2.41,
   "inst_20d": -190804,
   "analyzed_at": "2026-11-18 23:42"
+ },
+ {
+  "call_key": "3105_310520260909M001.pdf",
+  "stock_id": "3105",
+  "name": "穩懋",
+  "call_date": "2026-09-14",
+  "signal": "🟡 訊號不明顯",
+  "level": 0,
+  "market": "上櫃",
+  "tone": "樂觀",
+  "tone_score": 1,
+  "news_sentiment": 0,
+  "one_line": "穩懋法說會指出第三季營收和毛利率展望正面，並強調在中高階手機市場的布局。",
+  "guidance": [
+   "第三季營收預計成長低雙位數百分比。",
+   "第三季毛利率預計約為低三十分比。",
+   "公司持續關注中高階及高端手機市場。"
+  ],
+  "risks": [],
+  "notes": [],
+  "news_reason": "標題主要為公司策略及市場分析，無顯著正面或負面情緒",
+  "pdf_url": "https://mopsov.twse.com.tw/nas/STR/310520260909M001.pdf",
+  "chips": {
+   "close": 444,
+   "inst_5d": 5335,
+   "trust_5d": 7411,
+   "data_date": "2026-09-14",
+   "dealer_5d": -578,
+   "margin_5d": -1875,
+   "volume_5d": 97142,
+   "foreign_5d": -2076,
+   "inst_5d_pct": 5.5,
+   "price_5d_pct": -1.4,
+   "trust_streak": 6,
+   "foreign_streak": 1,
+   "after_call_days": 0,
+   "after_call_inst": 0,
+   "price_since_call_pct": 0
+  },
+  "brokers": {
+   "ups": 0,
+   "downs": 0,
+   "items": [
+    {
+     "date": "2026-09-01",
+     "link": "https://news.google.com/rss/articles/CBMinwNBVV95cUxOUWRBMlpMMWlqMmNRMElKS0RLSWdmVGtxOGtrb3VXSjlScGZva2tOQjFWUTVneVhPbmRJX1A0d0t3VzhPWnVyWU1qYzZpWklfT1VOOWZGc1NQdE1CV09qOXR6SFdNR3BLRE1jbDR1NmgxOFdzTlVreEQtcHJXVkdYVnNFdWdrSUNYYzAweG5vdl94ZVpJRGRGR0Fma3hvdkhUUFFOdWNIbzJzcFdveERvVDFmcFpaVGNYWjMxRUFCNm9qRl9GWG5RU2VnUjVaZHpKeWhtaGt0OG43SG1Kc01jeVROMnItd2UydzZCdTg4TUlLdmxuVG1QVlBBUzdwWUJYenNaQ2xDaURJczVFUGl4Qm0ybV95YmxMSXJYejZHay1VY0ZIcGxjUGJEVlNhYkZIX2EzQzBmb3ZWOGtzaUYwbk9sMXVVeWs4MkhfRmFjMEhyYkVOeWFBQ2ZxX21VMVU1T2twM0YzbXJtaERTdG45UWpSQm1HbjlVTVVBZWF1eW16elF6eHpTbTJfeWQ1em94UHlqRzVKMENOcEs2Ukxj?oc=5",
+     "title": "光通訊狂亮8顆燈！「這磊晶廠」656元目標價達標、全新喜收連6紅 「前股后」飆漲625元、穩懋、汎銓都攻頂",
+     "broker": "",
+     "source": "Yahoo股市",
+     "target": null,
+     "direction": "flat"
+    }
+   ],
+   "trend": "flat",
+   "consensus": null,
+   "upside_pct": null
+  },
+  "retail": {
+   "ok": true,
+   "hot": false,
+   "bear": 0,
+   "bull": 0,
+   "titles": [],
+   "posts_7d": 0,
+   "posts_30d": 0,
+   "heat_ratio": 0
+  },
+  "ebc": {
+   "ok": true,
+   "count": 0,
+   "titles": [],
+   "in_title": 0
+  },
+  "base_date": "2026-09-14",
+  "price_at_report": 444,
+  "ret_5d": 10.47,
+  "mkt_ret_5d": 4.05,
+  "ret_20d": 13.06,
+  "mkt_ret_20d": 2.41,
+  "inst_20d": 41718,
+  "analyzed_at": "2026-11-18 23:50"
  },
  {
   "call_key": "3042_304220260901M001.pdf",
@@ -6563,6 +6649,96 @@
   "analyzed_at": "2026-11-18 23:31"
  },
  {
+  "call_key": "3081_308120260828M002.pdf",
+  "stock_id": "3081",
+  "name": "聯亞",
+  "call_date": "2026-09-03",
+  "signal": "🟡 訊號不明顯",
+  "level": 0,
+  "market": "上櫃",
+  "tone": "中性",
+  "tone_score": 0,
+  "news_sentiment": 2,
+  "one_line": "簡報主要回顧了過去幾個季度的財務表現，未明確展望未來。",
+  "guidance": [
+   "管理層未明確展望未來營收、毛利及需求。",
+   "過去幾個季度的營收表現強勁，但毛利率有下滑趨勢。",
+   "2026年上半年營收達1,221億元，較去年同期增長111%。"
+  ],
+  "risks": [],
+  "notes": [],
+  "news_reason": "三則新聞皆顯示聯亞股價上漲，且有正面题材支撑",
+  "pdf_url": "https://mopsov.twse.com.tw/nas/STR/308120260828M002.pdf",
+  "chips": {
+   "close": 3120,
+   "inst_5d": 1200,
+   "trust_5d": 418,
+   "data_date": "2026-09-03",
+   "dealer_5d": -15,
+   "margin_5d": -267,
+   "volume_5d": 17705,
+   "foreign_5d": 782,
+   "inst_5d_pct": 6.8,
+   "price_5d_pct": -7.4,
+   "trust_streak": -2,
+   "foreign_streak": 2,
+   "after_call_days": 0,
+   "after_call_inst": 0,
+   "price_since_call_pct": 0
+  },
+  "brokers": {
+   "ups": 1,
+   "downs": 0,
+   "items": [
+    {
+     "date": "2026-08-18",
+     "link": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE50cFYzY3d1SUE0d1ZrZFBzNHdmWFBqMlY5SHdCSFI0azZqV3dRQ1QtTFFaUnBiYlFyRG5WMkI5Wi1TQmpDajBxTHFRQ1ZHbmtuNjdhcGZkekpLZkk?oc=5",
+     "title": "個股評等》矽光子需求爆發 聯亞獲利飆 法人喊買目標價4000元",
+     "broker": "法人",
+     "source": "Newtalk新聞",
+     "target": 4000,
+     "direction": "flat"
+    },
+    {
+     "date": "2026-08-14",
+     "link": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE1VMExSWWdzWVZudGpickZkTG43Y0Q3Y0I4RVZ5WGtSYXVvTDItcUlBeVJjdDk0SEJfdzZxNm9sMTdZN0pFSkUzZTdXNHFkYTFMR2E1SUNVT25ZZ2fSAWBBVV95cUxPdHhiR0hWXzljOTJBQnlrUDhvN1dXc3BnckRUMGxubzM3MXN1dURIaE1EUFp1Q2JtNGVYVnZJNld3STlaYU5xSUo5N2tmWklfYjRtNjdFamQ0cHBiNFNxNE4?oc=5",
+     "title": "財報超標、持續擴產 法人調高聯亞獲利預估值及目標價",
+     "broker": "法人",
+     "source": "經濟日報",
+     "target": null,
+     "direction": "up"
+    }
+   ],
+   "trend": "mixed",
+   "consensus": null,
+   "upside_pct": null
+  },
+  "retail": {
+   "ok": true,
+   "hot": false,
+   "bear": 0,
+   "bull": 0,
+   "titles": [],
+   "posts_7d": 0,
+   "posts_30d": 2,
+   "heat_ratio": 0
+  },
+  "ebc": {
+   "ok": true,
+   "count": 0,
+   "titles": [],
+   "in_title": 0
+  },
+  "base_date": "2026-09-03",
+  "price_at_report": 3120,
+  "ret_5d": -9.29,
+  "mkt_ret_5d": 2.36,
+  "ret_20d": -3.85,
+  "mkt_ret_20d": 8.41,
+  "inst_20d": -4591,
+  "analyzed_at": "2026-11-18 23:25"
+ },
+ {
   "call_key": "2454_245420260731M002.pdf",
   "stock_id": "2454",
   "name": "聯發科",
@@ -6746,96 +6922,6 @@
   "analyzed_at": "2026-11-18 23:24"
  },
  {
-  "call_key": "3081_308120260828M002.pdf",
-  "stock_id": "3081",
-  "name": "聯亞",
-  "call_date": "2026-09-03",
-  "signal": "🟡 訊號不明顯",
-  "level": 0,
-  "market": "上櫃",
-  "tone": "中性",
-  "tone_score": 0,
-  "news_sentiment": 2,
-  "one_line": "簡報主要回顧了過去幾個季度的財務表現，未明確展望未來。",
-  "guidance": [
-   "管理層未明確展望未來營收、毛利及需求。",
-   "過去幾個季度的營收表現強勁，但毛利率有下滑趨勢。",
-   "2026年上半年營收達1,221億元，較去年同期增長111%。"
-  ],
-  "risks": [],
-  "notes": [],
-  "news_reason": "三則新聞皆顯示聯亞股價上漲，且有正面题材支撑",
-  "pdf_url": "https://mopsov.twse.com.tw/nas/STR/308120260828M002.pdf",
-  "chips": {
-   "close": 3120,
-   "inst_5d": 1200,
-   "trust_5d": 418,
-   "data_date": "2026-09-03",
-   "dealer_5d": -15,
-   "margin_5d": -267,
-   "volume_5d": 17705,
-   "foreign_5d": 782,
-   "inst_5d_pct": 6.8,
-   "price_5d_pct": -7.4,
-   "trust_streak": -2,
-   "foreign_streak": 2,
-   "after_call_days": 0,
-   "after_call_inst": 0,
-   "price_since_call_pct": 0
-  },
-  "brokers": {
-   "ups": 1,
-   "downs": 0,
-   "items": [
-    {
-     "date": "2026-08-18",
-     "link": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE50cFYzY3d1SUE0d1ZrZFBzNHdmWFBqMlY5SHdCSFI0azZqV3dRQ1QtTFFaUnBiYlFyRG5WMkI5Wi1TQmpDajBxTHFRQ1ZHbmtuNjdhcGZkekpLZkk?oc=5",
-     "title": "個股評等》矽光子需求爆發 聯亞獲利飆 法人喊買目標價4000元",
-     "broker": "法人",
-     "source": "Newtalk新聞",
-     "target": 4000,
-     "direction": "flat"
-    },
-    {
-     "date": "2026-08-14",
-     "link": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE1VMExSWWdzWVZudGpickZkTG43Y0Q3Y0I4RVZ5WGtSYXVvTDItcUlBeVJjdDk0SEJfdzZxNm9sMTdZN0pFSkUzZTdXNHFkYTFMR2E1SUNVT25ZZ2fSAWBBVV95cUxPdHhiR0hWXzljOTJBQnlrUDhvN1dXc3BnckRUMGxubzM3MXN1dURIaE1EUFp1Q2JtNGVYVnZJNld3STlaYU5xSUo5N2tmWklfYjRtNjdFamQ0cHBiNFNxNE4?oc=5",
-     "title": "財報超標、持續擴產 法人調高聯亞獲利預估值及目標價",
-     "broker": "法人",
-     "source": "經濟日報",
-     "target": null,
-     "direction": "up"
-    }
-   ],
-   "trend": "mixed",
-   "consensus": null,
-   "upside_pct": null
-  },
-  "retail": {
-   "ok": true,
-   "hot": false,
-   "bear": 0,
-   "bull": 0,
-   "titles": [],
-   "posts_7d": 0,
-   "posts_30d": 2,
-   "heat_ratio": 0
-  },
-  "ebc": {
-   "ok": true,
-   "count": 0,
-   "titles": [],
-   "in_title": 0
-  },
-  "base_date": "2026-09-03",
-  "price_at_report": 3120,
-  "ret_5d": -9.29,
-  "mkt_ret_5d": 2.36,
-  "ret_20d": -3.85,
-  "mkt_ret_20d": 8.41,
-  "inst_20d": -4591,
-  "analyzed_at": "2026-11-18 23:25"
- },
- {
   "call_key": "6197_619720260901M001.pdf",
   "stock_id": "6197",
   "name": "佳必琪",
@@ -6905,6 +6991,110 @@
   "mkt_ret_20d": 2.99,
   "inst_20d": -2011,
   "analyzed_at": "2026-11-18 23:20"
+ },
+ {
+  "call_key": "2884_288420260813M002.pdf",
+  "stock_id": "2884",
+  "name": "玉山金",
+  "call_date": "2026-08-31",
+  "signal": "🔵 戴維斯雙擊候選：展望樂觀、券商調升、法人同步買",
+  "level": 2,
+  "market": "上市",
+  "tone": "非常樂觀",
+  "tone_score": 2,
+  "news_sentiment": 0,
+  "one_line": "玉山金控上半年獲利創新高，受惠於財富管理及證券業表現強勁。",
+  "guidance": [
+   "玉山金控預期上半年獲利創新高，存貸款業務均衡發展。",
+   "財富管理手續費收入創歷史新高，顯示市場活躍度提升。",
+   "證券業獲利年增率上升，主因AI產業帶動市場熱絡。"
+  ],
+  "risks": [
+   "中國經濟成長放緩，內需疲弱",
+   "通膨風險仍存，能源成本壓力大"
+  ],
+  "notes": [],
+  "news_reason": "標題主要討論玉山金的籌碼面、合併消息及與其他公司的比較，沒有強烈正面或負面情緒。",
+  "pdf_url": "https://mopsov.twse.com.tw/nas/STR/288420260813M002.pdf",
+  "chips": {
+   "close": 39.75,
+   "inst_5d": 9681,
+   "trust_5d": 8754,
+   "data_date": "2026-08-31",
+   "dealer_5d": -2642,
+   "margin_5d": -485,
+   "volume_5d": 186065,
+   "foreign_5d": 927,
+   "inst_5d_pct": 5.2,
+   "price_5d_pct": 4.2,
+   "trust_streak": 18,
+   "foreign_streak": 1,
+   "after_call_days": 0,
+   "after_call_inst": 0,
+   "price_since_call_pct": 0
+  },
+  "brokers": {
+   "ups": 0,
+   "downs": 0,
+   "items": [
+    {
+     "date": "2026-08-17",
+     "link": "https://news.google.com/rss/articles/CBMidkFVX3lxTE1jZjBtcmxocGZWQjMwRGtGUWo3M3lMUmI1MVF6T21FZ2V4VFNwT2dDVjZtalRBRkxTRHd6VVY5SWdOd1hCc0o2OGVrMW53NlEtQ3hHNm16RERiLVV5OTdCc3VsVzdfc2hNZF9kb1VheUd4UWtFa3c?oc=5",
+     "title": "Factset 最新調查：玉山金(2884-TW)EPS預估上修至2.56元，預估目標價為39.4元｜新聞快訊｜豐雲學堂",
+     "broker": "FactSet 共識",
+     "source": "永豐金證券",
+     "target": 39.4,
+     "direction": "up"
+    },
+    {
+     "date": "2026-08-13",
+     "link": "https://news.google.com/rss/articles/CBMidkFVX3lxTE0zaDI2RkJpY3FQdFBXaVR1X0JiWDVsNXhORGY2eTBvd0F3MWdUR05OX3JTSFdDUHBPLW9WZFllNVl3OC0yb1RMUW1RS3BDTGNCMUZXbTNZVU53R3pRSUhYZV9QVUdOWXNWWk5pWnVkNHRHWnlnMnc?oc=5",
+     "title": "Factset 最新調查：玉山金(2884-TW)目標價調升至37.9元，幅度約3.84%｜新聞快訊｜豐雲學堂",
+     "broker": "FactSet 共識",
+     "source": "永豐金證券",
+     "target": 37.9,
+     "direction": "up"
+    }
+   ],
+   "trend": "up",
+   "consensus": {
+    "date": "2026-08-17",
+    "target": 39.4,
+    "direction": "up",
+    "change_pct": 4
+   },
+   "upside_pct": -0.9
+  },
+  "retail": {
+   "ok": true,
+   "hot": false,
+   "bear": 0,
+   "bull": 0,
+   "titles": [],
+   "posts_7d": 0,
+   "posts_30d": 1,
+   "heat_ratio": 0
+  },
+  "ebc": {
+   "ok": true,
+   "count": 1,
+   "titles": [
+    {
+     "date": "08-31",
+     "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE9DMGRIdUtFcXdpWTFFazdPeVpoMG9LOGM1QkJDeGc1YWFDMHQ4SFlyWjRmX0M4NmpsM3JxNUVuZVA5QlVuNW85b21TYkRLVThyZzh1NVFn?oc=5",
+     "title": "台股尾盤爆3千億大量！ 華邦電被砍23萬張 「這檔」敲進45萬張秒翻紅"
+    }
+   ],
+   "in_title": 0
+  },
+  "base_date": "2026-08-31",
+  "price_at_report": 39.75,
+  "ret_5d": 9.56,
+  "mkt_ret_5d": 2.6,
+  "ret_20d": 12.83,
+  "mkt_ret_20d": 3.93,
+  "inst_20d": 48435,
+  "analyzed_at": "2026-11-18 22:46"
  },
  {
   "call_key": "2886_288620260827M002.pdf",
@@ -7192,227 +7382,6 @@
   "analyzed_at": "2026-11-18 23:13"
  },
  {
-  "call_key": "2884_288420260813M002.pdf",
-  "stock_id": "2884",
-  "name": "玉山金",
-  "call_date": "2026-08-31",
-  "signal": "🔵 戴維斯雙擊候選：展望樂觀、券商調升、法人同步買",
-  "level": 2,
-  "market": "上市",
-  "tone": "非常樂觀",
-  "tone_score": 2,
-  "news_sentiment": 0,
-  "one_line": "玉山金控上半年獲利創新高，受惠於財富管理及證券業表現強勁。",
-  "guidance": [
-   "玉山金控預期上半年獲利創新高，存貸款業務均衡發展。",
-   "財富管理手續費收入創歷史新高，顯示市場活躍度提升。",
-   "證券業獲利年增率上升，主因AI產業帶動市場熱絡。"
-  ],
-  "risks": [
-   "中國經濟成長放緩，內需疲弱",
-   "通膨風險仍存，能源成本壓力大"
-  ],
-  "notes": [],
-  "news_reason": "標題主要討論玉山金的籌碼面、合併消息及與其他公司的比較，沒有強烈正面或負面情緒。",
-  "pdf_url": "https://mopsov.twse.com.tw/nas/STR/288420260813M002.pdf",
-  "chips": {
-   "close": 39.75,
-   "inst_5d": 9681,
-   "trust_5d": 8754,
-   "data_date": "2026-08-31",
-   "dealer_5d": -2642,
-   "margin_5d": -485,
-   "volume_5d": 186065,
-   "foreign_5d": 927,
-   "inst_5d_pct": 5.2,
-   "price_5d_pct": 4.2,
-   "trust_streak": 18,
-   "foreign_streak": 1,
-   "after_call_days": 0,
-   "after_call_inst": 0,
-   "price_since_call_pct": 0
-  },
-  "brokers": {
-   "ups": 0,
-   "downs": 0,
-   "items": [
-    {
-     "date": "2026-08-17",
-     "link": "https://news.google.com/rss/articles/CBMidkFVX3lxTE1jZjBtcmxocGZWQjMwRGtGUWo3M3lMUmI1MVF6T21FZ2V4VFNwT2dDVjZtalRBRkxTRHd6VVY5SWdOd1hCc0o2OGVrMW53NlEtQ3hHNm16RERiLVV5OTdCc3VsVzdfc2hNZF9kb1VheUd4UWtFa3c?oc=5",
-     "title": "Factset 最新調查：玉山金(2884-TW)EPS預估上修至2.56元，預估目標價為39.4元｜新聞快訊｜豐雲學堂",
-     "broker": "FactSet 共識",
-     "source": "永豐金證券",
-     "target": 39.4,
-     "direction": "up"
-    },
-    {
-     "date": "2026-08-13",
-     "link": "https://news.google.com/rss/articles/CBMidkFVX3lxTE0zaDI2RkJpY3FQdFBXaVR1X0JiWDVsNXhORGY2eTBvd0F3MWdUR05OX3JTSFdDUHBPLW9WZFllNVl3OC0yb1RMUW1RS3BDTGNCMUZXbTNZVU53R3pRSUhYZV9QVUdOWXNWWk5pWnVkNHRHWnlnMnc?oc=5",
-     "title": "Factset 最新調查：玉山金(2884-TW)目標價調升至37.9元，幅度約3.84%｜新聞快訊｜豐雲學堂",
-     "broker": "FactSet 共識",
-     "source": "永豐金證券",
-     "target": 37.9,
-     "direction": "up"
-    }
-   ],
-   "trend": "up",
-   "consensus": {
-    "date": "2026-08-17",
-    "target": 39.4,
-    "direction": "up",
-    "change_pct": 4
-   },
-   "upside_pct": -0.9
-  },
-  "retail": {
-   "ok": true,
-   "hot": false,
-   "bear": 0,
-   "bull": 0,
-   "titles": [],
-   "posts_7d": 0,
-   "posts_30d": 1,
-   "heat_ratio": 0
-  },
-  "ebc": {
-   "ok": true,
-   "count": 1,
-   "titles": [
-    {
-     "date": "08-31",
-     "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE9DMGRIdUtFcXdpWTFFazdPeVpoMG9LOGM1QkJDeGc1YWFDMHQ4SFlyWjRmX0M4NmpsM3JxNUVuZVA5QlVuNW85b21TYkRLVThyZzh1NVFn?oc=5",
-     "title": "台股尾盤爆3千億大量！ 華邦電被砍23萬張 「這檔」敲進45萬張秒翻紅"
-    }
-   ],
-   "in_title": 0
-  },
-  "base_date": "2026-08-31",
-  "price_at_report": 39.75,
-  "ret_5d": 9.56,
-  "mkt_ret_5d": 2.6,
-  "ret_20d": 12.83,
-  "mkt_ret_20d": 3.93,
-  "inst_20d": 48435,
-  "analyzed_at": "2026-11-18 22:46"
- },
- {
-  "call_key": "2317_231720260812M001.pdf",
-  "stock_id": "2317",
-  "name": "鴻海",
-  "call_date": "2026-08-28",
-  "signal": "🔴 背離警報：利多出貨（說好話＋新聞熱，法人連賣）",
-  "level": 3,
-  "market": "上市",
-  "tone": "非常樂觀",
-  "tone_score": 2,
-  "news_sentiment": 1,
-  "one_line": "鴻海法說會強調第三季與全年展望強勁成長，並持續擴大AI產能以應對市場需求。",
-  "guidance": [
-   "第三季與全年展望強勁成長。",
-   "上半年營業利益率達3.67%，高於目標，毛利及營業利益大幅成長。",
-   "持續擴充全球AI產能因應市場需求。"
-  ],
-  "risks": [],
-  "notes": [
-   "融資 5 日增 769 張、法人賣超，籌碼由法人流向散戶"
-  ],
-  "news_reason": "鴻海受輝達財報影響，帶動股價上漲",
-  "pdf_url": "https://mopsov.twse.com.tw/nas/STR/231720260812M001.pdf",
-  "chips": {
-   "close": 253,
-   "inst_5d": -5881,
-   "trust_5d": -184,
-   "data_date": "2026-08-28",
-   "dealer_5d": 1508,
-   "margin_5d": 769,
-   "volume_5d": 159548,
-   "foreign_5d": -5697,
-   "inst_5d_pct": -3.7,
-   "price_5d_pct": 3.1,
-   "trust_streak": 1,
-   "foreign_streak": 2,
-   "after_call_days": 0,
-   "after_call_inst": 0,
-   "price_since_call_pct": 0
-  },
-  "brokers": {
-   "ups": 1,
-   "downs": 0,
-   "items": [
-    {
-     "date": "2026-08-13",
-     "link": "https://news.google.com/rss/articles/CBMiT0FVX3lxTE1sRUJIaE5rdHlWUmpGS2NUOUpzeWdfWnpydURJZkRTeFc1d2xGNlBJTmJmY2VwRk1FR0JTM0xyUjRMYnFscjlrYnpsYk0yWUE?oc=5",
-     "title": "鴻海AI需求續強 法說會後美系、日系外資齊升目標價4字頭起跳",
-     "broker": "日系外資",
-     "source": "鉅亨網",
-     "target": null,
-     "direction": "up"
-    },
-    {
-     "date": "2026-08-12",
-     "link": "https://news.google.com/rss/articles/CBMikAFBVV95cUxPdFRSUzMybFZqWlk4NmRiUS0weG5xNGxHWWttU1NBcFdpRzZPYTFHdEMxVGNaQ3pRLW96Nld0WUlKRkxybE9QdDBDN1lycjJaNUpNSDBidmlkNkh5MmV3eTFhQkRkWVJrakJWOXlPcmRSQktfcENPQU9aemZWaUFick1jX20wRl8xX1RMdXRKYVk?oc=5",
-     "title": "【即時新聞】鴻海(2317)法說登場目標價看370，這「2檔概念股」買氣爆棚！",
-     "broker": "",
-     "source": "CMoney投資網誌",
-     "target": null,
-     "direction": "flat"
-    },
-    {
-     "date": "2026-08-11",
-     "link": "https://news.google.com/rss/articles/CBMikAFBVV95cUxORGw5T1FCazNheUxwS0l4NkxVVjdwUTFQbWt3QWh4ZmptUjU0OXl5X05YbEN3aWdYUWowaGpLa3QxUUswYUVEVXlOTEE2UUt5UF9ZSkNocHVWR0k5bF9EeURWdklvVnlVLVl0TXlFM3VEREwtdXR5Qk0ydWJySFVScXowQ0gwZ01nVDQxTEdMQjM?oc=5",
-     "title": "【即時新聞】鴻海(2317)營收創高目標價飆330！這「2檔概念股」盤中多空激戰",
-     "broker": "",
-     "source": "CMoney投資網誌",
-     "target": null,
-     "direction": "flat"
-    }
-   ],
-   "trend": "mixed",
-   "consensus": null,
-   "upside_pct": null
-  },
-  "retail": {
-   "ok": true,
-   "hot": false,
-   "bear": 0,
-   "bull": 0,
-   "titles": [],
-   "posts_7d": 0,
-   "posts_30d": 2,
-   "heat_ratio": 0
-  },
-  "ebc": {
-   "ok": true,
-   "count": 6,
-   "titles": [
-    {
-     "date": "08-26",
-     "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE1nYU4yWmt3dVFYWlZaVlR2TEhsTUFCajBLUDZMNGdXRWtKa3puV19SWUh6U3FUNHZWYjFHamV1SjNaekZGeFJPaFFLN0dOdExtbW1TSzBn?oc=5",
-     "title": "台股平盤震盪！大立光亮燈再創高 「PTFE雙雄」衝漲停"
-    },
-    {
-     "date": "08-26",
-     "link": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE9jMEF0RzVTTFMzazVMLVNBRDlOYV9VcjZnU1Y1XzRqWTgwMDBxYnJOandzekpwcU15aXhlN0pic2FwSTZkTS1jalRfVV9QZzF5TVN5NFllb0w4QQ?oc=5",
-     "title": "鴻海突發重訊！砸17.58億買下美國廠房 AI布局再擴大"
-    },
-    {
-     "date": "08-27",
-     "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE5yUng0Vjd6VzdodHhLcThYWE1pSUFjcWxPODlLaWxNRHgzMF9reFR1U2Z3eElEZWZZajBxcGVndm04Z2piZHo4bXJmWWxRem1yR3YtOXFB?oc=5",
-     "title": "輝達財報開獎！台股漲351點「PTFE雙雄」又漲停"
-    }
-   ],
-   "in_title": 0
-  },
-  "base_date": "2026-08-28",
-  "price_at_report": 253,
-  "ret_5d": 1.19,
-  "mkt_ret_5d": 0.47,
-  "ret_20d": -0.99,
-  "mkt_ret_20d": 2.81,
-  "inst_20d": -4163,
-  "analyzed_at": "2026-11-18 23:09"
- },
- {
   "call_key": "6213_621320260813M002.pdf",
   "stock_id": "6213",
   "name": "聯茂",
@@ -7559,6 +7528,123 @@
   "mkt_ret_20d": 2.81,
   "inst_20d": 19,
   "analyzed_at": "2026-11-18 22:37"
+ },
+ {
+  "call_key": "2317_231720260812M001.pdf",
+  "stock_id": "2317",
+  "name": "鴻海",
+  "call_date": "2026-08-28",
+  "signal": "🔴 背離警報：利多出貨（說好話＋新聞熱，法人連賣）",
+  "level": 3,
+  "market": "上市",
+  "tone": "非常樂觀",
+  "tone_score": 2,
+  "news_sentiment": 1,
+  "one_line": "鴻海法說會強調第三季與全年展望強勁成長，並持續擴大AI產能以應對市場需求。",
+  "guidance": [
+   "第三季與全年展望強勁成長。",
+   "上半年營業利益率達3.67%，高於目標，毛利及營業利益大幅成長。",
+   "持續擴充全球AI產能因應市場需求。"
+  ],
+  "risks": [],
+  "notes": [
+   "融資 5 日增 769 張、法人賣超，籌碼由法人流向散戶"
+  ],
+  "news_reason": "鴻海受輝達財報影響，帶動股價上漲",
+  "pdf_url": "https://mopsov.twse.com.tw/nas/STR/231720260812M001.pdf",
+  "chips": {
+   "close": 253,
+   "inst_5d": -5881,
+   "trust_5d": -184,
+   "data_date": "2026-08-28",
+   "dealer_5d": 1508,
+   "margin_5d": 769,
+   "volume_5d": 159548,
+   "foreign_5d": -5697,
+   "inst_5d_pct": -3.7,
+   "price_5d_pct": 3.1,
+   "trust_streak": 1,
+   "foreign_streak": 2,
+   "after_call_days": 0,
+   "after_call_inst": 0,
+   "price_since_call_pct": 0
+  },
+  "brokers": {
+   "ups": 1,
+   "downs": 0,
+   "items": [
+    {
+     "date": "2026-08-13",
+     "link": "https://news.google.com/rss/articles/CBMiT0FVX3lxTE1sRUJIaE5rdHlWUmpGS2NUOUpzeWdfWnpydURJZkRTeFc1d2xGNlBJTmJmY2VwRk1FR0JTM0xyUjRMYnFscjlrYnpsYk0yWUE?oc=5",
+     "title": "鴻海AI需求續強 法說會後美系、日系外資齊升目標價4字頭起跳",
+     "broker": "日系外資",
+     "source": "鉅亨網",
+     "target": null,
+     "direction": "up"
+    },
+    {
+     "date": "2026-08-12",
+     "link": "https://news.google.com/rss/articles/CBMikAFBVV95cUxPdFRSUzMybFZqWlk4NmRiUS0weG5xNGxHWWttU1NBcFdpRzZPYTFHdEMxVGNaQ3pRLW96Nld0WUlKRkxybE9QdDBDN1lycjJaNUpNSDBidmlkNkh5MmV3eTFhQkRkWVJrakJWOXlPcmRSQktfcENPQU9aemZWaUFick1jX20wRl8xX1RMdXRKYVk?oc=5",
+     "title": "【即時新聞】鴻海(2317)法說登場目標價看370，這「2檔概念股」買氣爆棚！",
+     "broker": "",
+     "source": "CMoney投資網誌",
+     "target": null,
+     "direction": "flat"
+    },
+    {
+     "date": "2026-08-11",
+     "link": "https://news.google.com/rss/articles/CBMikAFBVV95cUxORGw5T1FCazNheUxwS0l4NkxVVjdwUTFQbWt3QWh4ZmptUjU0OXl5X05YbEN3aWdYUWowaGpLa3QxUUswYUVEVXlOTEE2UUt5UF9ZSkNocHVWR0k5bF9EeURWdklvVnlVLVl0TXlFM3VEREwtdXR5Qk0ydWJySFVScXowQ0gwZ01nVDQxTEdMQjM?oc=5",
+     "title": "【即時新聞】鴻海(2317)營收創高目標價飆330！這「2檔概念股」盤中多空激戰",
+     "broker": "",
+     "source": "CMoney投資網誌",
+     "target": null,
+     "direction": "flat"
+    }
+   ],
+   "trend": "mixed",
+   "consensus": null,
+   "upside_pct": null
+  },
+  "retail": {
+   "ok": true,
+   "hot": false,
+   "bear": 0,
+   "bull": 0,
+   "titles": [],
+   "posts_7d": 0,
+   "posts_30d": 2,
+   "heat_ratio": 0
+  },
+  "ebc": {
+   "ok": true,
+   "count": 6,
+   "titles": [
+    {
+     "date": "08-26",
+     "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE1nYU4yWmt3dVFYWlZaVlR2TEhsTUFCajBLUDZMNGdXRWtKa3puV19SWUh6U3FUNHZWYjFHamV1SjNaekZGeFJPaFFLN0dOdExtbW1TSzBn?oc=5",
+     "title": "台股平盤震盪！大立光亮燈再創高 「PTFE雙雄」衝漲停"
+    },
+    {
+     "date": "08-26",
+     "link": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE9jMEF0RzVTTFMzazVMLVNBRDlOYV9VcjZnU1Y1XzRqWTgwMDBxYnJOandzekpwcU15aXhlN0pic2FwSTZkTS1jalRfVV9QZzF5TVN5NFllb0w4QQ?oc=5",
+     "title": "鴻海突發重訊！砸17.58億買下美國廠房 AI布局再擴大"
+    },
+    {
+     "date": "08-27",
+     "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE5yUng0Vjd6VzdodHhLcThYWE1pSUFjcWxPODlLaWxNRHgzMF9reFR1U2Z3eElEZWZZajBxcGVndm04Z2piZHo4bXJmWWxRem1yR3YtOXFB?oc=5",
+     "title": "輝達財報開獎！台股漲351點「PTFE雙雄」又漲停"
+    }
+   ],
+   "in_title": 0
+  },
+  "base_date": "2026-08-28",
+  "price_at_report": 253,
+  "ret_5d": 1.19,
+  "mkt_ret_5d": 0.47,
+  "ret_20d": -0.99,
+  "mkt_ret_20d": 2.81,
+  "inst_20d": -4163,
+  "analyzed_at": "2026-11-18 23:09"
  },
  {
   "call_key": "2882_288220260828M001.pdf",
@@ -7771,93 +7857,6 @@
   "analyzed_at": "2026-11-18 22:40"
  },
  {
-  "call_key": "4979_497920260828M001.pdf",
-  "stock_id": "4979",
-  "name": "華星光",
-  "call_date": "2026-08-28",
-  "signal": "🟡 訊號不明顯",
-  "level": 0,
-  "market": "上櫃",
-  "tone": "樂觀",
-  "tone_score": 1,
-  "news_sentiment": 2,
-  "one_line": "管理層樂觀看待AI伺服器帶動Intra-Datacenter光收發模組需求，預期800G ZR/ZR+產品將成為未來成長動能。",
-  "guidance": [
-   "管理層預期Intra-Datacenter光收發模組需求將大幅成長。",
-   "800G ZR/ZR+產品將成為未來公司成長動能。",
-   "CW laser及EML等關鍵元件需求看好。"
-  ],
-  "risks": [],
-  "notes": [],
-  "news_reason": "多篇新聞報導華星光獲利大增及未來成長展望，股價表現強勢",
-  "pdf_url": "https://mopsov.twse.com.tw/nas/STR/497920260828M001.pdf",
-  "chips": {
-   "close": 610,
-   "inst_5d": 3175,
-   "trust_5d": 5977,
-   "data_date": "2026-08-28",
-   "dealer_5d": -91,
-   "margin_5d": 420,
-   "volume_5d": 88623,
-   "foreign_5d": -2802,
-   "inst_5d_pct": 3.6,
-   "price_5d_pct": 5.7,
-   "trust_streak": 0,
-   "foreign_streak": 1,
-   "after_call_days": 0,
-   "after_call_inst": 0,
-   "price_since_call_pct": 0
-  },
-  "brokers": {
-   "ups": 0,
-   "downs": 0,
-   "items": [
-    {
-     "date": "2026-08-22",
-     "link": "https://news.google.com/rss/articles/CBMiakFVX3lxTE5RNVEzMzFleTNoQVZKY0FtczI3OEtMVjdYenAzVTVCR3liLURKY0dSNEkzcWNiTXVkeFdxTkU2THBPb2V5OEd4cjZDS0E1dGkzTU5UNW5FWkxhb21DQVZhc0Fsci0ybUlJd2c?oc=5",
-     "title": "缺口高達30％！光通訊滿血復活法人不選光聖、華星光反推聯亞等3檔目標價一表看- 上市櫃",
-     "broker": "法人",
-     "source": "旺得富理財網",
-     "target": null,
-     "direction": "flat"
-    }
-   ],
-   "trend": "flat",
-   "consensus": null,
-   "upside_pct": null
-  },
-  "retail": {
-   "ok": true,
-   "hot": false,
-   "bear": 0,
-   "bull": 0,
-   "titles": [],
-   "posts_7d": 0,
-   "posts_30d": 0,
-   "heat_ratio": 0
-  },
-  "ebc": {
-   "ok": true,
-   "count": 1,
-   "titles": [
-    {
-     "date": "08-25",
-     "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE1VcnJMUjNMSlRBVVRLeGxKMDBFak4yaXgtU2d4UzlBa0pqSEZ3bnh3WmVfVjMzUnk3ZTdwWHJ6eUVRVktfbHlHZmJaOFdoSEJFemRpbmNR?oc=5",
-     "title": "7千萬落袋又掃貨！ 中環砸3.6億買南亞科 手上還有3658張"
-    }
-   ],
-   "in_title": 0
-  },
-  "base_date": "2026-08-28",
-  "price_at_report": 610,
-  "ret_5d": 3.11,
-  "mkt_ret_5d": 0.47,
-  "ret_20d": -7.05,
-  "mkt_ret_20d": 2.81,
-  "inst_20d": -5982,
-  "analyzed_at": "2026-11-18 22:43"
- },
- {
   "call_key": "2368_236820260819M001.pdf",
   "stock_id": "2368",
   "name": "金像電",
@@ -7987,6 +7986,93 @@
   "mkt_ret_20d": 2.81,
   "inst_20d": -14127,
   "analyzed_at": "2026-11-18 22:30"
+ },
+ {
+  "call_key": "4979_497920260828M001.pdf",
+  "stock_id": "4979",
+  "name": "華星光",
+  "call_date": "2026-08-28",
+  "signal": "🟡 訊號不明顯",
+  "level": 0,
+  "market": "上櫃",
+  "tone": "樂觀",
+  "tone_score": 1,
+  "news_sentiment": 2,
+  "one_line": "管理層樂觀看待AI伺服器帶動Intra-Datacenter光收發模組需求，預期800G ZR/ZR+產品將成為未來成長動能。",
+  "guidance": [
+   "管理層預期Intra-Datacenter光收發模組需求將大幅成長。",
+   "800G ZR/ZR+產品將成為未來公司成長動能。",
+   "CW laser及EML等關鍵元件需求看好。"
+  ],
+  "risks": [],
+  "notes": [],
+  "news_reason": "多篇新聞報導華星光獲利大增及未來成長展望，股價表現強勢",
+  "pdf_url": "https://mopsov.twse.com.tw/nas/STR/497920260828M001.pdf",
+  "chips": {
+   "close": 610,
+   "inst_5d": 3175,
+   "trust_5d": 5977,
+   "data_date": "2026-08-28",
+   "dealer_5d": -91,
+   "margin_5d": 420,
+   "volume_5d": 88623,
+   "foreign_5d": -2802,
+   "inst_5d_pct": 3.6,
+   "price_5d_pct": 5.7,
+   "trust_streak": 0,
+   "foreign_streak": 1,
+   "after_call_days": 0,
+   "after_call_inst": 0,
+   "price_since_call_pct": 0
+  },
+  "brokers": {
+   "ups": 0,
+   "downs": 0,
+   "items": [
+    {
+     "date": "2026-08-22",
+     "link": "https://news.google.com/rss/articles/CBMiakFVX3lxTE5RNVEzMzFleTNoQVZKY0FtczI3OEtMVjdYenAzVTVCR3liLURKY0dSNEkzcWNiTXVkeFdxTkU2THBPb2V5OEd4cjZDS0E1dGkzTU5UNW5FWkxhb21DQVZhc0Fsci0ybUlJd2c?oc=5",
+     "title": "缺口高達30％！光通訊滿血復活法人不選光聖、華星光反推聯亞等3檔目標價一表看- 上市櫃",
+     "broker": "法人",
+     "source": "旺得富理財網",
+     "target": null,
+     "direction": "flat"
+    }
+   ],
+   "trend": "flat",
+   "consensus": null,
+   "upside_pct": null
+  },
+  "retail": {
+   "ok": true,
+   "hot": false,
+   "bear": 0,
+   "bull": 0,
+   "titles": [],
+   "posts_7d": 0,
+   "posts_30d": 0,
+   "heat_ratio": 0
+  },
+  "ebc": {
+   "ok": true,
+   "count": 1,
+   "titles": [
+    {
+     "date": "08-25",
+     "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE1VcnJMUjNMSlRBVVRLeGxKMDBFak4yaXgtU2d4UzlBa0pqSEZ3bnh3WmVfVjMzUnk3ZTdwWHJ6eUVRVktfbHlHZmJaOFdoSEJFemRpbmNR?oc=5",
+     "title": "7千萬落袋又掃貨！ 中環砸3.6億買南亞科 手上還有3658張"
+    }
+   ],
+   "in_title": 0
+  },
+  "base_date": "2026-08-28",
+  "price_at_report": 610,
+  "ret_5d": 3.11,
+  "mkt_ret_5d": 0.47,
+  "ret_20d": -7.05,
+  "mkt_ret_20d": 2.81,
+  "inst_20d": -5982,
+  "analyzed_at": "2026-11-18 22:43"
  },
  {
   "call_key": "8046_804620260826M001.pdf",
@@ -8171,148 +8257,6 @@
   "mkt_ret_20d": 4.46,
   "inst_20d": 247938,
   "analyzed_at": "2026-11-18 22:15"
- },
- {
-  "call_key": "2383_238320260729M001.pdf",
-  "stock_id": "2383",
-  "name": "台光電",
-  "call_date": "2026-08-27",
-  "signal": "🟡 訊號不明顯",
-  "level": 0,
-  "market": "上市",
-  "tone": "樂觀",
-  "tone_score": 1,
-  "news_sentiment": 1,
-  "one_line": "台光電第二季營收及利潤大幅成長，並計畫擴大產能以應對未來市場需求。",
-  "guidance": [
-   "第二季營收成長43%季變化及110%年變化，表現強勁。",
-   "計畫擴產至2027年達93萬張/月，彰顯對未來市場需求的信心。",
-   "預期在東南亞擁有領先規模優勢的銅箔基板產能，有助於全球佈局。"
-  ],
-  "risks": [
-   "未提風險或逆風"
-  ],
-  "notes": [
-   "融資 5 日增 44 張、法人賣超，籌碼由法人流向散戶"
-  ],
-  "news_reason": "多篇報導提及台光電的技術性調整及正面營運預期，但也有下跌消息，整體偏正面",
-  "pdf_url": "https://mopsov.twse.com.tw/nas/STR/238320260729M001.pdf",
-  "chips": {
-   "close": 5500,
-   "inst_5d": -642,
-   "trust_5d": -1024,
-   "data_date": "2026-08-27",
-   "dealer_5d": 262,
-   "margin_5d": 44,
-   "volume_5d": 11630,
-   "foreign_5d": 382,
-   "inst_5d_pct": -5.5,
-   "price_5d_pct": -8.1,
-   "trust_streak": -1,
-   "foreign_streak": -1,
-   "after_call_days": 0,
-   "after_call_inst": 0,
-   "price_since_call_pct": 0
-  },
-  "brokers": {
-   "ups": 2,
-   "downs": 0,
-   "items": [
-    {
-     "date": "2026-08-07",
-     "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE1lNG1lM2ZHUEMtaDZwWW94YXpaQzVfYXhCNmZPdXgxX3dlT3dIZ0xhTzl5Y19kNTJnZWNOQkxNa2I5U0FkUVA0TThfYlpQcnQtQm0wYnh3?oc=5",
-     "title": "銅箔基板(CCL) 台股概念股全解析，台光電、台燿、聯茂7月營收同步創高與法人目標價一次看懂",
-     "broker": "法人",
-     "source": "口袋證券",
-     "target": null,
-     "direction": "flat"
-    },
-    {
-     "date": "2026-08-06",
-     "link": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE11b04tczI4QTJvSXQ4bmZWNUNrbzJ0Q0VfZzRSYThnb0hjTkpVNzA4Q1RUWkVpSVUxYUlYMmRPS1hPTjVHS09qLXJKc185QVhVUlpTLTVranVFQQ?oc=5",
-     "title": "狂暴上修AI PCB商機！ 高盛喊買台燿、臻鼎、台光電 目標價曝光",
-     "broker": "高盛",
-     "source": "東森電視",
-     "target": null,
-     "direction": "flat"
-    },
-    {
-     "date": "2026-07-30",
-     "link": "https://news.google.com/rss/articles/CBMickFVX3lxTE5fcHAzdlJzUUE0STZmbE1mWHMyalYtN1J5eF9UWk9tdzRBdElJS0VhR0NjZDB2aHFIWjRRQmREUmhaNlpfNWdHTm5OVHBoNGEwamNvOWhGUnllSEJ6OUpGbUktTlMxZVdmVU1lYk1OUXFSdw?oc=5",
-     "title": "高階 CCL 產能未來幾年搶光！高盛調高台光電目標價 10,200 元",
-     "broker": "高盛",
-     "source": "TechNews 科技新報",
-     "target": null,
-     "direction": "up"
-    },
-    {
-     "date": "2026-07-30",
-     "link": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE9Rakg3U1hIVmdzdV9YTXBfYzRDbWZxM2p4cmtQQTlncktPNWdTQjdqVFI2Z0RmNVQ1LTZ5cFA1R1o0ak1LVWlKQ3FEakhienNlaGF4ckNmMHNFUDDSAWBBVV95cUxPNWZGMzVLMzl2QzFmYkxvVy1FdW1sa3RRaHBUOEtQSTRhTUtiSGl4dXI2R1J5N0NZdW44ZFdIeTVQLU0wbm92THVzUXpuODhQRWJyb0FGWFo2ZmVpLU1nYmE?oc=5",
-     "title": "財報優於預期 法人調升台光電獲利預估值及目標價",
-     "broker": "法人",
-     "source": "經濟日報",
-     "target": null,
-     "direction": "up"
-    },
-    {
-     "date": "2026-07-29",
-     "link": "https://news.google.com/rss/articles/CBMidkFVX3lxTE5aV0ROa1c3OFdwTnB2ZnJPMkVWdXg0LWNSbVVMWVAxcGQzaW4yXzkybnpzVEZQbDlveHpVaUx2V0RpajVjTGw3NDU4WEdTaGNGUzh0UHBlNFFYQWZfaEt5dDI2YlZzWHc5N21iZU1sV1FvaUwtY1E?oc=5",
-     "title": "Factset 最新調查：台光電(2383-TW)EPS預估上修至108.84元，預估目標價為7200元｜新聞快訊｜豐雲學堂",
-     "broker": "FactSet 共識",
-     "source": "永豐金證券",
-     "target": 7200,
-     "direction": "flat"
-    }
-   ],
-   "trend": "up",
-   "consensus": {
-    "date": "2026-07-29",
-    "target": 7200,
-    "direction": "flat",
-    "change_pct": null
-   },
-   "upside_pct": 30.9
-  },
-  "retail": {
-   "ok": true,
-   "hot": false,
-   "bear": 0,
-   "bull": 0,
-   "titles": [],
-   "posts_7d": 0,
-   "posts_30d": 2,
-   "heat_ratio": 0
-  },
-  "ebc": {
-   "ok": true,
-   "count": 10,
-   "titles": [
-    {
-     "date": "08-27",
-     "link": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE5sSXpxUUZ4MUliY2NGRUR6cHhlWENmekFYbEI2WDRGa3ZxR0JDNWpEbkZQYTdpUTQtQWh1TW1QdmVmV1ppVkhlNzJTVEszZUd5RjJ3cGExci01QQ?oc=5",
-     "title": "三大法人買超643億 台股只漲142點 資金轉進3大族群"
-    },
-    {
-     "date": "08-26",
-     "link": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE1tRDBlRHJlNWlPY0RsSDB3S1lHbXVnSklDSThHa1h3VkxsWWJnQU8wZ1dKdXJxNHlBQU9PN1NhVkFzX2VXektwTXJFNnRGWFJqR1lWdF9BVXBxQQ?oc=5",
-     "title": "AI股震盪別亂接！ 蔡明翰點名「10檔第一梯隊」 13檔等轉強再買"
-    },
-    {
-     "date": "08-26",
-     "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTFB4ZVNGdHJhN2FHSVBFNG91VTNOZ0lEV2dFcnhFamt5allvNS15cmR2c2t0OGtzZ0NBZ0xmTWZnbjdzZ1h2VWozTzJUY19IamgtTnBDcFhB?oc=5",
-     "title": "台股漲663點！成交量增至8000億「光學+PCB」11檔收漲停"
-    }
-   ],
-   "in_title": 0
-  },
-  "base_date": "2026-08-27",
-  "price_at_report": 5500,
-  "ret_5d": -3.82,
-  "mkt_ret_5d": -0.26,
-  "ret_20d": -8.18,
-  "mkt_ret_20d": 4.46,
-  "inst_20d": -3513,
-  "analyzed_at": "2026-11-18 22:06"
  },
  {
   "call_key": "2880_288020260827M001.pdf",
@@ -8632,6 +8576,148 @@
   "mkt_ret_20d": 4.46,
   "inst_20d": -807,
   "analyzed_at": "2026-11-18 22:27"
+ },
+ {
+  "call_key": "2383_238320260729M001.pdf",
+  "stock_id": "2383",
+  "name": "台光電",
+  "call_date": "2026-08-27",
+  "signal": "🟡 訊號不明顯",
+  "level": 0,
+  "market": "上市",
+  "tone": "樂觀",
+  "tone_score": 1,
+  "news_sentiment": 1,
+  "one_line": "台光電第二季營收及利潤大幅成長，並計畫擴大產能以應對未來市場需求。",
+  "guidance": [
+   "第二季營收成長43%季變化及110%年變化，表現強勁。",
+   "計畫擴產至2027年達93萬張/月，彰顯對未來市場需求的信心。",
+   "預期在東南亞擁有領先規模優勢的銅箔基板產能，有助於全球佈局。"
+  ],
+  "risks": [
+   "未提風險或逆風"
+  ],
+  "notes": [
+   "融資 5 日增 44 張、法人賣超，籌碼由法人流向散戶"
+  ],
+  "news_reason": "多篇報導提及台光電的技術性調整及正面營運預期，但也有下跌消息，整體偏正面",
+  "pdf_url": "https://mopsov.twse.com.tw/nas/STR/238320260729M001.pdf",
+  "chips": {
+   "close": 5500,
+   "inst_5d": -642,
+   "trust_5d": -1024,
+   "data_date": "2026-08-27",
+   "dealer_5d": 262,
+   "margin_5d": 44,
+   "volume_5d": 11630,
+   "foreign_5d": 382,
+   "inst_5d_pct": -5.5,
+   "price_5d_pct": -8.1,
+   "trust_streak": -1,
+   "foreign_streak": -1,
+   "after_call_days": 0,
+   "after_call_inst": 0,
+   "price_since_call_pct": 0
+  },
+  "brokers": {
+   "ups": 2,
+   "downs": 0,
+   "items": [
+    {
+     "date": "2026-08-07",
+     "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE1lNG1lM2ZHUEMtaDZwWW94YXpaQzVfYXhCNmZPdXgxX3dlT3dIZ0xhTzl5Y19kNTJnZWNOQkxNa2I5U0FkUVA0TThfYlpQcnQtQm0wYnh3?oc=5",
+     "title": "銅箔基板(CCL) 台股概念股全解析，台光電、台燿、聯茂7月營收同步創高與法人目標價一次看懂",
+     "broker": "法人",
+     "source": "口袋證券",
+     "target": null,
+     "direction": "flat"
+    },
+    {
+     "date": "2026-08-06",
+     "link": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE11b04tczI4QTJvSXQ4bmZWNUNrbzJ0Q0VfZzRSYThnb0hjTkpVNzA4Q1RUWkVpSVUxYUlYMmRPS1hPTjVHS09qLXJKc185QVhVUlpTLTVranVFQQ?oc=5",
+     "title": "狂暴上修AI PCB商機！ 高盛喊買台燿、臻鼎、台光電 目標價曝光",
+     "broker": "高盛",
+     "source": "東森電視",
+     "target": null,
+     "direction": "flat"
+    },
+    {
+     "date": "2026-07-30",
+     "link": "https://news.google.com/rss/articles/CBMickFVX3lxTE5fcHAzdlJzUUE0STZmbE1mWHMyalYtN1J5eF9UWk9tdzRBdElJS0VhR0NjZDB2aHFIWjRRQmREUmhaNlpfNWdHTm5OVHBoNGEwamNvOWhGUnllSEJ6OUpGbUktTlMxZVdmVU1lYk1OUXFSdw?oc=5",
+     "title": "高階 CCL 產能未來幾年搶光！高盛調高台光電目標價 10,200 元",
+     "broker": "高盛",
+     "source": "TechNews 科技新報",
+     "target": null,
+     "direction": "up"
+    },
+    {
+     "date": "2026-07-30",
+     "link": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE9Rakg3U1hIVmdzdV9YTXBfYzRDbWZxM2p4cmtQQTlncktPNWdTQjdqVFI2Z0RmNVQ1LTZ5cFA1R1o0ak1LVWlKQ3FEakhienNlaGF4ckNmMHNFUDDSAWBBVV95cUxPNWZGMzVLMzl2QzFmYkxvVy1FdW1sa3RRaHBUOEtQSTRhTUtiSGl4dXI2R1J5N0NZdW44ZFdIeTVQLU0wbm92THVzUXpuODhQRWJyb0FGWFo2ZmVpLU1nYmE?oc=5",
+     "title": "財報優於預期 法人調升台光電獲利預估值及目標價",
+     "broker": "法人",
+     "source": "經濟日報",
+     "target": null,
+     "direction": "up"
+    },
+    {
+     "date": "2026-07-29",
+     "link": "https://news.google.com/rss/articles/CBMidkFVX3lxTE5aV0ROa1c3OFdwTnB2ZnJPMkVWdXg0LWNSbVVMWVAxcGQzaW4yXzkybnpzVEZQbDlveHpVaUx2V0RpajVjTGw3NDU4WEdTaGNGUzh0UHBlNFFYQWZfaEt5dDI2YlZzWHc5N21iZU1sV1FvaUwtY1E?oc=5",
+     "title": "Factset 最新調查：台光電(2383-TW)EPS預估上修至108.84元，預估目標價為7200元｜新聞快訊｜豐雲學堂",
+     "broker": "FactSet 共識",
+     "source": "永豐金證券",
+     "target": 7200,
+     "direction": "flat"
+    }
+   ],
+   "trend": "up",
+   "consensus": {
+    "date": "2026-07-29",
+    "target": 7200,
+    "direction": "flat",
+    "change_pct": null
+   },
+   "upside_pct": 30.9
+  },
+  "retail": {
+   "ok": true,
+   "hot": false,
+   "bear": 0,
+   "bull": 0,
+   "titles": [],
+   "posts_7d": 0,
+   "posts_30d": 2,
+   "heat_ratio": 0
+  },
+  "ebc": {
+   "ok": true,
+   "count": 10,
+   "titles": [
+    {
+     "date": "08-27",
+     "link": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE5sSXpxUUZ4MUliY2NGRUR6cHhlWENmekFYbEI2WDRGa3ZxR0JDNWpEbkZQYTdpUTQtQWh1TW1QdmVmV1ppVkhlNzJTVEszZUd5RjJ3cGExci01QQ?oc=5",
+     "title": "三大法人買超643億 台股只漲142點 資金轉進3大族群"
+    },
+    {
+     "date": "08-26",
+     "link": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE1tRDBlRHJlNWlPY0RsSDB3S1lHbXVnSklDSThHa1h3VkxsWWJnQU8wZ1dKdXJxNHlBQU9PN1NhVkFzX2VXektwTXJFNnRGWFJqR1lWdF9BVXBxQQ?oc=5",
+     "title": "AI股震盪別亂接！ 蔡明翰點名「10檔第一梯隊」 13檔等轉強再買"
+    },
+    {
+     "date": "08-26",
+     "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTFB4ZVNGdHJhN2FHSVBFNG91VTNOZ0lEV2dFcnhFamt5allvNS15cmR2c2t0OGtzZ0NBZ0xmTWZnbjdzZ1h2VWozTzJUY19IamgtTnBDcFhB?oc=5",
+     "title": "台股漲663點！成交量增至8000億「光學+PCB」11檔收漲停"
+    }
+   ],
+   "in_title": 0
+  },
+  "base_date": "2026-08-27",
+  "price_at_report": 5500,
+  "ret_5d": -3.82,
+  "mkt_ret_5d": -0.26,
+  "ret_20d": -8.18,
+  "mkt_ret_20d": 4.46,
+  "inst_20d": -3513,
+  "analyzed_at": "2026-11-18 22:06"
  },
  {
   "call_key": "6830_683020260820M001.pdf",
@@ -10335,124 +10421,6 @@
   "analyzed_at": "2026-11-18 21:14"
  },
  {
-  "call_key": "3037_303720260730M001.pdf",
-  "stock_id": "3037",
-  "name": "欣興",
-  "call_date": "2026-08-18",
-  "signal": "🟡 訊號不明顯",
-  "level": 0,
-  "market": "上市",
-  "tone": "中性",
-  "tone_score": 0,
-  "news_sentiment": 2,
-  "one_line": "欣興電子第二季財報顯示營收成長，但未明確展望未來表現。",
-  "guidance": [
-   "管理層指出第二季營收較去年同期成長32%，但未明確預測未來營收或毛利。",
-   "在產品應用方面，通訊和AI數據中心的收入分別成長71%和61%，表現強勁。",
-   "但在其他應用領域則有下滑趨勢。"
-  ],
-  "risks": [
-   "供應鏈不確定性可能影響未來營運",
-   "市場需求變動帶來風險"
-  ],
-  "notes": [],
-  "news_reason": "多篇新聞標題顯示股價創新高，且獲外资看好，情緒偏向正面",
-  "pdf_url": "https://mopsov.twse.com.tw/nas/STR/303720260730M001.pdf",
-  "chips": {
-   "close": 1145,
-   "inst_5d": 39210,
-   "trust_5d": -690,
-   "data_date": "2026-08-18",
-   "dealer_5d": 332,
-   "margin_5d": -2362,
-   "volume_5d": 119128,
-   "foreign_5d": 39900,
-   "inst_5d_pct": 32.9,
-   "price_5d_pct": 15.4,
-   "trust_streak": 2,
-   "foreign_streak": 7,
-   "after_call_days": 0,
-   "after_call_inst": 0,
-   "price_since_call_pct": 0
-  },
-  "brokers": {
-   "ups": 0,
-   "downs": 0,
-   "items": [
-    {
-     "date": "2026-08-05",
-     "link": "https://news.google.com/rss/articles/CBMikAFBVV95cUxQVlBDOUFBMXZRbXZLVkNPUW1OdlVpbkVlb3ZyVFN5TkU4dWFqN21heEtuS1hHWUdmd2p1SWhVNDdlSm0wbXdQWjRVRlZSUVY2dFFMcGJWSWY3LUZFOVdCT05ib3VOZjZUVWlrZ0J3ZFU3S3c4Q3QzTGJWM0VlLXZCY0t5T3Y5X2JDTks4djR4dHk?oc=5",
-     "title": "【即時新聞】欣興(3037)目標價驚見千元！這「2檔概念股」大戶卡位接棒狂飆？",
-     "broker": "",
-     "source": "CMoney投資網誌",
-     "target": null,
-     "direction": "flat"
-    },
-    {
-     "date": "2026-08-05",
-     "link": "https://news.google.com/rss/articles/CBMiVEFVX3lxTE5OSVZnMHhvYmxaSDVGNFg5cXJiT1YzM01Ra0pSSlFpUF9teWNmdzZfSUZZN082d2Z0S3g3c1RJMW04Y0dDRG1oN0NkM1lXaUhKV1BKMw?oc=5",
-     "title": "台股欣興是AI概念股嗎?欣興目標價多少?欣興可以買嗎?",
-     "broker": "",
-     "source": "EBC Financial Group",
-     "target": null,
-     "direction": "flat"
-    },
-    {
-     "date": "2026-07-22",
-     "link": "https://news.google.com/rss/articles/CBMiakFVX3lxTE1LSXdubi1xWVZremJxX21PRTRVWC1NVTRUTkdqU3EtS0dUQW5Ga0ZKcmI3THVhVXNCWUNLZjc5dmMzVGVXZnoxZktmNnJnN1JZNzhJaW9fSm5rQ1VpcmpNWkNEUVVlVFFDZEE?oc=5",
-     "title": "缺貨到2028年！南電、欣興、景碩目標價齊飛「大和資本喊出2,444元狂想曲」但有1致命隱憂恐跌落神壇- 上市櫃",
-     "broker": "大和",
-     "source": "旺得富理財網",
-     "target": null,
-     "direction": "flat"
-    }
-   ],
-   "trend": "flat",
-   "consensus": null,
-   "upside_pct": null
-  },
-  "retail": {
-   "ok": true,
-   "hot": false,
-   "bear": 0,
-   "bull": 0,
-   "titles": [],
-   "posts_7d": 0,
-   "posts_30d": 1,
-   "heat_ratio": 0
-  },
-  "ebc": {
-   "ok": true,
-   "count": 4,
-   "titles": [
-    {
-     "date": "08-17",
-     "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE5zelpzdDZzU0FNRkI0eFlOV1hpQ2NacGJ5NUF1WHJPV0hidkZmaWtnR0czRHB2VDVpSGtTNzdZTFNMV2ljdmRKM3d0MFBmdkRPOUhYMzBn?oc=5",
-     "title": "4萬6保衛戰！台股收漲46點 PCB「3檔」攻漲停"
-    },
-    {
-     "date": "08-17",
-     "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE1GOHVzZHJfdjl0aDE1N2YtVUhTdEpBdENvdk9WMkZGRkhIVFV0WUJOY2ZsT1puTXg1dUVWSFlULWVBVlp2azdqSUNmNmctVG9wOGx4Ulp3?oc=5",
-     "title": "台股漲323點 PCB重返榮耀 「這載板」強勢攻漲停"
-    },
-    {
-     "date": "08-18",
-     "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTFBKOTRrNGFhenktWGZybnJlbTBVRXB5TXdiYUxrRHI3UzV3STQ1YmxJaE4tOUtqanM0QXNYejdfblltM2FodW9ZVEt6ejFiVTJ2RjljRzZn?oc=5",
-     "title": "009828開募能買嗎？ 網憂「埋在高點」 專家一句話點破"
-    }
-   ],
-   "in_title": 0
-  },
-  "base_date": "2026-08-18",
-  "price_at_report": 1145,
-  "ret_5d": -4.37,
-  "mkt_ret_5d": -0.31,
-  "ret_20d": -16.94,
-  "mkt_ret_20d": 0.45,
-  "inst_20d": 22910,
-  "analyzed_at": "2026-11-18 21:11"
- },
- {
   "call_key": "2891_289120260818M001.pdf",
   "stock_id": "2891",
   "name": "中信金",
@@ -10639,42 +10607,42 @@
   "analyzed_at": "2026-11-18 21:07"
  },
  {
-  "call_key": "3661_366120260814M001.pdf",
-  "stock_id": "3661",
-  "name": "世芯-KY",
-  "call_date": "2026-08-14",
+  "call_key": "3037_303720260730M001.pdf",
+  "stock_id": "3037",
+  "name": "欣興",
+  "call_date": "2026-08-18",
   "signal": "🟡 訊號不明顯",
   "level": 0,
   "market": "上市",
   "tone": "中性",
   "tone_score": 0,
   "news_sentiment": 2,
-  "one_line": "世芯-KY 法說會回顧了第二季財報，並展望未來營運表現。",
+  "one_line": "欣興電子第二季財報顯示營收成長，但未明確展望未來表現。",
   "guidance": [
-   "2Q26 營收達 2.42 億美元，季增 82.6%，年減 18.7%。",
-   "N3 加速器自五月起開始進入量產，並於整個 3Q26 持續放量。",
-   "次世代專案接近 Tape-out 階段。"
+   "管理層指出第二季營收較去年同期成長32%，但未明確預測未來營收或毛利。",
+   "在產品應用方面，通訊和AI數據中心的收入分別成長71%和61%，表現強勁。",
+   "但在其他應用領域則有下滑趨勢。"
   ],
   "risks": [
-   "毛利率（GM）下滑",
-   "營業費用（OPEX）增加"
+   "供應鏈不確定性可能影響未來營運",
+   "市場需求變動帶來風險"
   ],
   "notes": [],
-  "news_reason": "多篇正面新聞提到未來營收增長及獲利改善，股價累漲超過51%",
-  "pdf_url": "https://mopsov.twse.com.tw/nas/STR/366120260814M001.pdf",
+  "news_reason": "多篇新聞標題顯示股價創新高，且獲外资看好，情緒偏向正面",
+  "pdf_url": "https://mopsov.twse.com.tw/nas/STR/303720260730M001.pdf",
   "chips": {
-   "close": 4210,
-   "inst_5d": 1480,
-   "trust_5d": -883,
-   "data_date": "2026-08-14",
-   "dealer_5d": 164,
-   "margin_5d": 180,
-   "volume_5d": 16432,
-   "foreign_5d": 2363,
-   "inst_5d_pct": 9,
-   "price_5d_pct": 13.3,
-   "trust_streak": -4,
-   "foreign_streak": 4,
+   "close": 1145,
+   "inst_5d": 39210,
+   "trust_5d": -690,
+   "data_date": "2026-08-18",
+   "dealer_5d": 332,
+   "margin_5d": -2362,
+   "volume_5d": 119128,
+   "foreign_5d": 39900,
+   "inst_5d_pct": 32.9,
+   "price_5d_pct": 15.4,
+   "trust_streak": 2,
+   "foreign_streak": 7,
    "after_call_days": 0,
    "after_call_inst": 0,
    "price_since_call_pct": 0
@@ -10682,8 +10650,36 @@
   "brokers": {
    "ups": 0,
    "downs": 0,
-   "items": [],
-   "trend": "none",
+   "items": [
+    {
+     "date": "2026-08-05",
+     "link": "https://news.google.com/rss/articles/CBMikAFBVV95cUxQVlBDOUFBMXZRbXZLVkNPUW1OdlVpbkVlb3ZyVFN5TkU4dWFqN21heEtuS1hHWUdmd2p1SWhVNDdlSm0wbXdQWjRVRlZSUVY2dFFMcGJWSWY3LUZFOVdCT05ib3VOZjZUVWlrZ0J3ZFU3S3c4Q3QzTGJWM0VlLXZCY0t5T3Y5X2JDTks4djR4dHk?oc=5",
+     "title": "【即時新聞】欣興(3037)目標價驚見千元！這「2檔概念股」大戶卡位接棒狂飆？",
+     "broker": "",
+     "source": "CMoney投資網誌",
+     "target": null,
+     "direction": "flat"
+    },
+    {
+     "date": "2026-08-05",
+     "link": "https://news.google.com/rss/articles/CBMiVEFVX3lxTE5OSVZnMHhvYmxaSDVGNFg5cXJiT1YzM01Ra0pSSlFpUF9teWNmdzZfSUZZN082d2Z0S3g3c1RJMW04Y0dDRG1oN0NkM1lXaUhKV1BKMw?oc=5",
+     "title": "台股欣興是AI概念股嗎?欣興目標價多少?欣興可以買嗎?",
+     "broker": "",
+     "source": "EBC Financial Group",
+     "target": null,
+     "direction": "flat"
+    },
+    {
+     "date": "2026-07-22",
+     "link": "https://news.google.com/rss/articles/CBMiakFVX3lxTE1LSXdubi1xWVZremJxX21PRTRVWC1NVTRUTkdqU3EtS0dUQW5Ga0ZKcmI3THVhVXNCWUNLZjc5dmMzVGVXZnoxZktmNnJnN1JZNzhJaW9fSm5rQ1VpcmpNWkNEUVVlVFFDZEE?oc=5",
+     "title": "缺貨到2028年！南電、欣興、景碩目標價齊飛「大和資本喊出2,444元狂想曲」但有1致命隱憂恐跌落神壇- 上市櫃",
+     "broker": "大和",
+     "source": "旺得富理財網",
+     "target": null,
+     "direction": "flat"
+    }
+   ],
+   "trend": "flat",
    "consensus": null,
    "upside_pct": null
   },
@@ -10699,18 +10695,34 @@
   },
   "ebc": {
    "ok": true,
-   "count": 0,
-   "titles": [],
+   "count": 4,
+   "titles": [
+    {
+     "date": "08-17",
+     "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE5zelpzdDZzU0FNRkI0eFlOV1hpQ2NacGJ5NUF1WHJPV0hidkZmaWtnR0czRHB2VDVpSGtTNzdZTFNMV2ljdmRKM3d0MFBmdkRPOUhYMzBn?oc=5",
+     "title": "4萬6保衛戰！台股收漲46點 PCB「3檔」攻漲停"
+    },
+    {
+     "date": "08-17",
+     "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE1GOHVzZHJfdjl0aDE1N2YtVUhTdEpBdENvdk9WMkZGRkhIVFV0WUJOY2ZsT1puTXg1dUVWSFlULWVBVlp2azdqSUNmNmctVG9wOGx4Ulp3?oc=5",
+     "title": "台股漲323點 PCB重返榮耀 「這載板」強勢攻漲停"
+    },
+    {
+     "date": "08-18",
+     "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTFBKOTRrNGFhenktWGZybnJlbTBVRXB5TXdiYUxrRHI3UzV3STQ1YmxJaE4tOUtqanM0QXNYejdfblltM2FodW9ZVEt6ejFiVTJ2RjljRzZn?oc=5",
+     "title": "009828開募能買嗎？ 網憂「埋在高點」 專家一句話點破"
+    }
+   ],
    "in_title": 0
   },
-  "base_date": "2026-08-14",
-  "price_at_report": 4210,
-  "ret_5d": -12.11,
-  "mkt_ret_5d": -1.28,
-  "ret_20d": -13.3,
-  "mkt_ret_20d": 0.82,
-  "inst_20d": -3471,
-  "analyzed_at": "2026-11-18 20:57"
+  "base_date": "2026-08-18",
+  "price_at_report": 1145,
+  "ret_5d": -4.37,
+  "mkt_ret_5d": -0.31,
+  "ret_20d": -16.94,
+  "mkt_ret_20d": 0.45,
+  "inst_20d": 22910,
+  "analyzed_at": "2026-11-18 21:11"
  },
  {
   "call_key": "3005_300520260813M001.pdf",
@@ -10784,6 +10796,80 @@
   "mkt_ret_20d": 0.82,
   "inst_20d": 1712,
   "analyzed_at": "2026-11-18 20:54"
+ },
+ {
+  "call_key": "3661_366120260814M001.pdf",
+  "stock_id": "3661",
+  "name": "世芯-KY",
+  "call_date": "2026-08-14",
+  "signal": "🟡 訊號不明顯",
+  "level": 0,
+  "market": "上市",
+  "tone": "中性",
+  "tone_score": 0,
+  "news_sentiment": 2,
+  "one_line": "世芯-KY 法說會回顧了第二季財報，並展望未來營運表現。",
+  "guidance": [
+   "2Q26 營收達 2.42 億美元，季增 82.6%，年減 18.7%。",
+   "N3 加速器自五月起開始進入量產，並於整個 3Q26 持續放量。",
+   "次世代專案接近 Tape-out 階段。"
+  ],
+  "risks": [
+   "毛利率（GM）下滑",
+   "營業費用（OPEX）增加"
+  ],
+  "notes": [],
+  "news_reason": "多篇正面新聞提到未來營收增長及獲利改善，股價累漲超過51%",
+  "pdf_url": "https://mopsov.twse.com.tw/nas/STR/366120260814M001.pdf",
+  "chips": {
+   "close": 4210,
+   "inst_5d": 1480,
+   "trust_5d": -883,
+   "data_date": "2026-08-14",
+   "dealer_5d": 164,
+   "margin_5d": 180,
+   "volume_5d": 16432,
+   "foreign_5d": 2363,
+   "inst_5d_pct": 9,
+   "price_5d_pct": 13.3,
+   "trust_streak": -4,
+   "foreign_streak": 4,
+   "after_call_days": 0,
+   "after_call_inst": 0,
+   "price_since_call_pct": 0
+  },
+  "brokers": {
+   "ups": 0,
+   "downs": 0,
+   "items": [],
+   "trend": "none",
+   "consensus": null,
+   "upside_pct": null
+  },
+  "retail": {
+   "ok": true,
+   "hot": false,
+   "bear": 0,
+   "bull": 0,
+   "titles": [],
+   "posts_7d": 0,
+   "posts_30d": 1,
+   "heat_ratio": 0
+  },
+  "ebc": {
+   "ok": true,
+   "count": 0,
+   "titles": [],
+   "in_title": 0
+  },
+  "base_date": "2026-08-14",
+  "price_at_report": 4210,
+  "ret_5d": -12.11,
+  "mkt_ret_5d": -1.28,
+  "ret_20d": -13.3,
+  "mkt_ret_20d": 0.82,
+  "inst_20d": -3471,
+  "analyzed_at": "2026-11-18 20:57"
  },
  {
   "call_key": "2382_238220260813M001.pdf",
@@ -10970,6 +11056,82 @@
   "analyzed_at": "2026-11-18 20:48"
  },
  {
+  "call_key": "6640_664020260812M001.pdf",
+  "stock_id": "6640",
+  "name": "均華",
+  "call_date": "2026-08-12",
+  "signal": "⚪ 簡報是圖片，讀不到文字，只列籌碼",
+  "level": 0,
+  "market": "上櫃",
+  "tone": "中性",
+  "tone_score": 0,
+  "news_sentiment": 2,
+  "one_line": "均華法說會對未來營收持保守態度，強調擴產但未明確時間。",
+  "guidance": [
+   "管理層表示今年第三季營收可能較第二季略低。",
+   "未來將持續關注全球經濟環境對需求的影響。",
+   "公司計畫擴大產能，但時間點尚未確定。"
+  ],
+  "risks": [
+   "供應鏈不穩定仍是一大挑戰",
+   "客戶去化庫存動作可能延緩成長"
+  ],
+  "notes": [
+   "融資 5 日增 52 張、法人賣超，籌碼由法人流向散戶"
+  ],
+  "news_reason": "多篇新聞顯示均華營收創新高、訂單充足及股價上漲，情緒偏向正面",
+  "pdf_url": "https://mopsov.twse.com.tw/nas/STR/664020260812M001.pdf",
+  "chips": {
+   "close": 1000,
+   "inst_5d": -157,
+   "trust_5d": 0,
+   "data_date": "2026-08-12",
+   "dealer_5d": 43,
+   "margin_5d": 52,
+   "volume_5d": 1364,
+   "foreign_5d": -157,
+   "inst_5d_pct": -11.5,
+   "price_5d_pct": 9.9,
+   "trust_streak": 0,
+   "foreign_streak": 1,
+   "after_call_days": 0,
+   "after_call_inst": 0,
+   "price_since_call_pct": 0
+  },
+  "brokers": {
+   "ups": 0,
+   "downs": 0,
+   "items": [],
+   "trend": "none",
+   "consensus": null,
+   "upside_pct": null
+  },
+  "retail": {
+   "ok": true,
+   "hot": false,
+   "bear": 0,
+   "bull": 0,
+   "titles": [],
+   "posts_7d": 0,
+   "posts_30d": 0,
+   "heat_ratio": 0
+  },
+  "ebc": {
+   "ok": true,
+   "count": 0,
+   "titles": [],
+   "in_title": 0
+  },
+  "base_date": "2026-08-12",
+  "price_at_report": 1000,
+  "ret_5d": -3.4,
+  "mkt_ret_5d": -1.75,
+  "ret_20d": 20,
+  "mkt_ret_20d": 3.66,
+  "inst_20d": -151,
+  "analyzed_at": "2026-11-18 20:43"
+ },
+ {
   "call_key": "3081_308120260812M001.pdf",
   "stock_id": "3081",
   "name": "聯亞",
@@ -11055,82 +11217,6 @@
   "mkt_ret_20d": 3.66,
   "inst_20d": 2206,
   "analyzed_at": "2026-11-18 20:41"
- },
- {
-  "call_key": "6640_664020260812M001.pdf",
-  "stock_id": "6640",
-  "name": "均華",
-  "call_date": "2026-08-12",
-  "signal": "⚪ 簡報是圖片，讀不到文字，只列籌碼",
-  "level": 0,
-  "market": "上櫃",
-  "tone": "中性",
-  "tone_score": 0,
-  "news_sentiment": 2,
-  "one_line": "均華法說會對未來營收持保守態度，強調擴產但未明確時間。",
-  "guidance": [
-   "管理層表示今年第三季營收可能較第二季略低。",
-   "未來將持續關注全球經濟環境對需求的影響。",
-   "公司計畫擴大產能，但時間點尚未確定。"
-  ],
-  "risks": [
-   "供應鏈不穩定仍是一大挑戰",
-   "客戶去化庫存動作可能延緩成長"
-  ],
-  "notes": [
-   "融資 5 日增 52 張、法人賣超，籌碼由法人流向散戶"
-  ],
-  "news_reason": "多篇新聞顯示均華營收創新高、訂單充足及股價上漲，情緒偏向正面",
-  "pdf_url": "https://mopsov.twse.com.tw/nas/STR/664020260812M001.pdf",
-  "chips": {
-   "close": 1000,
-   "inst_5d": -157,
-   "trust_5d": 0,
-   "data_date": "2026-08-12",
-   "dealer_5d": 43,
-   "margin_5d": 52,
-   "volume_5d": 1364,
-   "foreign_5d": -157,
-   "inst_5d_pct": -11.5,
-   "price_5d_pct": 9.9,
-   "trust_streak": 0,
-   "foreign_streak": 1,
-   "after_call_days": 0,
-   "after_call_inst": 0,
-   "price_since_call_pct": 0
-  },
-  "brokers": {
-   "ups": 0,
-   "downs": 0,
-   "items": [],
-   "trend": "none",
-   "consensus": null,
-   "upside_pct": null
-  },
-  "retail": {
-   "ok": true,
-   "hot": false,
-   "bear": 0,
-   "bull": 0,
-   "titles": [],
-   "posts_7d": 0,
-   "posts_30d": 0,
-   "heat_ratio": 0
-  },
-  "ebc": {
-   "ok": true,
-   "count": 0,
-   "titles": [],
-   "in_title": 0
-  },
-  "base_date": "2026-08-12",
-  "price_at_report": 1000,
-  "ret_5d": -3.4,
-  "mkt_ret_5d": -1.75,
-  "ret_20d": 20,
-  "mkt_ret_20d": 3.66,
-  "inst_20d": -151,
-  "analyzed_at": "2026-11-18 20:43"
  },
  {
   "call_key": "6672_667220260807M001.pdf",
