@@ -2176,7 +2176,11 @@ def fetch_minutes(api, code: str, start: dt.date, end: dt.date, day_session_only
     df = df.sort_index().astype(float)
 
     # Shioaji 的 ts 是 K 棒「結束」分鐘（第一根為 09:01 / 08:46）→ 改成開始時間，與其他資料一致
-    first_min = df.index.to_series().groupby(df.index.date).min().dt.minute
+    # 只看日盤判斷：含夜盤時每天最早一根是午夜的夜盤 K 棒（00:00），會讓判斷失準
+    t = df.index.time
+    day_mask = (t >= DAY_SESSION[0]) & (t < DAY_SESSION[1])
+    ref = df.index[day_mask] if day_mask.any() else df.index
+    first_min = ref.to_series().groupby(ref.date).min().dt.minute
     if len(first_min) and (first_min % 5 == 1).mean() > 0.5:
         df.index = df.index - pd.Timedelta(minutes=1)
 
@@ -3787,6 +3791,566 @@ def render_ma13_cabin():
 """)
 
 
+# ==============================================================================
+# ⚖️ 期現對照・13MA（第 24 艙）——台指期 × 加權指數：期現多空、正逆價差、夜盤→開盤、現貨定方向回測
+#   函式庫與 13MA 艙共用（ma13_system／sinopac_data／tw_symbols）；永豐共用左側控制台連線，只讀行情。
+# ==============================================================================
+
+def render_futspot_cabin():
+    """第 24 艙：期現對照・13MA（原 期貨與台股/futspot-app/futspot_dashboard.py 整頁；規則與回測用上方 13MA 函式庫）"""
+    UP, DOWN = "#e5484d", "#2f9e44"          # 台股慣例：紅漲綠跌
+    MA_COLOR, SPOT_COLOR, FUT_COLOR = "#f59f00", "#1c7ed6", "#ae3ec9"
+    OHLC = ["Open", "High", "Low", "Close"]
+    DIR_ICON = {1: "多 🔴", -1: "空 🟢", 0: "— ⚪"}
+    FUT_CODES = {"TXFR1": "台指期 近月", "MXFR1": "小台指 近月", "TXFR2": "台指期 次月"}
+    POINT_VALUE = {"TXFR1": 200, "TXFR2": 200, "MXFR1": 50}
+    TODAY = pd.Timestamp.now(tz="Asia/Taipei").date()
+
+
+    # ───────────────────────── 資料 ─────────────────────────
+    class EmptyData(Exception):
+        """抓到空資料：丟例外讓快取不要記住空結果"""
+
+
+    def _clean(df: pd.DataFrame) -> pd.DataFrame:
+        if isinstance(df.columns, pd.MultiIndex):
+            df.columns = df.columns.get_level_values(0)
+        if getattr(df.index, "tz", None) is not None:
+            df.index = df.index.tz_convert("Asia/Taipei").tz_localize(None)
+        return df[OHLC].dropna()
+
+
+    @st.cache_data(ttl=600, show_spinner="下載 Yahoo 行情中…")
+    def _yf_download(symbol: str, period: str, interval: str) -> pd.DataFrame:
+        import time
+
+        import yfinance as yf
+        last_err = None
+        for wait in (0, 2, 5):            # 雲端主機 IP 共用，Yahoo 偶爾限流 → 稍等重試
+            time.sleep(wait)
+            try:
+                df = yf.download(symbol, period=period, interval=interval, auto_adjust=False, progress=False)
+                if df is not None and not df.empty:
+                    df = _clean(df)
+                    if not df.empty:
+                        return df
+            except Exception as e:  # noqa: BLE001
+                last_err = e
+        raise EmptyData(str(last_err) if last_err else "Yahoo 回傳空資料")
+
+
+    def fetch_yf(symbol: str, period: str, interval: str) -> pd.DataFrame:
+        try:
+            return _yf_download(symbol, period, interval)
+        except Exception as e:  # noqa: BLE001
+            st.session_state["yf_last_err"] = f"{symbol} {period} {interval}：{e}"
+            return pd.DataFrame(columns=OHLC)
+
+
+    @st.cache_data(ttl=600, show_spinner="向永豐 API 下載 1 分K…（區間長會花一點時間）")
+    def _sj_download(_api, session_id: str, code: str, start: dt.date, end: dt.date, day_only: bool) -> pd.DataFrame:
+        """_api 不參與快取鍵；session_id 讓重新登入後重新抓"""
+        df = fetch_minutes(_api, code, start, end, day_session_only=day_only)
+        if df.empty:
+            raise EmptyData(f"永豐回傳 0 根 K 棒（{code}，{start}～{end}）")
+        return df
+
+
+    def fetch_sj(sess: dict, code: str, start: dt.date, end: dt.date, day_only: bool) -> pd.DataFrame:
+        try:
+            return _sj_download(sess["api"], sess["id"], code, start, end, day_only)
+        except Exception as e:  # noqa: BLE001
+            st.session_state.setdefault("sj_errs", []).append(f"{code}：{e}")
+            return pd.DataFrame(columns=OHLC)
+
+
+    def split_sessions(df: pd.DataFrame) -> tuple[pd.DataFrame, pd.DataFrame]:
+        """日盤（08:45–13:45）與夜盤（其餘時段，15:00～隔天 05:00）"""
+        if df.empty:
+            return df, df
+        t = df.index.time
+        day = (t >= DAY_SESSION[0]) & (t < DAY_SESSION[1])
+        return df[day], df[~day]
+
+
+    def to_daily(df: pd.DataFrame) -> pd.DataFrame:
+        if df.empty:
+            return df
+        d = df.groupby(df.index.date).agg({"Open": "first", "High": "max", "Low": "min", "Close": "last"})
+        d.index = pd.to_datetime(d.index)
+        return d
+
+
+    def to_interval(df5: pd.DataFrame, daily: pd.DataFrame, interval: str) -> pd.DataFrame:
+        if interval == "1d":
+            return daily
+        n = int(interval[:-1])
+        return df5 if n == 5 else resample_ohlc(df5, n)
+
+
+    def settlement_day(year: int, month: int) -> dt.date:
+        """台指期月結算：每月第三個星期三"""
+        first = dt.date(year, month, 1)
+        return first + dt.timedelta(days=(2 - first.weekday()) % 7 + 14)
+
+
+    def is_settlement(d: dt.date) -> bool:
+        return d == settlement_day(d.year, d.month)
+
+
+    def state_of(r: pd.Series) -> tuple[str, int]:
+        """13MA 三條件：回傳（文字、方向）；方向只看收盤在 13MA 之上或之下"""
+        if pd.isna(r["MA13"]):
+            return "資料不足", 0
+        side = int(np.sign(r["Close"] - r["MA13"]))
+        if side > 0 and r["K"] > 50 and r["OSC"] > 0:
+            return "多頭成立 🔴", 1
+        if side < 0 and r["K"] < 50 and r["OSC"] < 0:
+            return "空頭成立 🟢", -1
+        return ("站上 13MA・條件不齊 ⚪" if side > 0 else "跌破 13MA・條件不齊 ⚪"), side
+
+
+    def last_dir(df: pd.DataFrame) -> int:
+        if df is None or df.empty:
+            return 0
+        r = df.iloc[-1]
+        return 0 if pd.isna(r["MA13"]) else int(np.sign(r["Close"] - r["MA13"]))
+
+
+    def sinopac_login_panel():
+        """沿用左側控制台的 Shioaji 連線（global_sj_api）；沒連線時只看現貨"""
+        api = globals().get("global_sj_api")
+        sim = bool(globals().get("global_is_simulation", True))
+        if api is None:
+            st.info("台指期、夜盤、價差需要永豐資料：在左側「⚙️ 行情數據源配置」選自動雙軌或強制 Shioaji，"
+                    "填入 API Key／Secret Key，並**取消勾選「使用模擬環境」**。沒連線時只看現貨（Yahoo）。", icon="🔑")
+            return None
+        st.success(f"使用左側控制台的 Shioaji 連線（{'模擬' if sim else '正式'}環境，只讀行情）", icon="✅")
+        if sim:
+            st.warning("模擬環境的歷史 K 線很少或沒有；要看台指期請在左側取消勾選「使用模擬環境」。", icon="⚠️")
+        usage = sj_usage_text(api)
+        if usage:
+            st.caption(usage)
+        return {"api": api, "sim": sim, "id": f"{id(api)}_{sim}"}
+
+
+    # ───────────────────────── 側欄 ─────────────────────────
+    with st.sidebar:
+        st.header("⚖️ 期現對照 參數")
+        sj_sess = sinopac_login_panel()
+        fut_code = st.selectbox("期貨商品", list(FUT_CODES), format_func=lambda c: f"{c} {FUT_CODES[c]}",
+                                disabled=sj_sess is None)
+        if sj_sess is not None:
+            spot_src = st.radio("現貨資料", ["永豐 TSE001", "Yahoo ^TWII"], horizontal=True,
+                                help="用永豐抓現貨，期現時間對得最準，也不受 Yahoo 60 天限制")
+            d1, d2 = st.columns(2)
+            sj_start = d1.date_input("起", TODAY - dt.timedelta(days=120), max_value=TODAY)
+            sj_end = d2.date_input("迄", TODAY, max_value=TODAY)
+            st.caption("期貨一律含夜盤下載；區間越長下載越久。日線 13MA／MACD 建議至少 60 天。")
+        else:
+            spot_src = "Yahoo ^TWII"
+            sj_start = sj_end = None
+
+        st.divider()
+        st.subheader("顯示")
+        interval = st.selectbox("走勢圖 K 棒週期", ["5m", "15m", "30m", "60m", "1d"], index=2)
+        show_bars = st.slider("圖上顯示最近幾根 K 棒", 40, 600, 120, step=20)
+        div_pts = st.number_input("預估剩餘除息點數", min_value=0.0, value=0.0, step=5.0,
+                                  help="除權息季（6～8 月）指數會因除息自然下降，期貨提前反映，"
+                                       "實質價差 ＝ 價差 ＋ 這個點數。其他月份填 0。")
+
+        st.divider()
+        st.subheader("回測")
+        cost = st.number_input("每筆來回成本（點）", min_value=0.0, value=2.0, step=0.5,
+                               help="手續費＋期交稅＋滑價折成點數")
+        bias_mode = st.radio("30 分K 方向判斷", ["ma", "strict"], horizontal=True,
+                             format_func={"ma": "只看 13MA 上下", "strict": "三條件齊"}.get)
+        use_stop = st.toggle("固定停損", value=False)
+        stop = st.number_input("停損點數", min_value=0.0, value=100.0, step=10.0) if use_stop else None
+        st.caption("教學用規則化程式，不構成投資建議。")
+
+
+    # ───────────────────────── 載入 ─────────────────────────
+    st.session_state["sj_errs"] = []
+    spot5 = pd.DataFrame(columns=OHLC)
+    fut_day = fut_night = fut5 = fut_daily = pd.DataFrame(columns=OHLC)
+
+    if sj_sess is not None and sj_start > sj_end:
+        st.error("起始日不能晚於結束日。")
+        st.stop()
+
+    if sj_sess is not None and spot_src.startswith("永豐"):
+        spot_m1 = fetch_sj(sj_sess, "TSE001", sj_start, sj_end, True)
+        spot5 = resample_ohlc(spot_m1, 5) if not spot_m1.empty else spot_m1
+    if spot5.empty:
+        spot5 = fetch_yf("^TWII", "60d", "5m")
+        if sj_sess is not None and spot_src.startswith("永豐"):
+            st.warning("永豐抓不到 TSE001，現貨改用 Yahoo ^TWII（近 60 天）。", icon="⚠️")
+            spot_src = "Yahoo ^TWII"
+
+    spot_daily = fetch_yf("^TWII", "1y", "1d")          # 日線用長資料，13MA／MACD 才穩
+    if spot_daily.empty:
+        spot_daily = to_daily(spot5)
+
+    if sj_sess is not None:
+        fut_all = fetch_sj(sj_sess, fut_code, sj_start, sj_end, False)
+        fut_day, fut_night = split_sessions(fut_all)
+        if not fut_day.empty:
+            fut5 = resample_ohlc(fut_day, 5)
+            fut_daily = to_daily(fut_day)
+
+    has_fut = len(fut5) > MA_LEN * 6
+    st.title("⚖️ 期現對照・13MA")
+
+    if spot5.empty or len(spot5) < MA_LEN + 2:
+        st.error("抓不到加權指數現貨資料。")
+        tips = ["雲端主機的 IP 共用，Yahoo 偶爾會限流：等 1～2 分鐘後按右上角 ⋮ → Rerun 再試。"]
+        if st.session_state.get("yf_last_err"):
+            tips.append(f"最近一次 Yahoo 錯誤：`{st.session_state['yf_last_err']}`")
+        tips += [f"永豐：{e}" for e in st.session_state["sj_errs"]]
+        st.markdown("\n".join(f"- {t}" for t in tips))
+        st.stop()
+
+    for e in st.session_state["sj_errs"]:
+        st.warning(f"永豐資料讀取失敗：{e}", icon="⚠️")
+
+    src_txt = f"現貨：{spot_src}　{spot5.index[0]:%Y-%m-%d} ～ {spot5.index[-1]:%Y-%m-%d %H:%M}"
+    if has_fut:
+        src_txt += (f"　｜　期貨：永豐 {fut_code}　{fut5.index[0]:%Y-%m-%d} ～ {fut5.index[-1]:%Y-%m-%d %H:%M}"
+                    f"（夜盤 {len(fut_night):,} 根 1 分K）")
+    elif sj_sess is None:
+        src_txt += "　｜　期貨：左側控制台未連線 Shioaji（連線後才有台指期、價差、夜盤）"
+    st.caption(src_txt)
+
+    # 指標（各週期）
+    S = {"5m": add_indicators(spot5), "30m": add_indicators(resample_ohlc(spot5, 30)),
+         "1d": add_indicators(spot_daily)}
+    F = {}
+    if has_fut:
+        F = {"5m": add_indicators(fut5), "30m": add_indicators(resample_ohlc(fut5, 30)),
+             "1d": add_indicators(fut_daily)}
+
+    # 結算日提醒
+    nxt = settlement_day(TODAY.year, TODAY.month)
+    if nxt < TODAY:
+        y, m = (TODAY.year + 1, 1) if TODAY.month == 12 else (TODAY.year, TODAY.month + 1)
+        nxt = settlement_day(y, m)
+    days_left = (nxt - TODAY).days
+    if days_left <= 2:
+        st.warning(f"**{nxt:%m/%d}（三）是台指期月結算日**（還有 {days_left} 天）。結算前後主力可能拉高或壓低結算、"
+                   "近月合約換月，13MA 訊號容易失真，期貨訊號請多跟現貨對照。", icon="📅")
+
+    tab_now, tab_basis, tab_night, tab_bt, tab_rules = st.tabs(
+        ["⚖️ 期現多空", "📈 正逆價差", "🌙 夜盤→開盤", "📊 回測：現貨定方向", "📖 規則與注意"])
+
+
+    # ───────────────────────── 期現多空 ─────────────────────────
+    def metric_row(title: str, df: pd.DataFrame, color: str):
+        r, p = df.iloc[-1], df.iloc[-2]
+        txt, _ = state_of(r)
+        st.markdown(f"<span style='color:{color};font-weight:700'>■</span> **{title}**　{df.index[-1]:%Y-%m-%d %H:%M}",
+                    unsafe_allow_html=True)
+        c = st.columns(5)
+        c[0].metric("收盤", f"{r['Close']:,.0f}", f"{r['Close'] - p['Close']:+,.0f}", delta_color="inverse")
+        c[1].metric("13MA", f"{r['MA13']:,.0f}" if pd.notna(r["MA13"]) else "—",
+                    f"距離 {r['Close'] - r['MA13']:+,.0f}" if pd.notna(r["MA13"]) else None, delta_color="inverse")
+        c[2].metric("K / D", f"{r['K']:.0f} / {r['D']:.0f}")
+        c[3].metric("MACD 柱", f"{r['OSC']:+.1f}")
+        c[4].metric("13MA 狀態", txt)
+
+
+    def build_chart(views: list[tuple[str, pd.DataFrame, str]]) -> go.Figure:
+        fig = make_subplots(rows=len(views), cols=1, vertical_spacing=0.09,
+                            subplot_titles=[f"{t}（{interval}）" for t, _, _ in views])
+        fmt = "%Y-%m-%d" if interval == "1d" else "%m-%d %H:%M"
+        for i, (title, v, color) in enumerate(views, start=1):
+            x = v.index.strftime(fmt)
+            fig.add_trace(go.Candlestick(
+                x=x, open=v["Open"], high=v["High"], low=v["Low"], close=v["Close"], name=title,
+                increasing=dict(line=dict(color=UP), fillcolor=UP),
+                decreasing=dict(line=dict(color=DOWN), fillcolor=DOWN), showlegend=False), i, 1)
+            fig.add_trace(go.Scatter(x=x, y=v["MA13"], name="13MA", line=dict(color=MA_COLOR, width=2),
+                                     showlegend=i == 1, legendgroup="ma"), i, 1)
+            pad = (v["High"].max() - v["Low"].min()) * 0.02
+            for col, sym, clr, y, lbl in (("多頭成立", "triangle-up", UP, v["Low"] - pad, "多頭成立"),
+                                          ("空頭成立", "triangle-down", DOWN, v["High"] + pad, "空頭成立")):
+                m = v[col].to_numpy()
+                if m.any():
+                    fig.add_trace(go.Scatter(x=x[m], y=y[m], mode="markers", name=lbl, legendgroup=lbl,
+                                             showlegend=i == 1,
+                                             marker=dict(symbol=sym, size=10, color=clr,
+                                                         line=dict(width=1, color="white"))), i, 1)
+            fig.update_xaxes(type="category", nticks=8, showgrid=False, rangeslider_visible=False, row=i, col=1)
+        fig.update_layout(height=330 * len(views) + 60, margin=dict(l=10, r=10, t=60, b=10),
+                          hovermode="x unified",
+                          legend=dict(orientation="h", y=1.02, yanchor="bottom", x=1, xanchor="right"))
+        return fig
+
+
+    with tab_now:
+        spot_view = add_indicators(to_interval(spot5, spot_daily, interval))
+        metric_row("加權指數（現貨）", spot_view, SPOT_COLOR)
+        fut_view = None
+        if has_fut:
+            fut_view = add_indicators(to_interval(fut5, fut_daily, interval))
+            metric_row(f"{fut_code} {FUT_CODES[fut_code]}（日盤）", fut_view, FUT_COLOR)
+
+        st.subheader("三週期 × 期現 方向（收盤在 13MA 之上＝多、之下＝空）")
+        rows = []
+        for lbl, k in (("日線", "1d"), ("30 分K", "30m"), ("5 分K", "5m")):
+            s = last_dir(S[k])
+            f = last_dir(F[k]) if F else 0
+            rows.append({"週期": lbl, "現貨": DIR_ICON[s], "期貨": DIR_ICON[f] if F else "（未登入）",
+                         "期現": ("同向 ✅" if s == f != 0 else ("背離 ⚠️" if s and f and s != f else "—")) if F else "—"})
+        st.dataframe(pd.DataFrame(rows), hide_index=True, width="stretch")
+
+        sd, s30 = last_dir(S["1d"]), last_dir(S["30m"])
+        if F:
+            f30, f5 = last_dir(F["30m"]), last_dir(F["5m"])
+            if sd == s30 == f30 == f5 != 0:
+                st.success(f"**期現共振（{DIR_ICON[sd]}）**：現貨日線、30 分K 與期貨 30 分、5 分K 全部同向 → 可抱波段單", icon="🔁")
+            elif s30 and f30 and s30 != f30:
+                st.warning("**期現背離**：現貨與期貨的 30 分K 在 13MA 兩側，通常是價差正在擴大或收斂。"
+                           "期貨訊號只做當沖，收盤前平倉。", icon="⚠️")
+            elif sd == s30 != 0 and f5 == -sd:
+                st.warning(f"現貨日線、30 分同為**{DIR_ICON[sd]}**，期貨 5 分K 逆向：波段單減碼或觀望；逆向只做當沖。", icon="⚠️")
+            else:
+                st.info("週期不一致：只做當沖，收盤前一定平倉。", icon="⏱️")
+        else:
+            if sd == s30 != 0:
+                st.info(f"現貨日線、30 分K 同為 **{DIR_ICON[sd]}**：期貨只順這個方向做。登入永豐可再對照期貨。", icon="🧭")
+            else:
+                st.info("現貨日線與 30 分K 方向不一致：期貨只做當沖。", icon="⏱️")
+
+        views = [("加權指數（現貨）", spot_view.tail(show_bars), SPOT_COLOR)]
+        if fut_view is not None:
+            views.append((f"{fut_code}（日盤）", fut_view.tail(show_bars), FUT_COLOR))
+        st.plotly_chart(build_chart(views))
+        st.caption("▲ 多頭成立、▼ 空頭成立（13MA＋K 50＋MACD 柱 0 三者同時成立的第一根）。"
+                   "期貨日盤從 08:45 開始切 K 棒，現貨從 09:00 開始，兩者的分K不會完全對齊。")
+
+
+    # ───────────────────────── 正逆價差 ─────────────────────────
+    with tab_basis:
+        if not has_fut:
+            st.info("正逆價差需要台指期資料：請在左側控制台連線 Shioaji。", icon="🔑")
+        else:
+            b = pd.DataFrame({"期貨": fut5["Close"], "現貨": spot5["Close"]}).dropna()
+            if b.empty:
+                st.warning(
+                    "期貨與現貨的 5 分K 對不上，算不出價差。\n\n"
+                    f"- 現貨：{spot5.index[0]:%Y-%m-%d %H:%M} ～ {spot5.index[-1]:%Y-%m-%d %H:%M}，"
+                    f"每天第一根 {spot5.index[0]:%H:%M}\n"
+                    f"- 期貨：{fut5.index[0]:%Y-%m-%d %H:%M} ～ {fut5.index[-1]:%Y-%m-%d %H:%M}，"
+                    f"每天第一根 {fut5.index[0]:%H:%M}\n\n"
+                    "日期沒有重疊：調整左側永豐的「起／迄」。每天第一根的分鐘不是 5 的倍數：請把這段訊息貼給我。")
+            else:
+                b["價差"] = b["期貨"] - b["現貨"]
+                b["實質價差"] = b["價差"] + div_pts
+                g = b.groupby(b.index.date)
+                daily_b = pd.DataFrame({
+                    "現貨收": g["現貨"].last(), "期貨同時價": g["期貨"].last(), "收盤價差": g["價差"].last(),
+                    "日內最大": g["價差"].max(), "日內最小": g["價差"].min(), "日內平均": g["價差"].mean(),
+                })
+                daily_b["實質收盤價差"] = daily_b["收盤價差"] + div_pts
+                daily_b["期貨13:45收"] = fut_daily["Close"].reindex(pd.to_datetime(daily_b.index)).to_numpy()
+                daily_b["結算日"] = ["📅" if is_settlement(d) else "" for d in daily_b.index]
+                daily_b.index.name = "日期"
+
+                last = b.iloc[-1]
+                m = st.columns(4)
+                m[0].metric(f"最新價差（{b.index[-1]:%m-%d %H:%M}）", f"{last['價差']:+,.1f} 點",
+                            "正價差" if last["價差"] > 0 else "逆價差", delta_color="off")
+                m[1].metric("實質價差（加回除息點數）", f"{last['實質價差']:+,.1f} 點")
+                m[2].metric("近 20 日平均收盤價差", f"{daily_b['收盤價差'].tail(20).mean():+,.1f} 點")
+                m[3].metric("近 20 日正價差天數", f"{(daily_b['收盤價差'].tail(20) > 0).sum()} / {min(20, len(daily_b))}")
+                st.caption("價差 ＝ 期貨 − 現貨（同一根 5 分K 的收盤）。正價差偏多情緒、逆價差偏避險；"
+                           "除權息季要先加回預估除息點數（左側設定）再判斷。")
+
+                fig = make_subplots(rows=2, cols=1, vertical_spacing=0.14, row_heights=[0.55, 0.45],
+                                    subplot_titles=("每日收盤價差（13:30 同時價）", "最近 5 天盤中價差（5 分K）"))
+                xd = pd.Series(daily_b.index).astype(str)
+                fig.add_bar(x=xd, y=daily_b["實質收盤價差"], name="收盤價差",
+                            marker_color=np.where(daily_b["實質收盤價差"] >= 0, UP, DOWN), row=1, col=1)
+                recent = b[pd.Index(b.index.date).isin(sorted(set(b.index.date))[-5:])]
+                fig.add_scatter(x=recent.index.strftime("%m-%d %H:%M"), y=recent["實質價差"], mode="lines",
+                                name="盤中價差", line=dict(color=FUT_COLOR, width=1.5), row=2, col=1)
+                for r_ in (1, 2):
+                    fig.add_hline(y=0, line=dict(color="#868e96", dash="dot", width=1), row=r_, col=1)
+                    fig.update_xaxes(type="category", nticks=10, row=r_, col=1)
+                fig.update_layout(height=620, showlegend=False, margin=dict(l=10, r=10, t=40, b=10),
+                                  hovermode="x unified")
+                st.plotly_chart(fig)
+                st.dataframe(daily_b.iloc[::-1].reset_index(), hide_index=True, width="stretch", column_config={
+                    c: st.column_config.NumberColumn(format="%.0f") for c in ["現貨收", "期貨同時價", "期貨13:45收"]
+                } | {c: st.column_config.NumberColumn(format="%+.1f") for c in
+                     ["收盤價差", "實質收盤價差", "日內最大", "日內最小", "日內平均"]})
+
+
+    # ───────────────────────── 夜盤 → 開盤 ─────────────────────────
+    def night_table() -> pd.DataFrame:
+        """每個期貨交易日一列：前一日日盤收 → 夜盤 → 今日期貨開盤、現貨開盤跳空"""
+        spot_d = to_daily(spot5)
+        days = list(fut_day.groupby(fut_day.index.date))
+        rows = []
+        for (pday, prev), (day, cur) in zip(days, days[1:]):
+            lo = pd.Timestamp.combine(pday, DAY_SESSION[1])
+            hi = pd.Timestamp.combine(day, DAY_SESSION[0])
+            n = fut_night[(fut_night.index >= lo) & (fut_night.index < hi)]
+            fut_prev = prev["Close"].iloc[-1]
+            row = {"日期": day, "星期": "一二三四五六日"[day.weekday()], "期貨昨收(13:45)": fut_prev}
+            if len(n):
+                row.update({"夜盤高": n["High"].max(), "夜盤低": n["Low"].min(), "夜盤收": n["Close"].iloc[-1],
+                            "夜盤漲跌": n["Close"].iloc[-1] - fut_prev})
+                row["期貨開盤−夜盤收"] = cur["Open"].iloc[0] - n["Close"].iloc[-1]
+            row["期貨開盤(08:45)"] = cur["Open"].iloc[0]
+            d0, d1 = pd.Timestamp(pday), pd.Timestamp(day)
+            if d0 in spot_d.index and d1 in spot_d.index:
+                row["現貨昨收"] = spot_d.at[d0, "Close"]
+                row["現貨開盤(09:00)"] = spot_d.at[d1, "Open"]
+                row["現貨跳空"] = row["現貨開盤(09:00)"] - row["現貨昨收"]
+            row["結算日"] = "📅" if is_settlement(day) else ""
+            rows.append(row)
+        out = pd.DataFrame(rows)
+        if "夜盤漲跌" in out and "現貨跳空" in out:
+            ok = out["夜盤漲跌"].notna() & out["現貨跳空"].notna()
+            out["方向一致"] = np.where(ok, np.where(np.sign(out["夜盤漲跌"]) == np.sign(out["現貨跳空"]), "✅", "❌"), "")
+        return out
+
+
+    with tab_night:
+        st.caption("夜盤（15:00～隔天 05:00）先反映美股、費半、台積電 ADR。"
+                   "夜盤收 − 前一日期貨日盤收 ≈ 隔天 09:00 現貨跳空的方向和幅度。")
+        if not has_fut:
+            st.info("夜盤需要台指期資料：請在左側控制台連線 Shioaji。", icon="🔑")
+        elif fut_night.empty:
+            st.info("這段期間沒有夜盤資料。", icon="🌙")
+        else:
+            nt = night_table()
+            # 最新夜盤（今天日盤還沒開，或已收盤後的夜盤）
+            last_day = fut_day.index[-1].date()
+            after = fut_night[fut_night.index >= pd.Timestamp.combine(last_day, DAY_SESSION[1])]
+            if len(after):
+                chg = after["Close"].iloc[-1] - fut_day["Close"].iloc[-1]
+                (st.error if chg > 0 else st.success)(
+                    f"**最新夜盤**（{after.index[0]:%m-%d %H:%M} ～ {after.index[-1]:%m-%d %H:%M}）："
+                    f"收 {after['Close'].iloc[-1]:,.0f}，比日盤收 {fut_day['Close'].iloc[-1]:,.0f} "
+                    f"{'漲' if chg > 0 else '跌'} {abs(chg):,.0f} 點 → 預估下一個交易日現貨"
+                    f"**{'開高' if chg > 0 else '開低'}**（僅供參考）", icon="🌙")
+
+            if "方向一致" in nt and (nt["方向一致"] != "").any():
+                v = nt[nt["方向一致"] != ""]
+                m = st.columns(4)
+                m[0].metric("統計天數", f"{len(v)} 天")
+                m[1].metric("夜盤方向 = 現貨跳空方向", f"{(v['方向一致'] == '✅').mean():.0%}")
+                m[2].metric("相關係數", f"{v['夜盤漲跌'].corr(v['現貨跳空']):.2f}")
+                m[3].metric("平均誤差（點）", f"{(v['現貨跳空'] - v['夜盤漲跌']).abs().mean():,.0f}")
+
+                lim = float(max(v["夜盤漲跌"].abs().max(), v["現貨跳空"].abs().max())) * 1.1
+                fig = go.Figure()
+                fig.add_scatter(x=[-lim, lim], y=[-lim, lim], mode="lines", name="夜盤 ＝ 跳空",
+                                line=dict(color="#868e96", dash="dot"))
+                fig.add_scatter(x=v["夜盤漲跌"], y=v["現貨跳空"], mode="markers", name="每天",
+                                marker=dict(size=9, color=np.where(v["方向一致"] == "✅", FUT_COLOR, "#adb5bd")),
+                                text=v["日期"].astype(str),
+                                hovertemplate="%{text}<br>夜盤漲跌 %{x:+.0f}<br>現貨跳空 %{y:+.0f}<extra></extra>")
+                fig.update_layout(height=430, margin=dict(l=10, r=10, t=40, b=10), showlegend=False,
+                                  title="夜盤漲跌（橫軸） vs 隔天現貨開盤跳空（縱軸）",
+                                  xaxis=dict(range=[-lim, lim], zeroline=True, title="夜盤漲跌（點）"),
+                                  yaxis=dict(range=[-lim, lim], zeroline=True, title="現貨跳空（點）"))
+                st.plotly_chart(fig)
+                st.caption("灰點＝方向不一致（夜盤過度反應、或開盤前又有消息）。夜盤量小，突發消息時容易過度反應。")
+            num = nt.select_dtypes("number").columns
+            st.dataframe(nt.iloc[::-1], hide_index=True, width="stretch", column_config={
+                c: st.column_config.NumberColumn(format="%+.0f" if c in ("夜盤漲跌", "期貨開盤−夜盤收", "現貨跳空")
+                                                 else "%.0f") for c in num})
+
+
+    # ───────────────────────── 回測：現貨定方向、期貨進出 ─────────────────────────
+    with tab_bt:
+        st.caption(f"進場：期貨 5 分K 多頭／空頭成立（13MA＋KD 50＋MACD 柱 0）；出場：反向穿越 13MA、"
+                   f"獲利回吐超過 {HALF_RETRACE:.0%}" + (f"、停損 {stop:g} 點" if stop else "")
+                   + f"。以收盤價成交，每筆扣 {cost:g} 點。")
+        if not has_fut:
+            st.info("回測需要台指期資料：請在左側控制台連線 Shioaji。", icon="🔑")
+        else:
+            # 只用期現都有資料的期間，比較才公平
+            lo_d, hi_d = max(spot5.index[0], fut5.index[0]).normalize(), min(spot5.index[-1], fut5.index[-1])
+            f5 = add_indicators(fut5[(fut5.index >= lo_d) & (fut5.index <= hi_d + pd.Timedelta(hours=1))])
+            f30 = add_indicators(resample_ohlc(fut5[fut5.index >= lo_d], 30))
+            s30 = S["30m"]
+            kw = dict(long_only=False, stop=stop, cost=cost)
+            runs = {
+                "期貨 5 分K 單獨": backtest(f5, **kw),
+                "期貨 30 分K 單獨": backtest(add_indicators(resample_ohlc(f5[OHLC], 30)), **kw),
+                "期貨 30 分定方向＋期貨 5 分進場": backtest_mtf(f5, f30, bias_mode=bias_mode, **kw),
+                "現貨 30 分定方向＋期貨 5 分進場": backtest_mtf(f5, s30, bias_mode=bias_mode, **kw),
+            }
+            cmp_df = pd.DataFrame({k: bt_stats(v) for k, v in runs.items()}).T
+            cmp_df.index.name = "方法"
+            pv = POINT_VALUE.get(fut_code, 200)
+            if "總損益" in cmp_df:
+                cmp_df["總損益（元/口）"] = cmp_df["總損益"] * pv
+            st.dataframe(cmp_df.reset_index(), hide_index=True, width="stretch", column_config={
+                "交易次數": st.column_config.NumberColumn(format="%d"),
+                "勝率": st.column_config.NumberColumn(format="percent"),
+                "總損益": st.column_config.NumberColumn(format="%+.0f"),
+                "總損益（元/口）": st.column_config.NumberColumn(format="%+.0f"),
+                "獲利因子": st.column_config.NumberColumn(format="%.2f"),
+                "平均每筆": st.column_config.NumberColumn(format="%+.1f"),
+                "最大單筆虧損": st.column_config.NumberColumn(format="%+.0f"),
+                "最大回撤": st.column_config.NumberColumn(format="%+.0f"),
+            })
+            st.caption(f"期間 {lo_d:%Y-%m-%d} ～ {hi_d:%Y-%m-%d}，{len(set(f5.index.date))} 個交易日；"
+                       f"{fut_code} 1 點 = {pv} 元。樣本短、未計換月價差，僅供比較規則用。")
+
+            fig = go.Figure()
+            colors = ["#adb5bd", "#868e96", FUT_COLOR, SPOT_COLOR]
+            for (name, bt_), c in zip(runs.items(), colors):
+                if bt_.trades:
+                    tb = bt_.table()
+                    fig.add_scatter(x=tb["出場時間"], y=tb["損益"].cumsum(), mode="lines", name=name,
+                                    line=dict(color=c, width=2.5 if name.startswith("現貨") else 1.5))
+            fig.update_layout(height=400, hovermode="x unified", margin=dict(l=10, r=10, t=70, b=10),
+                              title=dict(text="累積損益（點）", y=0.97),
+                              legend=dict(orientation="h", y=1.02, yanchor="bottom", x=1, xanchor="right"))
+            st.plotly_chart(fig)
+
+            pick = st.selectbox("看交易明細", list(runs), index=3)
+            if runs[pick].trades:
+                st.dataframe(runs[pick].table().iloc[::-1], hide_index=True, width="stretch",
+                             column_config={"損益": st.column_config.NumberColumn(format="%+.1f")})
+
+
+    # ───────────────────────── 規則與注意 ─────────────────────────
+    with tab_rules:
+        st.markdown(f"""
+### 判斷規則
+1. **13MA 是多空開關**：收盤站上 13MA、K>50、MACD 柱>0 → **多頭成立**；跌破 13MA、K<50、MACD 柱<0 → **空頭成立**。
+   三者要一起成立，只有一部分成立就不動。
+2. **現貨定方向、期貨抓進出**：
+   | 現貨日線＋30 分 | 期貨 30 分＋5 分 | 動作 |
+   |---|---|---|
+   | 多 | 多 | 期現共振：做多，可抱波段 |
+   | 空 | 空 | 期現共振：做空，可抱波段 |
+   | 30 分 K 期現不同向 | | 期現背離：價差在變化，只做當沖，收盤前平倉 |
+   | 多 | 5 分 K 空 | 逆勢只做當沖，波段單減碼或觀望 |
+3. **回吐一半就砍**：獲利從最高回吐超過 {HALF_RETRACE:.0%} 出場。
+4. **夜盤 → 開盤**：夜盤收 − 前一日期貨日盤收 ≈ 隔天現貨跳空的方向。開盤後再看缺口大小與第一根 5 分 K。
+5. **正逆價差**：期貨 − 現貨。正價差偏多、逆價差偏避險；除權息季先加回預估除息點數。
+
+### 注意
+- **換月與結算**：每月第三個星期三結算，`TXFR1` 會換到下個月合約，價格可能跳一段，
+  之後約 13 根 K 棒的 13MA 會被拉偏。結算日前後主力可能拉高或壓低結算，訊號容易失真。
+- **期貨日 K 只用日盤**（08:45–13:45）。看盤軟體若把夜盤併進日 K，13MA 會和這裡不同。
+- **夜盤量小**：突發消息時容易過度反應，隔天現貨不一定照單全收。
+- **現貨不能直接買賣**：要透過 0050、00631L 等 ETF，或直接用台指期。
+- 籌碼面（外資期貨未平倉、選擇權最大 OI、P/C 比）請搭配《台指期籌碼判讀與 YesWin 看盤筆記》。
+
+> 規則來源：老哥錄音談話整理（13MA 法則）。教學用規則化程式，不構成投資建議。
+""")
+
+
 live_us_data = fetch_global_us_dashboard_data()
 st.sidebar.title("⚡ 併武 V18.83 控制台")
 
@@ -3863,6 +4427,7 @@ tabs_list = [
     "📈 多源即時量化研報艙",
     "📐 13MA的魔力艙",
     "📡 法說會籌碼雷達艙",
+    "⚖️ 期現對照・13MA艙",
 ]
 
 # 網址參數 ?cabin=radar&stock=3231：直接打開雷達艙並聚焦該股（雷達 Email 的連結用這個格式）
@@ -5907,3 +6472,6 @@ elif col_sel == "📐 13MA的魔力艙":
 elif col_sel == "📡 法說會籌碼雷達艙":
   from radar_cabin import render_radar_cabin
   render_radar_cabin(focus_stock=_qp_stock or None)
+
+elif col_sel == "⚖️ 期現對照・13MA艙":
+  render_futspot_cabin()
