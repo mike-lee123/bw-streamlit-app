@@ -3836,13 +3836,17 @@ def render_ma13_cabin():
 # ==============================================================================
 
 def render_futspot_cabin():
-    """第 24 艙：期現對照・13MA（原 期貨與台股/futspot-app/futspot_dashboard.py 整頁；規則與回測用上方 13MA 函式庫）"""
+    """第 24 艙：期現對照・13MA（由 sync_futspot.py 從 期貨與台股/futspot-app/futspot_dashboard.py 產生；規則與回測用上方 13MA 函式庫）"""
     UP, DOWN = "#e5484d", "#2f9e44"          # 台股慣例：紅漲綠跌
     MA_COLOR, SPOT_COLOR, FUT_COLOR = "#f59f00", "#1c7ed6", "#ae3ec9"
     OHLC = ["Open", "High", "Low", "Close"]
     DIR_ICON = {1: "多 🔴", -1: "空 🟢", 0: "— ⚪"}
     FUT_CODES = {"TXFR1": "台指期 近月", "MXFR1": "小台指 近月", "TXFR2": "台指期 次月"}
     POINT_VALUE = {"TXFR1": 200, "TXFR2": 200, "MXFR1": 50}
+
+
+
+
     TODAY = pd.Timestamp.now(tz="Asia/Taipei").date()
 
 
@@ -3935,6 +3939,38 @@ def render_futspot_cabin():
 
     def is_settlement(d: dt.date) -> bool:
         return d == settlement_day(d.year, d.month)
+
+
+    BASIS_LOOKBACK = 20      # 價差偏離：和前 20 個交易日的收盤價差比
+    BASIS_FLAT = 5.0         # 價差變化在 ±5 點內視為持平（雜訊）
+
+
+    def basis_quadrant(spot_chg: float, basis_chg: float) -> str:
+        """現貨漲跌 × 價差變化 → 四象限判讀"""
+        if pd.isna(spot_chg) or pd.isna(basis_chg):
+            return ""
+        if abs(basis_chg) < BASIS_FLAT:
+            return "⚪ 價差持平：看指數本身"
+        if spot_chg > 0:
+            return "🔴 真強勢：漲＋價差擴大" if basis_chg > 0 else "🟠 漲得心虛：漲但價差走低"
+        if spot_chg < 0:
+            return "🟢 真弱勢：跌＋價差走低" if basis_chg < 0 else "🔵 跌勢鈍化：跌但價差回升"
+        return "⚪ 現貨平盤"
+
+
+    def basis_level(z: float) -> str:
+        """價差偏離 z 值 → 文字"""
+        if pd.isna(z):
+            return "樣本不足"
+        if z >= 2:
+            return "極端正價差：期貨過熱"
+        if z >= 1:
+            return "明顯偏多"
+        if z > -1:
+            return "中性"
+        if z > -2:
+            return "明顯偏防守"
+        return "極端逆價差：恐慌，常近短線低點"
 
 
     def state_of(r: pd.Series) -> tuple[str, int]:
@@ -4157,7 +4193,7 @@ def render_futspot_cabin():
                 st.info("週期不一致：只做當沖，收盤前一定平倉。", icon="⏱️")
         else:
             if sd == s30 != 0:
-                st.info(f"現貨日線、30 分K 同為 **{DIR_ICON[sd]}**：期貨只順這個方向做。登入永豐可再對照期貨。", icon="🧭")
+                st.info(f"現貨日線、30 分K 同為 **{DIR_ICON[sd]}**：期貨只順這個方向做。左側連線 Shioaji 可再對照期貨。", icon="🧭")
             else:
                 st.info("現貨日線與 30 分K 方向不一致：期貨只做當沖。", icon="⏱️")
 
@@ -4196,6 +4232,15 @@ def render_futspot_cabin():
                 daily_b["結算日"] = ["📅" if is_settlement(d) else "" for d in daily_b.index]
                 daily_b.index.name = "日期"
 
+                # 偏離與四象限（每日收盤；換月隔天價差會跳，標出來）
+                prior = daily_b["實質收盤價差"].shift(1).rolling(BASIS_LOOKBACK, min_periods=10)
+                daily_b["偏離z"] = (daily_b["實質收盤價差"] - prior.mean()) / prior.std()
+                daily_b["現貨漲跌"] = daily_b["現貨收"].diff()
+                daily_b["價差變化"] = daily_b["實質收盤價差"].diff()
+                rolled = pd.Series(daily_b["結算日"].to_numpy()).shift(1).eq("📅").to_numpy()
+                daily_b["判讀"] = [basis_quadrant(s, c) + ("（換月，參考）" if r else "")
+                                   for s, c, r in zip(daily_b["現貨漲跌"], daily_b["價差變化"], rolled)]
+
                 last = b.iloc[-1]
                 m = st.columns(4)
                 m[0].metric(f"最新價差（{b.index[-1]:%m-%d %H:%M}）", f"{last['價差']:+,.1f} 點",
@@ -4205,6 +4250,46 @@ def render_futspot_cabin():
                 m[3].metric("近 20 日正價差天數", f"{(daily_b['收盤價差'].tail(20) > 0).sum()} / {min(20, len(daily_b))}")
                 st.caption("價差 ＝ 期貨 − 現貨（同一根 5 分K 的收盤）。正價差偏多情緒、逆價差偏避險；"
                            "除權息季要先加回預估除息點數（左側設定）再判斷。")
+
+                # ── 現在的位階與四象限：最新一根 vs. 前一交易日收盤 ──
+                st.markdown("##### 🧭 價差判讀")
+                today_d = b.index[-1].date()
+                hist = daily_b[daily_b.index < today_d]
+                if hist.empty:
+                    st.info("至少要有前一個交易日的資料才能判讀。")
+                else:
+                    ref = hist["實質收盤價差"].tail(BASIS_LOOKBACK)
+                    z_now = ((last["實質價差"] - ref.mean()) / ref.std()) if len(ref) >= 10 else np.nan
+                    spot_chg = last["現貨"] - hist["現貨收"].iloc[-1]
+                    basis_chg = last["實質價差"] - hist["實質收盤價差"].iloc[-1]
+                    quad = basis_quadrant(spot_chg, basis_chg)
+                    rolled_now = is_settlement(hist.index[-1])
+                    q = st.columns(4)
+                    q[0].metric(f"偏離（vs 前 {len(ref)} 日）", "—" if pd.isna(z_now) else f"{z_now:+.1f} σ",
+                                basis_level(z_now), delta_color="off")
+                    q[1].metric("價差較昨收", f"{basis_chg:+,.1f} 點")
+                    q[2].metric("現貨較昨收", f"{spot_chg:+,.0f} 點")
+                    q[3].metric("四象限", quad.split("：")[0] if quad else "—", delta_color="off")
+                    msg = {
+                        "🔴": "期貨帶頭追價，上漲動能足。",
+                        "🟠": "現貨在漲、期貨不跟，可能是高檔避險，提防反轉。",
+                        "🟢": "期貨帶頭殺，賣壓還沒結束。",
+                        "🔵": "期貨先止跌，殺盤可能接近尾聲。",
+                    }.get(quad[:1], "價差變化不大，訊號以指數和籌碼為主。")
+                    text = f"**{quad}**　{msg}" if quad else msg
+                    if not pd.isna(z_now) and z_now <= -2:
+                        text += "\n\n逆價差已到極端：急跌時現貨指數會落後（部分個股還沒成交），價差常被誇大；極端恐慌也常是短線低點，別追空。"
+                    elif not pd.isna(z_now) and z_now >= 2:
+                        text += "\n\n正價差已到極端：期貨追價過熱，追多要小心回吐。"
+                    if rolled_now:
+                        text += "\n\n⚠️ 昨天是結算日，近月已換成新合約，價差變化含換月跳空，僅供參考。"
+                    elif is_settlement(today_d):
+                        text += "\n\n⚠️ 今天是結算日：價差會往 0 收斂，判讀意義不大。"
+                    (st.success if quad[:1] == "🔴" else st.error if quad[:1] == "🟢"
+                     else st.warning if quad[:1] in ("🟠", "🔵") else st.info)(text)
+                    st.caption(f"偏離 ＝（現在價差 − 前 {BASIS_LOOKBACK} 日收盤價差平均）÷ 標準差；±1σ 明顯、±2σ 極端。"
+                               f"四象限比較最新一根和前一交易日收盤（同為現貨最後一根 5 分K）；價差變化在 ±{BASIS_FLAT:.0f} 點內視為持平。"
+                               "價差只是情緒溫度，請搭配外資期貨未平倉與夜盤一起看。")
 
                 fig = make_subplots(rows=2, cols=1, vertical_spacing=0.14, row_heights=[0.55, 0.45],
                                     subplot_titles=("每日收盤價差（13:30 同時價）", "最近 5 天盤中價差（5 分K）"))
@@ -4223,7 +4308,9 @@ def render_futspot_cabin():
                 st.dataframe(daily_b.iloc[::-1].reset_index(), hide_index=True, width="stretch", column_config={
                     c: st.column_config.NumberColumn(format="%.0f") for c in ["現貨收", "期貨同時價", "期貨13:45收"]
                 } | {c: st.column_config.NumberColumn(format="%+.1f") for c in
-                     ["收盤價差", "實質收盤價差", "日內最大", "日內最小", "日內平均"]})
+                     ["收盤價差", "實質收盤價差", "日內最大", "日內最小", "日內平均", "價差變化"]}
+                  | {"現貨漲跌": st.column_config.NumberColumn(format="%+.0f"),
+                     "偏離z": st.column_config.NumberColumn("偏離σ", format="%+.1f")})
 
 
     # ───────────────────────── 夜盤 → 開盤 ─────────────────────────
@@ -4377,6 +4464,15 @@ def render_futspot_cabin():
 3. **回吐一半就砍**：獲利從最高回吐超過 {HALF_RETRACE:.0%} 出場。
 4. **夜盤 → 開盤**：夜盤收 − 前一日期貨日盤收 ≈ 隔天現貨跳空的方向。開盤後再看缺口大小與第一根 5 分 K。
 5. **正逆價差**：期貨 − 現貨。正價差偏多、逆價差偏避險；除權息季先加回預估除息點數。
+   看**偏離**（和前 {BASIS_LOOKBACK} 日平均比，±1σ 明顯、±2σ 極端）而不是絕對點數，再配合指數漲跌：
+   | 現貨 | 價差 | 判讀 |
+   |---|---|---|
+   | 漲 | 擴大 | 🔴 真強勢：期貨帶頭追價 |
+   | 漲 | 走低 | 🟠 漲得心虛：期貨不跟，提防反轉 |
+   | 跌 | 走低 | 🟢 真弱勢：期貨帶頭殺 |
+   | 跌 | 回升 | 🔵 跌勢鈍化：期貨先止跌 |
+
+   極端逆價差常是恐慌低點；結算日價差收斂到 0、換月隔天價差會跳，這兩天的判讀僅供參考。
 
 ### 注意
 - **換月與結算**：每月第三個星期三結算，`TXFR1` 會換到下個月合約，價格可能跳一段，
