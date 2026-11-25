@@ -1,6 +1,7 @@
 """第 25 艙「💱 台幣匯率×台股艙」。
 
-USD/TWD 技術分析（K 線、MA20/MA60、布林、MACD 交叉、RSI）＋ 股匯連動（台股 vs 台幣、滾動相關、雙 MACD、報酬散佈圖）。
+USD/TWD 技術分析（K 線、MA20/MA60、布林、MACD 交叉、RSI）＋ 股匯連動（台股 vs 台幣、滾動相關、雙 MACD、報酬散佈圖）
+＋ 主力痕跡・威科夫（開高低收量分工：收盤位置、影線、量比、布林壓縮、彈簧／上衝回落、背離、階段底色、多方轉折檢查表）。
 資料來源 Yahoo Finance（TWD=X 與台股代號），每小時快取。即期外匯是店頭市場、Yahoo 無成交量，以日振幅替代。
 由獨立的「台幣匯率 × 台股 技術分析儀表板」（fx_core.py + app.py）併入；設定放在艙內，不佔用左側控制台。
 """
@@ -186,6 +187,215 @@ def fx_scatter_figure(df: pd.DataFrame, name: str) -> go.Figure:
   return fig
 
 
+# ---------- 主力痕跡・威科夫（開高低收量分工） ----------
+FX_WK_PHASES = {   # 階段: (底色, 圖例色)
+  "吸籌": ("rgba(77,171,247,0.13)", "rgba(77,171,247,0.8)"),
+  "拉抬": ("rgba(255,107,107,0.12)", "rgba(255,107,107,0.8)"),
+  "出貨": ("rgba(255,169,77,0.14)", "rgba(255,169,77,0.8)"),
+  "收割": ("rgba(81,207,102,0.12)", "rgba(81,207,102,0.8)"),
+}
+FX_WK_EVENTS = {
+  "Spring": "彈簧：假跌破洗盤",
+  "Upthrust": "上衝回落：假突破誘多",
+  "Climax": "爆量長影線",
+  "BullDiv": "MACD 底背離",
+  "BearDiv": "MACD 頂背離",
+  "VolDiv": "創高量縮",
+  "Squeeze": "布林壓縮",
+}
+
+
+def _fx_first_in(mask: pd.Series, days: int = 10) -> pd.Series:
+  """同一訊號 days 天內只保留第一次。"""
+  seen = mask.shift().rolling(days, min_periods=1).max().fillna(0).astype(bool)
+  return mask & ~seen
+
+
+def fx_add_wyckoff(df: pd.DataFrame, lookback: int = 20, squeeze_window: int = 120) -> pd.DataFrame:
+  """在 fx_build_link 的結果上加入 OHLCV 分工指標與簡化威科夫階段。"""
+  df = df.copy()
+  rng = (df.High - df.Low).replace(0, float("nan"))
+  body_top = df[["Open", "Close"]].max(axis=1)
+  body_bot = df[["Open", "Close"]].min(axis=1)
+  df["CLV"] = (df.Close - df.Low) / rng                 # 收盤＝主力表態
+  df["UpShadow"] = (df.High - body_top) / rng           # 上方流動性被吃
+  df["LowShadow"] = (body_bot - df.Low) / rng           # 下方停損被掃
+  vol = df.Volume.where(df.Volume > 0)                  # 盤中 Yahoo 量為 0，視為缺值
+  df["VolRatio"] = vol / vol.rolling(20, min_periods=10).mean()
+  df["BBW"] = (df.BB_up - df.BB_dn) / df.MA20 * 100     # 非線性：波動壓縮
+  df["Squeeze"] = df.BBW <= df.BBW.rolling(squeeze_window, min_periods=40).quantile(0.10)
+
+  prev_hi = df.High.rolling(lookback).max().shift()
+  prev_lo = df.Low.rolling(lookback).min().shift()
+  df["Spring"] = (df.Low < prev_lo) & (df.Close > prev_lo) & (df.CLV > 0.5)
+  df["Upthrust"] = (df.High > prev_hi) & (df.Close < prev_hi) & (df.CLV < 0.5)
+  df["Climax"] = (df.VolRatio >= 1.8) & ((df.UpShadow >= 0.4) | (df.LowShadow >= 0.4))
+
+  new_hi = df.Close >= df.Close.rolling(lookback).max()
+  new_lo = df.Close <= df.Close.rolling(lookback).min()
+  dif_peak = df.DIF.rolling(40).max().shift(5)
+  dif_trough = df.DIF.rolling(40).min().shift(5)
+  df["BearDiv"] = _fx_first_in(new_hi & (dif_peak > 0) & (df.DIF < dif_peak * 0.8) & (df.HIST < 0))
+  df["BullDiv"] = _fx_first_in(new_lo & (dif_trough < 0) & (df.DIF > dif_trough * 0.8) & (df.HIST > 0))
+  df["VolDiv"] = new_hi & (df.VolRatio < 0.9)
+
+  # 階段：均線排列判方向（線性）；橫盤時依 MA60 斜率判斷是跌後吸籌或漲後出貨
+  ma60_slope = df.MA60.diff(20)
+  ma20_slope = df.MA20.diff(5)
+  up = (df.Close > df.MA20) & (df.MA20 > df.MA60) & (ma20_slope > 0)
+  dn = (df.Close < df.MA20) & (df.MA20 < df.MA60) & (ma20_slope < 0)
+  phase = pd.Series(pd.NA, index=df.index, dtype="object")
+  phase[up] = "拉抬"
+  phase[dn] = "收割"
+  rest = ~(up | dn) & ma60_slope.notna()
+  phase[rest & (ma60_slope >= 0)] = "出貨"
+  phase[rest & (ma60_slope < 0)] = "吸籌"
+  run = phase.groupby((phase != phase.shift()).cumsum()).transform("size")
+  df["Phase"] = phase.where(run >= 3).ffill().fillna("")   # 連續 3 天才確認
+  return df
+
+
+def fx_wk_checklist(df: pd.DataFrame, window: int = 10) -> list:
+  """多方轉折檢查表：[(條件, 成立?, 說明)]。"""
+  last, prev = df.iloc[-1], df.iloc[-2]
+  recent = df.tail(window)
+  sig = recent.Spring | (recent.Climax & (recent.LowShadow >= 0.4) & (recent.CLV > 0.5))
+  sig_days = recent.index[sig]
+  if len(sig_days):
+    base = df.loc[sig_days[-1]]
+    after = df.loc[sig_days[-1]:].iloc[1:]
+    vr = after.VolRatio.dropna()
+    retest_ok = len(after) >= 2 and after.Low.min() >= base.Low and len(vr) > 0 and vr.mean() < 1.0
+    vr_text = f"{vr.mean():.2f}" if len(vr) else "—"
+    retest_note = (f"訊號日後 {len(after)} 天，最低 {after.Low.min():,.2f} vs 訊號低 {base.Low:,.2f}，"
+                   f"均量比 {vr_text}（需 ≥2 天且 <1）") if len(after) else "訊號就在最後一天，等待回測"
+  else:
+    retest_ok, retest_note = False, "尚無訊號日可回測"
+  return [
+    ("台幣動能轉強（外資停止撤出）", bool(last.F_HIST < 0),
+     f"USD/TWD MACD 柱 {last.F_HIST:+.4f}，需 < 0（美元轉弱＝台幣轉強）"),
+    (f"近 {window} 日出現彈簧或爆量長下影（收上半部）", bool(len(sig_days)),
+     "、".join(d.strftime("%m/%d") for d in sig_days) or "尚未出現"),
+    ("回測量縮且不破訊號低點", bool(retest_ok), retest_note),
+    ("MACD 空方動能收斂", bool(last.HIST > prev.HIST),
+     f"MACD 柱 {last.HIST:+.2f}（前一日 {prev.HIST:+.2f}）"),
+    ("收盤守在 MA20 之上", bool(last.Close > last.MA20),
+     f"收盤 {last.Close:,.2f} vs MA20 {last.MA20:,.2f}"),
+  ]
+
+
+def fx_wk_events(df: pd.DataFrame, n: int = 40) -> pd.DataFrame:
+  rows = []
+  for dt, r in df.tail(n).iterrows():
+    for col, text in FX_WK_EVENTS.items():
+      if bool(r[col]):
+        rows.append({"日期": dt.strftime("%Y-%m-%d"), "事件": text, "階段": r.Phase,
+                     "收盤": round(r.Close, 2), "收盤位置": round(r.CLV, 2),
+                     "上影": round(r.UpShadow, 2), "下影": round(r.LowShadow, 2),
+                     "量比": round(r.VolRatio, 2)})
+  return pd.DataFrame(rows[::-1])
+
+
+def fx_wyckoff_figure(df: pd.DataFrame, name: str) -> go.Figure:
+  fig = make_subplots(rows=5, cols=1, shared_xaxes=True, vertical_spacing=0.035,
+                      row_heights=[0.40, 0.14, 0.16, 0.15, 0.15],
+                      subplot_titles=(f"{name}：威科夫階段 ＋ 主力痕跡",
+                                      "收盤位置 CLV（收盤＝主力表態；>0.5 買方掌控）",
+                                      "影線比例（上＝上方流動性被吃；下＝停損被掃）",
+                                      "量比（成交量 ÷ 20 日均量；紫色 ≥ 1.8 爆量）",
+                                      "布林帶寬 %（橘點＝壓縮，非線性變盤前兆）"))
+  # K 線必須是第一條 trace，x 軸才會被判定為日期軸
+  fig.add_trace(go.Candlestick(x=df.index, open=df.Open, high=df.High, low=df.Low, close=df.Close,
+                               name=name, showlegend=False,
+                               increasing_line_color=UP, decreasing_line_color=DN), 1, 1)
+  for p, (_, solid) in FX_WK_PHASES.items():   # 階段圖例
+    fig.add_trace(go.Scatter(x=[df.index[-1]], y=[float("nan")], mode="markers", name=p,
+                             marker=dict(size=12, symbol="square", color=solid)), 1, 1)
+  fig.add_trace(go.Scatter(x=df.index, y=df.MA20, name="MA20", line=dict(color="#f08c00", width=1.1)), 1, 1)
+  fig.add_trace(go.Scatter(x=df.index, y=df.MA60, name="MA60", line=dict(color="#4dabf7", width=1.1)), 1, 1)
+  marks = [("Spring", "Low", 0.985, "triangle-up", UP, "彈簧（假跌破）"),
+           ("Upthrust", "High", 1.015, "triangle-down", DN, "上衝回落（假突破）"),
+           ("BullDiv", "Low", 0.97, "star", "#ff8787", "MACD 底背離"),
+           ("BearDiv", "High", 1.03, "star", "#69db7c", "MACD 頂背離"),
+           ("Climax", "High", 1.045, "circle-open", "#b197fc", "爆量長影線")]
+  for col, ref, k, sym, color, label in marks:
+    d = df[df[col]]
+    fig.add_trace(go.Scatter(x=d.index, y=d[ref] * k, mode="markers", name=label,
+                             marker=dict(symbol=sym, size=10, color=color,
+                                         line=dict(width=1.5, color=color))), 1, 1)
+  # 階段底色（須在子圖已有 trace 後加入，否則 plotly 會略過）
+  seg = (df.Phase != df.Phase.shift()).cumsum()
+  for _, g in df.groupby(seg):
+    p = g.Phase.iloc[0]
+    if p in FX_WK_PHASES:
+      fig.add_vrect(x0=g.index[0], x1=g.index[-1], fillcolor=FX_WK_PHASES[p][0],
+                    line_width=0, layer="below", row=1, col=1)
+
+  fig.add_trace(go.Bar(x=df.index, y=df.CLV, name="CLV", showlegend=False,
+                       marker_color=[UP if v >= 0.5 else DN for v in df.CLV.fillna(0.5)]), 2, 1)
+  fig.add_hline(y=0.5, line_dash="dash", line_color="#868e96", row=2, col=1)
+  fig.add_trace(go.Bar(x=df.index, y=df.UpShadow, name="上影線", showlegend=False,
+                       marker_color=DN), 3, 1)
+  fig.add_trace(go.Bar(x=df.index, y=-df.LowShadow, name="下影線", showlegend=False,
+                       marker_color=UP), 3, 1)
+  fig.add_trace(go.Bar(x=df.index, y=df.VolRatio, name="量比", showlegend=False,
+                       marker_color=["#b197fc" if v >= 1.8 else "#868e96" for v in df.VolRatio.fillna(0)]), 4, 1)
+  fig.add_hline(y=1, line_dash="dash", line_color="#868e96", row=4, col=1)
+  fig.add_trace(go.Scatter(x=df.index, y=df.BBW, name="帶寬", showlegend=False,
+                           line=dict(color="#ced4da", width=1.2)), 5, 1)
+  sq = df[df.Squeeze]
+  fig.add_trace(go.Scatter(x=sq.index, y=sq.BBW, mode="markers", name="壓縮", showlegend=False,
+                           marker=dict(color="#ffa94d", size=6)), 5, 1)
+  _fx_layout(fig, 1200)
+  fig.update_layout(barmode="relative", margin=dict(t=110, b=10, l=10, r=10),
+                    legend=dict(orientation="h", yanchor="bottom", y=1.03, x=0))
+  return fig
+
+
+def _fx_render_wyckoff(link: pd.DataFrame, name: str):
+  wk = fx_add_wyckoff(link)
+  if wk.Phase.iloc[-1] == "":
+    st.warning("資料不足以判定威科夫階段（需約 80 個交易日），請換長一點的期間。")
+  phase_now = wk.Phase.iloc[-1] or "資料不足"
+  phase_days = int((wk.Phase[::-1] == wk.Phase.iloc[-1]).cumprod().sum())
+  checks = fx_wk_checklist(wk)
+  passed = sum(ok for _, ok, _ in checks)
+  last_vr = wk.VolRatio.dropna()
+
+  k1, k2, k3, k4 = st.columns(4)
+  k1.metric("目前階段", phase_now, f"已持續 {phase_days} 天", delta_color="off", border=True)
+  k2.metric("收盤位置 CLV", f"{wk.CLV.iloc[-1]:.2f}",
+            help="(收-低)/(高-低)；收盤＝主力表態，>0.5 買方掌控", border=True)
+  k3.metric("量比", f"{last_vr.iloc[-1]:.2f}" if len(last_vr) else "—",
+            help="成交量 ÷ 20 日均量；盤中量為 0 時取前一日", border=True)
+  k4.metric("多方轉折條件", f"{passed} / {len(checks)}", border=True)
+
+  left, right = st.columns(2)
+  with left.container(border=True):
+    st.markdown("**🔄 多方轉折檢查表**")
+    for label, ok, note in checks:
+      st.markdown(f"{'✅' if ok else '⬜'} **{label}**  \n<small>{note}</small>", unsafe_allow_html=True)
+  with right.container(border=True):
+    st.markdown("**🧭 開高低收量的分工**")
+    st.markdown(
+      "- **開盤**＝隔夜情緒（跳空）\n"
+      "- **最高／最低**＝掃停損、吃流動性（影線）\n"
+      "- **收盤**＝主力表態（CLV）\n"
+      "- **成交量**＝力道真假（量比、量價背離）\n"
+      "- **帶寬壓縮**＝非線性變盤前兆\n\n"
+      "階段：🟦吸籌 → 🟥拉抬 → 🟧出貨 → 🟩收割")
+
+  st.plotly_chart(fx_wyckoff_figure(wk, name))
+  st.markdown("**📌 近 40 個交易日事件**")
+  ev = fx_wk_events(wk)
+  if ev.empty:
+    st.caption("近期沒有偵測到事件。")
+  else:
+    st.dataframe(ev, width="stretch", hide_index=True)
+  st.caption("階段判定為簡化規則（均線排列＋MA60 斜率），事件為量化近似，"
+             "僅供理解主力行為的框架，不構成投資建議。")
+
+
 # ---------- 訊號解讀 ----------
 def _fx_trend(row) -> str:
   p, m20, m60 = row.Close, row.MA20, row.MA60
@@ -273,7 +483,11 @@ def render_fx_cabin():
     else:
       st.info("股匯連動偏弱：近期匯率對股市的解釋力有限。")
 
-  t1, t2, t3, t4 = st.tabs(["💵 匯率技術分析", "📈 股匯連動", "🔍 報酬散佈圖", "🗂️ 資料表"])
+  t1, t2, t5, t3, t4 = st.tabs(["💵 匯率技術分析", "📈 股匯連動", "🎯 主力痕跡・威科夫",
+                                "🔍 報酬散佈圖", "🗂️ 資料表"])
+
+  with t5:
+    _fx_render_wyckoff(link, name)
 
   with t1:
     st.plotly_chart(fx_figure(fx, show_bb, show_cross))
