@@ -20,7 +20,7 @@
    "n_20d": 0,
    "avg_excess_20d": null,
    "hit_rate_20d": null,
-   "n_total": 3
+   "n_total": 6
   },
   {
    "signal_type": "🟠 黑馬但法人倒貨",
@@ -108,6 +108,16 @@
    "hit_rate_20d": 15
   },
   {
+   "signal_type": "🟢 黃金坑候選",
+   "bias": "bull",
+   "n_5d": 0,
+   "avg_excess_5d": null,
+   "hit_rate_5d": null,
+   "n_20d": 0,
+   "avg_excess_20d": null,
+   "hit_rate_20d": null
+  },
+  {
    "signal_type": "⚪ 簡報下載或解析失敗，只列籌碼",
    "bias": "none",
    "n_5d": 1,
@@ -153,7 +163,7 @@
    "n_20d": 8,
    "avg_excess_20d": 14.99,
    "hit_rate_20d": 75,
-   "n_total": 8
+   "n_total": 9
   },
   {
    "broker": "法人",
@@ -161,7 +171,7 @@
    "n_20d": 7,
    "avg_excess_20d": 10.35,
    "hit_rate_20d": 71,
-   "n_total": 9
+   "n_total": 13
   },
   {
    "broker": "外資",
@@ -170,6 +180,14 @@
    "avg_excess_20d": 7.38,
    "hit_rate_20d": 67,
    "n_total": 6
+  },
+  {
+   "broker": "（未具名）",
+   "direction": "down",
+   "n_20d": 2,
+   "avg_excess_20d": -2.45,
+   "hit_rate_20d": 100,
+   "n_total": 3
   },
   {
    "broker": "美銀",
@@ -188,14 +206,6 @@
    "n_total": 2
   },
   {
-   "broker": "（未具名）",
-   "direction": "down",
-   "n_20d": 2,
-   "avg_excess_20d": -2.45,
-   "hit_rate_20d": 100,
-   "n_total": 2
-  },
-  {
    "broker": "高盛",
    "direction": "up",
    "n_20d": 2,
@@ -209,7 +219,7 @@
    "n_20d": 1,
    "avg_excess_20d": -7.19,
    "hit_rate_20d": 100,
-   "n_total": 5
+   "n_total": 7
   },
   {
    "broker": "外資",
@@ -273,6 +283,14 @@
    "n_20d": 1,
    "avg_excess_20d": -0.92,
    "hit_rate_20d": 100,
+   "n_total": 1
+  },
+  {
+   "broker": "美系外資",
+   "direction": "down",
+   "n_20d": 0,
+   "avg_excess_20d": null,
+   "hit_rate_20d": null,
    "n_total": 1
   },
   {

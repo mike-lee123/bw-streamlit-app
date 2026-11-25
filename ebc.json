@@ -1,5 +1,250 @@
 [
  {
+  "date": "2026-11-25",
+  "stock_id": "2330",
+  "name": "台積電",
+  "mentions": 2,
+  "in_watchlist": true,
+  "titles": [
+   {
+    "link": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE5aLXVCYlE1VVJkaGZ1LW1OQWU3b19ycWxVR1BfTERFekhnakhoXzdFS0tSbWZETl9MMlZtMFBlS1pzaDFTRUR0V2RyUEtDcHdIWmRzZEdhUHlPZw?oc=5",
+    "time": "2026-11-24T09:44:00.000Z",
+    "title": "黃仁勳請辭11天！ 台積電摔破2000元 股東人數創新高"
+   },
+   {
+    "link": "https://news.google.com/rss/articles/CBMiWkFVX3lxTFAyZFhOM2tjM0pWOUVCV295bUdIcG53d1JLRHNkUUpCRnBGOGhvdF9EZmZ3a003QlcwOEtFbmxkOHZ5cnlTYnMzVExOSlpnblRzRGR6ekpsS0ZrQQ?oc=5",
+    "time": "2026-11-25T01:20:00.000Z",
+    "title": "2奈米落腳德州 房產稅減免是關鍵？ 台積電回應了"
+   }
+  ],
+  "news_total": 74
+ },
+ {
+  "date": "2026-11-25",
+  "stock_id": "2002",
+  "name": "中鋼",
+  "mentions": 1,
+  "in_watchlist": true,
+  "titles": [
+   {
+    "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE5KYUFFVXhER1NZeGNRU0NIaHFJeldZeWwtWFlKVllOd0NyZkN0b3ZSMy03ME5BejBNc3JtakExYThaRW85S0FsN2dseUkyX0FSSWtzSHFB?oc=5",
+    "time": "2026-11-25T06:05:00.000Z",
+    "title": "個股：中鋼(2002)節能減碳成果獲肯定，連續16年獲頒溫室氣體減量績優廠商"
+   }
+  ],
+  "news_total": 74
+ },
+ {
+  "date": "2026-11-25",
+  "stock_id": "0050",
+  "name": "元大台灣50",
+  "mentions": 1,
+  "in_watchlist": true,
+  "titles": [
+   {
+    "link": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE43OGNXSTRncVJ4V0lFSUhpUXhrdzV3dU1JVjdIa200cTMwX015bEc2dXk0TENoUUpZQlZzRW8zWjR1UnN6MlVkY0FJeGJLSFAwUUtPWWlndzJUUQ?oc=5",
+    "time": "2026-11-25T00:27:00.000Z",
+    "title": "今年首例！「元大台灣50反1」爆3946萬違約交割"
+   }
+  ],
+  "news_total": 74
+ },
+ {
+  "date": "2026-11-25",
+  "stock_id": "3081",
+  "name": "聯亞",
+  "mentions": 1,
+  "in_watchlist": true,
+  "titles": [
+   {
+    "link": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE9xNkJmRzQzbVc4c1ZkZllrbUZoMWRtWDQwZUpHN2pqSHdoR3hhaENfaWxoa3ZHczNhaFdPRTRFV2FFUlNPcndTQWZ5QTBFN21sbXNKMV9Sel81UQ?oc=5",
+    "time": "2026-11-24T09:55:00.000Z",
+    "title": "0050今年吸金破兆！ 有望蟬聯亞太ETF淨申購冠軍"
+   }
+  ],
+  "news_total": 74
+ },
+ {
+  "date": "2026-11-25",
+  "stock_id": "2454",
+  "name": "聯發科",
+  "mentions": 1,
+  "in_watchlist": true,
+  "titles": [
+   {
+    "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE01dTJaekxXV21tbE4teDY0T0lFeUk2cTBNY0MzRDBkdE95cDZvVXlpLXJsbE4tX24xS2wzTi1pbVlYak1ZQklhREhDRXJIWkkwd1hHbURR?oc=5",
+    "time": "2026-11-25T02:51:00.000Z",
+    "title": "打回原形？台股再挫3400點 聯發科、聯電摔跌停"
+   }
+  ],
+  "news_total": 74
+ },
+ {
+  "date": "2026-11-25",
+  "stock_id": "2308",
+  "name": "台達電",
+  "mentions": 1,
+  "in_watchlist": true,
+  "titles": [
+   {
+    "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE0xcUl6bmZoTWNJdjZOaEpJZmM0UC1nM0ZkQl9tM0NiUGhjN25Wa09tQVNMSmljLTlrR1p0T0FHRHJ5TktDT25IVDVkMjNpbVF3WFVXYlhB?oc=5",
+    "time": "2026-11-25T01:19:00.000Z",
+    "title": "台股重挫1800點！台達電、台塑化走高 資安概念逆勢強"
+   }
+  ],
+  "news_total": 74
+ },
+ {
+  "date": "2026-11-25",
+  "stock_id": "2303",
+  "name": "聯電",
+  "mentions": 1,
+  "in_watchlist": true,
+  "titles": [
+   {
+    "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE01dTJaekxXV21tbE4teDY0T0lFeUk2cTBNY0MzRDBkdE95cDZvVXlpLXJsbE4tX24xS2wzTi1pbVlYak1ZQklhREhDRXJIWkkwd1hHbURR?oc=5",
+    "time": "2026-11-25T02:51:00.000Z",
+    "title": "打回原形？台股再挫3400點 聯發科、聯電摔跌停"
+   }
+  ],
+  "news_total": 74
+ },
+ {
+  "date": "2026-11-25",
+  "stock_id": "1472",
+  "name": "三洋實業",
+  "mentions": 1,
+  "in_watchlist": false,
+  "titles": [
+   {
+    "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE1nR2gtemRscnhSYk9NUVlEODdiM1VxQ2VfVVA3VEFQeGdIcXZlemRVc1hqQTVSNDVqRTVRdWZCV3ExNHljdnU3OGFOcU1tSktqVVRuX0tn?oc=5",
+    "time": "2026-11-25T01:05:00.000Z",
+    "title": "個股：手握充沛案量，三洋實業(1472)前三季已取得標案總金額逾222億元"
+   }
+  ],
+  "news_total": 74
+ },
+ {
+  "date": "2026-11-25",
+  "stock_id": "1466",
+  "name": "聚隆",
+  "mentions": 1,
+  "in_watchlist": false,
+  "titles": [
+   {
+    "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTFA4cnJrd1JPSW9qcE5PWC1COEJoMllQUFp4T2U0R1k0SjRUVVZfZTFtckZPeEh5YVNQWEdQMnE0MElyYWV4U1RpVkdTZ0lUeTNMbVBEMlRR?oc=5",
+    "time": "2026-11-25T07:05:00.000Z",
+    "title": "個股：聚隆(1466)前三季EPS 0.21元轉盈，轉型材料創新攻環保/軍工國防商機"
+   }
+  ],
+  "news_total": 74
+ },
+ {
+  "date": "2026-11-25",
+  "stock_id": "1216",
+  "name": "統一",
+  "mentions": 1,
+  "in_watchlist": false,
+  "titles": [
+   {
+    "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE1xWW5yVmg5YzY0ek0tazZvNkdNdmloQkV4Nk9nMFFDdVAydjdHTGh4UU1BeDRCWUlpcmprcWxkRXpvTTNHZVVJU05mUS1jS2podkpNc2R3?oc=5",
+    "time": "2026-11-25T08:05:00.000Z",
+    "title": "焦點股：統一(1216)前三季獲利賺贏去年整年，持續擴張版圖，股價逆勢上漲"
+   }
+  ],
+  "news_total": 74
+ },
+ {
+  "date": "2026-11-25",
+  "stock_id": "8436",
+  "name": "大江",
+  "mentions": 1,
+  "in_watchlist": false,
+  "titles": [
+   {
+    "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE1LYm91S3BQYlpLY0U1X0xUbF9PVF9VN2tWMVhqcURQSWlvUnZ4SzJ4UVJoYWJqZFVobUd3SnpIOGNQWWV0SmlLOHRwMldicjRMdzl6X3Zn?oc=5",
+    "time": "2026-11-25T07:05:00.000Z",
+    "title": "個股：保健新劑型商機升溫，大江(8436)Jellie果凍平台雙展吸引65國買主"
+   }
+  ],
+  "news_total": 74
+ },
+ {
+  "date": "2026-11-25",
+  "stock_id": "7983",
+  "name": "欣亞",
+  "mentions": 1,
+  "in_watchlist": false,
+  "titles": [
+   {
+    "link": "https://news.google.com/rss/articles/CBMiVEFVX3lxTE13WXR5OWVzYnh3YTRVeTF2cnRUWVhtU0lEWkNIdDh1R1pGTnlrUDRnaGd6Y2IxWGY2UnhSRVNEeGRaTEtEbUEtUHFoc3RRaGRZWFFXaA?oc=5",
+    "time": "2026-11-25T05:05:00.000Z",
+    "title": "未上市：欣亞(7983)24日送件，最快12月中旬登興櫃"
+   }
+  ],
+  "news_total": 74
+ },
+ {
+  "date": "2026-11-25",
+  "stock_id": "6505",
+  "name": "台塑化",
+  "mentions": 1,
+  "in_watchlist": false,
+  "titles": [
+   {
+    "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE0xcUl6bmZoTWNJdjZOaEpJZmM0UC1nM0ZkQl9tM0NiUGhjN25Wa09tQVNMSmljLTlrR1p0T0FHRHJ5TktDT25IVDVkMjNpbVF3WFVXYlhB?oc=5",
+    "time": "2026-11-25T01:19:00.000Z",
+    "title": "台股重挫1800點！台達電、台塑化走高 資安概念逆勢強"
+   }
+  ],
+  "news_total": 74
+ },
+ {
+  "date": "2026-11-25",
+  "stock_id": "4904",
+  "name": "遠傳",
+  "mentions": 1,
+  "in_watchlist": false,
+  "titles": [
+   {
+    "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE9LZkpjOFlPNmIzNlNTYzRpLUY0c1dtcVhKMWdFOGJKc1FBTjhYY3gxQ2ZNQkc1eVNPVV9Sa2dEVzl1MTROMVpQMkV0TmVtLXNZdDhKVC1R?oc=5",
+    "time": "2026-11-25T07:05:00.000Z",
+    "title": "個股：遠傳(4904)總座稱發展AI沒有回頭路，打造遠傳智靈加速創新服務客戶"
+   }
+  ],
+  "news_total": 74
+ },
+ {
+  "date": "2026-11-25",
+  "stock_id": "3680",
+  "name": "家登",
+  "mentions": 1,
+  "in_watchlist": false,
+  "titles": [
+   {
+    "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE8zQUVka3VjUHQzQmp3di0yemtXUmNQTFVOQnNpQlZpTzBsaDRTZlg3bjc1c0MzaTBJejNqQmtxbTZYbzcwWDFzZnRJWDZRTERsZzZTSU1R?oc=5",
+    "time": "2026-11-25T08:05:00.000Z",
+    "title": "個股：家登(3680)董座稱股價終究回歸基本面，仍高度樂觀看待AI產業"
+   }
+  ],
+  "news_total": 74
+ },
+ {
+  "date": "2026-11-25",
+  "stock_id": "2707",
+  "name": "晶華",
+  "mentions": 1,
+  "in_watchlist": false,
+  "titles": [
+   {
+    "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE5NY2lELTc1X0RaRC1QR29Eb2tSVVVDUzhhZjhTUnBxbS1GX0N4RUpqeGt4dHBmdEdKVC11dHBrWUxpaTdid05IdHQtcXY3Y0hpM1lBUzNn?oc=5",
+    "time": "2026-11-25T07:05:00.000Z",
+    "title": "個股：晶華(2707)董座看好AI榮景有望延續兩年，舊金山據點2029年完整貢獻"
+   }
+  ],
+  "news_total": 74
+ },
+ {
   "date": "2026-11-24",
   "stock_id": "2330",
   "name": "台積電",
@@ -56,21 +301,6 @@
  },
  {
   "date": "2026-11-24",
-  "stock_id": "2382",
-  "name": "廣達",
-  "mentions": 1,
-  "in_watchlist": true,
-  "titles": [
-   {
-    "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTFBEZXdmdWpCOGtoM09Fd3ItY1lySFlTM2tEdEZxbjdXTWJTNVZjSzZMV2oydmFKYjdHRUtpeFg0bF9fMEtmMUhGUlpuX3oyLWxfSGd4SU1R?oc=5",
-    "time": "2026-11-24T06:05:00.000Z",
-    "title": "個股：AI教父回歸，AI大廠股價獲救，廣達/緯創/緯穎PE跌破10倍直接鎖漲停"
-   }
-  ],
-  "news_total": 85
- },
- {
-  "date": "2026-11-24",
   "stock_id": "6830",
   "name": "汎銓",
   "mentions": 1,
@@ -95,21 +325,6 @@
     "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTFBEZXdmdWpCOGtoM09Fd3ItY1lySFlTM2tEdEZxbjdXTWJTNVZjSzZMV2oydmFKYjdHRUtpeFg0bF9fMEtmMUhGUlpuX3oyLWxfSGd4SU1R?oc=5",
     "time": "2026-11-24T06:05:00.000Z",
     "title": "個股：AI教父回歸，AI大廠股價獲救，廣達/緯創/緯穎PE跌破10倍直接鎖漲停"
-   }
-  ],
-  "news_total": 85
- },
- {
-  "date": "2026-11-24",
-  "stock_id": "2454",
-  "name": "聯發科",
-  "mentions": 1,
-  "in_watchlist": true,
-  "titles": [
-   {
-    "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE56MFVweHJoT25CLTZ2Smg1LWdhUVpQTmhIYUxiT0hzUnRsNHoyZFdfWDZDYnM1dGRHS2ZKc3Jhb1dNUlAzVEsyNGRkTTZQVVFQcEx1TmRn?oc=5",
-    "time": "2026-11-24T01:07:00.000Z",
-    "title": "台股爆漲3300點！台積電、聯發科、鴻海全亮燈 近600家飆漲停"
    }
   ],
   "news_total": 85
@@ -146,45 +361,30 @@
  },
  {
   "date": "2026-11-24",
-  "stock_id": "2344",
-  "name": "華邦電",
+  "stock_id": "2454",
+  "name": "聯發科",
   "mentions": 1,
-  "in_watchlist": false,
+  "in_watchlist": true,
   "titles": [
    {
-    "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE1HeXpxQm1kX1g0SE9Qd0tZNWFYY2c0cVFfdU1rZ0Q2Nl9NN29KWElrd0U2bVV4b2N3RS1NS1FFM3lxdTRyQ2gxVG5SWHV1MlhXaDVrVGJn?oc=5",
-    "time": "2026-11-24T05:05:00.000Z",
-    "title": "個股：華邦電(2344)攜手成大設共同研發中心，年投千萬培育半導體人才"
+    "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE56MFVweHJoT25CLTZ2Smg1LWdhUVpQTmhIYUxiT0hzUnRsNHoyZFdfWDZDYnM1dGRHS2ZKc3Jhb1dNUlAzVEsyNGRkTTZQVVFQcEx1TmRn?oc=5",
+    "time": "2026-11-24T01:07:00.000Z",
+    "title": "台股爆漲3300點！台積電、聯發科、鴻海全亮燈 近600家飆漲停"
    }
   ],
   "news_total": 85
  },
  {
   "date": "2026-11-24",
-  "stock_id": "6925",
-  "name": "意藍",
+  "stock_id": "2382",
+  "name": "廣達",
   "mentions": 1,
-  "in_watchlist": false,
+  "in_watchlist": true,
   "titles": [
    {
-    "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE94YWdVd1p4S09OeUhPNzRpS3hldG9pOTBEOU5lYVVTMUt3V3BER3NRQzFBeTdjVTNzVWZFLUtTcnFfNmhxa0pHeGVBU2xUUmR4bmFaYlVn?oc=5",
+    "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTFBEZXdmdWpCOGtoM09Fd3ItY1lySFlTM2tEdEZxbjdXTWJTNVZjSzZMV2oydmFKYjdHRUtpeFg0bF9fMEtmMUhGUlpuX3oyLWxfSGd4SU1R?oc=5",
     "time": "2026-11-24T06:05:00.000Z",
-    "title": "個股：意藍(6925)自結10月EPS 0.41元，Q4旺季營運動能可期"
-   }
-  ],
-  "news_total": 85
- },
- {
-  "date": "2026-11-24",
-  "stock_id": "6143",
-  "name": "振曜",
-  "mentions": 1,
-  "in_watchlist": false,
-  "titles": [
-   {
-    "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE9vNGdTQ19vVVJSdEpQcWVhMHpsVGxaRjFZaEstNGZYNmk5WjY3SUJ0dUkxdTdfQXFwczlBWlZOYTFXN1QyamI4UlpYNnBEOGVfLVI3MGd3?oc=5",
-    "time": "2026-11-24T04:05:00.000Z",
-    "title": "個股：振曜(6143)Q4不旺力拚持平Q3，明年攜大客戶再推全彩電子書全球首發"
+    "title": "個股：AI教父回歸，AI大廠股價獲救，廣達/緯創/緯穎PE跌破10倍直接鎖漲停"
    }
   ],
   "news_total": 85
@@ -200,21 +400,6 @@
     "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTFBYRXM2b1BzLUZDQ0Q3RmdnR1lPM1R3M3RoTG9EZVloc29iS0oxd1A0RUNJN0U0dTQxalZKTDBZVkdxd2R5VDNCOXJwWGlBQlRheEg3NUdB?oc=5",
     "time": "2026-11-24T01:05:00.000Z",
     "title": "個股：遠傳(4904)稱行動通信與衛星頻譜共存共用為國際趨勢，無移頻之必要"
-   }
-  ],
-  "news_total": 85
- },
- {
-  "date": "2026-11-24",
-  "stock_id": "4770",
-  "name": "上品",
-  "mentions": 1,
-  "in_watchlist": false,
-  "titles": [
-   {
-    "link": "https://news.google.com/rss/articles/CBMiVEFVX3lxTE5ydkhLMFFvak1kUVVEWDdhMXpqdmQwRi01WUM5MEdCQ0xFajJKX3lFaGZMZmR0THVaQjhjZWRKTEJFQk14c19FNS1EZWRBc1BYaEhBbw?oc=5",
-    "time": "2026-11-24T04:05:00.000Z",
-    "title": "個股：上品(4770)在手訂單持續攀升，2027年擴產與高毛利產品接棒助攻獲利"
    }
   ],
   "news_total": 85
@@ -281,15 +466,75 @@
  },
  {
   "date": "2026-11-24",
-  "stock_id": "009830",
-  "name": "中信金屬及礦業",
+  "stock_id": "2344",
+  "name": "華邦電",
   "mentions": 1,
   "in_watchlist": false,
   "titles": [
    {
-    "link": "https://news.google.com/rss/articles/CBMiVEFVX3lxTE5GRkV0dmNJVVZzSWd6SDlkYUxIUlFBNlg5NDQ0Nk0tR3ZUclBJcGRyR0JSMGRwaXBlcDl5NHhmQzd0UEZiSzBNeTRTVzBXZFZjUVl5Sg?oc=5",
-    "time": "2026-11-24T03:05:00.000Z",
-    "title": "基金：中信金屬及礦業(009830)募集至27日，聚焦美金屬礦業、AI與能源轉型商機"
+    "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE1HeXpxQm1kX1g0SE9Qd0tZNWFYY2c0cVFfdU1rZ0Q2Nl9NN29KWElrd0U2bVV4b2N3RS1NS1FFM3lxdTRyQ2gxVG5SWHV1MlhXaDVrVGJn?oc=5",
+    "time": "2026-11-24T05:05:00.000Z",
+    "title": "個股：華邦電(2344)攜手成大設共同研發中心，年投千萬培育半導體人才"
+   }
+  ],
+  "news_total": 85
+ },
+ {
+  "date": "2026-11-24",
+  "stock_id": "7827",
+  "name": "漢康-KY創",
+  "mentions": 1,
+  "in_watchlist": false,
+  "titles": [
+   {
+    "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE92WndBMGltdjh2WVQzbnpuM0o1aVVPaEtWeVBmZV9PZ0NDWTNmbHlQOWZJZThtN3ZEdzRUY0V0V2JOSF9lME5Mb2hIeGRVM0xYY3l4dGln?oc=5",
+    "time": "2026-11-24T02:05:00.000Z",
+    "title": "個股：漢康-KY創(7827)HCB301臨床暫停股價崩，董座自掏腰包加碼持股"
+   }
+  ],
+  "news_total": 85
+ },
+ {
+  "date": "2026-11-24",
+  "stock_id": "6925",
+  "name": "意藍",
+  "mentions": 1,
+  "in_watchlist": false,
+  "titles": [
+   {
+    "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE94YWdVd1p4S09OeUhPNzRpS3hldG9pOTBEOU5lYVVTMUt3V3BER3NRQzFBeTdjVTNzVWZFLUtTcnFfNmhxa0pHeGVBU2xUUmR4bmFaYlVn?oc=5",
+    "time": "2026-11-24T06:05:00.000Z",
+    "title": "個股：意藍(6925)自結10月EPS 0.41元，Q4旺季營運動能可期"
+   }
+  ],
+  "news_total": 85
+ },
+ {
+  "date": "2026-11-24",
+  "stock_id": "6143",
+  "name": "振曜",
+  "mentions": 1,
+  "in_watchlist": false,
+  "titles": [
+   {
+    "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE9vNGdTQ19vVVJSdEpQcWVhMHpsVGxaRjFZaEstNGZYNmk5WjY3SUJ0dUkxdTdfQXFwczlBWlZOYTFXN1QyamI4UlpYNnBEOGVfLVI3MGd3?oc=5",
+    "time": "2026-11-24T04:05:00.000Z",
+    "title": "個股：振曜(6143)Q4不旺力拚持平Q3，明年攜大客戶再推全彩電子書全球首發"
+   }
+  ],
+  "news_total": 85
+ },
+ {
+  "date": "2026-11-24",
+  "stock_id": "4770",
+  "name": "上品",
+  "mentions": 1,
+  "in_watchlist": false,
+  "titles": [
+   {
+    "link": "https://news.google.com/rss/articles/CBMiVEFVX3lxTE5ydkhLMFFvak1kUVVEWDdhMXpqdmQwRi01WUM5MEdCQ0xFajJKX3lFaGZMZmR0THVaQjhjZWRKTEJFQk14c19FNS1EZWRBc1BYaEhBbw?oc=5",
+    "time": "2026-11-24T04:05:00.000Z",
+    "title": "個股：上品(4770)在手訂單持續攀升，2027年擴產與高毛利產品接棒助攻獲利"
    }
   ],
   "news_total": 85
@@ -311,6 +556,21 @@
  },
  {
   "date": "2026-11-24",
+  "stock_id": "009830",
+  "name": "中信金屬及礦業",
+  "mentions": 1,
+  "in_watchlist": false,
+  "titles": [
+   {
+    "link": "https://news.google.com/rss/articles/CBMiVEFVX3lxTE5GRkV0dmNJVVZzSWd6SDlkYUxIUlFBNlg5NDQ0Nk0tR3ZUclBJcGRyR0JSMGRwaXBlcDl5NHhmQzd0UEZiSzBNeTRTVzBXZFZjUVl5Sg?oc=5",
+    "time": "2026-11-24T03:05:00.000Z",
+    "title": "基金：中信金屬及礦業(009830)募集至27日，聚焦美金屬礦業、AI與能源轉型商機"
+   }
+  ],
+  "news_total": 85
+ },
+ {
+  "date": "2026-11-24",
   "stock_id": "7942",
   "name": "東佑達",
   "mentions": 1,
@@ -320,21 +580,6 @@
     "link": "https://news.google.com/rss/articles/CBMiVEFVX3lxTE5BXzFqdDFuaTBBT1NCWllMZGZQWkxEOEhLcHhUR2ZEU0F6ZUxJSHpDdXRXVHkyeXIxM0VlOVVTbTZWRjVDWEp6b1IzVzl5NjVZZUdueg?oc=5",
     "time": "2026-11-24T05:05:00.000Z",
     "title": "興櫃：東佑達(7942)參展無人載具暨機器人展，聚焦半導體、人形機器人及CPO"
-   }
-  ],
-  "news_total": 85
- },
- {
-  "date": "2026-11-24",
-  "stock_id": "7827",
-  "name": "漢康-KY創",
-  "mentions": 1,
-  "in_watchlist": false,
-  "titles": [
-   {
-    "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE92WndBMGltdjh2WVQzbnpuM0o1aVVPaEtWeVBmZV9PZ0NDWTNmbHlQOWZJZThtN3ZEdzRUY0V0V2JOSF9lME5Mb2hIeGRVM0xYY3l4dGln?oc=5",
-    "time": "2026-11-24T02:05:00.000Z",
-    "title": "個股：漢康-KY創(7827)HCB301臨床暫停股價崩，董座自掏腰包加碼持股"
    }
   ],
   "news_total": 85
@@ -411,75 +656,15 @@
  },
  {
   "date": "2026-11-23",
-  "stock_id": "7781",
-  "name": "昕力資*",
+  "stock_id": "3653",
+  "name": "健策",
   "mentions": 1,
   "in_watchlist": false,
   "titles": [
    {
-    "link": "https://news.google.com/rss/articles/CBMiVEFVX3lxTFBVTy03LUs3ZzhXMlp0M2R0d21hdzQ2dDZYRkRCc2hMZ3NHTkxsUDlMelFXLTJqMjFkQ1ZmUTYyWGd5czZMSEZjZDJLa0FOaHBLbnFSRw?oc=5",
-    "time": "2026-11-23T01:05:00.000Z",
-    "title": "興櫃：昕力資*(7781)力拚Q4單季轉盈，規劃12月中旬申請上櫃"
-   }
-  ],
-  "news_total": 62
- },
- {
-  "date": "2026-11-23",
-  "stock_id": "6603",
-  "name": "富強鑫",
-  "mentions": 1,
-  "in_watchlist": false,
-  "titles": [
-   {
-    "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTFBPdHpsOUtzSVBWdHVyMmZXVHZ3a0NtckRvUHVDY0hCSXRSaG1NcndYQnY2eGlZaEpORURtbzBGUl9pSzhBUXNfM3pCRXlXTFNyRU5TOWxR?oc=5",
-    "time": "2026-11-23T04:05:00.000Z",
-    "title": "個股：富強鑫(6603)Q4可望為全年營運高峰，AI及半導體明年陸續出貨"
-   }
-  ],
-  "news_total": 62
- },
- {
-  "date": "2026-11-23",
-  "stock_id": "6590",
-  "name": "普鴻",
-  "mentions": 1,
-  "in_watchlist": false,
-  "titles": [
-   {
-    "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE9BMThoY0lmekhOeWRoMmZSMVY5a2c0aktQWkYwTGpNT1pNdHBNTmtvMEJqS1VpcWZOeS01M1dCdXRvM3RsYll1S1JYellkb0ZsNlJPVnFB?oc=5",
-    "time": "2026-11-23T03:05:00.000Z",
-    "title": "個股：普鴻(6590)攜手資策會，發表PQC遷移實務白皮書"
-   }
-  ],
-  "news_total": 62
- },
- {
-  "date": "2026-11-23",
-  "stock_id": "5434",
-  "name": "崇越",
-  "mentions": 1,
-  "in_watchlist": false,
-  "titles": [
-   {
-    "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE9oaExaZzVzR1JEd09TMF9PNXdpLUdpWm9BZV9Fd2N3cmJUYTFUU0pncTR1Z2JQV21GeUxJRjhVNFppNVNtOFpqWUFpbWJlRE9YN1dnNTFB?oc=5",
-    "time": "2026-11-23T01:05:00.000Z",
-    "title": "個股：半導體材料需求方興未艾，崇越(5434)2027年光阻液、矽晶圓接棒成長"
-   }
-  ],
-  "news_total": 62
- },
- {
-  "date": "2026-11-23",
-  "stock_id": "2357",
-  "name": "華碩",
-  "mentions": 1,
-  "in_watchlist": false,
-  "titles": [
-   {
-    "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTFBtazFiVS1DS0x4d19iZjlSREJvdEtIeUlFeVV0RDNHUlowd3pLT3hnZUtuSld2b2E0OVZRSnRQSi1vRXRNWGtkTW5qbGxYZVpQejFUMWVR?oc=5",
+    "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE91dHdwVDh5ZENlUEJIQkplOXpRN0J2TTg4UlJIYTEtanVSa1E3U2hjUEh2YmJrZEpUaXhmMF9UMkY0eDR0NHp4dnhOcUhmRWpaRWxkb3FB?oc=5",
     "time": "2026-11-23T05:05:00.000Z",
-    "title": "個股：華碩(2357)深化商用佈局，ASUS EXPERTHUB揮軍海外，首攻泰國市場"
+    "title": "個股：健策10月每股盈餘6.7元，年增1.26倍，今股價殺跌停後翻紅，振幅近13%"
    }
   ],
   "news_total": 62
@@ -501,15 +686,75 @@
  },
  {
   "date": "2026-11-23",
-  "stock_id": "00757",
-  "name": "ETF",
+  "stock_id": "2357",
+  "name": "華碩",
   "mentions": 1,
   "in_watchlist": false,
   "titles": [
    {
-    "link": "https://news.google.com/rss/articles/CBMiVEFVX3lxTFBfNjNRX2p3QXVSX1lJSmJTUkE5ME5KT1V6U2FWNFhyM0xQUmVqZmlWSjduTkFOVVpwSmM5MVlfeER5Qm0zZFFGbFpNNHpNWmFOR3JLaQ?oc=5",
-    "time": "2026-11-23T02:05:00.000Z",
-    "title": "基金：統一FANG+ETF(00757)分割投票倒數，1張門檻有望降至2萬元"
+    "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTFBtazFiVS1DS0x4d19iZjlSREJvdEtIeUlFeVV0RDNHUlowd3pLT3hnZUtuSld2b2E0OVZRSnRQSi1vRXRNWGtkTW5qbGxYZVpQejFUMWVR?oc=5",
+    "time": "2026-11-23T05:05:00.000Z",
+    "title": "個股：華碩(2357)深化商用佈局，ASUS EXPERTHUB揮軍海外，首攻泰國市場"
+   }
+  ],
+  "news_total": 62
+ },
+ {
+  "date": "2026-11-23",
+  "stock_id": "5434",
+  "name": "崇越",
+  "mentions": 1,
+  "in_watchlist": false,
+  "titles": [
+   {
+    "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE9oaExaZzVzR1JEd09TMF9PNXdpLUdpWm9BZV9Fd2N3cmJUYTFUU0pncTR1Z2JQV21GeUxJRjhVNFppNVNtOFpqWUFpbWJlRE9YN1dnNTFB?oc=5",
+    "time": "2026-11-23T01:05:00.000Z",
+    "title": "個股：半導體材料需求方興未艾，崇越(5434)2027年光阻液、矽晶圓接棒成長"
+   }
+  ],
+  "news_total": 62
+ },
+ {
+  "date": "2026-11-23",
+  "stock_id": "6590",
+  "name": "普鴻",
+  "mentions": 1,
+  "in_watchlist": false,
+  "titles": [
+   {
+    "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE9BMThoY0lmekhOeWRoMmZSMVY5a2c0aktQWkYwTGpNT1pNdHBNTmtvMEJqS1VpcWZOeS01M1dCdXRvM3RsYll1S1JYellkb0ZsNlJPVnFB?oc=5",
+    "time": "2026-11-23T03:05:00.000Z",
+    "title": "個股：普鴻(6590)攜手資策會，發表PQC遷移實務白皮書"
+   }
+  ],
+  "news_total": 62
+ },
+ {
+  "date": "2026-11-23",
+  "stock_id": "6603",
+  "name": "富強鑫",
+  "mentions": 1,
+  "in_watchlist": false,
+  "titles": [
+   {
+    "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTFBPdHpsOUtzSVBWdHVyMmZXVHZ3a0NtckRvUHVDY0hCSXRSaG1NcndYQnY2eGlZaEpORURtbzBGUl9pSzhBUXNfM3pCRXlXTFNyRU5TOWxR?oc=5",
+    "time": "2026-11-23T04:05:00.000Z",
+    "title": "個股：富強鑫(6603)Q4可望為全年營運高峰，AI及半導體明年陸續出貨"
+   }
+  ],
+  "news_total": 62
+ },
+ {
+  "date": "2026-11-23",
+  "stock_id": "7781",
+  "name": "昕力資*",
+  "mentions": 1,
+  "in_watchlist": false,
+  "titles": [
+   {
+    "link": "https://news.google.com/rss/articles/CBMiVEFVX3lxTFBVTy03LUs3ZzhXMlp0M2R0d21hdzQ2dDZYRkRCc2hMZ3NHTkxsUDlMelFXLTJqMjFkQ1ZmUTYyWGd5czZMSEZjZDJLa0FOaHBLbnFSRw?oc=5",
+    "time": "2026-11-23T01:05:00.000Z",
+    "title": "興櫃：昕力資*(7781)力拚Q4單季轉盈，規劃12月中旬申請上櫃"
    }
   ],
   "news_total": 62
@@ -531,21 +776,6 @@
  },
  {
   "date": "2026-11-23",
-  "stock_id": "3653",
-  "name": "健策",
-  "mentions": 1,
-  "in_watchlist": false,
-  "titles": [
-   {
-    "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE91dHdwVDh5ZENlUEJIQkplOXpRN0J2TTg4UlJIYTEtanVSa1E3U2hjUEh2YmJrZEpUaXhmMF9UMkY0eDR0NHp4dnhOcUhmRWpaRWxkb3FB?oc=5",
-    "time": "2026-11-23T05:05:00.000Z",
-    "title": "個股：健策10月每股盈餘6.7元，年增1.26倍，今股價殺跌停後翻紅，振幅近13%"
-   }
-  ],
-  "news_total": 62
- },
- {
-  "date": "2026-11-23",
   "stock_id": "7889",
   "name": "騰勢",
   "mentions": 1,
@@ -555,6 +785,21 @@
     "link": "https://news.google.com/rss/articles/CBMiVEFVX3lxTFBvR0ZVV0FCcEpieE5ralpRSjVsTGc0OExxR1NEeEtsc0tmalFCa093THIweGxMN0VjTjA5bDdfby14NHl6Mk1XY19aemdsWnRyRklpTQ?oc=5",
     "time": "2026-11-23T02:05:00.000Z",
     "title": "準上櫃：騰勢(7889)競拍超額認購比例達2.42倍，承銷價47.19元，12/1上櫃"
+   }
+  ],
+  "news_total": 62
+ },
+ {
+  "date": "2026-11-23",
+  "stock_id": "00757",
+  "name": "ETF",
+  "mentions": 1,
+  "in_watchlist": false,
+  "titles": [
+   {
+    "link": "https://news.google.com/rss/articles/CBMiVEFVX3lxTFBfNjNRX2p3QXVSX1lJSmJTUkE5ME5KT1V6U2FWNFhyM0xQUmVqZmlWSjduTkFOVVpwSmM5MVlfeER5Qm0zZFFGbFpNNHpNWmFOR3JLaQ?oc=5",
+    "time": "2026-11-23T02:05:00.000Z",
+    "title": "基金：統一FANG+ETF(00757)分割投票倒數，1張門檻有望降至2萬元"
    }
   ],
   "news_total": 62
@@ -591,6 +836,21 @@
  },
  {
   "date": "2026-11-19",
+  "stock_id": "3443",
+  "name": "創意",
+  "mentions": 1,
+  "in_watchlist": true,
+  "titles": [
+   {
+    "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE5pT0t4bEpSTlk3Yzc5RzdmOG1OZWRmRjRaTVRyM2pNdlJNSGcwN3A0WDRkZ1VJZjNqRzVYdFdvelJlWjRFZ0tVU1F2cmM0UEhSYmhscEVB?oc=5",
+    "time": "2026-11-19T00:44:00.000Z",
+    "title": "「9大熱門股」驚爆違約交割 創意、欣興、華通全上榜"
+   }
+  ],
+  "news_total": 67
+ },
+ {
+  "date": "2026-11-19",
   "stock_id": "2313",
   "name": "華通",
   "mentions": 1,
@@ -621,15 +881,15 @@
  },
  {
   "date": "2026-11-19",
-  "stock_id": "3443",
-  "name": "創意",
+  "stock_id": "8069",
+  "name": "元太",
   "mentions": 1,
-  "in_watchlist": true,
+  "in_watchlist": false,
   "titles": [
    {
-    "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE5pT0t4bEpSTlk3Yzc5RzdmOG1OZWRmRjRaTVRyM2pNdlJNSGcwN3A0WDRkZ1VJZjNqRzVYdFdvelJlWjRFZ0tVU1F2cmM0UEhSYmhscEVB?oc=5",
-    "time": "2026-11-19T00:44:00.000Z",
-    "title": "「9大熱門股」驚爆違約交割 創意、欣興、華通全上榜"
+    "link": "https://news.google.com/rss/articles/CBMiVEFVX3lxTE9hUnNJb2VpeFR1Zkhuck00all4Q3UzVDFNbmh6Y3lwSGU5akQ4ZlMxNW5oT2hCMWJIWlpqaHU2dVhTUEtfc2Ffdnd6Q19uOWRmWjB0OQ?oc=5",
+    "time": "2026-11-19T05:05:00.000Z",
+    "title": "個股：元太(8069)大型看板接棒高速成長，外資看好跨界PTFE材料開闢新局"
    }
   ],
   "news_total": 67
@@ -651,30 +911,15 @@
  },
  {
   "date": "2026-11-19",
-  "stock_id": "3687",
-  "name": "歐買尬",
+  "stock_id": "6677",
+  "name": "瑩碩生技",
   "mentions": 1,
   "in_watchlist": false,
   "titles": [
    {
-    "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE5CR1dwVE9nYmNrSGNlcE5uc1hqcDdHVUNfZi1mZ2w1d29LeW51eXdwNEJoUmlzNzBVdVQxOWZlVXVURnh6RkVXWG5mMjRoOE1Fb0pOb3JB?oc=5",
-    "time": "2026-11-19T03:05:00.000Z",
-    "title": "個股：歐買尬(3687)擴大AI事業布局，搶攻電商短影音商機"
-   }
-  ],
-  "news_total": 67
- },
- {
-  "date": "2026-11-19",
-  "stock_id": "4439",
-  "name": "冠星-KY",
-  "mentions": 1,
-  "in_watchlist": false,
-  "titles": [
-   {
-    "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE5DdXgycEhhbktnRjMyejFPUmphTGVJR0gybTlNUG5rb3pVQkxWSy1ncTFfem41UGFocm1TVlh4R1ZBX2ZvdHV3OWY4VTd6eFc0Y3Z3OFNR?oc=5",
-    "time": "2026-11-19T04:05:00.000Z",
-    "title": "個股：冠星-KY(4439)耕耘日系客戶傳捷，奪亞瑟士大單，明年再戰雙位數成長"
+    "link": "https://news.google.com/rss/articles/CBMiVEFVX3lxTE1kXzhEWlNYMkJmRjZkWkNNZWo1ZklXbGlvTzY5RE5MU3FGYk1mOTRNVFhNT09tbU1DX0o4Q3BPd0JSd0U1X19mc2tkOFZDVmF2Y2piSg?oc=5",
+    "time": "2026-11-19T02:05:00.000Z",
+    "title": "興櫃：瑩碩生技(6677)海外布局步收成期，明年迎取證潮"
    }
   ],
   "news_total": 67
@@ -696,30 +941,30 @@
  },
  {
   "date": "2026-11-19",
-  "stock_id": "6677",
-  "name": "瑩碩生技",
+  "stock_id": "4439",
+  "name": "冠星-KY",
   "mentions": 1,
   "in_watchlist": false,
   "titles": [
    {
-    "link": "https://news.google.com/rss/articles/CBMiVEFVX3lxTE1kXzhEWlNYMkJmRjZkWkNNZWo1ZklXbGlvTzY5RE5MU3FGYk1mOTRNVFhNT09tbU1DX0o4Q3BPd0JSd0U1X19mc2tkOFZDVmF2Y2piSg?oc=5",
-    "time": "2026-11-19T02:05:00.000Z",
-    "title": "興櫃：瑩碩生技(6677)海外布局步收成期，明年迎取證潮"
+    "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE5DdXgycEhhbktnRjMyejFPUmphTGVJR0gybTlNUG5rb3pVQkxWSy1ncTFfem41UGFocm1TVlh4R1ZBX2ZvdHV3OWY4VTd6eFc0Y3Z3OFNR?oc=5",
+    "time": "2026-11-19T04:05:00.000Z",
+    "title": "個股：冠星-KY(4439)耕耘日系客戶傳捷，奪亞瑟士大單，明年再戰雙位數成長"
    }
   ],
   "news_total": 67
  },
  {
   "date": "2026-11-19",
-  "stock_id": "8069",
-  "name": "元太",
+  "stock_id": "3687",
+  "name": "歐買尬",
   "mentions": 1,
   "in_watchlist": false,
   "titles": [
    {
-    "link": "https://news.google.com/rss/articles/CBMiVEFVX3lxTE9hUnNJb2VpeFR1Zkhuck00all4Q3UzVDFNbmh6Y3lwSGU5akQ4ZlMxNW5oT2hCMWJIWlpqaHU2dVhTUEtfc2Ffdnd6Q19uOWRmWjB0OQ?oc=5",
-    "time": "2026-11-19T05:05:00.000Z",
-    "title": "個股：元太(8069)大型看板接棒高速成長，外資看好跨界PTFE材料開闢新局"
+    "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE5CR1dwVE9nYmNrSGNlcE5uc1hqcDdHVUNfZi1mZ2w1d29LeW51eXdwNEJoUmlzNzBVdVQxOWZlVXVURnh6RkVXWG5mMjRoOE1Fb0pOb3JB?oc=5",
+    "time": "2026-11-19T03:05:00.000Z",
+    "title": "個股：歐買尬(3687)擴大AI事業布局，搶攻電商短影音商機"
    }
   ],
   "news_total": 67
@@ -751,23 +996,8 @@
  },
  {
   "date": "2026-11-18",
-  "stock_id": "2455",
-  "name": "全新",
-  "mentions": 1,
-  "in_watchlist": true,
-  "titles": [
-   {
-    "link": "https://news.google.com/rss/articles/CBMiVEFVX3lxTE5mS0xxYlIyeEk5clAxc09DdVdYM1NIM1ZUaVRiVllhNm1tLUU2OWF4SU1FVkZma0E4WjNfbWRxN2dQMDhOYzZ5Z0J6cUpVOTRTcFF4dQ?oc=5",
-    "time": "2026-11-17T08:05:00.000Z",
-    "title": "基金：兆豐00913成分股調整3進3出今收盤後生效，納入南亞科、全新、精材"
-   }
-  ],
-  "news_total": 86
- },
- {
-  "date": "2026-11-18",
-  "stock_id": "6223",
-  "name": "旺矽",
+  "stock_id": "3105",
+  "name": "穩懋",
   "mentions": 1,
   "in_watchlist": true,
   "titles": [
@@ -775,21 +1005,6 @@
     "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE14cmFydzhublpNa1BqV2xyUHdTQmZsbU9XQkpBMnJXVDk4eGhZTWZnZGNXVFZuczRPRTVENHd0QXFmN3dLUUhqMGhfdFlmaHBjY1VJUm53?oc=5",
     "time": "2026-11-18T02:05:00.000Z",
     "title": "旺矽、穩懋、創意單日漲近一成 00418A成分股輪流發動"
-   }
-  ],
-  "news_total": 72
- },
- {
-  "date": "2026-11-18",
-  "stock_id": "3665",
-  "name": "貿聯-KY",
-  "mentions": 1,
-  "in_watchlist": true,
-  "titles": [
-   {
-    "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE9PR056b0RvUTdlaXUwa1MteUFlRGZfWDhVUnJqVmg3T0ljRTlHVGtBbzU3U3RzTGhjeXJnLVJzZEFZYWhNUEtPUTNOY1VuV2ItcHN1S0l3?oc=5",
-    "time": "2026-11-18T04:05:00.000Z",
-    "title": "個股：Interplex貢獻優於預期，貿聯-KY(3665)獲利動能大躍進，股價攻漲停"
    }
   ],
   "news_total": 72
@@ -811,8 +1026,38 @@
  },
  {
   "date": "2026-11-18",
-  "stock_id": "3105",
-  "name": "穩懋",
+  "stock_id": "2455",
+  "name": "全新",
+  "mentions": 1,
+  "in_watchlist": true,
+  "titles": [
+   {
+    "link": "https://news.google.com/rss/articles/CBMiVEFVX3lxTE5mS0xxYlIyeEk5clAxc09DdVdYM1NIM1ZUaVRiVllhNm1tLUU2OWF4SU1FVkZma0E4WjNfbWRxN2dQMDhOYzZ5Z0J6cUpVOTRTcFF4dQ?oc=5",
+    "time": "2026-11-17T08:05:00.000Z",
+    "title": "基金：兆豐00913成分股調整3進3出今收盤後生效，納入南亞科、全新、精材"
+   }
+  ],
+  "news_total": 86
+ },
+ {
+  "date": "2026-11-18",
+  "stock_id": "3665",
+  "name": "貿聯-KY",
+  "mentions": 1,
+  "in_watchlist": true,
+  "titles": [
+   {
+    "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE9PR056b0RvUTdlaXUwa1MteUFlRGZfWDhVUnJqVmg3T0ljRTlHVGtBbzU3U3RzTGhjeXJnLVJzZEFZYWhNUEtPUTNOY1VuV2ItcHN1S0l3?oc=5",
+    "time": "2026-11-18T04:05:00.000Z",
+    "title": "個股：Interplex貢獻優於預期，貿聯-KY(3665)獲利動能大躍進，股價攻漲停"
+   }
+  ],
+  "news_total": 72
+ },
+ {
+  "date": "2026-11-18",
+  "stock_id": "6223",
+  "name": "旺矽",
   "mentions": 1,
   "in_watchlist": true,
   "titles": [
@@ -820,21 +1065,6 @@
     "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE14cmFydzhublpNa1BqV2xyUHdTQmZsbU9XQkpBMnJXVDk4eGhZTWZnZGNXVFZuczRPRTVENHd0QXFmN3dLUUhqMGhfdFlmaHBjY1VJUm53?oc=5",
     "time": "2026-11-18T02:05:00.000Z",
     "title": "旺矽、穩懋、創意單日漲近一成 00418A成分股輪流發動"
-   }
-  ],
-  "news_total": 72
- },
- {
-  "date": "2026-11-18",
-  "stock_id": "3037",
-  "name": "欣興",
-  "mentions": 1,
-  "in_watchlist": true,
-  "titles": [
-   {
-    "link": "https://news.google.com/rss/articles/CBMiWkFVX3lxTFBsNjhnMnZfS2phM0pKR1dqVldFZTAyRnlZSkRxRWlDSDljaTBfTHRGMVhrVGpQcWE1VTU3QXM4QVB4ZTA2dThUWFUzWVBNU3B1NDJyUG5McGJDdw?oc=5",
-    "time": "2026-11-18T02:15:00.000Z",
-    "title": "輝達Q3營收翻倍成長！ 台廠供應鏈吃大補丸 點名京元電、矽品、欣興擴產"
    }
   ],
   "news_total": 72
@@ -886,93 +1116,18 @@
  },
  {
   "date": "2026-11-18",
-  "stock_id": "2413",
-  "name": "環科",
+  "stock_id": "3037",
+  "name": "欣興",
   "mentions": 1,
-  "in_watchlist": false,
+  "in_watchlist": true,
   "titles": [
    {
-    "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTFBHVTZEek40aV9GY2RpTUpza0ZSejFYZnQ5UEhsVFZ6X0VyOWYtNUR2aE05eXJqV3llMmZFd3Z4bXZQN2JtYlQxb0ZINE9PX3Brc18zdTRB?oc=5",
-    "time": "2026-11-18T06:05:00.000Z",
-    "title": "焦點股：環科(2413)前三季獲利大幅超越去年全年，盤中股價強攻漲停"
+    "link": "https://news.google.com/rss/articles/CBMiWkFVX3lxTFBsNjhnMnZfS2phM0pKR1dqVldFZTAyRnlZSkRxRWlDSDljaTBfTHRGMVhrVGpQcWE1VTU3QXM4QVB4ZTA2dThUWFUzWVBNU3B1NDJyUG5McGJDdw?oc=5",
+    "time": "2026-11-18T02:15:00.000Z",
+    "title": "輝達Q3營收翻倍成長！ 台廠供應鏈吃大補丸 點名京元電、矽品、欣興擴產"
    }
   ],
   "news_total": 72
- },
- {
-  "date": "2026-11-18",
-  "stock_id": "7848",
-  "name": "騏億鑫",
-  "mentions": 1,
-  "in_watchlist": false,
-  "titles": [
-   {
-    "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTFBzdklfUUR0S0pzSjNUb3V4QVg0cjNVVUlHYkxvQkdBYUcxMnlRelAtN1FyT2t1QW5Xd3JXdFRYOGlxNFpOYTBFXzJOX1A1VkxxQ0pTUnF3?oc=5",
-    "time": "2026-11-17T06:05:00.000Z",
-    "title": "個股：上櫃新兵騏億鑫(7848)營運亮眼，法人估今年每股淨利15～20元"
-   }
-  ],
-  "news_total": 86
- },
- {
-  "date": "2026-11-18",
-  "stock_id": "6796",
-  "name": "晉弘",
-  "mentions": 1,
-  "in_watchlist": false,
-  "titles": [
-   {
-    "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE9IS21CWXhxbEdRcVdSOHp5RGlTLWxBN1NrYnlVMjlUU1NXREhzRWV1bk1rZ0pZUmF5d3pNazlpWFdiaGlCQ1pHRnA3NjZ4eUpDcHFqXzRB?oc=5",
-    "time": "2026-11-17T08:05:00.000Z",
-    "title": "個股：晉弘(6796)Q4毛利率、獲利看升，不排除實施庫藏股"
-   }
-  ],
-  "news_total": 86
- },
- {
-  "date": "2026-11-18",
-  "stock_id": "6461",
-  "name": "益得",
-  "mentions": 1,
-  "in_watchlist": false,
-  "titles": [
-   {
-    "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE1mdGhBZjRrRzE1dEFwbU1KMDVuR3hWdjZUMW5vTUtyenhwc2tXeWZFZVJNb3ljVmIyeFlqcTNNNDF4ZWdQRklLWWtkdHJhZFA3dlhheTJB?oc=5",
-    "time": "2026-11-17T08:05:00.000Z",
-    "title": "個股：全球吸入劑加速低碳轉型，益得(6461)雙軌推進三複方、SABA吸入劑"
-   }
-  ],
-  "news_total": 86
- },
- {
-  "date": "2026-11-18",
-  "stock_id": "6416",
-  "name": "瑞祺電通",
-  "mentions": 1,
-  "in_watchlist": false,
-  "titles": [
-   {
-    "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE1qN1Z6RVJMNWlVYXhJRUhneFFLYlExRWdWX0dJTlJrR0c0c00zWEpROGVyVlNkMmlLVEQtV2JDa0NtVUs0Z1kxZW5xOTB0TVBERjVpUERn?oc=5",
-    "time": "2026-11-17T07:05:00.000Z",
-    "title": "焦點股：瑞祺電通(6416)Q3三率升，前三季EPS 5.4元，搭資安題材股價大漲"
-   }
-  ],
-  "news_total": 86
- },
- {
-  "date": "2026-11-18",
-  "stock_id": "4548",
-  "name": "名超",
-  "mentions": 1,
-  "in_watchlist": false,
-  "titles": [
-   {
-    "link": "https://news.google.com/rss/articles/CBMiVEFVX3lxTE1NWEVqVUJXbkZUb1hnTGdVcjVncEFiVlVRY0NJdTFLQWlyTVJtdkp2NmZvT1hVVTNxSUx1WjNuejB1OUJhdFd2LTNVZzNvcnFQTmFFMA?oc=5",
-    "time": "2026-11-17T07:05:00.000Z",
-    "title": "興櫃：名超(4548)登興櫃，AI與先進封裝擴產帶動，前3季營收獲利超越去年全年"
-   }
-  ],
-  "news_total": 86
  },
  {
   "date": "2026-11-18",
@@ -985,21 +1140,6 @@
     "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTFA5cHpJRlNEQmU1aWlrT2FCdzRzQUdGMEFxY2o0NVQ0YXFaSFMtcEIzYlo4ZTY0MTRPNlFDNzB3YnFGbE9MNXVsS0FwWE14QVFBdnBJVURn?oc=5",
     "time": "2026-11-17T08:05:00.000Z",
     "title": "個股：亞洲藏壽司(2754)明年台灣展店上看10家，年初將首度插旗泰國市場"
-   }
-  ],
-  "news_total": 86
- },
- {
-  "date": "2026-11-18",
-  "stock_id": "2408",
-  "name": "南亞科",
-  "mentions": 1,
-  "in_watchlist": false,
-  "titles": [
-   {
-    "link": "https://news.google.com/rss/articles/CBMiVEFVX3lxTE5mS0xxYlIyeEk5clAxc09DdVdYM1NIM1ZUaVRiVllhNm1tLUU2OWF4SU1FVkZma0E4WjNfbWRxN2dQMDhOYzZ5Z0J6cUpVOTRTcFF4dQ?oc=5",
-    "time": "2026-11-17T08:05:00.000Z",
-    "title": "基金：兆豐00913成分股調整3進3出今收盤後生效，納入南亞科、全新、精材"
    }
   ],
   "news_total": 86
@@ -1033,21 +1173,6 @@
    }
   ],
   "news_total": 72
- },
- {
-  "date": "2026-11-18",
-  "stock_id": "7861",
-  "name": "貝爾威勒",
-  "mentions": 1,
-  "in_watchlist": false,
-  "titles": [
-   {
-    "link": "https://news.google.com/rss/articles/CBMiVEFVX3lxTFBCZ0RZMGZScFpyRnJTWGRPYTd5bWpaOG5aNlNPSWFMUnlvbFFUajEyM3JRRnUwaHpQNnJ1MXFUeW5xZWNHbFB4dUROWWZSY1liVXZhSw?oc=5",
-    "time": "2026-11-17T08:05:00.000Z",
-    "title": "興櫃：貝爾威勒(7861)前三季賺逾三個股本，布局800V與EBO迎接AI資料中心升級"
-   }
-  ],
-  "news_total": 86
  },
  {
   "date": "2026-11-18",
@@ -1168,5 +1293,125 @@
    }
   ],
   "news_total": 72
+ },
+ {
+  "date": "2026-11-18",
+  "stock_id": "2413",
+  "name": "環科",
+  "mentions": 1,
+  "in_watchlist": false,
+  "titles": [
+   {
+    "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTFBHVTZEek40aV9GY2RpTUpza0ZSejFYZnQ5UEhsVFZ6X0VyOWYtNUR2aE05eXJqV3llMmZFd3Z4bXZQN2JtYlQxb0ZINE9PX3Brc18zdTRB?oc=5",
+    "time": "2026-11-18T06:05:00.000Z",
+    "title": "焦點股：環科(2413)前三季獲利大幅超越去年全年，盤中股價強攻漲停"
+   }
+  ],
+  "news_total": 72
+ },
+ {
+  "date": "2026-11-18",
+  "stock_id": "7861",
+  "name": "貝爾威勒",
+  "mentions": 1,
+  "in_watchlist": false,
+  "titles": [
+   {
+    "link": "https://news.google.com/rss/articles/CBMiVEFVX3lxTFBCZ0RZMGZScFpyRnJTWGRPYTd5bWpaOG5aNlNPSWFMUnlvbFFUajEyM3JRRnUwaHpQNnJ1MXFUeW5xZWNHbFB4dUROWWZSY1liVXZhSw?oc=5",
+    "time": "2026-11-17T08:05:00.000Z",
+    "title": "興櫃：貝爾威勒(7861)前三季賺逾三個股本，布局800V與EBO迎接AI資料中心升級"
+   }
+  ],
+  "news_total": 86
+ },
+ {
+  "date": "2026-11-18",
+  "stock_id": "7848",
+  "name": "騏億鑫",
+  "mentions": 1,
+  "in_watchlist": false,
+  "titles": [
+   {
+    "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTFBzdklfUUR0S0pzSjNUb3V4QVg0cjNVVUlHYkxvQkdBYUcxMnlRelAtN1FyT2t1QW5Xd3JXdFRYOGlxNFpOYTBFXzJOX1A1VkxxQ0pTUnF3?oc=5",
+    "time": "2026-11-17T06:05:00.000Z",
+    "title": "個股：上櫃新兵騏億鑫(7848)營運亮眼，法人估今年每股淨利15～20元"
+   }
+  ],
+  "news_total": 86
+ },
+ {
+  "date": "2026-11-18",
+  "stock_id": "6796",
+  "name": "晉弘",
+  "mentions": 1,
+  "in_watchlist": false,
+  "titles": [
+   {
+    "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE9IS21CWXhxbEdRcVdSOHp5RGlTLWxBN1NrYnlVMjlUU1NXREhzRWV1bk1rZ0pZUmF5d3pNazlpWFdiaGlCQ1pHRnA3NjZ4eUpDcHFqXzRB?oc=5",
+    "time": "2026-11-17T08:05:00.000Z",
+    "title": "個股：晉弘(6796)Q4毛利率、獲利看升，不排除實施庫藏股"
+   }
+  ],
+  "news_total": 86
+ },
+ {
+  "date": "2026-11-18",
+  "stock_id": "6461",
+  "name": "益得",
+  "mentions": 1,
+  "in_watchlist": false,
+  "titles": [
+   {
+    "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE1mdGhBZjRrRzE1dEFwbU1KMDVuR3hWdjZUMW5vTUtyenhwc2tXeWZFZVJNb3ljVmIyeFlqcTNNNDF4ZWdQRklLWWtkdHJhZFA3dlhheTJB?oc=5",
+    "time": "2026-11-17T08:05:00.000Z",
+    "title": "個股：全球吸入劑加速低碳轉型，益得(6461)雙軌推進三複方、SABA吸入劑"
+   }
+  ],
+  "news_total": 86
+ },
+ {
+  "date": "2026-11-18",
+  "stock_id": "6416",
+  "name": "瑞祺電通",
+  "mentions": 1,
+  "in_watchlist": false,
+  "titles": [
+   {
+    "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE1qN1Z6RVJMNWlVYXhJRUhneFFLYlExRWdWX0dJTlJrR0c0c00zWEpROGVyVlNkMmlLVEQtV2JDa0NtVUs0Z1kxZW5xOTB0TVBERjVpUERn?oc=5",
+    "time": "2026-11-17T07:05:00.000Z",
+    "title": "焦點股：瑞祺電通(6416)Q3三率升，前三季EPS 5.4元，搭資安題材股價大漲"
+   }
+  ],
+  "news_total": 86
+ },
+ {
+  "date": "2026-11-18",
+  "stock_id": "4548",
+  "name": "名超",
+  "mentions": 1,
+  "in_watchlist": false,
+  "titles": [
+   {
+    "link": "https://news.google.com/rss/articles/CBMiVEFVX3lxTE1NWEVqVUJXbkZUb1hnTGdVcjVncEFiVlVRY0NJdTFLQWlyTVJtdkp2NmZvT1hVVTNxSUx1WjNuejB1OUJhdFd2LTNVZzNvcnFQTmFFMA?oc=5",
+    "time": "2026-11-17T07:05:00.000Z",
+    "title": "興櫃：名超(4548)登興櫃，AI與先進封裝擴產帶動，前3季營收獲利超越去年全年"
+   }
+  ],
+  "news_total": 86
+ },
+ {
+  "date": "2026-11-18",
+  "stock_id": "2408",
+  "name": "南亞科",
+  "mentions": 1,
+  "in_watchlist": false,
+  "titles": [
+   {
+    "link": "https://news.google.com/rss/articles/CBMiVEFVX3lxTE5mS0xxYlIyeEk5clAxc09DdVdYM1NIM1ZUaVRiVllhNm1tLUU2OWF4SU1FVkZma0E4WjNfbWRxN2dQMDhOYzZ5Z0J6cUpVOTRTcFF4dQ?oc=5",
+    "time": "2026-11-17T08:05:00.000Z",
+    "title": "基金：兆豐00913成分股調整3進3出今收盤後生效，納入南亞科、全新、精材"
+   }
+  ],
+  "news_total": 86
  }
 ]
