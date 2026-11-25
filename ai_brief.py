@@ -9,12 +9,14 @@
 
 from __future__ import annotations
 
+import logging
 import os
 import re
 
 import anthropic
 import streamlit as st
 
+_log = logging.getLogger(__name__)
 DEFAULT_MODEL = "claude-opus-5-5"
 
 SYSTEM_PROMPT = """你是台股盤後的技術分析研究員。使用者會給你一份由固定規則產生的「每日綜合戰情總結報告」（Markdown），
@@ -35,23 +37,25 @@ SYSTEM_PROMPT = """你是台股盤後的技術分析研究員。使用者會給�
 
 
 def key_status() -> tuple[str | None, str]:
-  """回傳 (金鑰, 找不到時的原因)。原因寫清楚，方便判斷是沒設定、格式錯，還是放錯區段。"""
+  """回傳 (金鑰, 找不到時的原因)。
+  原因只給一般性的提示：畫面可能被他人看到，所以不列出其他 secrets 的名稱、也不顯示解析錯誤原文
+  （TOML 錯誤訊息可能引用 secrets 檔的內容）。詳細錯誤只寫進伺服器 log。"""
   try:
     key = st.secrets.get("ANTHROPIC_API_KEY")
-    names = list(st.secrets.keys())
   except Exception as e:  # noqa: BLE001
     if type(e).__name__ == "StreamlitSecretNotFoundError":
-      key, names, why = None, [], "找不到任何 secrets（本機沒有 .streamlit/secrets.toml，或雲端 Secrets 是空的）"
+      key, why = None, "找不到任何 secrets（本機沒有 .streamlit/secrets.toml，或雲端 Secrets 是空的）"
     else:
-      return os.environ.get("ANTHROPIC_API_KEY"), f"Secrets 內容格式錯誤，無法解析：{str(e)[:200]}"
+      _log.warning("secrets 解析失敗：%s", type(e).__name__)
+      env = os.environ.get("ANTHROPIC_API_KEY")
+      return (env, "") if env else (None, "Secrets 內容格式錯誤，無法解析（請檢查是否用半形雙引號、開頭沒有 #）")
   else:
     if key:
       key = str(key).strip()
       if not key.startswith("sk-ant-"):
         return None, "ANTHROPIC_API_KEY 有值但不是 sk-ant- 開頭，請確認貼上的是 Anthropic API 金鑰"
       return key, ""
-    why = ("Secrets 裡沒有 ANTHROPIC_API_KEY 這一行" +
-           (f"（目前只有：{'、'.join(map(str, names))}；若金鑰放在 [某個區段] 底下，請移到最上面）" if names else ""))
+    why = "Secrets 裡沒有 ANTHROPIC_API_KEY 這一行（若放在 [區段] 底下，請移到所有區段的上方）"
   env = os.environ.get("ANTHROPIC_API_KEY")
   return (env, "") if env else (None, why)
 
@@ -142,4 +146,7 @@ def error_text(e: Exception) -> str:
     return f"Anthropic 伺服器錯誤（{e.status_code}），請稍後再試。"
   if isinstance(e, anthropic.APIConnectionError):
     return "連不上 Anthropic API，請檢查網路。"
-  return str(e)
+  if isinstance(e, RuntimeError):          # 本模組自己丟出的（拒答、空回應），訊息內容可控
+    return str(e)
+  _log.warning("AI 研判失敗：%r", e)        # 其他未預期錯誤只寫 log，畫面不顯示原文
+  return f"未預期的錯誤（{type(e).__name__}），詳情請看伺服器 log。"
