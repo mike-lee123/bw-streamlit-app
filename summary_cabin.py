@@ -54,20 +54,70 @@ def _trend(row) -> int:
 TREND_TXT = {1: "多頭排列", -1: "空頭排列", 0: "盤整"}
 
 
-def _ma13_state(df: pd.DataFrame) -> int:
-  """13MA 艙的多空狀態：收盤 vs 13MA、KD 的 K 值 vs 50、MACD 柱 vs 0，三者同向才成立"""
+def _ma13_state(df: pd.DataFrame) -> tuple[int, float, float]:
+  """13MA 艙的多空狀態：收盤 vs 13MA、KD 的 K 值 vs 50、MACD 柱 vs 0，三者同向才成立。回傳 (狀態, K, MACD 柱)"""
   c = df["Close"]
   ma13 = c.rolling(13).mean()
   low9, high9 = df["Low"].rolling(9).min(), df["High"].rolling(9).max()
   rsv = ((c - low9) / (high9 - low9).replace(0, np.nan) * 100).fillna(50)
   k = rsv.ewm(alpha=1 / 3, adjust=False).mean()
   last = df.index[-1]
-  above, k_now, o = c[last] > ma13[last], k[last], df["HIST"][last]
+  above, k_now, o = c[last] > ma13[last], float(k[last]), float(df["HIST"][last])
   if above and k_now > 50 and o > 0:
-    return 1
+    return 1, k_now, o
   if (not above) and k_now < 50 and o < 0:
-    return -1
-  return 0
+    return -1, k_now, o
+  return 0, k_now, o
+
+
+FIB_RATIOS = (0.382, 0.5, 0.618)
+
+
+def _unfilled_gaps(df: pd.DataFrame, lookback: int = 120) -> tuple[tuple | None, tuple | None]:
+  """最近一個未回補的向上缺口（現價下方＝支撐）與向下缺口（現價上方＝壓力）。回傳 (日期, 缺口上緣, 缺口下緣)"""
+  d = df.tail(lookback + 1)
+  hi, lo = d["High"].to_numpy(), d["Low"].to_numpy()
+  up = dn = None
+  for i in range(len(d) - 1, 0, -1):
+    if up is None and lo[i] > hi[i - 1] and lo[i:].min() > hi[i - 1]:     # 向上缺口：之後低點沒跌回缺口下緣
+      up = (d.index[i].date().isoformat(), float(lo[i]), float(hi[i - 1]))
+    if dn is None and hi[i] < lo[i - 1] and hi[i:].max() < lo[i - 1]:     # 向下缺口：之後高點沒漲回缺口上緣
+      dn = (d.index[i].date().isoformat(), float(lo[i - 1]), float(hi[i]))
+    if up and dn:
+      break
+  return up, dn
+
+
+def key_levels(df: pd.DataFrame) -> pd.DataFrame:
+  """加權指數支撐／壓力表（全部由規則計算）：近期高低點、布林通道、MA20／60／120、費波那契回撤、未回補缺口"""
+  c = float(df.Close.iloc[-1])
+  rows = [
+    ("20 日最低", df.Low.tail(20).min()), ("60 日最低", df.Low.tail(60).min()),
+    ("20 日最高", df.High.tail(20).max()),
+    ("布林下軌（MA20−2σ）", df.BB_dn.iloc[-1]), ("布林上軌（MA20+2σ）", df.BB_up.iloc[-1]),
+    ("MA20", df.MA20.iloc[-1]), ("MA60", df.MA60.iloc[-1]),
+    ("MA120", df.Close.rolling(120).mean().iloc[-1]),
+  ]
+  # 費波那契：60 日內最高點，對應它之前 250 日內的波段低點 → 這段漲幅的回撤位
+  hi_idx = df.High.tail(60).idxmax()
+  swing_hi = float(df.High[hi_idx])
+  swing_lo = float(df.Low[:hi_idx].tail(250).min())
+  for r in FIB_RATIOS:
+    rows.append((f"費波那契 {r:.3f} 回撤（{swing_lo:,.0f}→{swing_hi:,.0f}）", swing_hi - (swing_hi - swing_lo) * r))
+  up, dn = _unfilled_gaps(df)
+  if up:
+    rows.append((f"未回補向上缺口（{up[0]}，{up[2]:,.0f}～{up[1]:,.0f}）", up[2]))
+  if dn:
+    rows.append((f"未回補向下缺口（{dn[0]}，{dn[2]:,.0f}～{dn[1]:,.0f}）", dn[1]))
+  out = pd.DataFrame(rows, columns=["類型", "價位"]).dropna()
+  out["價位"] = out["價位"].astype(float).round(0)
+  out = out.groupby("價位", as_index=False, sort=False)["類型"].agg("／".join)   # 同價位（例如 20 日與 60 日最低相同）合併標示
+  out["位置"] = np.where(out["價位"] < c, "支撐", "壓力")
+  out["距現價%"] = ((out["價位"] / c - 1) * 100).round(2)
+  now = pd.DataFrame([{"類型": "▶ 現價", "價位": round(c, 0), "位置": "—", "距現價%": 0.0}])
+  out = pd.concat([out, now]).sort_values("價位", ascending=False).reset_index(drop=True)
+  out["價位"] = out["價位"].map("{:,.0f}".format)
+  return out[["位置", "價位", "距現價%", "類型"]]
 
 
 def _vote(name, source, score, reading, flip):
@@ -85,16 +135,19 @@ def market_votes() -> tuple[list[dict], dict]:
   info["twii"] = float(last.Close)
   info["twii_chg"] = float(last.Close / prev.Close - 1) * 100
   info["twii_rsi"] = float(last.RSI)
+  info["levels"] = key_levels(twii)
 
   t = _trend(last)
   votes.append(_vote("加權指數均線排列", "💱 台幣匯率 / 📈 現貨", t,
                      f"{TREND_TXT[t]}（收 {last.Close:,.0f}、MA20 {last.MA20:,.0f}、MA60 {last.MA60:,.0f}）",
                      f"收盤站回 MA20（{last.MA20:,.0f}）" if t <= 0 else f"收盤跌破 MA20（{last.MA20:,.0f}）"))
 
-  s13 = _ma13_state(twii)
+  s13, k13, osc13 = _ma13_state(twii)
   ma13 = float(twii.Close.rolling(13).mean().iloc[-1])
+  info["k"] = k13
   votes.append(_vote("13MA 多空開關", "📐 13MA的魔力", s13,
-                     {1: "多頭成立", -1: "空頭成立", 0: "多空未定"}[s13] + f"（13MA {ma13:,.0f}）",
+                     {1: "多頭成立", -1: "空頭成立", 0: "多空未定"}[s13]
+                     + f"（13MA {ma13:,.0f}、K {k13:.1f}、MACD 柱 {osc13:+.1f}）",
                      f"收盤站上 13MA（{ma13:,.0f}）且 K>50、MACD 柱翻正" if s13 <= 0
                      else f"收盤跌破 13MA（{ma13:,.0f}）"))
 
@@ -319,7 +372,16 @@ def build_sections(votes, info, total, regime, plan, scan, chips_day, group, cap
   sec.append(("四、風控", risk))
 
   watch = [f"- {v['項目']}：{v['翻轉條件']}" for v in votes if v["票"] != 0 and v["翻轉條件"] != "—"]
-  sec.append(("五、明日觀察", ["\n".join(watch) if watch else "各項皆為中性，等待方向表態。"]))
+  five = ["\n".join(watch) if watch else "各項皆為中性，等待方向表態。"]
+  lv = info.get("levels")
+  if lv is not None and not lv.empty:
+    sup = lv[lv["位置"] == "支撐"].head(3)                 # 表格由高到低排序：支撐取前幾列＝離現價最近
+    res = lv[lv["位置"] == "壓力"].tail(3).iloc[::-1]      # 壓力取最後幾列再反轉＝由近到遠
+
+    def _fmt(d):
+      return "、".join(f"{r['價位']}（{r['類型']}，{r['距現價%']:+.2f}%）" for _, r in d.iterrows()) or "無"
+    five += [f"加權指數支撐／壓力（由近到遠）：\n- 下檔支撐：{_fmt(sup)}\n- 上檔壓力：{_fmt(res)}", lv]
+  sec.append(("五、明日觀察", five))
 
   notes = [f"資料截至 {info['date']}（若在台股盤中產生，當日 K 棒尚未收盤）。"
            f"籌碼來自雷達艙 {chips_day or '（未取得）'} 的掃描，僅涵蓋雷達自選股。",
@@ -553,8 +615,9 @@ def render_ai_section(title: str, sections) -> tuple[str, list] | None:
   import ai_brief
 
   st.markdown("#### 六、🧠 AI 研判（Claude 撰寫，僅供參考）")
-  key = ai_brief.api_key()
+  key, why = ai_brief.key_status()
   if not key:
+    st.warning(f"讀不到金鑰：{why}")
     st.info("尚未設定 Anthropic API 金鑰：本機寫在 `.streamlit/secrets.toml` 的 `ANTHROPIC_API_KEY = \"sk-ant-...\"`，"
             "Streamlit Cloud 在 App settings → Secrets 加同一行。設定後重新整理即可使用。")
     return None

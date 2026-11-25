@@ -29,17 +29,35 @@ SYSTEM_PROMPT = """你是台股盤後的技術分析研究員。使用者會給�
 輸出格式（不要用 # 標題，小標用【】，可用 **粗體** 與條列）：
 【綜合研判】2～3 句：這些訊號合起來代表什麼，市場處在什麼狀態。
 【訊號矛盾】哪些訊號和多數方向相反、代表什麼；沒有就寫「無明顯矛盾」。
-【情境推演】2～3 個情境（例如止跌、續跌、反彈），每個情境寫出要看哪個數字、到哪個價位才算確認（引用報告的「明日觀察」）。
+【情境推演】2～3 個情境（例如止跌、續跌、反彈），每個情境寫出要看哪個數字、到哪個價位才算確認（引用報告的「明日觀察」；下跌情境請引用「下檔支撐」表，寫出跌破哪個支撐後下一個看哪裡）。
 【操作紀律】根據報告的風控段落，提醒部位與停損的執行重點（不得改動數字）。
 全文 400～700 字。最後一行固定寫：「以上由 AI 根據規則報告撰寫，僅供參考，不構成投資建議。」"""
 
 
-def api_key() -> str | None:
+def key_status() -> tuple[str | None, str]:
+  """回傳 (金鑰, 找不到時的原因)。原因寫清楚，方便判斷是沒設定、格式錯，還是放錯區段。"""
   try:
     key = st.secrets.get("ANTHROPIC_API_KEY")
-  except Exception:  # noqa: BLE001  沒有 secrets.toml 時 st.secrets 會丟例外
-    key = None
-  return key or os.environ.get("ANTHROPIC_API_KEY")
+    names = list(st.secrets.keys())
+  except Exception as e:  # noqa: BLE001
+    if type(e).__name__ == "StreamlitSecretNotFoundError":
+      key, names, why = None, [], "找不到任何 secrets（本機沒有 .streamlit/secrets.toml，或雲端 Secrets 是空的）"
+    else:
+      return os.environ.get("ANTHROPIC_API_KEY"), f"Secrets 內容格式錯誤，無法解析：{str(e)[:200]}"
+  else:
+    if key:
+      key = str(key).strip()
+      if not key.startswith("sk-ant-"):
+        return None, "ANTHROPIC_API_KEY 有值但不是 sk-ant- 開頭，請確認貼上的是 Anthropic API 金鑰"
+      return key, ""
+    why = ("Secrets 裡沒有 ANTHROPIC_API_KEY 這一行" +
+           (f"（目前只有：{'、'.join(map(str, names))}；若金鑰放在 [某個區段] 底下，請移到最上面）" if names else ""))
+  env = os.environ.get("ANTHROPIC_API_KEY")
+  return (env, "") if env else (None, why)
+
+
+def api_key() -> str | None:
+  return key_status()[0]
 
 
 def model_name() -> str:
