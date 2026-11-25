@@ -537,10 +537,47 @@ def render_summary_cabin(deps: dict):
       else:
         st.markdown(it)
 
+  ai_section = render_ai_section(title, sections)
   render_key_charts()
 
+  out = sections + ([ai_section] if ai_section else [])
   d1, d2 = st.columns(2)
-  d1.download_button("⬇️ 下載 Markdown", to_markdown(title, sections).encode("utf-8"),
+  d1.download_button("⬇️ 下載 Markdown", to_markdown(title, out).encode("utf-8"),
                      file_name=f"{title}.md", mime="text/markdown", key="sm_dl_md")
-  d2.download_button("⬇️ 下載 HTML", to_html(title, sections).encode("utf-8"),
+  d2.download_button("⬇️ 下載 HTML", to_html(title, out).encode("utf-8"),
                      file_name=f"{title}.html", mime="text/html", key="sm_dl_html")
+
+
+def render_ai_section(title: str, sections) -> tuple[str, list] | None:
+  """六、AI 研判：按鈕觸發才呼叫 Claude。回傳要併進下載檔的段落（沒產生就回傳 None）。"""
+  import ai_brief
+
+  st.markdown("#### 六、🧠 AI 研判（Claude 撰寫，僅供參考）")
+  key = ai_brief.api_key()
+  if not key:
+    st.info("尚未設定 Anthropic API 金鑰：本機寫在 `.streamlit/secrets.toml` 的 `ANTHROPIC_API_KEY = \"sk-ant-...\"`，"
+            "Streamlit Cloud 在 App settings → Secrets 加同一行。設定後重新整理即可使用。")
+    return None
+  report_md = to_markdown(title, sections)
+  model = ai_brief.model_name()
+  state_key = f"sm_ai::{hash(report_md)}::{model}"
+  if st.button("🧠 產生 AI 研判", key="sm_ai_run",
+               help=f"把上面的規則報告交給 {model} 寫成研判段落。燈號、名單、部位、停損不會被改動。同一份報告 24 小時內只計費一次。"):
+    with st.spinner(f"{model} 撰寫中（約 10～60 秒）…"):
+      try:
+        st.session_state[state_key] = ai_brief.generate(report_md, model, key)
+      except Exception as e:  # noqa: BLE001
+        st.error(f"AI 研判產生失敗：{ai_brief.error_text(e)}")
+  res = st.session_state.get(state_key)
+  if not res:
+    st.caption("按下按鈕才會呼叫 AI（會產生 API 費用）。規則報告本身不受影響。")
+    return None
+  st.markdown(res["text"])
+  bad = ai_brief.unmatched_numbers(res["text"], report_md)
+  if bad:
+    st.warning("⚠️ 以下數字在規則報告裡找不到，可能是 AI 自行推算或寫錯，請以上方規則報告為準：" + "、".join(bad))
+  else:
+    st.caption("✅ 數字核對：AI 文中的數字都能在規則報告裡找到。")
+  st.caption(f"模型 {res['model']}；輸入 {res['in_tok']:,} tokens、輸出 {res['out_tok']:,} tokens。")
+  note = ("⚠️ 數字核對未通過：" + "、".join(bad)) if bad else "數字核對：通過。"
+  return ("六、AI 研判（Claude 撰寫，僅供參考）", [res["text"], f"{note}（模型 {res['model']}）"])
