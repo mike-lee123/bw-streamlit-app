@@ -1,14 +1,14 @@
 """第 26 艙「📋 每日綜合戰情總結艙」。
 
 把各艙的結論用固定規則（不接 AI）合成一頁總結報告：
-  ① 大盤燈號：7 票投票（加權均線排列、13MA 多空開關、加權 MACD 動能、股匯象限、櫃買（富櫃50 ETF）均線排列、費半趨勢、VIX）
+  ① 大盤燈號：8 票投票（加權均線排列、13MA 多空開關、加權 MACD 動能、股匯象限、櫃買（富櫃50 ETF）均線排列、費半趨勢、VIX、期交所選擇權未平倉 PCR）
   ② 選股名單：沿用「🌐 全策略總合指揮艙」的共振分數，再加 13MA 防線與「📡 雷達艙」的法人籌碼確認
   ③ 進場時機：日線跳空缺口、爆量
   ④ 風控：依燈號決定總部位上限、單筆風險與最低共振門檻；停損 = 收盤 − 2×ATR14
   ⑤ 明日觀察：每張空方（或多方）票要翻轉的條件
 報告可下載 Markdown / HTML。app.py 內的策略函式以 deps 傳入（app.py 是腳本，不能被 import）。
 
-注意：選擇權艙的 PCR／VIX、全商品艙的夜盤數字是示範用的固定值，本艙不採用；VIX 改抓 Yahoo 的真實 ^VIX。
+PCR 來自期交所（taifex_pcr.py）、VIX 來自 Yahoo ^VIX，都是真實數據。全商品艙的夜盤、回測艙的績效是示範用的固定值，本艙不採用。
 期現價差需要永豐連線，第一版不納入投票。
 """
 
@@ -24,6 +24,7 @@ import streamlit as st
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 
+from taifex_pcr import PCR_BEAR, PCR_BULL, pcr_signal, taifex_pcr
 from fx_cabin import DN, UP, _fx_layout, _fx_macd_panel, fx_add_indicators, fx_build_link, fx_fetch, fx_pct_change
 
 # ---------- 規則參數 ----------
@@ -145,11 +146,25 @@ def market_votes() -> tuple[list[dict], dict]:
     v = 1 if vix < VIX_CALM else -1 if vix > VIX_FEAR else 0
     vt = "平穩" if v > 0 else "恐慌" if v < 0 else "警戒"
     info["vix"] = vix
-    votes.append(_vote("美股恐慌指數 VIX", "⚔️ 選擇權（改用真實 ^VIX）", v, f"{vix:.1f}（{vt}）",
+    votes.append(_vote("美股恐慌指數 VIX", "⚔️ 選擇權／🌐 全商品", v, f"{vix:.1f}（{vt}）",
                        f"回落到 {VIX_FEAR:.0f} 以下" if v < 0 else f"升破 {VIX_FEAR:.0f}" if v > 0
                        else f"跌破 {VIX_CALM:.0f} 轉多、升破 {VIX_FEAR:.0f} 轉空"))
   except Exception as e:  # noqa: BLE001
-    votes.append(_vote("美股恐慌指數 VIX", "⚔️ 選擇權", 0, f"資料取得失敗：{e}", "—"))
+    votes.append(_vote("美股恐慌指數 VIX", "⚔️ 選擇權／🌐 全商品", 0, f"資料取得失敗：{e}", "—"))
+
+  try:
+    pcr = taifex_pcr()
+    oi, vol = float(pcr.oi_pcr.iloc[-1]), float(pcr.vol_pcr.iloc[-1])
+    p, pt = pcr_signal(oi)
+    info.update(pcr=oi, pcr_date=pcr.index[-1].date().isoformat())
+    votes.append(_vote("選擇權未平倉 PCR", "⚔️ 選擇權（期交所）", p,
+                       f"{oi:.1f}%（{pt}；5 日均 {pcr.oi_pcr.tail(5).mean():.1f}、20 日均 {pcr.oi_pcr.tail(20).mean():.1f}；"
+                       f"成交量 PCR {vol:.1f}%；{info['pcr_date']}）",
+                       f"回升到 {PCR_BEAR:.0f} 以上轉中性、{PCR_BULL:.0f} 以上轉多" if p < 0
+                       else f"跌破 {PCR_BULL:.0f} 轉中性" if p > 0
+                       else f"≥ {PCR_BULL:.0f} 轉多、≤ {PCR_BEAR:.0f} 轉空"))
+  except Exception as e:  # noqa: BLE001
+    votes.append(_vote("選擇權未平倉 PCR", "⚔️ 選擇權（期交所）", 0, f"資料取得失敗：{e}", "—"))
 
   return votes, info
 
@@ -308,7 +323,7 @@ def build_sections(votes, info, total, regime, plan, scan, chips_day, group, cap
 
   notes = [f"資料截至 {info['date']}（若在台股盤中產生，當日 K 棒尚未收盤）。"
            f"籌碼來自雷達艙 {chips_day or '（未取得）'} 的掃描，僅涵蓋雷達自選股。",
-           "期現價差需要永豐連線，本版未納入投票；選擇權艙與回測艙的數字為示範值，未採用。",
+           "期現價差需要永豐連線，本版未納入投票；全商品艙的夜盤與回測艙的績效為示範值，未採用。PCR 為期交所每日盤後公布值。",
            "本報告由固定規則產生，僅供技術分析參考，不構成投資建議。"]
   sec.append(("附註", notes))
   return sec
@@ -394,9 +409,36 @@ def vix_figure(df: pd.DataFrame) -> go.Figure:
   return _fx_layout(fig, 640)
 
 
+def pcr_figure(df: pd.DataFrame) -> go.Figure:
+  fig = make_subplots(rows=2, cols=1, shared_xaxes=True, vertical_spacing=0.06, row_heights=[0.62, 0.38],
+                      subplot_titles=("臺指選擇權 Put/Call Ratio（%）", "未平倉量（口）：賣權 vs 買權"))
+  top = max(float(df.oi_pcr.max()), float(df.vol_pcr.max())) * 1.08
+  bottom = min(float(df.oi_pcr.min()), float(df.vol_pcr.min()), PCR_BEAR) * 0.9
+  for y0, y1, color, label in ((PCR_BULL, max(top, PCR_BULL + 10), "rgba(224,49,49,0.20)", "支撐強・偏多（+1）"),
+                               (PCR_BEAR, PCR_BULL, "rgba(173,181,189,0.10)", "中性（0）"),
+                               (bottom, PCR_BEAR, "rgba(47,158,68,0.22)", "支撐弱・偏空（−1）")):
+    fig.add_shape(type="rect", xref="x domain", x0=0, x1=1, yref="y", y0=y0, y1=y1,
+                  fillcolor=color, line_width=0, layer="below")
+    fig.add_annotation(xref="x domain", x=0.005, yref="y", y=(y0 + y1) / 2, text=label, showarrow=False,
+                       xanchor="left", font=dict(size=12, color="#dee2e6"))
+  fig.add_trace(go.Scatter(x=df.index, y=df.oi_pcr, name="未平倉 PCR（投票用）", mode="lines+markers",
+                           line=dict(color="#ffd43b", width=2), marker=dict(size=4)), 1, 1)
+  fig.add_trace(go.Scatter(x=df.index, y=df.oi_pcr.rolling(20).mean(), name="未平倉 PCR 20 日均",
+                           line=dict(color="#f08c00", width=1.2, dash="dot")), 1, 1)
+  fig.add_trace(go.Scatter(x=df.index, y=df.vol_pcr, name="成交量 PCR", line=dict(color="#74c0fc", width=1)), 1, 1)
+  for lvl in (PCR_BULL, PCR_BEAR):
+    fig.add_hline(y=lvl, line_dash="dash", line_color="#ced4da", row=1, col=1,
+                  annotation_text=f"{lvl:.0f}", annotation_position="bottom right")
+  fig.add_trace(go.Bar(x=df.index, y=df.put_oi, name="賣權未平倉", marker_color=UP), 2, 1)
+  fig.add_trace(go.Bar(x=df.index, y=df.call_oi, name="買權未平倉", marker_color=DN), 2, 1)
+  fig.update_layout(barmode="group")
+  fig.update_yaxes(range=[bottom, max(top, PCR_BULL + 10)], row=1, col=1)
+  return _fx_layout(fig, 640)
+
+
 def render_key_charts():
   st.markdown("#### 📈 關鍵指標線圖")
-  t1, t2 = st.tabs(["🔬 費城半導體 SOX", "😱 美股恐慌指數 VIX"])
+  t1, t2, t3 = st.tabs(["🔬 費城半導體 SOX", "😱 美股恐慌指數 VIX", "⚖️ 台指選擇權 PCR"])
   with t1:
     try:
       df = chart_data("^SOX")
@@ -416,6 +458,18 @@ def render_key_charts():
       st.plotly_chart(vix_figure(df), key="sm_vix_chart")
     except Exception as e:  # noqa: BLE001
       st.warning(f"VIX 資料取得失敗：{e}")
+  with t3:
+    try:
+      df = taifex_pcr()
+      r = df.iloc[-1]
+      sig, txt = pcr_signal(r.oi_pcr)
+      st.caption(f"{df.index[-1].date()} 未平倉 PCR {r.oi_pcr:.1f}%（{txt}）、成交量 PCR {r.vol_pcr:.1f}%；"
+                 f"賣權未平倉 {r.put_oi:,.0f} 口、買權未平倉 {r.call_oi:,.0f} 口。"
+                 f"規則：≥ {PCR_BULL:.0f} 偏多 +1、≤ {PCR_BEAR:.0f} 偏空 −1。"
+                 "看法：賣 Put 的多半是法人，未平倉 PCR 高代表下方支撐強。資料為期交所盤後公布值（約 15:00 後更新）。")
+      st.plotly_chart(pcr_figure(df), key="sm_pcr_chart")
+    except Exception as e:  # noqa: BLE001
+      st.warning(f"期交所 PCR 取得失敗：{e}")
 
 
 # ---------- 介面 ----------
@@ -431,7 +485,7 @@ def render_summary_cabin(deps: dict):
     group = c1.selectbox("選股掃描族群", keys,
                          index=keys.index(DEFAULT_GROUP) if DEFAULT_GROUP in keys else 0, key="sm_group")
     capital = c2.number_input("帳戶總資金（元）", value=1_000_000.0, step=100_000.0, min_value=10_000.0, key="sm_cap")
-    st.caption("燈號規則：7 票合計 ≥ +3 為 🟢 偏多、≤ −3 為 🔴 偏空，其餘 🟡 中性。"
+    st.caption("燈號規則：8 票合計 ≥ +3 為 🟢 偏多、≤ −3 為 🔴 偏空，其餘 🟡 中性。"
                "🟢 部位上限 80%／單筆風險 1%／共振 ≥ 3；🟡 50%／0.75%／≥ 4；🔴 20%／0.5%／≥ 4。")
     if len(groups[group]) > 60:
       st.warning(f"此族群有 {len(groups[group])} 檔，掃描約需 1～3 分鐘。")
@@ -442,6 +496,7 @@ def render_summary_cabin(deps: dict):
     market_votes.clear()
     scan_group.clear()
     chart_data.clear()
+    taifex_pcr.clear()
     fx_build_link.clear()
     st.session_state.pop("sm_report", None)
 

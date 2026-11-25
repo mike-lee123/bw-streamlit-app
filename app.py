@@ -5822,21 +5822,46 @@ elif col_sel == "⚔️ 選擇權":
   st.subheader(
       "⚔️ 選擇權大師艙 (含 PCR 籌碼、恐慌指數 VIX 標的篩選與進出場 SOP)"
   )
+  # PCR 來自期交所、VIX 來自 Yahoo ^VIX（原本是寫死的 107.8% / 14.5）
+  from taifex_pcr import PCR_BEAR, PCR_BULL, pcr_signal, taifex_pcr
+  try:
+    pcr_df = taifex_pcr()
+    pcr_now, pcr_date = float(pcr_df.oi_pcr.iloc[-1]), pcr_df.index[-1].date()
+    pcr_sig, pcr_txt = pcr_signal(pcr_now)
+  except Exception as e:
+    pcr_now, pcr_sig, pcr_txt, pcr_date = None, 0, "", None
+    st.warning(f"⚠️ 期交所 PCR 取得失敗：{e}")
+  vix_df = fetch_from_yahoo_chart_api("^VIX", range_str="3mo")   # 此函式要 ≥ 30 根才回傳
+  vix_now = float(vix_df["Close"].iloc[-1]) if not vix_df.empty else None
+  vix_sig = 0 if vix_now is None else (1 if vix_now < 18 else -1 if vix_now > 25 else 0)
+  vix_txt = {1: "🟢 平穩", 0: "🟡 警戒", -1: "🔴 恐慌"}[vix_sig] if vix_now is not None else ""
+
+  if pcr_sig > 0 and vix_sig >= 0:
+    strat, strat_note = "🟢 買方策略 (Buy Call)", "支撐強、波動不高"
+  elif pcr_sig < 0 and vix_sig < 0:
+    strat, strat_note = "🔴 保守：Buy Put 避險或觀望", "支撐弱＋恐慌，權利金偏貴"
+  elif pcr_sig < 0 or vix_sig < 0:
+    strat, strat_note = "🟡 價差策略／降低部位", "訊號偏空或波動偏高"
+  else:
+    strat, strat_note = "⚖️ 中性：價差策略", "方向不明"
+
   st.markdown(
-      "依據當前 **PCR = 107.8% (多方佔優)** 與 **VIX = 14.5 (低度恐慌平穩期)**，系統已自動為您推演最佳選擇權作戰策略與標的篩選。"
+      f"依據期交所 **未平倉 PCR = {pcr_now:.1f}%（{pcr_txt}）**" if pcr_now is not None else "期交所 PCR 暫時取不到",
   )
+  if vix_now is not None:
+    st.markdown(f"與 **VIX = {vix_now:.1f}（{vix_txt}）**，系統依固定規則推演作戰策略。")
 
   col_o1, col_o2, col_o3 = st.columns(3)
   with col_o1:
-    st.metric("Put/Call Ratio (PCR)", "107.8 %", "🔥 多方佔優")
+    st.metric("未平倉 Put/Call Ratio", f"{pcr_now:.1f} %" if pcr_now is not None else "—",
+              f"{pcr_txt}（{pcr_date}）" if pcr_now is not None else None, delta_color="off")
   with col_o2:
-    st.metric("美股恐慌指數 (CBOE VIX)", "14.5", "🟢 極低波動 (平穩)")
+    st.metric("美股恐慌指數 (CBOE VIX)", f"{vix_now:.1f}" if vix_now is not None else "—",
+              vix_txt or None, delta_color="off")
   with col_o3:
-    st.metric(
-        "建議最佳作戰策略",
-        "🟢 買方策略 (Buy Call)",
-        "權利金便宜 / 高槓桿",
-    )
+    st.metric("建議最佳作戰策略", strat, strat_note, delta_color="off")
+  st.caption(f"規則：未平倉 PCR ≥ {PCR_BULL:.0f} 偏多、≤ {PCR_BEAR:.0f} 偏空（賣 Put 多為法人，PCR 高＝下方支撐強）；"
+             "VIX < 18 平穩、> 25 恐慌。PCR 為期交所盤後公布值。歷史走勢見「📋 每日綜合戰情總結艙」。")
 
   st.markdown("---")
   st.markdown("### 🎯 選擇權標的與履約價動態篩選器")
