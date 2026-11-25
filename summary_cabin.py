@@ -21,7 +21,10 @@ import numpy as np
 import pandas as pd
 import streamlit as st
 
-from fx_cabin import fx_add_indicators, fx_build_link, fx_fetch, fx_pct_change
+import plotly.graph_objects as go
+from plotly.subplots import make_subplots
+
+from fx_cabin import DN, UP, _fx_layout, _fx_macd_panel, fx_add_indicators, fx_build_link, fx_fetch, fx_pct_change
 
 # ---------- 規則參數 ----------
 REGIMES = {
@@ -338,6 +341,83 @@ def to_html(title: str, sections) -> str:
           f"<style>{css}</style></head><body><h1>{html.escape(title)}</h1>{body}</body></html>")
 
 
+# ---------- 關鍵指標線圖（費半、VIX） ----------
+@st.cache_data(ttl=1800, show_spinner="下載費半與 VIX 線圖資料…")
+def chart_data(symbol: str) -> pd.DataFrame:
+  # 多抓一些再丟掉前 40 根：RSI／MACD 剛起算時數值不穩（RSI 會出現 100 或 0）
+  df = fx_add_indicators(fx_fetch(symbol, "2y")).iloc[40:]
+  return df[df.index > df.index[-1] - pd.Timedelta(days=365)]
+
+
+def sox_figure(df: pd.DataFrame) -> go.Figure:
+  fig = make_subplots(rows=3, cols=1, shared_xaxes=True, vertical_spacing=0.04, row_heights=[0.6, 0.22, 0.18],
+                      subplot_titles=("費城半導體指數 ^SOX（K 線＋MA20／MA60＋布林）", "MACD (12, 26, 9)", "RSI (14)"))
+  fig.add_trace(go.Candlestick(x=df.index, open=df.Open, high=df.High, low=df.Low, close=df.Close, name="SOX",
+                               increasing_line_color=UP, decreasing_line_color=DN), 1, 1)
+  for col, color, dash in (("MA20", "#f08c00", None), ("MA60", "#1c7ed6", None),
+                           ("BB_up", "#adb5bd", "dot"), ("BB_dn", "#adb5bd", "dot")):
+    fig.add_trace(go.Scatter(x=df.index, y=df[col], name=col, line=dict(color=color, width=1.2, dash=dash)), 1, 1)
+  ma20 = float(df.MA20.iloc[-1])
+  fig.add_hline(y=ma20, line_dash="dash", line_color="#f08c00", row=1, col=1,
+                annotation_text=f"翻轉線 MA20 {ma20:,.1f}", annotation_position="top left")
+  _fx_macd_panel(fig, df, 2)
+  fig.add_trace(go.Scatter(x=df.index, y=df.RSI, name="RSI", showlegend=False,
+                           line=dict(color="#7048e8", width=1.3)), 3, 1)
+  for lvl in (70, 30):
+    fig.add_hline(y=lvl, line_dash="dash", line_color="#adb5bd", row=3, col=1)
+  return _fx_layout(fig, 780)
+
+
+def vix_figure(df: pd.DataFrame) -> go.Figure:
+  fig = make_subplots(rows=2, cols=1, shared_xaxes=True, vertical_spacing=0.05, row_heights=[0.72, 0.28],
+                      subplot_titles=("美股恐慌指數 ^VIX（上漲＝恐慌升高）", "RSI (14)"))
+  top = max(float(df.High.max()) * 1.05, VIX_FEAR + 5)
+  bottom = max(0.0, min(float(df.Low.min()) * 0.95, VIX_CALM - 4))
+  for y0, y1, color, label in ((bottom, VIX_CALM, "rgba(224,49,49,0.22)", "平穩（多方 +1）"),
+                               (VIX_CALM, VIX_FEAR, "rgba(173,181,189,0.12)", "警戒（0）"),
+                               (VIX_FEAR, top, "rgba(47,158,68,0.25)", "恐慌（空方 −1）")):
+    fig.add_shape(type="rect", xref="x domain", x0=0, x1=1, yref="y", y0=y0, y1=y1,
+                  fillcolor=color, line_width=0, layer="below")
+    fig.add_annotation(xref="x domain", x=0.005, yref="y", y=(y0 + y1) / 2, text=label, showarrow=False,
+                       xanchor="left", font=dict(size=12, color="#dee2e6"))
+  fig.add_trace(go.Candlestick(x=df.index, open=df.Open, high=df.High, low=df.Low, close=df.Close, name="VIX",
+                               increasing_line_color=UP, decreasing_line_color=DN), 1, 1)
+  fig.add_trace(go.Scatter(x=df.index, y=df.MA20, name="MA20", line=dict(color="#f08c00", width=1.2)), 1, 1)
+  for lvl, txt in ((VIX_CALM, f"{VIX_CALM:.0f}"), (VIX_FEAR, f"{VIX_FEAR:.0f} 恐慌線")):
+    fig.add_hline(y=lvl, line_dash="dash", line_color="#ced4da", row=1, col=1,
+                  annotation_text=txt, annotation_position="bottom right")
+  fig.add_trace(go.Scatter(x=df.index, y=df.RSI, name="RSI", showlegend=False,
+                           line=dict(color="#7048e8", width=1.3)), 2, 1)
+  for lvl in (70, 30):
+    fig.add_hline(y=lvl, line_dash="dash", line_color="#adb5bd", row=2, col=1)
+  fig.update_yaxes(range=[bottom, top], row=1, col=1)
+  return _fx_layout(fig, 640)
+
+
+def render_key_charts():
+  st.markdown("#### 📈 關鍵指標線圖")
+  t1, t2 = st.tabs(["🔬 費城半導體 SOX", "😱 美股恐慌指數 VIX"])
+  with t1:
+    try:
+      df = chart_data("^SOX")
+      r = df.iloc[-1]
+      gap = (r.Close / r.MA20 - 1) * 100
+      st.caption(f"收 {r.Close:,.1f}／MA20 {r.MA20:,.1f}（距離 {gap:+.2f}%）／MA60 {r.MA60:,.1f}／RSI {r.RSI:.1f}。"
+                 "翻轉條件：收盤站回 MA20 且 MA20 在 MA60 之上才是多頭排列。")
+      st.plotly_chart(sox_figure(df), key="sm_sox_chart")
+    except Exception as e:  # noqa: BLE001
+      st.warning(f"費半資料取得失敗：{e}")
+  with t2:
+    try:
+      df = chart_data("^VIX")
+      r = df.iloc[-1]
+      st.caption(f"VIX {r.Close:.1f}（MA20 {r.MA20:.1f}）。規則：< {VIX_CALM:.0f} 平穩 +1、"
+                 f"{VIX_CALM:.0f}～{VIX_FEAR:.0f} 警戒 0、> {VIX_FEAR:.0f} 恐慌 −1；翻轉條件：回落到 {VIX_FEAR:.0f} 以下。")
+      st.plotly_chart(vix_figure(df), key="sm_vix_chart")
+    except Exception as e:  # noqa: BLE001
+      st.warning(f"VIX 資料取得失敗：{e}")
+
+
 # ---------- 介面 ----------
 def render_summary_cabin(deps: dict):
   """deps：fetch, confluence, atr, risk_mgr, groups, names（由 app.py 傳入）"""
@@ -361,6 +441,7 @@ def render_summary_cabin(deps: dict):
   if b2.button("🔄 清除快取重新抓取", key="sm_refresh"):
     market_votes.clear()
     scan_group.clear()
+    chart_data.clear()
     fx_build_link.clear()
     st.session_state.pop("sm_report", None)
 
@@ -400,6 +481,8 @@ def render_summary_cabin(deps: dict):
         st.dataframe(it, hide_index=True, width="stretch")
       else:
         st.markdown(it)
+
+  render_key_charts()
 
   d1, d2 = st.columns(2)
   d1.download_button("⬇️ 下載 Markdown", to_markdown(title, sections).encode("utf-8"),
