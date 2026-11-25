@@ -4564,15 +4564,43 @@ tabs_list = [
     "📡 法說會籌碼雷達艙",
     "⚖️ 期現對照・13MA艙",
     "💱 台幣匯率×台股艙",
+    "📋 每日綜合戰情總結艙",
 ]
 
 # 網址參數 ?cabin=radar&stock=3231：直接打開雷達艙並聚焦該股（雷達 Email 的連結用這個格式）；?cabin=fx 直接打開台幣匯率艙
 _qp_cabin = st.query_params.get("cabin", "")
 _qp_stock = st.query_params.get("stock", "")
-_qp_cabin_map = {"radar": "📡 法說會籌碼雷達艙", "fx": "💱 台幣匯率×台股艙"}
+_qp_cabin_map = {"radar": "📡 法說會籌碼雷達艙", "fx": "💱 台幣匯率×台股艙", "summary": "📋 每日綜合戰情總結艙"}
 _default_cabin = tabs_list.index(_qp_cabin_map[_qp_cabin]) if _qp_cabin in _qp_cabin_map else 0
 col_sel = st.selectbox("🎯 選擇要進入的實戰分頁艙", tabs_list, index=_default_cabin)
 st.markdown("---")
+
+
+def bw_master_grade(score: int, close: float) -> str:
+  if score >= 5 and close >= 300:
+    return "👑 S+ 級【頂尖高價領漲旗艦】(全策略滿分共振)"
+  if score >= 4:
+    return "🔥 S 級【多策略黃金主升段】"
+  if score >= 3:
+    return "🌟 A 級【穩健回檔蓄力標的】"
+  return "⚖️ B 級【潛力觀察標的】"
+
+
+def bw_master_confluence(df: pd.DataFrame, engine=None) -> dict:
+  """全策略共振分數（1～5）：基本 1 分＋Fibonacci＋MACD強化＋活躍籌碼≥75＋量能扣底。
+  「🌐 全策略總合指揮艙」與「📋 每日綜合戰情總結艙」共用。"""
+  engine = engine or AdvancedWyckoffQuantEngine()
+  last = engine.process(df).iloc[-1]
+  close = float(last["Close"])
+  fib_res = evaluate_fibonacci_strategy(df, lookback=60)
+  macd_res = evaluate_macd_enhanced_strategy(df, df, min_risk_reward_ratio=1.5)
+  comb_res = evaluate_volume_slope_deduct_strategy(df)
+  fib, macd, comb = bool(fib_res["is_valid"]), bool(macd_res["is_valid_trade"]), bool(comb_res["is_valid"])
+  mfi_ok = float(last.get("MFI", 50)) >= 75
+  score = 1 + fib + macd + mfi_ok + comb
+  return {"score": score, "grade": bw_master_grade(score, close), "close": close, "last": last,
+          "fib": fib, "macd": macd, "mfi_ok": mfi_ok, "comb": comb,
+          "fib_res": fib_res, "macd_res": macd_res, "comb_res": comb_res}
 
 
 def bw_find_module_dir(folder_name, marker_file, env_var):
@@ -4932,35 +4960,13 @@ elif col_sel == "🌐 全策略大聯軍總合指揮艙":
         )
         df_m = fetch_from_yahoo_chart_api(t, range_str="1y")
         if not df_m.empty and len(df_m) >= 50:
-          df_m_proc = engine_m.process(df_m)
-          last_m = df_m_proc.iloc[-1]
-          c_p = float(last_m["Close"])
-
-          fib_res = evaluate_fibonacci_strategy(df_m, lookback=60)
-          macd_res = evaluate_macd_enhanced_strategy(
-              df_m, df_m, min_risk_reward_ratio=1.5
-          )
-          comb_res = evaluate_volume_slope_deduct_strategy(df_m)
-
-          confluence_score = 1
-          if fib_res["is_valid"]:
-            confluence_score += 1
-          if macd_res["is_valid_trade"]:
-            confluence_score += 1
-          if float(last_m.get("MFI", 50)) >= 75:
-            confluence_score += 1
-          if comb_res["is_valid"]:
-            confluence_score += 1
+          conf = bw_master_confluence(df_m, engine_m)
+          last_m, c_p = conf["last"], conf["close"]
+          fib_res, macd_res, comb_res = conf["fib_res"], conf["macd_res"], conf["comb_res"]
+          confluence_score = conf["score"]
 
           if confluence_score >= master_min_score:
-            if confluence_score >= 5 and c_p >= 300:
-              m_grade = "👑 S+ 級【頂尖高價領漲旗艦】(全策略滿分共振)"
-            elif confluence_score >= 4:
-              m_grade = "🔥 S 級【多策略黃金主升段】"
-            elif confluence_score >= 3:
-              m_grade = "🌟 A 級【穩健回檔蓄力標的】"
-            else:
-              m_grade = "⚖️ B 級【潛力觀察標的】"
+            m_grade = conf["grade"]
 
             master_results.append({
                 "標的代號": f"[{t}] {ZHTW_MAP.get(t, '個股')}",
@@ -6616,3 +6622,10 @@ elif col_sel == "⚖️ 期現對照・13MA艙":
 elif col_sel == "💱 台幣匯率×台股艙":
   from fx_cabin import render_fx_cabin
   render_fx_cabin()
+
+elif col_sel == "📋 每日綜合戰情總結艙":
+  from summary_cabin import render_summary_cabin
+  render_summary_cabin({
+      "fetch": fetch_from_yahoo_chart_api, "confluence": bw_master_confluence, "atr": calculate_atr,
+      "risk_mgr": MATradingManager, "groups": STRATEGIC_GROUPS, "names": ZHTW_MAP,
+  })

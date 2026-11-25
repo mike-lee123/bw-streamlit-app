@@ -1,0 +1,408 @@
+"""第 26 艙「📋 每日綜合戰情總結艙」。
+
+把各艙的結論用固定規則（不接 AI）合成一頁總結報告：
+  ① 大盤燈號：7 票投票（加權均線排列、13MA 多空開關、加權 MACD 動能、股匯象限、櫃買（富櫃50 ETF）均線排列、費半趨勢、VIX）
+  ② 選股名單：沿用「🌐 全策略總合指揮艙」的共振分數，再加 13MA 防線與「📡 雷達艙」的法人籌碼確認
+  ③ 進場時機：日線跳空缺口、爆量
+  ④ 風控：依燈號決定總部位上限、單筆風險與最低共振門檻；停損 = 收盤 − 2×ATR14
+  ⑤ 明日觀察：每張空方（或多方）票要翻轉的條件
+報告可下載 Markdown / HTML。app.py 內的策略函式以 deps 傳入（app.py 是腳本，不能被 import）。
+
+注意：選擇權艙的 PCR／VIX、全商品艙的夜盤數字是示範用的固定值，本艙不採用；VIX 改抓 Yahoo 的真實 ^VIX。
+期現價差需要永豐連線，第一版不納入投票。
+"""
+
+from __future__ import annotations
+
+import html
+from concurrent.futures import ThreadPoolExecutor
+
+import numpy as np
+import pandas as pd
+import streamlit as st
+
+from fx_cabin import fx_add_indicators, fx_build_link, fx_fetch, fx_pct_change
+
+# ---------- 規則參數 ----------
+REGIMES = {
+  # 燈號: (總部位上限%, 單筆風險%, 最低共振分數)
+  "🟢 偏多": (80, 1.0, 3),
+  "🟡 中性": (50, 0.75, 4),
+  "🔴 偏空": (20, 0.5, 4),
+}
+REGIME_THRESHOLD = 3      # 合計 ≥ +3 偏多、≤ −3 偏空
+CORR_STRONG = 0.3         # 股匯相關高於此值，匯率票才計分
+VIX_CALM, VIX_FEAR = 18.0, 25.0
+ATR_STOP_MULT = 2.0
+DEFAULT_GROUP = "半導體與 AI 權值核心"
+VOTE_ICON = {1: "🔴 +1", -1: "🟢 −1", 0: "⚪ 0"}   # 台股慣例：紅多綠空
+
+
+# ---------- 指標小工具 ----------
+def _trend(row) -> int:
+  if row.Close > row.MA20 > row.MA60:
+    return 1
+  if row.Close < row.MA20 < row.MA60:
+    return -1
+  return 0
+
+
+TREND_TXT = {1: "多頭排列", -1: "空頭排列", 0: "盤整"}
+
+
+def _ma13_state(df: pd.DataFrame) -> int:
+  """13MA 艙的多空狀態：收盤 vs 13MA、KD 的 K 值 vs 50、MACD 柱 vs 0，三者同向才成立"""
+  c = df["Close"]
+  ma13 = c.rolling(13).mean()
+  low9, high9 = df["Low"].rolling(9).min(), df["High"].rolling(9).max()
+  rsv = ((c - low9) / (high9 - low9).replace(0, np.nan) * 100).fillna(50)
+  k = rsv.ewm(alpha=1 / 3, adjust=False).mean()
+  last = df.index[-1]
+  above, k_now, o = c[last] > ma13[last], k[last], df["HIST"][last]
+  if above and k_now > 50 and o > 0:
+    return 1
+  if (not above) and k_now < 50 and o < 0:
+    return -1
+  return 0
+
+
+def _vote(name, source, score, reading, flip):
+  return {"項目": name, "來源艙": source, "票": int(score), "讀數": reading, "翻轉條件": flip}
+
+
+# ---------- ① 大盤投票 ----------
+@st.cache_data(ttl=1800, show_spinner="計算大盤燈號…")
+def market_votes() -> tuple[list[dict], dict]:
+  votes, info = [], {}
+
+  twii = fx_add_indicators(fx_fetch("^TWII", "1y"))
+  last, prev = twii.iloc[-1], twii.iloc[-2]
+  info["date"] = twii.index[-1].date().isoformat()
+  info["twii"] = float(last.Close)
+  info["twii_chg"] = float(last.Close / prev.Close - 1) * 100
+  info["twii_rsi"] = float(last.RSI)
+
+  t = _trend(last)
+  votes.append(_vote("加權指數均線排列", "💱 台幣匯率 / 📈 現貨", t,
+                     f"{TREND_TXT[t]}（收 {last.Close:,.0f}、MA20 {last.MA20:,.0f}、MA60 {last.MA60:,.0f}）",
+                     f"收盤站回 MA20（{last.MA20:,.0f}）" if t <= 0 else f"收盤跌破 MA20（{last.MA20:,.0f}）"))
+
+  s13 = _ma13_state(twii)
+  ma13 = float(twii.Close.rolling(13).mean().iloc[-1])
+  votes.append(_vote("13MA 多空開關", "📐 13MA的魔力", s13,
+                     {1: "多頭成立", -1: "空頭成立", 0: "多空未定"}[s13] + f"（13MA {ma13:,.0f}）",
+                     f"收盤站上 13MA（{ma13:,.0f}）且 K>50、MACD 柱翻正" if s13 <= 0
+                     else f"收盤跌破 13MA（{ma13:,.0f}）"))
+
+  h_now, h_prev = float(last.HIST), float(prev.HIST)
+  if h_now > 0 and h_now > h_prev:
+    m, mt = 1, "多方動能增強"
+  elif h_now < 0 and h_now < h_prev:
+    m, mt = -1, "空方動能增強"
+  else:
+    m, mt = 0, "多方動能減弱" if h_now >= 0 else "空方動能減弱"
+  votes.append(_vote("加權 MACD 動能", "🎯 MACD強化版", m, f"{mt}（柱 {h_now:+.1f}）",
+                     "柱狀體由長轉短（空方動能減弱）" if m < 0 else "柱狀體連續縮短則轉中性"))
+
+  link = fx_build_link("^TWII", "1y", 60)
+  corr = float(link.CORR.iloc[-1])
+  twd20 = -fx_pct_change(link.FX, 20)          # 正＝台幣升值
+  stk20 = fx_pct_change(link.Close, 20)
+  fx_now = float(link.FX.iloc[-1])
+  fx_ma20 = float(link.FX.rolling(20).mean().iloc[-1])
+  info.update(corr=corr, twd20=twd20, stk20=stk20, usdtwd=fx_now)
+  if pd.isna(corr) or corr <= CORR_STRONG:
+    f, ft = 0, f"股匯連動弱（相關 {corr:+.2f}），不計分"
+  elif twd20 > 0 and stk20 > 0:
+    f, ft = 1, "資金行情：台幣升＋股市漲"
+  elif twd20 < 0 and stk20 < 0:
+    f, ft = -1, "股匯雙殺：台幣貶＋股市跌（外資撤出跡象）"
+  else:
+    f, ft = 0, "股匯分歧，方向不明"
+  votes.append(_vote("股匯象限", "💱 台幣匯率×台股", f,
+                     f"{ft}；20 日台幣 {twd20:+.2f}%、加權 {stk20:+.2f}%、相關 {corr:+.2f}",
+                     f"USD/TWD 跌回 MA20（{fx_ma20:.3f}）以下，台幣止貶" if f < 0
+                     else f"USD/TWD 站上 MA20（{fx_ma20:.3f}）則轉弱" if f > 0
+                     else "相關 >0.3 且股匯同向才計分"))
+
+  # Yahoo 已無櫃買指數（^TWOII 404），改用追蹤櫃買市場的 元大富櫃50（006201）代表中小型股
+  for sym, name, src in (("006201.TWO", "櫃買（富櫃50）均線排列", "📈 現貨大聯軍"),
+                         ("^SOX", "費城半導體趨勢", "🌐 全商品指揮")):
+    try:
+      d = fx_add_indicators(fx_fetch(sym, "1y"))
+      r = d.iloc[-1]
+      tr = _trend(r)
+      votes.append(_vote(name, src, tr, f"{TREND_TXT[tr]}（收 {r.Close:,.1f}、MA20 {r.MA20:,.1f}）",
+                         f"站回 MA20（{r.MA20:,.1f}）" if tr <= 0 else f"跌破 MA20（{r.MA20:,.1f}）"))
+    except Exception as e:  # noqa: BLE001
+      votes.append(_vote(name, src, 0, f"資料取得失敗：{e}", "—"))
+
+  try:
+    vix = float(fx_fetch("^VIX", "1mo").Close.iloc[-1])
+    v = 1 if vix < VIX_CALM else -1 if vix > VIX_FEAR else 0
+    vt = "平穩" if v > 0 else "恐慌" if v < 0 else "警戒"
+    info["vix"] = vix
+    votes.append(_vote("美股恐慌指數 VIX", "⚔️ 選擇權（改用真實 ^VIX）", v, f"{vix:.1f}（{vt}）",
+                       f"回落到 {VIX_FEAR:.0f} 以下" if v < 0 else f"升破 {VIX_FEAR:.0f}" if v > 0
+                       else f"跌破 {VIX_CALM:.0f} 轉多、升破 {VIX_FEAR:.0f} 轉空"))
+  except Exception as e:  # noqa: BLE001
+    votes.append(_vote("美股恐慌指數 VIX", "⚔️ 選擇權", 0, f"資料取得失敗：{e}", "—"))
+
+  return votes, info
+
+
+def regime_of(total: int) -> str:
+  if total >= REGIME_THRESHOLD:
+    return "🟢 偏多"
+  if total <= -REGIME_THRESHOLD:
+    return "🔴 偏空"
+  return "🟡 中性"
+
+
+# ---------- ② 選股掃描 ----------
+def _scan_one(code: str, deps: dict) -> dict | None:
+  df = deps["fetch"](code, range_str="1y")
+  if df is None or df.empty or len(df) < 80:
+    return None
+  res = deps["confluence"](df)
+  c = df["Close"]
+  close, prev = float(c.iloc[-1]), float(c.iloc[-2])
+  ma13 = float(c.rolling(13).mean().iloc[-1])
+  atr = float(deps["atr"](df, 14).iloc[-1])
+  vol = df["Volume"]
+  vol_ratio = float(vol.iloc[-1] / (vol.rolling(20).mean().iloc[-1] + 1e-8))
+  gap_up = float(df["Low"].iloc[-1]) > float(df["High"].iloc[-2])
+  gap_dn = float(df["High"].iloc[-1]) < float(df["Low"].iloc[-2])
+  hits = [n for n, ok in (("Fibonacci", res["fib"]), ("MACD強化", res["macd"]),
+                          ("活躍籌碼", res["mfi_ok"]), ("量能扣底", res["comb"])) if ok]
+  return {
+    "代號": code, "名稱": deps["names"].get(code, ""), "收盤": round(close, 2),
+    "漲跌%": round((close / prev - 1) * 100, 2), "共振分數": res["score"], "評等": res["grade"],
+    "命中戰法": "、".join(hits) or "—", "13MA": round(ma13, 2), "守13MA": close >= ma13,
+    "ATR14": round(atr, 2), "量比": round(vol_ratio, 2),
+    "缺口": "⬆️ 跳空向上" if gap_up else "⬇️ 跳空向下" if gap_dn else "",
+  }
+
+
+@st.cache_data(ttl=1800, show_spinner=False)
+def scan_group(codes: tuple, _deps: dict) -> pd.DataFrame:
+  with ThreadPoolExecutor(max_workers=8) as ex:
+    rows = [r for r in ex.map(lambda c: _scan_one(c, _deps), codes) if r]
+  return pd.DataFrame(rows)
+
+
+def radar_chips() -> tuple[dict, str]:
+  """雷達艙每日掃描的法人籌碼（最新一天）。取不到就回傳空 dict。"""
+  try:
+    from radar_cabin import load_json
+    scan = load_json("scan.json")
+  except Exception:  # noqa: BLE001
+    return {}, "雷達資料取得失敗"
+  if not scan:
+    return {}, "雷達尚無掃描資料"
+  df = pd.DataFrame(scan)
+  day = df["date"].max()
+  out = {}
+  for _, r in df[df["date"] == day].iterrows():
+    c = r["chips"] if isinstance(r.get("chips"), dict) else {}
+    out[str(r["stock_id"])] = {"inst_5d": c.get("inst_5d"), "signal": r.get("signal"), "level": r.get("level")}
+  return out, day
+
+
+def _chip_text(code: str, chips: dict) -> str:
+  c = chips.get(code)
+  if not c or c.get("inst_5d") is None:
+    return "—"
+  v = c["inst_5d"]
+  return f"✅ 法人買超 {v:,.0f} 張" if v > 0 else f"⚠️ 法人賣超 {abs(v):,.0f} 張" if v < 0 else "法人持平"
+
+
+# ---------- ④ 風控 ----------
+def build_plan(scan: pd.DataFrame, regime: str, capital: float, chips: dict, deps: dict) -> pd.DataFrame:
+  cap_pct, risk_pct, min_score = REGIMES[regime]
+  if scan.empty:
+    return scan
+  pick = scan[(scan["共振分數"] >= min_score) & scan["守13MA"]].copy()
+  if pick.empty:
+    return pick
+  pick["籌碼"] = pick["代號"].map(lambda c: _chip_text(c, chips))
+  pick = pick[~pick["籌碼"].str.startswith("⚠️")]          # 法人賣超者剔除
+  if pick.empty:
+    return pick
+  pick = pick.sort_values(["共振分數", "量比"], ascending=False)
+  mgr = deps["risk_mgr"](total_capital=capital, risk_tolerance_pct=risk_pct)
+  pick["停損"] = (pick["收盤"] - ATR_STOP_MULT * pick["ATR14"]).round(2)
+  pick["股數"] = [mgr.calculate_trade_risk(c, p, s, 0, 0, 0, False, m)["shares"]
+                 for c, p, s, m in zip(pick["代號"], pick["收盤"], pick["停損"], pick["13MA"])]
+  pick["金額"] = pick["股數"] * pick["收盤"]
+  budget = capital * cap_pct / 100
+  if pick["金額"].sum() > budget:                       # 超過總部位上限 → 等比例縮小
+    ratio = budget / pick["金額"].sum()
+    pick["股數"] = (pick["股數"] * ratio).astype(int)
+    pick["金額"] = pick["股數"] * pick["收盤"]
+  pick["張數"] = pick["股數"].map(lambda s: f"{s} 股（零股）" if s < 1000
+                                else f"{s // 1000} 張 {s % 1000} 股" if s % 1000 else f"{s // 1000} 張")
+  return pick
+
+
+# ---------- 報告 ----------
+def _md_table(df: pd.DataFrame) -> str:
+  cols = list(df.columns)
+  lines = ["| " + " | ".join(cols) + " |", "|" + "---|" * len(cols)]
+  for _, r in df.iterrows():
+    lines.append("| " + " | ".join(str(r[c]).replace("|", "／") for c in cols) + " |")
+  return "\n".join(lines)
+
+
+def _html_table(df: pd.DataFrame) -> str:
+  head = "".join(f"<th>{html.escape(str(c))}</th>" for c in df.columns)
+  body = "".join("<tr>" + "".join(f"<td>{html.escape(str(v))}</td>" for v in r) + "</tr>"
+                 for r in df.itertuples(index=False))
+  return f"<table><thead><tr>{head}</tr></thead><tbody>{body}</tbody></table>"
+
+
+def build_sections(votes, info, total, regime, plan, scan, chips_day, group, capital, n_codes=None) -> list[tuple[str, list]]:
+  """回傳 [(標題, [段落 str 或 DataFrame, ...]), ...]，Markdown 與 HTML 共用"""
+  cap_pct, risk_pct, min_score = REGIMES[regime]
+  n_up, n_dn = sum(v["票"] > 0 for v in votes), sum(v["票"] < 0 for v in votes)
+  n_fail = (n_codes or len(scan)) - len(scan)
+  scanned = f"「{group}」共掃描 {len(scan)} 檔" + (f"（另 {n_fail} 檔資料不足或抓取失敗）" if n_fail > 0 else "")
+  vt = pd.DataFrame(votes)[["項目", "來源艙", "票", "讀數"]].assign(票=lambda d: d["票"].map(VOTE_ICON))
+
+  sec = [("一、大盤環境", [
+    f"大盤燈號：**{regime}**（{len(votes)} 票：{n_up} 多、{n_dn} 空，合計 {total:+d}）。"
+    f"加權指數 {info['twii']:,.2f}（{info['twii_chg']:+.2f}%），RSI {info['twii_rsi']:.1f}；"
+    f"USD/TWD {info['usdtwd']:.3f}。",
+    vt,
+  ])]
+
+  if plan is None or plan.empty:
+    body = [f"{scanned}，"
+            f"在 {regime} 門檻（共振 ≥ {min_score} 分、守住 13MA、法人未賣超）下**沒有入選標的**，建議空手觀望。"]
+    near = scan[scan["共振分數"] >= min_score - 1].sort_values("共振分數", ascending=False).head(5) if not scan.empty else scan
+    if not near.empty:
+      body += ["差一步的觀察名單：", near[["代號", "名稱", "收盤", "共振分數", "命中戰法", "守13MA"]]]
+  else:
+    body = [f"{scanned}，入選 {len(plan)} 檔（共振 ≥ {min_score} 分、守住 13MA、法人未賣超）。",
+            plan[["代號", "名稱", "收盤", "漲跌%", "共振分數", "評等", "命中戰法", "籌碼"]]]
+  sec.append(("二、選股名單", body))
+
+  timing = scan[(scan["缺口"] != "") | (scan["量比"] >= 2)] if not scan.empty else scan
+  sec.append(("三、進場時機", [
+    "今日出現跳空缺口或量比 ≥ 2 倍的標的（量比 = 今日量 ÷ 20 日均量；盤中數字會變動）：",
+    timing[["代號", "名稱", "收盤", "漲跌%", "缺口", "量比", "共振分數"]] if not timing.empty else "今日無。",
+  ]))
+
+  risk = [f"依燈號 {regime}：總部位上限 **{cap_pct}%**（{capital * cap_pct / 100:,.0f} 元）、"
+          f"單筆風險 {risk_pct}% 資金、停損 = 收盤 − {ATR_STOP_MULT:g}×ATR14，並以 13MA 為防線。"]
+  if plan is not None and not plan.empty:
+    risk += [plan[["代號", "名稱", "收盤", "停損", "13MA", "張數", "金額"]].assign(金額=lambda d: d["金額"].map("{:,.0f}".format)),
+             f"合計動用 {plan['金額'].sum():,.0f} 元（{plan['金額'].sum() / capital * 100:.1f}% 資金）。"]
+  sec.append(("四、風控", risk))
+
+  watch = [f"- {v['項目']}：{v['翻轉條件']}" for v in votes if v["票"] != 0 and v["翻轉條件"] != "—"]
+  sec.append(("五、明日觀察", ["\n".join(watch) if watch else "各項皆為中性，等待方向表態。"]))
+
+  notes = [f"資料截至 {info['date']}（若在台股盤中產生，當日 K 棒尚未收盤）。"
+           f"籌碼來自雷達艙 {chips_day or '（未取得）'} 的掃描，僅涵蓋雷達自選股。",
+           "期現價差需要永豐連線，本版未納入投票；選擇權艙與回測艙的數字為示範值，未採用。",
+           "本報告由固定規則產生，僅供技術分析參考，不構成投資建議。"]
+  sec.append(("附註", notes))
+  return sec
+
+
+def to_markdown(title: str, sections) -> str:
+  out = [f"# {title}"]
+  for h, items in sections:
+    out.append(f"\n## {h}\n")
+    for it in items:
+      out.append(_md_table(it) if isinstance(it, pd.DataFrame) else it)
+      out.append("")
+  return "\n".join(out)
+
+
+def to_html(title: str, sections) -> str:
+  def para(s: str) -> str:
+    s = html.escape(s)
+    while "**" in s:
+      s = s.replace("**", "<b>", 1).replace("**", "</b>", 1)
+    return f"<p>{s.replace(chr(10), '<br>')}</p>"
+  body = "".join(
+    f"<h2>{html.escape(h)}</h2>" + "".join(_html_table(it) if isinstance(it, pd.DataFrame) else para(it) for it in items)
+    for h, items in sections)
+  css = ("body{font-family:'Noto Sans TC','Microsoft JhengHei',sans-serif;max-width:960px;margin:2em auto;"
+         "padding:0 1em;color:#222;line-height:1.6}h1{border-bottom:3px solid #e03131}"
+         "table{border-collapse:collapse;width:100%;margin:.5em 0;font-size:14px}"
+         "th,td{border:1px solid #ccc;padding:4px 8px;text-align:left}th{background:#f3f3f3}")
+  return (f"<!doctype html><html lang='zh-Hant'><head><meta charset='utf-8'><title>{html.escape(title)}</title>"
+          f"<style>{css}</style></head><body><h1>{html.escape(title)}</h1>{body}</body></html>")
+
+
+# ---------- 介面 ----------
+def render_summary_cabin(deps: dict):
+  """deps：fetch, confluence, atr, risk_mgr, groups, names（由 app.py 傳入）"""
+  st.subheader("📋 每日綜合戰情總結艙（大盤投票 × 多策略共振 × 籌碼確認 × 風控 → 一頁總結報告）")
+  st.caption("全部由固定規則產生、不接 AI：每個結論都能追到是哪一艙、哪個數字。僅供參考，不構成投資建議。")
+
+  groups = deps["groups"]
+  keys = list(groups.keys())
+  with st.expander("⚙️ 本艙設定", expanded=False):
+    c1, c2 = st.columns([2, 1])
+    group = c1.selectbox("選股掃描族群", keys,
+                         index=keys.index(DEFAULT_GROUP) if DEFAULT_GROUP in keys else 0, key="sm_group")
+    capital = c2.number_input("帳戶總資金（元）", value=1_000_000.0, step=100_000.0, min_value=10_000.0, key="sm_cap")
+    st.caption("燈號規則：7 票合計 ≥ +3 為 🟢 偏多、≤ −3 為 🔴 偏空，其餘 🟡 中性。"
+               "🟢 部位上限 80%／單筆風險 1%／共振 ≥ 3；🟡 50%／0.75%／≥ 4；🔴 20%／0.5%／≥ 4。")
+    if len(groups[group]) > 60:
+      st.warning(f"此族群有 {len(groups[group])} 檔，掃描約需 1～3 分鐘。")
+
+  b1, b2 = st.columns([1, 1])
+  run = b1.button("🚀 產生今日總結報告", type="primary", key="sm_run")
+  if b2.button("🔄 清除快取重新抓取", key="sm_refresh"):
+    market_votes.clear()
+    scan_group.clear()
+    fx_build_link.clear()
+    st.session_state.pop("sm_report", None)
+
+  if run:
+    try:
+      votes, info = market_votes()
+    except Exception as e:  # noqa: BLE001
+      st.error(f"大盤資料取得失敗：{e}")
+      return
+    with st.spinner(f"掃描「{group}」{len(groups[group])} 檔…"):
+      scan = scan_group(tuple(groups[group]), deps)
+    chips, chips_day = radar_chips()
+    total = sum(v["票"] for v in votes)
+    regime = regime_of(total)
+    plan = build_plan(scan, regime, capital, chips, deps)
+    title = f"每日綜合戰情總結報告 {info['date']}"
+    st.session_state["sm_report"] = (title, build_sections(votes, info, total, regime, plan, scan,
+                                                           chips_day, group, capital, len(groups[group])), regime, total, info, len(votes))
+
+  rep = st.session_state.get("sm_report")
+  if not rep:
+    st.info("按「🚀 產生今日總結報告」開始。大盤與掃描結果快取 30 分鐘。")
+    return
+  title, sections, regime, total, info, n_votes = rep
+
+  k = st.columns(4)
+  k[0].metric("大盤燈號", regime, f"{total:+d} / {n_votes} 票", delta_color="off")
+  k[1].metric("加權指數", f"{info['twii']:,.2f}", f"{info['twii_chg']:+.2f}%", delta_color="inverse")
+  k[2].metric("股匯相關（60 日）", f"{info['corr']:+.2f}")
+  k[3].metric("VIX", f"{info['vix']:.1f}" if "vix" in info else "—")
+
+  st.markdown(f"### {title}")
+  for h, items in sections:
+    st.markdown(f"#### {h}")
+    for it in items:
+      if isinstance(it, pd.DataFrame):
+        st.dataframe(it, hide_index=True, width="stretch")
+      else:
+        st.markdown(it)
+
+  d1, d2 = st.columns(2)
+  d1.download_button("⬇️ 下載 Markdown", to_markdown(title, sections).encode("utf-8"),
+                     file_name=f"{title}.md", mime="text/markdown", key="sm_dl_md")
+  d2.download_button("⬇️ 下載 HTML", to_html(title, sections).encode("utf-8"),
+                     file_name=f"{title}.html", mime="text/html", key="sm_dl_html")
