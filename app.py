@@ -4563,12 +4563,14 @@ tabs_list = [
     "📐 13MA的魔力艙",
     "📡 法說會籌碼雷達艙",
     "⚖️ 期現對照・13MA艙",
+    "💱 台幣匯率×台股艙",
 ]
 
-# 網址參數 ?cabin=radar&stock=3231：直接打開雷達艙並聚焦該股（雷達 Email 的連結用這個格式）
+# 網址參數 ?cabin=radar&stock=3231：直接打開雷達艙並聚焦該股（雷達 Email 的連結用這個格式）；?cabin=fx 直接打開台幣匯率艙
 _qp_cabin = st.query_params.get("cabin", "")
 _qp_stock = st.query_params.get("stock", "")
-_default_cabin = tabs_list.index("📡 法說會籌碼雷達艙") if _qp_cabin == "radar" else 0
+_qp_cabin_map = {"radar": "📡 法說會籌碼雷達艙", "fx": "💱 台幣匯率×台股艙"}
+_default_cabin = tabs_list.index(_qp_cabin_map[_qp_cabin]) if _qp_cabin in _qp_cabin_map else 0
 col_sel = st.selectbox("🎯 選擇要進入的實戰分頁艙", tabs_list, index=_default_cabin)
 st.markdown("---")
 
@@ -6610,3 +6612,7 @@ elif col_sel == "📡 法說會籌碼雷達艙":
 
 elif col_sel == "⚖️ 期現對照・13MA艙":
   render_futspot_cabin()
+
+elif col_sel == "💱 台幣匯率×台股艙":
+  from fx_cabin import render_fx_cabin
+  render_fx_cabin()
