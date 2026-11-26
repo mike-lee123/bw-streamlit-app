@@ -556,6 +556,8 @@ def render_key_charts():
 # ---------- 介面 ----------
 def render_summary_cabin(deps: dict):
   """deps：fetch, confluence, atr, risk_mgr, groups, names（由 app.py 傳入）"""
+  import twse_data
+  deps = {**deps, "fetch": twse_data.fresh_fetch(deps["fetch"])}   # Yahoo 日 K 落後時用官方資料補齊
   st.subheader("📋 每日綜合戰情總結艙（大盤投票 × 多策略共振 × 籌碼確認 × 風控 → 一頁總結報告）")
   st.caption("全部由固定規則產生、不接 AI：每個結論都能追到是哪一艙、哪個數字。僅供參考，不構成投資建議。")
 
@@ -572,6 +574,12 @@ def render_summary_cabin(deps: dict):
       st.warning(f"此族群有 {len(groups[group])} 檔，掃描約需 1～3 分鐘。")
 
   holdings = render_holdings_editor()
+  if "sj" in deps:
+    with st.expander("⏱️ 盤中監控（持股賣出／續抱、候選買點；訊號改變才提醒）", expanded=False):
+      import intraday_monitor as im
+      trade = st.session_state.get("sm_trade")
+      cands = list(trade[0]["代號"]) if trade and trade[0] is not None and not trade[0].empty else []
+      im.render_monitor(deps, holdings, cands, deps["names"])
 
   b1, b2 = st.columns([1, 1])
   run = b1.button("🚀 產生今日總結報告", type="primary", key="sm_run")
@@ -629,7 +637,7 @@ def render_summary_cabin(deps: dict):
 
   trade = st.session_state.get("sm_trade")
   if trade and trade[2]:
-    st.caption(f"📒 已把今天 {trade[2]} 筆新訊號記入戰績（data/signal_log.csv）。")
+    st.caption(f"📒 已把今天 {trade[2]} 筆新訊號記入戰績。")
 
   ai_section = render_ai_section(title, sections)
   render_key_charts()
@@ -685,10 +693,14 @@ def render_holdings_editor() -> pd.DataFrame:
     st.session_state["sm_hold"] = ts.load_holdings()
   with st.expander(f"💼 我的持股（{len(st.session_state['sm_hold'])} 檔，賣出訊號用）", expanded=False):
     st.caption("填代號即可產生 13MA 賣出訊號；填成本才會檢查停損與 2R 停利；填股數才會計算總部位與減碼股數。"
-               "持股只存在這台電腦的 data/holdings.csv，不會上傳到 GitHub。")
+               + ("持股存在本機 data/holdings.csv（不會上傳到 GitHub）。" if ts.files_enabled()
+                  else "持股只存在這個瀏覽器分頁，其他訪客看不到；請下載 CSV 保存，下次再上傳。"))
     up = st.file_uploader("上傳持股 CSV（欄位：代號, 成本, 股數）", type="csv", key="sm_hold_up")
     if up is not None and st.session_state.get("sm_hold_up_name") != up.name:
-      st.session_state["sm_hold"] = ts._clean_holdings(pd.read_csv(up, dtype={"代號": str}))
+      try:
+        st.session_state["sm_hold"] = ts._clean_holdings(pd.read_csv(up, dtype={"代號": str}, nrows=500))
+      except Exception:  # noqa: BLE001
+        st.warning("無法讀取這個 CSV，請確認欄位是 代號, 成本, 股數。")
       st.session_state["sm_hold_up_name"] = up.name
     edited = st.data_editor(
       st.session_state["sm_hold"], num_rows="dynamic", hide_index=True, key="sm_hold_editor",
@@ -701,7 +713,10 @@ def render_holdings_editor() -> pd.DataFrame:
     c1, c2 = st.columns(2)
     if c1.button("💾 儲存持股", key="sm_hold_save"):
       st.session_state["sm_hold"] = hold
-      st.success("已儲存到 data/holdings.csv。") if ts.save_holdings(hold) else st.warning("這台主機無法寫入檔案，請用右邊的下載保存。")
+      if ts.save_holdings(hold):
+        st.success("已儲存到本機 data/holdings.csv。")
+      else:
+        st.info("已存在這個瀏覽器分頁（其他訪客看不到）；關掉分頁就會消失，請用右邊的下載保存。")
     c2.download_button("⬇️ 下載持股 CSV", hold.to_csv(index=False).encode("utf-8-sig"),
                        file_name="holdings.csv", mime="text/csv", key="sm_hold_dl")
   return hold
@@ -710,21 +725,19 @@ def render_holdings_editor() -> pd.DataFrame:
 def render_track_record(deps: dict):
   """📒 訊號戰績：回頭計算過去訊號 1／5／20 日後的表現。"""
   with st.expander("📒 訊號戰績（每次產生報告自動記錄）", expanded=False):
-    up = st.file_uploader("上傳先前下載的戰績紀錄 CSV（與本機紀錄合併）", type="csv", key="sm_log_up")
+    up = st.file_uploader("上傳先前下載的戰績紀錄 CSV（與目前紀錄合併）", type="csv", key="sm_log_up")
     if up is not None and st.session_state.get("sm_log_up_name") != up.name:
-      old = pd.read_csv(up, dtype={"代號": str})
-      merged = pd.concat([ts.load_log(), old], ignore_index=True).drop_duplicates(["日期", "代號", "訊號"])
       try:
-        ts.DATA_DIR.mkdir(exist_ok=True)
-        merged.to_csv(ts.LOG_FILE, index=False, encoding="utf-8-sig")
-      except OSError:
-        st.warning("這台主機無法寫入檔案。")
+        n = ts.merge_upload(pd.read_csv(up, dtype={"代號": str}, nrows=ts.MAX_UPLOAD_ROWS))
+        st.success(f"已合併 {n} 筆新紀錄（格式不符的列已略過）。")
+      except Exception:  # noqa: BLE001
+        st.warning("無法讀取這個 CSV，請確認是本艙下載的戰績紀錄。")
       st.session_state["sm_log_up_name"] = up.name
     log = ts.load_log()
     if log.empty:
       st.caption("還沒有紀錄。之後每次按「🚀 產生今日總結報告」，買進／賣出／賣一半／減碼訊號都會自動記下來。")
       return
-    st.caption(f"共 {len(log)} 筆，最早 {log['日期'].min()}。Streamlit Cloud 重開機會清空本機檔案，請定期下載保存。")
+    st.caption(f"共 {len(log)} 筆，最早 {log['日期'].min()}。" + ("存在本機 data/signal_log.csv。" if ts.files_enabled() else "只存在這個瀏覽器分頁，請定期下載保存。"))
     if st.button("📊 計算戰績", key="sm_track_run"):
       with st.spinner("抓取後續股價…"):
         st.session_state["sm_track"] = ts.track_record(log, deps["fetch"])

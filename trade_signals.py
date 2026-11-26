@@ -10,13 +10,18 @@
         🟢 續抱     其他情況；13MA 是隔日的警戒價
   戰績：每次產生報告就把訊號記下來（同一天同一檔同一種訊號只記一次），之後回頭算 1／5／20 日後的報酬。
 
-個人資料（持股、戰績紀錄）只存在本機 data/ 資料夾（已列入 .gitignore），不會進 GitHub。
-Streamlit Cloud 重開機會清空本機檔案，雲端請用「下載／上傳 CSV」保存。
+個人資料（持股、戰績紀錄）的保存方式：
+  - 預設（例如公開的 Streamlit Cloud）：只存在「這個瀏覽器分頁的 session」，其他訪客看不到也改不到；
+    關掉分頁就消失，請用「下載／上傳 CSV」保存。
+  - 本機：在 .streamlit/secrets.toml 或環境變數設 LOCAL_DATA_FILES = true，才會讀寫 data/ 資料夾
+    （已列入 .gitignore，不會進 GitHub）。公開部署不要開這個開關，否則所有訪客會共用同一份檔案。
 """
 
 from __future__ import annotations
 
 from pathlib import Path
+
+import os
 
 import numpy as np
 import pandas as pd
@@ -32,6 +37,18 @@ TAKE_PROFIT_R = 2.0         # 獲利 2R 先賣一半
 HOLD_COLS = ["代號", "成本", "股數"]
 LOG_COLS = ["日期", "代號", "名稱", "訊號", "參考價", "停損", "燈號", "理由"]
 HORIZONS = (1, 5, 20)
+MAX_UPLOAD_ROWS = 5000
+
+
+def files_enabled() -> bool:
+  """只有明確開啟 LOCAL_DATA_FILES 時才用 data/ 檔案（本機自用）；公開部署一律只存 session。"""
+  v = os.environ.get("LOCAL_DATA_FILES")
+  if v is None:
+    try:
+      v = st.secrets.get("LOCAL_DATA_FILES")
+    except Exception:  # noqa: BLE001
+      v = None
+  return str(v).strip().lower() in ("1", "true", "yes")
 
 
 # ---------- 持股 ----------
@@ -45,7 +62,7 @@ def _clean_holdings(df: pd.DataFrame) -> pd.DataFrame:
 
 
 def load_holdings() -> pd.DataFrame:
-  if HOLDINGS_FILE.exists():
+  if files_enabled() and HOLDINGS_FILE.exists():
     try:
       return _clean_holdings(pd.read_csv(HOLDINGS_FILE, dtype={"代號": str}))
     except Exception:  # noqa: BLE001
@@ -54,6 +71,9 @@ def load_holdings() -> pd.DataFrame:
 
 
 def save_holdings(df: pd.DataFrame) -> bool:
+  """寫入 data/holdings.csv；沒開 LOCAL_DATA_FILES 時不寫檔（回傳 False，持股只留在 session）。"""
+  if not files_enabled():
+    return False
   try:
     DATA_DIR.mkdir(exist_ok=True)
     _clean_holdings(df).to_csv(HOLDINGS_FILE, index=False, encoding="utf-8-sig")
@@ -139,13 +159,49 @@ def sell_signals(holdings: pd.DataFrame, rows: pd.DataFrame, regime_cap_pct: flo
 
 
 # ---------- 戰績紀錄 ----------
+def clean_log(df: pd.DataFrame) -> pd.DataFrame:
+  """驗證並整理戰績紀錄（上傳的 CSV 也走這裡）：只留已知欄位、代號格式、日期與數字可解析的列，最多 5000 列。"""
+  df = df.reindex(columns=LOG_COLS).head(MAX_UPLOAD_ROWS).copy()
+  df["代號"] = df["代號"].astype(str).str.strip().str.upper()
+  df["日期"] = pd.to_datetime(df["日期"], errors="coerce").dt.strftime("%Y-%m-%d")
+  df["參考價"] = pd.to_numeric(df["參考價"], errors="coerce")
+  df["停損"] = pd.to_numeric(df["停損"], errors="coerce")
+  df = df[df["代號"].str.fullmatch(r"[0-9A-Z]{4,6}") & df["日期"].notna() & (df["參考價"] > 0)
+          & df["訊號"].isin(["買進", "賣出", "賣一半", "減碼"])]
+  for c in ("名稱", "燈號", "理由"):
+    df[c] = df[c].fillna("").astype(str).str.slice(0, 200)
+  return df.drop_duplicates(["日期", "代號", "訊號"]).reset_index(drop=True)
+
+
 def load_log() -> pd.DataFrame:
-  if LOG_FILE.exists():
-    try:
-      return pd.read_csv(LOG_FILE, dtype={"代號": str})
-    except Exception:  # noqa: BLE001
-      pass
-  return pd.DataFrame(columns=LOG_COLS)
+  if files_enabled():
+    if LOG_FILE.exists():
+      try:
+        return clean_log(pd.read_csv(LOG_FILE, dtype={"代號": str}))
+      except Exception:  # noqa: BLE001
+        pass
+    return pd.DataFrame(columns=LOG_COLS)
+  return st.session_state.get("ts_log", pd.DataFrame(columns=LOG_COLS))
+
+
+def save_log(df: pd.DataFrame) -> bool:
+  df = clean_log(df)
+  if not files_enabled():
+    st.session_state["ts_log"] = df
+    return True
+  try:
+    DATA_DIR.mkdir(exist_ok=True)
+    df.to_csv(LOG_FILE, index=False, encoding="utf-8-sig")
+    return True
+  except OSError:
+    return False
+
+
+def merge_upload(up_df: pd.DataFrame) -> int:
+  """合併上傳的戰績 CSV（先驗證）；回傳新增筆數"""
+  log = load_log()
+  merged = clean_log(pd.concat([log, clean_log(up_df)], ignore_index=True) if not log.empty else clean_log(up_df))
+  return (len(merged) - len(log)) if save_log(merged) else 0
 
 
 def append_log(date: str, regime: str, buys: pd.DataFrame, sells: pd.DataFrame) -> int:
@@ -166,12 +222,8 @@ def append_log(date: str, regime: str, buys: pd.DataFrame, sells: pd.DataFrame) 
   merged = pd.concat([log, pd.DataFrame(new)], ignore_index=True) if not log.empty else pd.DataFrame(new)
   merged = merged.drop_duplicates(["日期", "代號", "訊號"], keep="first")
   added = len(merged) - len(log)
-  if added:
-    try:
-      DATA_DIR.mkdir(exist_ok=True)
-      merged.to_csv(LOG_FILE, index=False, encoding="utf-8-sig")
-    except OSError:
-      return 0
+  if added and not save_log(merged):
+    return 0
   return added
 
 
