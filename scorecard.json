@@ -20,7 +20,7 @@
    "n_20d": 0,
    "avg_excess_20d": null,
    "hit_rate_20d": null,
-   "n_total": 6
+   "n_total": 7
   },
   {
    "signal_type": "🟠 黑馬但法人倒貨",
@@ -31,7 +31,7 @@
    "n_20d": 0,
    "avg_excess_20d": null,
    "hit_rate_20d": null,
-   "n_total": 3
+   "n_total": 6
   },
   {
    "signal_type": "🔵 三方共振",
@@ -187,7 +187,7 @@
    "n_20d": 2,
    "avg_excess_20d": -5.86,
    "hit_rate_20d": 100,
-   "n_total": 7
+   "n_total": 10
   },
   {
    "broker": "外資",
