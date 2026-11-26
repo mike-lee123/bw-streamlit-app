@@ -35,7 +35,47 @@ def fx_fetch(ticker: str, period: str, interval: str = "1d") -> pd.DataFrame:
   if isinstance(df.columns, pd.MultiIndex):
     df.columns = df.columns.get_level_values(0)
   df.index = pd.to_datetime(df.index).tz_localize(None).normalize()
-  return df[["Open", "High", "Low", "Close", "Volume"]].dropna()
+  df = df[["Open", "High", "Low", "Close", "Volume"]]
+  if ticker == "^TWII" and interval == "1d":
+    df = _patch_twii(df)
+  return df.dropna()
+
+
+def _twse_taiex_month(month_first: pd.Timestamp) -> pd.DataFrame:
+  """證交所官方加權指數日線（一次一個月）。日期是民國年，例如 115/11/25。"""
+  import requests
+  r = requests.get("https://www.twse.com.tw/rwd/zh/TAIEX/MI_5MINS_HIST",
+                   params={"date": month_first.strftime("%Y%m01"), "response": "json"},
+                   headers={"User-Agent": "Mozilla/5.0"}, timeout=10)
+  j = r.json()
+  if j.get("stat") != "OK" or not j.get("data"):
+    return pd.DataFrame()
+  rows = []
+  for d, o, h, l, c in j["data"]:
+    y, m, dd = d.split("/")
+    rows.append({"Date": pd.Timestamp(int(y) + 1911, int(m), int(dd)),
+                 "Open": float(o.replace(",", "")), "High": float(h.replace(",", "")),
+                 "Low": float(l.replace(",", "")), "Close": float(c.replace(",", "")), "Volume": 0.0})
+  return pd.DataFrame(rows).set_index("Date")
+
+
+def _patch_twii(df: pd.DataFrame) -> pd.DataFrame:
+  """Yahoo 的加權指數偶爾會缺最近幾天（整列沒有，或收盤是空值）。
+  用證交所官方資料補上最近兩個月缺的日子；證交所連不上就維持 Yahoo 原樣。
+  （補上的日子沒有成交量，以 0 填入；本專案的指數指標不使用成交量。）"""
+  try:
+    today = pd.Timestamp.now(tz="Asia/Taipei").tz_localize(None).normalize()
+    this_month = today.replace(day=1)
+    twse = pd.concat([_twse_taiex_month(this_month - pd.DateOffset(months=1)), _twse_taiex_month(this_month)])
+  except Exception:  # noqa: BLE001
+    return df
+  if twse.empty:
+    return df
+  missing = [d for d in twse.index if d not in df.index or pd.isna(df.at[d, "Close"])]
+  if not missing:
+    return df
+  df = df.drop(index=[d for d in missing if d in df.index])
+  return pd.concat([df, twse.loc[missing]]).sort_index()
 
 
 # ---------- 指標 ----------

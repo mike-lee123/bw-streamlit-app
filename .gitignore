@@ -15,3 +15,6 @@ bw_ultimate_dashboard_v18.8*_dashboard_FullMaster.py
 
 # 金鑰
 .streamlit/secrets.toml
+
+# 個人資料：持股與訊號戰績（第 26 艙）
+data/

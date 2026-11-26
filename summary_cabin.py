@@ -24,6 +24,7 @@ import streamlit as st
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 
+import trade_signals as ts
 from taifex_pcr import PCR_BEAR, PCR_BULL, pcr_signal, taifex_pcr
 from fx_cabin import DN, UP, _fx_layout, _fx_macd_panel, fx_add_indicators, fx_build_link, fx_fetch, fx_pct_change
 
@@ -247,7 +248,7 @@ def _scan_one(code: str, deps: dict) -> dict | None:
   hits = [n for n, ok in (("Fibonacci", res["fib"]), ("MACD強化", res["macd"]),
                           ("活躍籌碼", res["mfi_ok"]), ("量能扣底", res["comb"])) if ok]
   return {
-    "代號": code, "名稱": deps["names"].get(code, ""), "收盤": round(close, 2),
+    "代號": code, "名稱": deps["names"].get(code, ""), "日期": df.index[-1].date().isoformat(), "收盤": round(close, 2),
     "漲跌%": round((close / prev - 1) * 100, 2), "共振分數": res["score"], "評等": res["grade"],
     "命中戰法": "、".join(hits) or "—", "13MA": round(ma13, 2), "守13MA": close >= ma13,
     "ATR14": round(atr, 2), "量比": round(vol_ratio, 2),
@@ -332,7 +333,8 @@ def _html_table(df: pd.DataFrame) -> str:
   return f"<table><thead><tr>{head}</tr></thead><tbody>{body}</tbody></table>"
 
 
-def build_sections(votes, info, total, regime, plan, scan, chips_day, group, capital, n_codes=None) -> list[tuple[str, list]]:
+def build_sections(votes, info, total, regime, plan, scan, chips_day, group, capital, n_codes=None,
+                   buys=None, sells=None) -> list[tuple[str, list]]:
   """回傳 [(標題, [段落 str 或 DataFrame, ...]), ...]，Markdown 與 HTML 共用"""
   cap_pct, risk_pct, min_score = REGIMES[regime]
   n_up, n_dn = sum(v["票"] > 0 for v in votes), sum(v["票"] < 0 for v in votes)
@@ -371,6 +373,23 @@ def build_sections(votes, info, total, regime, plan, scan, chips_day, group, cap
              f"合計動用 {plan['金額'].sum():,.0f} 元（{plan['金額'].sum() / capital * 100:.1f}% 資金）。"]
   sec.append(("四、風控", risk))
 
+  trade = []
+  if buys is not None and not buys.empty:
+    trade += [f"**買進（{len(buys)} 檔）**：隔日開盤 ≤ 開盤上限才買（不追高），或拉回 13MA 掛單；"
+              "漲到「停利一半」先賣一半，其餘以 13MA 移動停利。", buys]
+  else:
+    trade += [f"**買進**：無（{regime} 門檻下沒有入選標的）。"]
+  if sells is not None and not sells.empty:
+    cnt = sells["訊號"].value_counts()
+    trade += [f"**持股檢查（{len(sells)} 檔）**：" + "、".join(f"{k} {v} 檔" for k, v in cnt.items()) + "。",
+              sells[["訊號", "代號", "名稱", "今收", "13MA", "建議賣出股數", "理由"]]]
+  else:
+    trade += ["**持股檢查**：尚未輸入持股（在上方「💼 我的持股」填寫）。"]
+  trade += ["規則：🔴 收盤跌破 13MA 或停損 → 賣出；🟡 獲利 ≥ 2R → 賣一半；"
+            "🟠 總持股超過燈號部位上限 → 等比例減碼；🟢 其餘續抱（13MA 為隔日警戒價）。"
+            "訊號是規則的機械輸出，未經回測驗證，不構成投資建議。"]
+  sec.append(("五、隔日交易訊號", trade))
+
   watch = [f"- {v['項目']}：{v['翻轉條件']}" for v in votes if v["票"] != 0 and v["翻轉條件"] != "—"]
   five = ["\n".join(watch) if watch else "各項皆為中性，等待方向表態。"]
   lv = info.get("levels")
@@ -381,7 +400,7 @@ def build_sections(votes, info, total, regime, plan, scan, chips_day, group, cap
     def _fmt(d):
       return "、".join(f"{r['價位']}（{r['類型']}，{r['距現價%']:+.2f}%）" for _, r in d.iterrows()) or "無"
     five += [f"加權指數支撐／壓力（由近到遠）：\n- 下檔支撐：{_fmt(sup)}\n- 上檔壓力：{_fmt(res)}", lv]
-  sec.append(("五、明日觀察", five))
+  sec.append(("六、明日觀察", five))
 
   notes = [f"資料截至 {info['date']}（若在台股盤中產生，當日 K 棒尚未收盤）。"
            f"籌碼來自雷達艙 {chips_day or '（未取得）'} 的掃描，僅涵蓋雷達自選股。",
@@ -552,6 +571,8 @@ def render_summary_cabin(deps: dict):
     if len(groups[group]) > 60:
       st.warning(f"此族群有 {len(groups[group])} 檔，掃描約需 1～3 分鐘。")
 
+  holdings = render_holdings_editor()
+
   b1, b2 = st.columns([1, 1])
   run = b1.button("🚀 產生今日總結報告", type="primary", key="sm_run")
   if b2.button("🔄 清除快取重新抓取", key="sm_refresh"):
@@ -574,9 +595,16 @@ def render_summary_cabin(deps: dict):
     total = sum(v["票"] for v in votes)
     regime = regime_of(total)
     plan = build_plan(scan, regime, capital, chips, deps)
+    # 隔日交易訊號：買進來自入選名單；賣出逐檔檢查持股
+    hold_scan = scan_group(tuple(holdings["代號"]), deps) if not holdings.empty else pd.DataFrame()
+    buys = ts.buy_signals(plan, set(holdings["代號"]))
+    sells = ts.sell_signals(holdings, hold_scan, REGIMES[regime][0], capital)
+    added = ts.append_log(info["date"], regime, buys, sells)
     title = f"每日綜合戰情總結報告 {info['date']}"
     st.session_state["sm_report"] = (title, build_sections(votes, info, total, regime, plan, scan,
-                                                           chips_day, group, capital, len(groups[group])), regime, total, info, len(votes))
+                                                           chips_day, group, capital, len(groups[group]),
+                                                           buys=buys, sells=sells), regime, total, info, len(votes))
+    st.session_state["sm_trade"] = (buys, sells, added)
 
   rep = st.session_state.get("sm_report")
   if not rep:
@@ -599,8 +627,13 @@ def render_summary_cabin(deps: dict):
       else:
         st.markdown(it)
 
+  trade = st.session_state.get("sm_trade")
+  if trade and trade[2]:
+    st.caption(f"📒 已把今天 {trade[2]} 筆新訊號記入戰績（data/signal_log.csv）。")
+
   ai_section = render_ai_section(title, sections)
   render_key_charts()
+  render_track_record(deps)
 
   out = sections + ([ai_section] if ai_section else [])
   d1, d2 = st.columns(2)
@@ -611,10 +644,10 @@ def render_summary_cabin(deps: dict):
 
 
 def render_ai_section(title: str, sections) -> tuple[str, list] | None:
-  """六、AI 研判：按鈕觸發才呼叫 Claude。回傳要併進下載檔的段落（沒產生就回傳 None）。"""
+  """七、AI 研判：按鈕觸發才呼叫 Claude。回傳要併進下載檔的段落（沒產生就回傳 None）。"""
   import ai_brief
 
-  st.markdown("#### 六、🧠 AI 研判（Claude 撰寫，僅供參考）")
+  st.markdown("#### 七、🧠 AI 研判（Claude 撰寫，僅供參考）")
   key, why = ai_brief.key_status()
   if not key:
     st.warning(f"讀不到金鑰：{why}")
@@ -643,4 +676,65 @@ def render_ai_section(title: str, sections) -> tuple[str, list] | None:
     st.caption("✅ 數字核對：AI 文中的數字都能在規則報告裡找到。")
   st.caption(f"模型 {res['model']}；輸入 {res['in_tok']:,} tokens、輸出 {res['out_tok']:,} tokens。")
   note = ("⚠️ 數字核對未通過：" + "、".join(bad)) if bad else "數字核對：通過。"
-  return ("六、AI 研判（Claude 撰寫，僅供參考）", [res["text"], f"{note}（模型 {res['model']}）"])
+  return ("七、AI 研判（Claude 撰寫，僅供參考）", [res["text"], f"{note}（模型 {res['model']}）"])
+
+
+def render_holdings_editor() -> pd.DataFrame:
+  """💼 我的持股：給賣出訊號用。只存在本機 data/holdings.csv（不進 GitHub）；雲端請用下載／上傳 CSV。"""
+  if "sm_hold" not in st.session_state:
+    st.session_state["sm_hold"] = ts.load_holdings()
+  with st.expander(f"💼 我的持股（{len(st.session_state['sm_hold'])} 檔，賣出訊號用）", expanded=False):
+    st.caption("填代號即可產生 13MA 賣出訊號；填成本才會檢查停損與 2R 停利；填股數才會計算總部位與減碼股數。"
+               "持股只存在這台電腦的 data/holdings.csv，不會上傳到 GitHub。")
+    up = st.file_uploader("上傳持股 CSV（欄位：代號, 成本, 股數）", type="csv", key="sm_hold_up")
+    if up is not None and st.session_state.get("sm_hold_up_name") != up.name:
+      st.session_state["sm_hold"] = ts._clean_holdings(pd.read_csv(up, dtype={"代號": str}))
+      st.session_state["sm_hold_up_name"] = up.name
+    edited = st.data_editor(
+      st.session_state["sm_hold"], num_rows="dynamic", hide_index=True, key="sm_hold_editor",
+      column_config={
+        "代號": st.column_config.TextColumn("代號", help="台股代號，例如 2330、0050"),
+        "成本": st.column_config.NumberColumn("成本（元／股）", min_value=0.0, format="%.2f"),
+        "股數": st.column_config.NumberColumn("股數", min_value=0, step=1, format="%d", help="1 張 = 1000 股"),
+      })
+    hold = ts._clean_holdings(edited)
+    c1, c2 = st.columns(2)
+    if c1.button("💾 儲存持股", key="sm_hold_save"):
+      st.session_state["sm_hold"] = hold
+      st.success("已儲存到 data/holdings.csv。") if ts.save_holdings(hold) else st.warning("這台主機無法寫入檔案，請用右邊的下載保存。")
+    c2.download_button("⬇️ 下載持股 CSV", hold.to_csv(index=False).encode("utf-8-sig"),
+                       file_name="holdings.csv", mime="text/csv", key="sm_hold_dl")
+  return hold
+
+
+def render_track_record(deps: dict):
+  """📒 訊號戰績：回頭計算過去訊號 1／5／20 日後的表現。"""
+  with st.expander("📒 訊號戰績（每次產生報告自動記錄）", expanded=False):
+    up = st.file_uploader("上傳先前下載的戰績紀錄 CSV（與本機紀錄合併）", type="csv", key="sm_log_up")
+    if up is not None and st.session_state.get("sm_log_up_name") != up.name:
+      old = pd.read_csv(up, dtype={"代號": str})
+      merged = pd.concat([ts.load_log(), old], ignore_index=True).drop_duplicates(["日期", "代號", "訊號"])
+      try:
+        ts.DATA_DIR.mkdir(exist_ok=True)
+        merged.to_csv(ts.LOG_FILE, index=False, encoding="utf-8-sig")
+      except OSError:
+        st.warning("這台主機無法寫入檔案。")
+      st.session_state["sm_log_up_name"] = up.name
+    log = ts.load_log()
+    if log.empty:
+      st.caption("還沒有紀錄。之後每次按「🚀 產生今日總結報告」，買進／賣出／賣一半／減碼訊號都會自動記下來。")
+      return
+    st.caption(f"共 {len(log)} 筆，最早 {log['日期'].min()}。Streamlit Cloud 重開機會清空本機檔案，請定期下載保存。")
+    if st.button("📊 計算戰績", key="sm_track_run"):
+      with st.spinner("抓取後續股價…"):
+        st.session_state["sm_track"] = ts.track_record(log, deps["fetch"])
+    tr = st.session_state.get("sm_track")
+    if tr:
+      summary, detail = tr
+      if not summary.empty:
+        st.markdown("**彙總**：" + summary.attrs.get("note", ""))
+        st.dataframe(summary, hide_index=True, width="stretch")
+        st.markdown("**明細**（訊號日之後的交易日數還不夠的欄位會空白）")
+        st.dataframe(detail, hide_index=True, width="stretch")
+    st.download_button("⬇️ 下載戰績紀錄 CSV", log.to_csv(index=False).encode("utf-8-sig"),
+                       file_name="signal_log.csv", mime="text/csv", key="sm_log_dl")
