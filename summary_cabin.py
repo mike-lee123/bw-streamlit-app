@@ -589,7 +589,13 @@ def render_summary_cabin(deps: dict):
     chart_data.clear()
     taifex_pcr.clear()
     fx_build_link.clear()
+    import twse_data
+    twse_data.clear_cache()
+    if "sj" in deps:
+      import intraday_monitor as im
+      im.daily_hist.clear()
     st.session_state.pop("sm_report", None)
+    st.toast("快取已清除，請按「🚀 產生今日總結報告」重新抓取。")
 
   if run:
     try:
@@ -613,6 +619,7 @@ def render_summary_cabin(deps: dict):
                                                            chips_day, group, capital, len(groups[group]),
                                                            buys=buys, sells=sells), regime, total, info, len(votes))
     st.session_state["sm_trade"] = (buys, sells, added)
+    st.session_state["sm_report_at"] = pd.Timestamp.now(tz="Asia/Taipei").strftime("%m/%d %H:%M")
 
   rep = st.session_state.get("sm_report")
   if not rep:
@@ -627,6 +634,10 @@ def render_summary_cabin(deps: dict):
   k[3].metric("VIX", f"{info['vix']:.1f}" if "vix" in info else "—")
 
   st.markdown(f"### {title}")
+  at = st.session_state.get("sm_report_at")
+  if at:
+    st.caption(f"報告產生時間 {at}（資料日期 {info['date']}）。報告不會自己更新，要看最新數據請重按「🚀 產生今日總結報告」；"
+               "大盤與掃描結果快取 30 分鐘，要立刻重抓請先按「🔄 清除快取重新抓取」。")
   for h, items in sections:
     st.markdown(f"#### {h}")
     for it in items:

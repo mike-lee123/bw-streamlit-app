@@ -40,8 +40,9 @@ def _num(x: str) -> float:
   return float(str(x).replace(",", "")) if str(x).replace(",", "").replace(".", "", 1).lstrip("-").isdigit() else float("nan")
 
 
-@st.cache_data(ttl=1800, show_spinner=False)
-def latest_trading_day() -> pd.Timestamp | None:
+@st.cache_data(ttl=600, show_spinner=False)
+def _latest_trading_day() -> pd.Timestamp:
+  """查不到時丟例外：例外不會被快取，下次重跑會再查（不會把「查不到」記住 10 分鐘）"""
   now = pd.Timestamp.now(tz="Asia/Taipei").tz_localize(None)
   for month in (now.replace(day=1), (now.replace(day=1) - pd.DateOffset(months=1))):
     try:
@@ -50,11 +51,18 @@ def latest_trading_day() -> pd.Timestamp | None:
         return _roc(j["data"][-1][0])
     except Exception:  # noqa: BLE001
       continue
-  return None
+  raise LookupError("證交所加權指數查不到最新交易日")
 
 
-@st.cache_data(ttl=1800, show_spinner=False)
-def _official_month(code: str, month: str) -> pd.DataFrame:
+def latest_trading_day() -> pd.Timestamp | None:
+  try:
+    return _latest_trading_day()
+  except Exception:  # noqa: BLE001
+    return None
+
+
+@st.cache_data(ttl=600, show_spinner=False)
+def _official_month_cached(code: str, month: str) -> pd.DataFrame:
   """month = 'YYYY-MM'。先試上市，再試上櫃。"""
   y, m = month.split("-")
   rows = []
@@ -74,7 +82,22 @@ def _official_month(code: str, month: str) -> pd.DataFrame:
     except Exception:  # noqa: BLE001
       rows = []
   df = pd.DataFrame(rows, columns=["Date", "Open", "High", "Low", "Close", "Volume"]).set_index("Date")
-  return df.dropna(subset=["Close"])
+  df = df.dropna(subset=["Close"])
+  if df.empty:                                  # 被限流或查不到：丟例外，不快取空結果
+    raise LookupError(f"官方日 K 查不到 {code} {month}")
+  return df
+
+
+def _official_month(code: str, month: str) -> pd.DataFrame:
+  try:
+    return _official_month_cached(code, month)
+  except Exception:  # noqa: BLE001
+    return pd.DataFrame(columns=["Open", "High", "Low", "Close", "Volume"])
+
+
+def clear_cache() -> None:
+  _latest_trading_day.clear()
+  _official_month_cached.clear()
 
 
 def patch_daily(code: str, df: pd.DataFrame) -> pd.DataFrame:
