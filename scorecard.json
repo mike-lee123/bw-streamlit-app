@@ -31,7 +31,7 @@
    "n_20d": 0,
    "avg_excess_20d": null,
    "hit_rate_20d": null,
-   "n_total": 6
+   "n_total": 8
   },
   {
    "signal_type": "🔵 三方共振",
@@ -53,7 +53,7 @@
    "n_20d": 0,
    "avg_excess_20d": null,
    "hit_rate_20d": null,
-   "n_total": 2
+   "n_total": 3
   }
  ],
  "signals": [
@@ -195,7 +195,7 @@
    "n_20d": 2,
    "avg_excess_20d": -8.93,
    "hit_rate_20d": 100,
-   "n_total": 4
+   "n_total": 6
   },
   {
    "broker": "（未具名）",
@@ -238,6 +238,14 @@
    "n_total": 2
   },
   {
+   "broker": "小摩",
+   "direction": "down",
+   "n_20d": 1,
+   "avg_excess_20d": -13.15,
+   "hit_rate_20d": 100,
+   "n_total": 1
+  },
+  {
    "broker": "花旗",
    "direction": "up",
    "n_20d": 1,
@@ -254,19 +262,11 @@
    "n_total": 1
   },
   {
-   "broker": "小摩",
-   "direction": "down",
+   "broker": "里昂",
+   "direction": "up",
    "n_20d": 1,
-   "avg_excess_20d": -13.15,
-   "hit_rate_20d": 100,
-   "n_total": 1
-  },
-  {
-   "broker": "高盛",
-   "direction": "down",
-   "n_20d": 1,
-   "avg_excess_20d": -0.92,
-   "hit_rate_20d": 100,
+   "avg_excess_20d": -0.24,
+   "hit_rate_20d": 0,
    "n_total": 1
   },
   {
@@ -278,19 +278,27 @@
    "n_total": 1
   },
   {
-   "broker": "里昂",
-   "direction": "up",
-   "n_20d": 1,
-   "avg_excess_20d": -0.24,
-   "hit_rate_20d": 0,
-   "n_total": 1
-  },
-  {
    "broker": "日系外資",
    "direction": "up",
    "n_20d": 1,
    "avg_excess_20d": -6.2,
    "hit_rate_20d": 0,
+   "n_total": 1
+  },
+  {
+   "broker": "高盛",
+   "direction": "down",
+   "n_20d": 1,
+   "avg_excess_20d": -0.92,
+   "hit_rate_20d": 100,
+   "n_total": 1
+  },
+  {
+   "broker": "大摩",
+   "direction": "down",
+   "n_20d": 0,
+   "avg_excess_20d": null,
+   "hit_rate_20d": null,
    "n_total": 1
   },
   {
