@@ -575,6 +575,25 @@ def render_summary_cabin(deps: dict):
   st.subheader("📋 每日綜合戰情總結艙（大盤投票 × 多策略共振 × 籌碼確認 × 風控 → 一頁總結報告）")
   st.caption("全部由固定規則產生、不接 AI：每個結論都能追到是哪一艙、哪個數字。僅供參考，不構成投資建議。")
 
+  hm = pd.Timestamp.now(tz="Asia/Taipei")
+  morning = (7, 0) <= (hm.hour, hm.minute) <= (9, 30)        # 早上 07:00～09:30 自動展開
+  with st.expander("🌅 開盤前趨勢預測（08:45 台指期／09:00 台股；ADR、費半、道瓊、匯率、KOSPI、夜盤）", expanded=morning):
+    st.caption("建議 08:00～08:45 之間看：此時美股與夜盤已收盤、KOSPI 已開盤。也會自動併入總結報告第七段。")
+    if st.button("🌅 抓取開盤前 6 大指標", key="sm_pre_run"):
+      st.session_state["sm_pre"] = _preopen_forecast(deps)
+    fc = st.session_state.get("sm_pre")
+    if fc is not None:
+      import preopen
+      trade = st.session_state.get("sm_trade") or (None, None, 0)
+      h, body = preopen.section(fc, sells=trade[1], buys=trade[0])
+      for it in body:
+        if isinstance(it, pd.DataFrame):
+          st.dataframe(it, hide_index=True, width="stretch")
+        else:
+          st.markdown(it)
+    elif "sm_pre" in st.session_state:
+      st.warning("開盤前指標抓取失敗（查不到台股最新交易日或網路問題），請稍後再按一次。")
+
   groups = deps["groups"]
   keys = list(groups.keys())
   with st.expander("⚙️ 本艙設定", expanded=False):
@@ -594,23 +613,6 @@ def render_summary_cabin(deps: dict):
       trade = st.session_state.get("sm_trade")
       cands = list(trade[0]["代號"]) if trade and trade[0] is not None and not trade[0].empty else []
       im.render_monitor(deps, holdings, cands, deps["names"])
-
-  with st.expander("🌅 開盤前趨勢預測（08:45 台指期／09:00 台股；ADR、費半、道瓊、匯率、KOSPI、夜盤）", expanded=False):
-    st.caption("建議 08:00～08:45 之間看：此時美股與夜盤已收盤、KOSPI 已開盤。也會自動併入總結報告第七段。")
-    if st.button("🌅 抓取開盤前 6 大指標", key="sm_pre_run"):
-      st.session_state["sm_pre"] = _preopen_forecast(deps)
-    fc = st.session_state.get("sm_pre")
-    if fc is not None:
-      import preopen
-      trade = st.session_state.get("sm_trade") or (None, None, 0)
-      h, body = preopen.section(fc, sells=trade[1], buys=trade[0])
-      for it in body:
-        if isinstance(it, pd.DataFrame):
-          st.dataframe(it, hide_index=True, width="stretch")
-        else:
-          st.markdown(it)
-    elif "sm_pre" in st.session_state:
-      st.warning("開盤前指標抓取失敗（查不到台股最新交易日或網路問題），請稍後再按一次。")
 
   b1, b2 = st.columns([1, 1])
   run = b1.button("🚀 產生今日總結報告", type="primary", key="sm_run")
