@@ -334,7 +334,7 @@ def _html_table(df: pd.DataFrame) -> str:
 
 
 def build_sections(votes, info, total, regime, plan, scan, chips_day, group, capital, n_codes=None,
-                   buys=None, sells=None) -> list[tuple[str, list]]:
+                   buys=None, sells=None, preopen_fc=None) -> list[tuple[str, list]]:
   """回傳 [(標題, [段落 str 或 DataFrame, ...]), ...]，Markdown 與 HTML 共用"""
   cap_pct, risk_pct, min_score = REGIMES[regime]
   n_up, n_dn = sum(v["票"] > 0 for v in votes), sum(v["票"] < 0 for v in votes)
@@ -401,10 +401,14 @@ def build_sections(votes, info, total, regime, plan, scan, chips_day, group, cap
       return "、".join(f"{r['價位']}（{r['類型']}，{r['距現價%']:+.2f}%）" for _, r in d.iterrows()) or "無"
     five += [f"加權指數支撐／壓力（由近到遠）：\n- 下檔支撐：{_fmt(sup)}\n- 上檔壓力：{_fmt(res)}", lv]
   sec.append(("六、明日觀察", five))
+  if preopen_fc is not None:
+    import preopen
+    h, body = preopen.section(preopen_fc, sells=sells, buys=buys)
+    sec.append((f"七、{h}", body))
 
   notes = [f"資料截至 {info['date']}（若在台股盤中產生，當日 K 棒尚未收盤）。"
            f"籌碼來自雷達艙 {chips_day or '（未取得）'} 的掃描，僅涵蓋雷達自選股。",
-           "期現價差需要永豐連線，本版未納入投票；全商品艙的夜盤與回測艙的績效為示範值，未採用。PCR 為期交所每日盤後公布值。",
+           "期現價差需要永豐連線，本版未納入投票；回測艙的績效為示範值，未採用。開盤前預測的夜盤來自期交所盤後行情（夜盤進行中改用永豐即時價）。PCR 為期交所每日盤後公布值。",
            "本報告由固定規則產生，僅供技術分析參考，不構成投資建議。"]
   sec.append(("附註", notes))
   return sec
@@ -554,6 +558,16 @@ def render_key_charts():
 
 
 # ---------- 介面 ----------
+def _preopen_forecast(deps):
+  """開盤前 6 大指標；失敗回傳 None（不影響總結報告其他段落）"""
+  import preopen
+  api = deps["sj"]() if "sj" in deps else None
+  try:
+    return preopen.forecast(api, deps.get("resolve"), api is not None)
+  except Exception:  # noqa: BLE001
+    return None
+
+
 def render_summary_cabin(deps: dict):
   """deps：fetch, confluence, atr, risk_mgr, groups, names（由 app.py 傳入）"""
   import twse_data
@@ -581,6 +595,23 @@ def render_summary_cabin(deps: dict):
       cands = list(trade[0]["代號"]) if trade and trade[0] is not None and not trade[0].empty else []
       im.render_monitor(deps, holdings, cands, deps["names"])
 
+  with st.expander("🌅 開盤前趨勢預測（08:45 台指期／09:00 台股；ADR、費半、道瓊、匯率、KOSPI、夜盤）", expanded=False):
+    st.caption("建議 08:00～08:45 之間看：此時美股與夜盤已收盤、KOSPI 已開盤。也會自動併入總結報告第七段。")
+    if st.button("🌅 抓取開盤前 6 大指標", key="sm_pre_run"):
+      st.session_state["sm_pre"] = _preopen_forecast(deps)
+    fc = st.session_state.get("sm_pre")
+    if fc is not None:
+      import preopen
+      trade = st.session_state.get("sm_trade") or (None, None, 0)
+      h, body = preopen.section(fc, sells=trade[1], buys=trade[0])
+      for it in body:
+        if isinstance(it, pd.DataFrame):
+          st.dataframe(it, hide_index=True, width="stretch")
+        else:
+          st.markdown(it)
+    elif "sm_pre" in st.session_state:
+      st.warning("開盤前指標抓取失敗（查不到台股最新交易日或網路問題），請稍後再按一次。")
+
   b1, b2 = st.columns([1, 1])
   run = b1.button("🚀 產生今日總結報告", type="primary", key="sm_run")
   if b2.button("🔄 清除快取重新抓取", key="sm_refresh"):
@@ -591,6 +622,9 @@ def render_summary_cabin(deps: dict):
     fx_build_link.clear()
     import twse_data
     twse_data.clear_cache()
+    import preopen
+    preopen.forecast.clear()
+    preopen.night_session.clear()
     if "sj" in deps:
       import intraday_monitor as im
       im.daily_hist.clear()
@@ -614,10 +648,12 @@ def render_summary_cabin(deps: dict):
     buys = ts.buy_signals(plan, set(holdings["代號"]))
     sells = ts.sell_signals(holdings, hold_scan, REGIMES[regime][0], capital)
     added = ts.append_log(info["date"], regime, buys, sells)
+    fc = _preopen_forecast(deps)
     title = f"每日綜合戰情總結報告 {info['date']}"
     st.session_state["sm_report"] = (title, build_sections(votes, info, total, regime, plan, scan,
                                                            chips_day, group, capital, len(groups[group]),
-                                                           buys=buys, sells=sells), regime, total, info, len(votes))
+                                                           buys=buys, sells=sells, preopen_fc=fc),
+                                  regime, total, info, len(votes))
     st.session_state["sm_trade"] = (buys, sells, added)
     st.session_state["sm_report_at"] = pd.Timestamp.now(tz="Asia/Taipei").strftime("%m/%d %H:%M")
 
@@ -663,10 +699,10 @@ def render_summary_cabin(deps: dict):
 
 
 def render_ai_section(title: str, sections) -> tuple[str, list] | None:
-  """七、AI 研判：按鈕觸發才呼叫 Claude。回傳要併進下載檔的段落（沒產生就回傳 None）。"""
+  """八、AI 研判：按鈕觸發才呼叫 Claude。回傳要併進下載檔的段落（沒產生就回傳 None）。"""
   import ai_brief
 
-  st.markdown("#### 七、🧠 AI 研判（Claude 撰寫，僅供參考）")
+  st.markdown("#### 八、🧠 AI 研判（Claude 撰寫，僅供參考）")
   key, why = ai_brief.key_status()
   if not key:
     st.warning(f"讀不到金鑰：{why}")
@@ -695,7 +731,7 @@ def render_ai_section(title: str, sections) -> tuple[str, list] | None:
     st.caption("✅ 數字核對：AI 文中的數字都能在規則報告裡找到。")
   st.caption(f"模型 {res['model']}；輸入 {res['in_tok']:,} tokens、輸出 {res['out_tok']:,} tokens。")
   note = ("⚠️ 數字核對未通過：" + "、".join(bad)) if bad else "數字核對：通過。"
-  return ("七、AI 研判（Claude 撰寫，僅供參考）", [res["text"], f"{note}（模型 {res['model']}）"])
+  return ("八、AI 研判（Claude 撰寫，僅供參考）", [res["text"], f"{note}（模型 {res['model']}）"])
 
 
 def render_holdings_editor() -> pd.DataFrame:

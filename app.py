@@ -1268,6 +1268,7 @@ def fetch_yahoo_intraday_data(symbol: str) -> pd.DataFrame:
 
 @st.cache_data(ttl=300)
 def fetch_global_us_dashboard_data():
+  # 原本用 range="10d"，但 fetch_from_yahoo_chart_api 需要 ≥ 30 筆，一定失敗而顯示寫死的假值；改抓 3mo，失敗就不顯示
   symbols = {
       "SOX": "^SOX",
       "TSM": "TSM",
@@ -1277,19 +1278,19 @@ def fetch_global_us_dashboard_data():
   }
   results = {}
   for key, symbol in symbols.items():
-    df = fetch_from_yahoo_chart_api(symbol, range_str="10d")
+    df = fetch_from_yahoo_chart_api(symbol, range_str="3mo")
     if not df.empty and len(df) >= 2:
       cp, pp = float(df["Close"].iloc[-1]), float(df["Close"].iloc[-2])
-      results[key] = {"price": cp, "change": ((cp - pp) / pp) * 100}
-    else:
-      fallback_vals = {
-          "SOX": 5150.0,
-          "TSM": 185.0,
-          "DJI": 41200.0,
-          "KOSPI": 2580.0,
-          "USDTWD": 31.85,
-      }
-      results[key] = {"price": fallback_vals.get(key, 100.0), "change": 0.75}
+      results[key] = {"price": cp, "change": ((cp - pp) / pp) * 100, "date": df.index[-1].strftime("%m/%d")}
+  # Yahoo 外匯日線的收盤不可靠：改用即時價，對台股前一交易日 13:30 的匯價
+  try:
+    import preopen, twse_data
+    q, tp = preopen._yahoo("TWD=X"), twse_data.latest_trading_day()
+    ref = preopen._fx_at(tp + pd.Timedelta(hours=13, minutes=30))
+    results["USDTWD"] = {"price": q["last"], "change": (q["last"] / ref - 1) * 100,
+                         "date": q["last_t"].tz_convert("Asia/Taipei").strftime("%m/%d %H:%M")}
+  except Exception:  # noqa: BLE001
+    pass
   return results
 
 
@@ -5785,40 +5786,34 @@ elif col_sel == "⚡ 第一缺口":
 elif col_sel == "🌐 全商品指揮":
   st.subheader("🌐 全商品跨國算力與期貨指揮艙 (含韓國指數與台指期夜盤)")
   gd = fetch_global_us_dashboard_data()
-  cols = st.columns(4)
-  with cols[0]:
-    st.metric(
-        "台積電 ADR (TSM)",
-        f"{gd.get('TSM', {}).get('price', 0):.2f} USD",
-        f"{gd.get('TSM', {}).get('change', 0):+.2f}%",
-    )
-  with cols[1]:
-    st.metric(
-        "費城半導體 (SOX)",
-        f"{gd.get('SOX', {}).get('price', 0):,.2f}",
-        f"{gd.get('SOX', {}).get('change', 0):+.2f}%",
-    )
-  with cols[2]:
-    st.metric(
-        "道瓊指數 (DJI)",
-        f"{gd.get('DJI', {}).get('price', 0):,.2f}",
-        f"{gd.get('DJI', {}).get('change', 0):+.2f}%",
-    )
-  with cols[3]:
-    st.metric(
-        "匯率 (USDTWD)",
-        f"{gd.get('USDTWD', {}).get('price', 0):.2f}",
-        f"{gd.get('USDTWD', {}).get('change', 0):+.2f}%",
-    )
 
+  def _gm(col, label, key, fmt):
+    d = gd.get(key)
+    if d:
+      col.metric(label, fmt.format(d["price"]), f"{d['change']:+.2f}%", delta_color="inverse",
+                 help=f"Yahoo 日線，最後一根 {d['date']}")
+    else:
+      col.metric(label, "—", "取不到資料", delta_color="off")
+
+  cols = st.columns(4)
+  _gm(cols[0], "台積電 ADR (TSM)", "TSM", "{:.2f} USD")
+  _gm(cols[1], "費城半導體 (SOX)", "SOX", "{:,.2f}")
+  _gm(cols[2], "道瓊指數 (DJI)", "DJI", "{:,.2f}")
+  _gm(cols[3], "匯率 (USDTWD)", "USDTWD", "{:.3f}")
   st.markdown("---")
-  k_val = gd.get("KOSPI", {}).get("price", 2580.0)
-  k_chg = gd.get("KOSPI", {}).get("change", 0.85)
   c_f1, c_f2 = st.columns(2)
-  with c_f1:
-    st.metric("韓國綜合指數 (KOSPI)", f"{k_val:,.2f}", f"{k_chg:+.2f}%")
-  with c_f2:
-    st.metric("台指期夜盤模擬變動", "+145 點", "🔥 多方強勢發動")
+  _gm(c_f1, "韓國綜合指數 (KOSPI)", "KOSPI", "{:,.2f}")
+  import preopen, twse_data
+  _tp = twse_data.latest_trading_day()
+  _ns = preopen.night_session(_tp, globals().get("global_sj_api"), resolve_contract,
+                                 globals().get("global_sj_api") is not None) if _tp is not None else None
+  if _ns:
+    _pts = _ns["last"] - _ns["day_close"]
+    c_f2.metric("台指期夜盤", f"{_ns['last']:,.0f}", f"{_pts:+,.0f} 點（{_pts / _ns['day_close'] * 100:+.2f}%）",
+                delta_color="inverse", help=_ns["src"] + "；對日盤收盤")
+  else:
+    c_f2.metric("台指期夜盤", "—", "夜盤尚未收盤（05:00 後公布）", delta_color="off")
+  st.caption("開盤前 6 大指標的投票與預估開盤點位，請看第 26 艙「🌅 開盤前趨勢預測」。")
 
 elif col_sel == "⚔️ 選擇權":
   st.subheader(
