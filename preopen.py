@@ -77,7 +77,7 @@ def night_session(t_prev: pd.Timestamp, _api=None, _resolve=None, sj_on: bool = 
         return {"last": float(n["close"]), "day_close": float(near["close"]), "month": near["month"],
                 "src": f"期交所夜盤收盤（{near['month']}）", "final": True}
       if api is not None and resolve is not None:
-        s = api.snapshots([resolve(api, "TXFR1")])[0]
+        s = api.snapshots([resolve(api, "TXFR1")], timeout=5000)[0]
         ts = pd.Timestamp(int(s.ts), unit="ns", tz="UTC").tz_convert(TZ)
         if ts.tz_localize(None) > t_prev + pd.Timedelta(hours=14):   # 日盤收盤之後的成交
           return {"last": float(s.close), "day_close": float(near["close"]), "month": near["month"],

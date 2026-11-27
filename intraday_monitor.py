@@ -93,18 +93,42 @@ def ref_for(df: pd.DataFrame, session: dt.date) -> dict | None:
 
 
 # ---------- 即時報價 ----------
+SJ_TIMEOUT_MS = 5000      # 永豐 snapshots 逾時（預設 30 秒；連不上時每輪會卡很久，表格一直出不來）
+SJ_COOLDOWN = 600         # 永豐失敗後，這段秒數內直接用 Yahoo，不再每輪重試
+
+
+def _contract(api, code: str, resolve):
+  """合約查一次就記在 session（查合約可能觸發重新下載合約表，不能每輪都查）；查不到記 None"""
+  cache = st.session_state.setdefault("im_contracts", {})
+  key = (id(api), code)
+  if key not in cache:
+    try:
+      cache[key] = resolve(api, code)
+    except Exception:  # noqa: BLE001
+      cache[key] = None
+  return cache[key]
+
+
+def sj_usable() -> bool:
+  return dt.datetime.now(TZ).timestamp() >= st.session_state.get("im_sj_off_until", 0)
+
+
+def sj_failed(err: str) -> None:
+  st.session_state["im_sj_off_until"] = dt.datetime.now(TZ).timestamp() + SJ_COOLDOWN
+  st.session_state["im_sj_err"] = err
+
+
 def quotes_shioaji(api, codes: list[str], resolve) -> dict:
   contracts, ok = [], []
   for c in codes:
-    try:
-      contracts.append(resolve(api, c))
+    k = _contract(api, c, resolve)
+    if k is not None:
+      contracts.append(k)
       ok.append(c)
-    except Exception:  # noqa: BLE001
-      pass
   if not contracts:
     return {}
   out = {}
-  for code, s in zip(ok, api.snapshots(contracts)):
+  for code, s in zip(ok, api.snapshots(contracts, timeout=SJ_TIMEOUT_MS)):
     last = float(s.close)
     out[code] = {"last": last, "open": float(s.open), "high": float(s.high), "low": float(s.low),
                  "vwap": float(s.average_price) or last, "cum_vol": float(s.total_volume) * 1000,   # 張 → 股
@@ -153,12 +177,14 @@ def quotes_yahoo(codes: list[str]) -> dict:
 
 def market_change(api, resolve) -> tuple[float | None, str]:
   """大盤濾網：有永豐用台指期近月，否則用 Yahoo 加權指數"""
-  if api is not None:
-    try:
-      s = api.snapshots([resolve(api, "TXFR1")])[0]
-      return float(s.change_rate), "台指期近月（永豐）"
-    except Exception:  # noqa: BLE001
-      pass
+  if api is not None and sj_usable():
+    k = _contract(api, "TXFR1", resolve)
+    if k is not None:
+      try:
+        s = api.snapshots([k], timeout=SJ_TIMEOUT_MS)[0]
+        return float(s.change_rate), "台指期近月（永豐）"
+      except Exception:  # noqa: BLE001
+        pass
   try:
     q = _yahoo_1m("%5ETWII")
     if q:
@@ -240,16 +266,27 @@ def render_monitor(deps: dict, holdings: pd.DataFrame, candidates: list[str], na
     now = dt.datetime.now(TZ)
     phase = phase_of(now)
     codes = list(dict.fromkeys(hold_codes + cands))
-    hist = daily_hist(tuple(codes), deps["fetch"])
-    api = deps["sj"]()
-    try:
-      quotes = deps["sj_retry"](lambda a: quotes_shioaji(a, codes, deps["resolve"])) if api is not None else {}
-    except Exception as e:  # noqa: BLE001
-      st.warning(f"永豐報價失敗，改用 Yahoo：{e}")
+    with st.spinner("抓取報價中…"):
+      hist = daily_hist(tuple(codes), deps["fetch"])
+      api = deps["sj"]()
       quotes = {}
-    if len(quotes) < len(codes):
-      quotes.update(quotes_yahoo([c for c in codes if c not in quotes]))
-    mkt, mkt_src = market_change(api, deps["resolve"])
+      if api is not None and sj_usable():
+        try:
+          # 連線過期（SessionNotEstablished）時 sj_retry 會重新登入一次再試
+          quotes = deps["sj_retry"](lambda a: quotes_shioaji(a, codes, deps["resolve"]))
+          if not quotes:
+            sj_failed("永豐查不到這些代號的合約")
+        except Exception as e:  # noqa: BLE001
+          sj_failed(type(e).__name__)
+      if len(quotes) < len(codes):
+        quotes.update(quotes_yahoo([c for c in codes if c not in quotes]))
+      mkt, mkt_src = market_change(api, deps["resolve"])
+    sj_live = any(q.get("src") == "永豐即時" for q in quotes.values())
+    if api is not None and not sj_live and st.session_state.get("im_sj_err"):
+      left = max(1, (int(st.session_state.get("im_sj_off_until", 0) - now.timestamp()) + 59) // 60)
+      st.warning(f"永豐即時報價取不到（{st.session_state['im_sj_err']}），先改用 Yahoo 延遲報價，"
+                 f"約 {left} 分鐘後自動再試永豐。在 Streamlit Cloud 上常見（雲端主機在美國，連不上永豐行情伺服器），"
+                 "要即時報價請在本機執行。")
 
     state = st.session_state.setdefault("im_state", {})
     alerts = st.session_state.setdefault("im_alerts", [])
@@ -289,8 +326,9 @@ def render_monitor(deps: dict, holdings: pd.DataFrame, candidates: list[str], na
     m1, m2, m3 = st.columns(3)
     m1.metric("時段", phase, now.strftime("%H:%M:%S"), delta_color="off")
     m2.metric("大盤濾網", f"{mkt:+.2f}%" if mkt is not None else "—", mkt_src, delta_color="off")
-    m3.metric("報價來源", "永豐即時" if api is not None else "Yahoo 延遲",
-              None if api is not None else "左側登入永豐可改為即時", delta_color="off")
+    m3.metric("報價來源", "永豐即時" if sj_live else "Yahoo 延遲（約 20 分鐘）",
+              None if sj_live else ("永豐連線失敗，暫用 Yahoo" if api is not None else "左側登入永豐可改為即時"),
+              delta_color="off")
     if phase in ("盤前", "收盤後", "休市"):
       st.info(f"目前為{phase}：表格顯示最近一個交易時段的最後狀態，不發新提醒。")
     st.dataframe(pd.DataFrame(rows), hide_index=True, width="stretch")
