@@ -18,7 +18,9 @@
   時段：09:00–09:15 只看硬停損；13:25 之後（試撮）與收盤後不發新訊號。
   13MA 用「前 12 日收盤 + 即時價」算即時 13MA，與收盤判斷一致。
 
-資料：左側控制台已登入永豐 → Shioaji snapshots（即時）；否則 Yahoo 1 分 K（延遲，僅供參考）。
+資料：左側控制台以正式帳號登入永豐 → Shioaji snapshots（即時）；
+  沒登入或模擬帳號（模擬環境沒有行情）→ 證交所基本市況報導（延遲約 5 秒，均價取自 Yahoo 1 分 K）；
+  都取不到 → Yahoo 1 分 K（延遲約 20 分鐘）。
 提醒：每檔記住目前狀態，只有狀態改變才跳通知，避免價格在 13MA 上下來回時一直提醒。
 """
 
@@ -98,15 +100,19 @@ SJ_COOLDOWN = 600         # 永豐失敗後，這段秒數內直接用 Yahoo，�
 
 
 def _contract(api, code: str, resolve):
-  """合約查一次就記在 session（查合約可能觸發重新下載合約表，不能每輪都查）；查不到記 None"""
+  """查到的合約記在 session（查合約可能觸發重新下載合約表，不能每輪都查）；查不到不記，下次再查"""
   cache = st.session_state.setdefault("im_contracts", {})
   key = (id(api), code)
-  if key not in cache:
+  if cache.get(key) is None:
     try:
       cache[key] = resolve(api, code)
     except Exception:  # noqa: BLE001
-      cache[key] = None
+      return None
   return cache[key]
+
+
+def _contracts_status(api) -> str:
+  return str(getattr(getattr(api, "Contracts", None), "status", "")).split(".")[-1] or "未知"
 
 
 def sj_usable() -> bool:
@@ -126,9 +132,12 @@ def quotes_shioaji(api, codes: list[str], resolve) -> dict:
       contracts.append(k)
       ok.append(c)
   if not contracts:
-    return {}
+    raise RuntimeError(f"查不到任何代號的合約（合約表狀態：{_contracts_status(api)}）")
+  snaps = api.snapshots(contracts, timeout=SJ_TIMEOUT_MS)
+  if not snaps:
+    raise RuntimeError(f"合約有 {len(contracts)} 檔，但永豐快照回傳 0 筆（模擬環境沒有行情，或行情連線未建立）")
   out = {}
-  for code, s in zip(ok, api.snapshots(contracts, timeout=SJ_TIMEOUT_MS)):
+  for code, s in zip(ok, snaps):
     last = float(s.close)
     out[code] = {"last": last, "open": float(s.open), "high": float(s.high), "low": float(s.low),
                  "vwap": float(s.average_price) or last, "cum_vol": float(s.total_volume) * 1000,   # 張 → 股
@@ -161,6 +170,51 @@ def _yahoo_1m(symbol: str) -> dict | None:
           "ts": d.index[-1].strftime("%m/%d %H:%M"), "src": "Yahoo 延遲", "date": d.index[-1].date()}
 
 
+def _mis(ex_ch: list[str]) -> list[dict]:
+  r = requests.get("https://mis.twse.com.tw/stock/api/getStockInfo.jsp",
+                   params={"ex_ch": "|".join(ex_ch), "json": "1", "delay": "0",
+                           "_": int(dt.datetime.now().timestamp() * 1000)},
+                   headers={"User-Agent": "Mozilla/5.0", "Referer": "https://mis.twse.com.tw/stock/index.jsp"}, timeout=8)
+  return [m for m in (r.json().get("msgArray") or []) if m.get("c")]
+
+
+def _f(x) -> float:
+  try:
+    return float(x)
+  except (TypeError, ValueError):
+    return float("nan")
+
+
+def quotes_mis(codes: list[str]) -> dict:
+  """證交所「基本市況報導」即時報價（延遲約 5 秒，免帳號）。不知道上市或上櫃，所以兩邊都查。
+  它不提供成交均價：VWAP 改用 Yahoo 1 分 K 估（延遲），取不到就用 (高+低+現價)/3。"""
+  out = {}
+  for i in range(0, len(codes), 20):                       # 一次最多查 20 檔（40 個 ex_ch）
+    part = codes[i:i + 20]
+    for m in _mis([f"{ex}_{c.lower()}.tw" for c in part for ex in ("tse", "otc")]):
+      last = _f(m.get("z"))
+      if last != last:                                     # 這 5 秒沒成交：用最佳買價
+        last = _f(str(m.get("b") or "").split("_")[0])
+      if last != last:
+        continue
+      t = pd.Timestamp(int(m["tlong"]), unit="ms", tz="UTC").tz_convert(TZ)
+      hi, lo = _f(m.get("h")), _f(m.get("l"))
+      out[m["c"]] = {"last": last, "open": _f(m.get("o")), "high": hi, "low": lo,
+                     "vwap": float(np.nanmean([hi, lo, last])), "vwap_src": "估算",
+                     "cum_vol": _f(m.get("v")) * 1000, "prev_close": _f(m.get("y")),
+                     "ts": t.strftime("%H:%M:%S"), "src": "證交所即時", "date": t.date()}
+  for c, q in out.items():                                 # 均價：Yahoo 1 分 K 的 VWAP（延遲）
+    for suf in (".TW", ".TWO"):
+      try:
+        y = _yahoo_1m(c + suf)
+      except Exception:  # noqa: BLE001
+        y = None
+      if y and y["date"] == q["date"]:
+        q["vwap"], q["vwap_src"] = y["vwap"], "Yahoo"
+        break
+  return out
+
+
 def quotes_yahoo(codes: list[str]) -> dict:
   out = {}
   for c in codes:
@@ -185,6 +239,12 @@ def market_change(api, resolve) -> tuple[float | None, str]:
         return float(s.change_rate), "台指期近月（永豐）"
       except Exception:  # noqa: BLE001
         pass
+  try:                                        # 證交所即時加權指數（延遲約 5 秒）
+    m = _mis(["tse_t00.tw"])
+    if m and _f(m[0].get("z")) == _f(m[0].get("z")) and _f(m[0].get("y")) > 0:
+      return (_f(m[0]["z"]) / _f(m[0]["y"]) - 1) * 100, "加權指數（證交所即時）"
+  except Exception:  # noqa: BLE001
+    pass
   try:
     q = _yahoo_1m("%5ETWII")
     if q:
@@ -269,24 +329,31 @@ def render_monitor(deps: dict, holdings: pd.DataFrame, candidates: list[str], na
     with st.spinner("抓取報價中…"):
       hist = daily_hist(tuple(codes), deps["fetch"])
       api = deps["sj"]()
+      sim = api is not None and deps.get("sim", lambda: False)()   # 已登入、但是模擬帳號
+      if sim:                                     # 模擬帳號沒有行情：不查永豐，直接用證交所即時報價
+        api = None
       quotes = {}
       if api is not None and sj_usable():
         try:
           # 連線過期（SessionNotEstablished）時 sj_retry 會重新登入一次再試
           quotes = deps["sj_retry"](lambda a: quotes_shioaji(a, codes, deps["resolve"]))
-          if not quotes:
-            sj_failed("永豐查不到這些代號的合約")
+        except RuntimeError as e:                   # 本模組自己丟出的診斷訊息，內容可控
+          sj_failed(str(e))
         except Exception as e:  # noqa: BLE001
           sj_failed(type(e).__name__)
+      if len(quotes) < len(codes):
+        try:
+          quotes.update(quotes_mis([c for c in codes if c not in quotes]))
+        except Exception:  # noqa: BLE001
+          pass
       if len(quotes) < len(codes):
         quotes.update(quotes_yahoo([c for c in codes if c not in quotes]))
       mkt, mkt_src = market_change(api, deps["resolve"])
     sj_live = any(q.get("src") == "永豐即時" for q in quotes.values())
     if api is not None and not sj_live and st.session_state.get("im_sj_err"):
       left = max(1, (int(st.session_state.get("im_sj_off_until", 0) - now.timestamp()) + 59) // 60)
-      st.warning(f"永豐即時報價取不到（{st.session_state['im_sj_err']}），先改用 Yahoo 延遲報價，"
-                 f"約 {left} 分鐘後自動再試永豐。在 Streamlit Cloud 上常見（雲端主機在美國，連不上永豐行情伺服器），"
-                 "要即時報價請在本機執行。")
+      st.warning(f"永豐即時報價取不到（{st.session_state['im_sj_err']}），先改用證交所公開報價，"
+                 f"約 {left} 分鐘後自動再試永豐。")
 
     state = st.session_state.setdefault("im_state", {})
     alerts = st.session_state.setdefault("im_alerts", [])
@@ -326,9 +393,13 @@ def render_monitor(deps: dict, holdings: pd.DataFrame, candidates: list[str], na
     m1, m2, m3 = st.columns(3)
     m1.metric("時段", phase, now.strftime("%H:%M:%S"), delta_color="off")
     m2.metric("大盤濾網", f"{mkt:+.2f}%" if mkt is not None else "—", mkt_src, delta_color="off")
-    m3.metric("報價來源", "永豐即時" if sj_live else "Yahoo 延遲（約 20 分鐘）",
-              None if sj_live else ("永豐連線失敗，暫用 Yahoo" if api is not None else "左側登入永豐可改為即時"),
+    srcs = {q.get("src") for q in quotes.values()}
+    src = "永豐即時" if sj_live else "證交所即時（約 5 秒）" if "證交所即時" in srcs else "Yahoo 延遲（約 20 分鐘）"
+    m3.metric("報價來源", src,
+              "模擬帳號無行情，改用證交所" if sim else ("永豐連線失敗，暫用公開報價" if api is not None and not sj_live else None),
               delta_color="off")
+    if "證交所即時" in srcs:
+      st.caption("證交所即時報價不含成交均價：均價（VWAP）取自 Yahoo 1 分 K（延遲約 20 分鐘），取不到時以（高＋低＋現價）÷ 3 估算。")
     if phase in ("盤前", "收盤後", "休市"):
       st.info(f"目前為{phase}：表格顯示最近一個交易時段的最後狀態，不發新提醒。")
     st.dataframe(pd.DataFrame(rows), hide_index=True, width="stretch")
@@ -336,4 +407,8 @@ def render_monitor(deps: dict, holdings: pd.DataFrame, candidates: list[str], na
       st.markdown("**🔔 今日訊號變化**")
       st.dataframe(pd.DataFrame(alerts[:50]), hide_index=True, width="stretch")
 
+  if not sj_usable() and st.button("🔁 立即重試永豐（改好設定、重新連線後按）", key="im_sj_retry"):
+    st.session_state["im_sj_off_until"] = 0
+    st.session_state.pop("im_sj_err", None)
+    st.session_state.pop("im_contracts", None)
   st.fragment(run_every=every if on else None)(tick)()

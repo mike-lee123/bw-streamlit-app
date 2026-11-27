@@ -6656,6 +6656,7 @@ elif col_sel == "📋 每日綜合戰情總結艙":
       "risk_mgr": MATradingManager, "groups": STRATEGIC_GROUPS, "names": ZHTW_MAP,
       # 盤中監控：沿用左側控制台的永豐連線；連線中斷時 bw_sj_retry 會自動重新登入一次
       "sj": lambda: globals().get("global_sj_api"), "resolve": resolve_contract,
+      "sim": lambda: bool(globals().get("global_is_simulation", True)),
       "sj_retry": lambda fn: bw_sj_retry(fn, {"api": globals().get("global_sj_api"),
                                              "sim": globals().get("global_is_simulation", True)}),
   })
