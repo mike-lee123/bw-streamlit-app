@@ -24,6 +24,7 @@ import streamlit as st
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 
+import exit_rules as er
 import trade_signals as ts
 from taifex_pcr import PCR_BEAR, PCR_BULL, pcr_signal, taifex_pcr
 from fx_cabin import DN, UP, _fx_layout, _fx_macd_panel, fx_add_indicators, fx_build_link, fx_fetch, fx_pct_change
@@ -240,6 +241,8 @@ def _scan_one(code: str, deps: dict) -> dict | None:
   c = df["Close"]
   close, prev = float(c.iloc[-1]), float(c.iloc[-2])
   ma13 = float(c.rolling(13).mean().iloc[-1])
+  ma60 = c.rolling(60).mean().iloc[-1]
+  ma120 = c.rolling(120).mean().iloc[-1]
   atr = float(deps["atr"](df, 14).iloc[-1])
   vol = df["Volume"]
   vol_ratio = float(vol.iloc[-1] / (vol.rolling(20).mean().iloc[-1] + 1e-8))
@@ -251,6 +254,8 @@ def _scan_one(code: str, deps: dict) -> dict | None:
     "代號": code, "名稱": deps["names"].get(code, ""), "日期": df.index[-1].date().isoformat(), "收盤": round(close, 2),
     "漲跌%": round((close / prev - 1) * 100, 2), "共振分數": res["score"], "評等": res["grade"],
     "命中戰法": "、".join(hits) or "—", "13MA": round(ma13, 2), "守13MA": close >= ma13,
+    "60MA": round(float(ma60), 2) if pd.notna(ma60) else None,
+    "120MA": round(float(ma120), 2) if pd.notna(ma120) else None,
     "ATR14": round(atr, 2), "量比": round(vol_ratio, 2),
     "缺口": "⬆️ 跳空向上" if gap_up else "⬇️ 跳空向下" if gap_dn else "",
   }
@@ -382,11 +387,13 @@ def build_sections(votes, info, total, regime, plan, scan, chips_day, group, cap
   if sells is not None and not sells.empty:
     cnt = sells["訊號"].value_counts()
     trade += [f"**持股檢查（{len(sells)} 檔）**：" + "、".join(f"{k} {v} 檔" for k, v in cnt.items()) + "。",
-              sells[["訊號", "代號", "名稱", "今收", "13MA", "建議賣出股數", "理由"]]]
+              sells[["訊號", "代號", "名稱", "類型", "出場規則", "今收", "出場線", "建議賣出股數", "理由"]]]
   else:
     trade += ["**持股檢查**：尚未輸入持股（在上方「💼 我的持股」填寫）。"]
-  trade += ["規則：🔴 收盤跌破 13MA 或停損 → 賣出；🟡 獲利 ≥ 2R → 賣一半；"
-            "🟠 總持股超過燈號部位上限 → 等比例減碼；🟢 其餘續抱（13MA 為隔日警戒價）。"
+  trade += ["規則：每檔依自己的出場規則，🔴 收盤跌破出場線（均線 ×（1 − 緩衝））→ 賣出；"
+            "交易持股另有停損（成本 − 2×ATR14）與獲利 ≥ 2R 賣一半，核心持股不套用、跌破 13MA 只提醒；"
+            "🟡「60MA 減半、120MA 出清」跌破 60MA 出場線 → 賣一半；"
+            "🟠 總持股超過燈號部位上限 → 等比例減碼；🟢 其餘續抱（出場線為隔日警戒價）。"
             "訊號是規則的機械輸出，未經回測驗證，不構成投資建議。"]
   sec.append(("五、隔日交易訊號", trade))
 
@@ -606,7 +613,8 @@ def render_summary_cabin(deps: dict):
     if len(groups[group]) > 60:
       st.warning(f"此族群有 {len(groups[group])} 檔，掃描約需 1～3 分鐘。")
 
-  holdings = render_holdings_editor()
+  _NAMES.update(deps.get("names") or {})
+  holdings = er.effective(render_holdings_editor())
   if "sj" in deps:
     with st.expander("⏱️ 盤中監控（持股賣出／續抱、候選買點；訊號改變才提醒）", expanded=False):
       import intraday_monitor as im
@@ -736,15 +744,19 @@ def render_ai_section(title: str, sections) -> tuple[str, list] | None:
   return ("八、AI 研判（Claude 撰寫，僅供參考）", [res["text"], f"{note}（模型 {res['model']}）"])
 
 
+_NAMES: dict = {}
+
+
 def render_holdings_editor() -> pd.DataFrame:
   """💼 我的持股：給賣出訊號用。只存在本機 data/holdings.csv（不進 GitHub）；雲端請用下載／上傳 CSV。"""
   if "sm_hold" not in st.session_state:
     st.session_state["sm_hold"] = ts.load_holdings()
   with st.expander(f"💼 我的持股（{len(st.session_state['sm_hold'])} 檔，賣出訊號用）", expanded=False):
-    st.caption("填代號即可產生 13MA 賣出訊號；填成本才會檢查停損與 2R 停利；填股數才會計算總部位與減碼股數。"
+    st.caption("填代號即可產生賣出訊號；填成本才會檢查停損與 2R 停利（只用在交易持股）；填股數才會計算總部位與減碼股數。"
+               "「類型」留空＝依股性自動建議，「出場規則」留空＝依類型預設（核心 60MA 加 2%、交易 13MA 加 1%）。"
                + ("持股存在本機 data/holdings.csv（不會上傳到 GitHub）。" if ts.files_enabled()
                   else "持股只存在這個瀏覽器分頁，其他訪客看不到；請下載 CSV 保存，下次再上傳。"))
-    up = st.file_uploader("上傳持股 CSV（欄位：代號, 成本, 股數）", type="csv", key="sm_hold_up")
+    up = st.file_uploader("上傳持股 CSV（欄位：代號, 成本, 股數，可另加 類型, 出場規則）", type="csv", key="sm_hold_up")
     if up is not None and st.session_state.get("sm_hold_up_name") != up.name:
       try:
         st.session_state["sm_hold"] = ts._clean_holdings(pd.read_csv(up, dtype={"代號": str}, nrows=500))
@@ -757,8 +769,22 @@ def render_holdings_editor() -> pd.DataFrame:
         "代號": st.column_config.TextColumn("代號", help="台股代號，例如 2330、0050"),
         "成本": st.column_config.NumberColumn("成本（元／股）", min_value=0.0, format="%.2f"),
         "股數": st.column_config.NumberColumn("股數", min_value=0, step=1, format="%d", help="1 張 = 1000 股"),
+        "類型": st.column_config.SelectboxColumn("類型", options=er.TYPES,
+                                                help="核心：長抱、不套用短線停損；交易：短線規則。留空＝依股性自動建議"),
+        "出場規則": st.column_config.SelectboxColumn("出場規則", options=list(er.RULES), width="medium",
+                                                  help="留空＝核心用 60MA 加 2% 緩衝、交易用 13MA 加 1% 緩衝"),
       })
     hold = ts._clean_holdings(edited)
+    if not hold.empty:
+      eff = er.effective(hold)
+      prof = pd.DataFrame([er.profile(c) for c in hold["代號"]])
+      view = eff[["代號", "類型", "出場規則", "設定來源"]].merge(prof, on="代號", how="left")
+      view.insert(1, "名稱", view["代號"].map(lambda c: _NAMES.get(c, "")))
+      st.markdown("**生效設定與股性**（2009 年以來含息日線；四項都通過才建議「核心」："
+                  f"年化波動 ≤ {er.TH_VOL:g}%、年線上方 ≥ {er.TH_ABOVE:g}%、最長套牢 ≤ {er.TH_UNDER:g} 年、"
+                  f"單年跌逾 30% ≤ {er.TH_BADYEARS} 次）")
+      st.dataframe(view, hide_index=True, width="stretch")
+      st.caption("要改就在上表的「類型」「出場規則」欄選擇，再按儲存。股性是歷史統計，不保證未來，不構成投資建議。")
     c1, c2 = st.columns(2)
     if c1.button("💾 儲存持股", key="sm_hold_save"):
       st.session_state["sm_hold"] = hold

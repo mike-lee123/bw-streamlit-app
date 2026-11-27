@@ -24,6 +24,7 @@
 | `fx_cabin.py` | 第 25 艙 台幣匯率×台股 |
 | `summary_cabin.py` | 第 26 艙 每日綜合戰情總結 |
 | `after_hours_cabin.py` | 第 27 艙 盤後定價 |
+| `exit_rules.py` | 持股類型（核心／交易，依股性自動建議）與出場規則（13MA／60MA／120MA 加緩衝），隔日訊號與盤中監控共用 |
 | `preopen.py` | 開盤前 6 大指標投票與開盤點位預估（總結艙、全商品艙共用） |
 | `taifex_pcr.py` | 期交所臺指選擇權 Put/Call Ratio（選擇權艙、總結艙共用） |
 | `requirements.txt` | 套件 |

@@ -3,11 +3,11 @@
 全部是固定規則的機械輸出，不是投資建議：
   買進：入選名單 → 隔日開盤 ≤ 今收 +2% 才買（不追高）、掛單參考今收或拉回 13MA、停損 = 收盤 − 2×ATR14、
         停利 = 2R 先賣一半（R = 收盤 − 停損），其餘用 13MA 移動停利。
-  賣出：逐檔檢查持股
-        🔴 賣出     收盤跌破 13MA，或跌破停損（成本 − 2×ATR14）
-        🟡 賣一半   獲利 ≥ 2R（R = 2×ATR14）→ 賣一半，其餘以 13MA 移動停利
+  賣出：逐檔依持股的「類型」與「出場規則」檢查（見 exit_rules.py）
+        🔴 賣出     收盤跌破出場線；交易持股另外檢查停損（成本 − 2×ATR14）
+        🟡 賣一半   「60MA 減半、120MA 出清」跌破 60MA 出場線；交易持股獲利 ≥ 2R（R = 2×ATR14）
         🟠 減碼     燈號的總部位上限被超過 → 等比例減到上限
-        🟢 續抱     其他情況；13MA 是隔日的警戒價
+        🟢 續抱     其他情況；出場線是隔日的警戒價（核心持股跌破 13MA 只提醒）
   戰績：每次產生報告就把訊號記下來（同一天同一檔同一種訊號只記一次），之後回頭算 1／5／20 日後的報酬。
 
 個人資料（持股、戰績紀錄）的保存方式：
@@ -27,6 +27,8 @@ import numpy as np
 import pandas as pd
 import streamlit as st
 
+import exit_rules as er
+
 DATA_DIR = Path(__file__).resolve().parent / "data"
 HOLDINGS_FILE = DATA_DIR / "holdings.csv"
 LOG_FILE = DATA_DIR / "signal_log.csv"
@@ -34,7 +36,7 @@ LOG_FILE = DATA_DIR / "signal_log.csv"
 OPEN_CHASE_LIMIT = 0.02     # 隔日開盤高於今收 2% 以上就不追
 ATR_MULT = 2.0              # R = 2 × ATR14
 TAKE_PROFIT_R = 2.0         # 獲利 2R 先賣一半
-HOLD_COLS = ["代號", "成本", "股數"]
+HOLD_COLS = ["代號", "成本", "股數", "類型", "出場規則"]
 LOG_COLS = ["日期", "代號", "名稱", "訊號", "參考價", "停損", "燈號", "理由"]
 HORIZONS = (1, 5, 20)
 MAX_UPLOAD_ROWS = 5000
@@ -58,6 +60,8 @@ def _clean_holdings(df: pd.DataFrame) -> pd.DataFrame:
   df = df[df["代號"].str.fullmatch(r"[0-9A-Z]{4,6}")]
   df["成本"] = pd.to_numeric(df["成本"], errors="coerce")
   df["股數"] = pd.to_numeric(df["股數"], errors="coerce")
+  df["類型"] = df["類型"].where(df["類型"].isin(er.TYPES), None)          # 空白＝自動建議
+  df["出場規則"] = df["出場規則"].where(df["出場規則"].isin(list(er.RULES)), None)   # 空白＝類型預設
   return df.drop_duplicates("代號").reset_index(drop=True)
 
 
@@ -101,34 +105,47 @@ def buy_signals(plan: pd.DataFrame, held: set[str]) -> pd.DataFrame:
 
 # ---------- 賣出訊號 ----------
 def sell_signals(holdings: pd.DataFrame, rows: pd.DataFrame, regime_cap_pct: float, capital: float) -> pd.DataFrame:
-  """holdings：代號／成本／股數；rows：同一批代號的掃描結果（收盤、13MA、ATR14、共振分數…）"""
+  """holdings：代號／成本／股數／類型／出場規則（先用 exit_rules.effective 補齊）；
+  rows：同一批代號的掃描結果（收盤、13MA、60MA、120MA、ATR14…）"""
   if holdings.empty:
     return pd.DataFrame()
+  if "設定來源" not in holdings:
+    holdings = er.effective(holdings)
   info = rows.set_index("代號") if not rows.empty else pd.DataFrame()
   out = []
   for _, h in holdings.iterrows():
-    code = h["代號"]
+    code, kind, rule = h["代號"], h["類型"], h["出場規則"]
     if code not in info.index:
-      out.append({"訊號": "⚪ 無資料", "代號": code, "名稱": "", "今收": None, "13MA": None, "停損": None,
-                  "損益%": None, "建議賣出股數": None, "理由": "抓不到行情或資料不足 80 天"})
+      out.append({"訊號": "⚪ 無資料", "代號": code, "名稱": "", "類型": kind, "出場規則": rule, "今收": None,
+                  "出場線": None, "13MA": None, "停損": None, "損益%": None, "建議賣出股數": None,
+                  "理由": "抓不到行情或資料不足 80 天"})
       continue
     r = info.loc[code]
     close, ma13, atr = float(r["收盤"]), float(r["13MA"]), float(r["ATR14"])
+    ma = {n: (float(r[f"{n}MA"]) if f"{n}MA" in r and pd.notna(r[f"{n}MA"]) else None) for n in (13, 60, 120)}
     cost, shares = h["成本"], h["股數"]
     R = ATR_MULT * atr
-    stop = cost - R if pd.notna(cost) else None
+    trade = kind == er.TRADE
+    stop = cost - R if trade and pd.notna(cost) else None      # 核心持股不套用 2×ATR 硬停損
     pnl = (close / cost - 1) * 100 if pd.notna(cost) and cost > 0 else None
-    if close < ma13:
-      sig, why, qty = "🔴 賣出", f"收盤 {close:,.2f} 跌破 13MA {ma13:,.2f}（13MA 熔斷防線）", shares
+    act, why, line = er.judge(close, ma, rule)
+    half_qty = int(shares // 2) if pd.notna(shares) else None
+    if act == "sell":
+      sig, why, qty = "🔴 賣出", f"收盤 {close:,.2f} {why}", shares
     elif stop is not None and close < stop:
       sig, why, qty = "🔴 賣出", f"收盤 {close:,.2f} 跌破停損 {stop:,.2f}（成本 − 2×ATR14）", shares
-    elif pd.notna(cost) and close >= cost + TAKE_PROFIT_R * R:
-      sig, qty = "🟡 賣一半", (int(shares // 2) if pd.notna(shares) else None)
-      why = f"獲利 {pnl:+.1f}% 已達 2R（{cost + TAKE_PROFIT_R * R:,.2f}），賣一半、其餘以 13MA {ma13:,.2f} 移動停利"
+    elif act == "half":
+      sig, why, qty = "🟡 賣一半", f"收盤 {close:,.2f} {why}", half_qty
+    elif trade and pd.notna(cost) and close >= cost + TAKE_PROFIT_R * R:
+      sig, qty = "🟡 賣一半", half_qty
+      why = f"獲利 {pnl:+.1f}% 已達 2R（{cost + TAKE_PROFIT_R * R:,.2f}），賣一半、其餘以出場線移動停利"
     else:
       sig, qty = "🟢 續抱", 0
-      why = f"守在 13MA {ma13:,.2f} 之上（距 {(close / ma13 - 1) * 100:+.2f}%）；收盤跌破即賣出"
-    out.append({"訊號": sig, "代號": code, "名稱": r["名稱"], "日期": r["日期"], "今收": round(close, 2), "13MA": round(ma13, 2),
+      why = ("資料不足，暫不判斷；" if act == "na" else "") + why
+      if not trade and close < ma13:
+        why += f"。跌破 13MA {ma13:,.2f}（核心持股只提醒，不賣）"
+    out.append({"訊號": sig, "代號": code, "名稱": r["名稱"], "日期": r["日期"], "類型": kind, "出場規則": rule,
+                "今收": round(close, 2), "出場線": round(line, 2) if line else None, "13MA": round(ma13, 2),
                 "停損": round(stop, 2) if stop is not None else None,
                 "損益%": round(pnl, 2) if pnl is not None else None,
                 "建議賣出股數": qty, "理由": why, "_市值": close * shares if pd.notna(shares) else 0.0})

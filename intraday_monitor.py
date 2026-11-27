@@ -1,13 +1,14 @@
 """第 26 艙「⏱️ 盤中監控」：盤中判斷持股該賣出／續抱、候選股能不能買。
 
 規則（固定、不接 AI；訊號是規則的機械輸出，未經回測驗證，不構成投資建議）：
-  持股
-    🔴 立即賣出      盤中跌破停損（成本 − 2×ATR14）。硬停損，任何時段都成立
-    🟠 警戒          盤中跌破 13MA（緩衝 0.3%，連續 2 次檢查才算）；先提醒、不動作
-    🔴 收盤前賣出    13:20 之後仍在 13MA 下方（＝日線「收盤跌破 13MA」）
-    🟡 轉強可留      警戒後站回 13MA 且站上當日均價（VWAP）
-    🟡 可賣一半      獲利達 2R（R = 2×ATR14）
-    🟢 續抱          其他
+  持股（每檔依「💼 我的持股」的類型與出場規則；出場線 = 即時均線 ×（1 − 緩衝），見 exit_rules.py）
+    🔴 立即賣出      交易持股盤中跌破停損（成本 − 2×ATR14）。硬停損，任何時段都成立；核心持股不套用
+    🟠 警戒          盤中跌破出場線（連續 2 次檢查才算）；先提醒、不動作
+    🔴 收盤前賣出    13:20 之後仍在出場線下方（＝日線收盤跌破出場線）
+    🟡 收盤前賣一半  「60MA 減半、120MA 出清」13:20 後在 60MA 出場線下方、120MA 出場線上方
+    🟡 轉強可留      警戒後站回出場線且站上當日均價（VWAP）
+    🟡 可賣一半      交易持股獲利達 2R（R = 2×ATR14）
+    🟢 續抱          其他（核心持股跌破 13MA 只在理由欄提醒）
   候選（前一天報告的買進名單＋自選觀察）
     ⚪ 放棄          開盤高於昨收 2% 以上（不追高，當天不再考慮）
     ⏳ 等待          09:30 前
@@ -16,7 +17,7 @@
     🟢 可買進（拉回）在 13MA 上方 1% 內止穩，且站回 VWAP
     ⚪ 觀望          其他
   時段：09:00–09:15 只看硬停損；13:25 之後（試撮）與收盤後不發新訊號。
-  13MA 用「前 12 日收盤 + 即時價」算即時 13MA，與收盤判斷一致。
+  即時 N 日均線 =（前 N−1 日收盤合計 + 即時價）÷ N，與收盤判斷一致。
 
 資料：左側控制台以正式帳號登入永豐 → Shioaji snapshots（即時）；
   沒登入或模擬帳號（模擬環境沒有行情）→ 證交所基本市況報導（延遲約 5 秒，均價取自 Yahoo 1 分 K）；
@@ -32,6 +33,8 @@ import numpy as np
 import pandas as pd
 import requests
 import streamlit as st
+
+import exit_rules as er
 
 TZ = dt.timezone(dt.timedelta(hours=8))
 BUFFER = 0.003            # 跌破 13MA 要超過 0.3% 才算
@@ -76,7 +79,7 @@ def daily_hist(codes: tuple, _fetch) -> dict:
   """每檔的完整日 K（已用官方資料補齊落後的日子）"""
   out = {}
   for code in codes:
-    df = _fetch(code, range_str="6mo")
+    df = _fetch(code, range_str="1y")                      # 120MA 需要 120 天以上
     if df is not None and len(df) >= 30:
       out[code] = df
   return out
@@ -90,7 +93,9 @@ def ref_for(df: pd.DataFrame, session: dt.date) -> dict | None:
     return None
   c = d["Close"]
   tr = pd.concat([d.High - d.Low, (d.High - c.shift()).abs(), (d.Low - c.shift()).abs()], axis=1).max(axis=1)
-  return {"last12": float(c.tail(12).sum()), "atr": float(tr.rolling(14).mean().iloc[-1]),
+  return {"last12": float(c.tail(12).sum()),
+          "sums": {n: (float(c.tail(n - 1).sum()) if len(c) >= n - 1 else None) for n in (13, 60, 120)},
+          "atr": float(tr.rolling(14).mean().iloc[-1]),
           "vol20": float(d.Volume.tail(20).mean()), "prev_close": float(c.iloc[-1])}
 
 
@@ -259,29 +264,40 @@ def market_change(api, resolve) -> tuple[float | None, str]:
 
 
 # ---------- 規則 ----------
-def eval_holding(q: dict, ref: dict, cost: float | None, prev: dict, phase: str) -> tuple[str, str, dict]:
+def live_ma(ref: dict, last: float) -> dict:
+  return {n: ((v + last) / n if v is not None else None) for n, v in ref["sums"].items()}
+
+
+def eval_holding(q: dict, ref: dict, cost: float | None, prev: dict, phase: str,
+                 kind: str = er.TRADE, rule: str = "13MA 加 1% 緩衝") -> tuple[str, str, dict]:
   """回傳 (訊號, 理由, 新狀態)。prev 是這檔上一次的狀態（below_cnt、signal）。"""
   last, vwap = q["last"], q["vwap"]
-  ma13 = (ref["last12"] + last) / 13
+  ma = live_ma(ref, last)
+  ma13 = ma[13]
+  act, why, line = er.judge(last, ma, rule)
+  trade = kind == er.TRADE
   R = ATR_MULT * ref["atr"]
-  stop = cost - R if cost and cost == cost else None
-  below = last < ma13 * (1 - BUFFER)
+  stop = cost - R if trade and cost and cost == cost else None
+  below = act in ("sell", "half")
   cnt = prev.get("below_cnt", 0) + 1 if below else 0
-  st_ = {"below_cnt": cnt, "ma13": ma13, "stop": stop}
-  was_alert = prev.get("signal", "").startswith(("🟠", "🔴 收盤前"))
+  st_ = {"below_cnt": cnt, "ma13": ma13, "line": line, "stop": stop}
+  was_alert = prev.get("signal", "").startswith(("🟠", "🔴 收盤前", "🟡 收盤前"))
+  note = f"（核心持股：跌破 13MA {ma13:,.2f} 只提醒）" if not trade and ma13 and last < ma13 else ""
   if stop is not None and last < stop:
     return "🔴 立即賣出", f"跌破停損 {stop:,.2f}（成本 − 2×ATR14），硬停損", st_
+  if act == "na":
+    return "⚪ 資料不足", why, st_
   if phase == "開盤震盪":
-    return "🟢 續抱", f"開盤震盪時段只看硬停損（即時 13MA {ma13:,.2f}）", st_
+    return "🟢 續抱", f"開盤震盪時段只看硬停損（出場線 {line:,.2f}）", st_
   if below and phase in ("收盤確認", "試撮"):
-    return "🔴 收盤前賣出", f"13:20 後仍在即時 13MA {ma13:,.2f} 下方（{(last / ma13 - 1) * 100:+.2f}%）", st_
+    return ("🔴 收盤前賣出" if act == "sell" else "🟡 收盤前賣一半"), f"13:20 後仍{why}", st_
   if below and cnt >= CONFIRM_CHECKS:
-    return "🟠 警戒", f"盤中跌破即時 13MA {ma13:,.2f}（{(last / ma13 - 1) * 100:+.2f}%）；13:20 仍在下方則收盤前賣出", st_
-  if cost and cost == cost and last >= cost + TP_R * R:
-    return "🟡 可賣一半", f"獲利 {(last / cost - 1) * 100:+.1f}% 已達 2R（{cost + TP_R * R:,.2f}），其餘以 13MA 移動停利", st_
-  if was_alert and last >= ma13 and last >= vwap:
-    return "🟡 轉強可留", f"站回即時 13MA {ma13:,.2f} 與均價 {vwap:,.2f}", st_
-  return "🟢 續抱", f"即時 13MA {ma13:,.2f}（{(last / ma13 - 1) * 100:+.2f}%）、均價 {vwap:,.2f}", st_
+    return "🟠 警戒", f"盤中{why}；13:20 仍在下方則收盤前{'賣出' if act == 'sell' else '賣一半'}", st_
+  if trade and cost and cost == cost and last >= cost + TP_R * R:
+    return "🟡 可賣一半", f"獲利 {(last / cost - 1) * 100:+.1f}% 已達 2R（{cost + TP_R * R:,.2f}），其餘以出場線移動停利", st_
+  if was_alert and not below and last >= vwap:
+    return "🟡 轉強可留", f"站回出場線 {line:,.2f} 與均價 {vwap:,.2f}", st_
+  return "🟢 續抱", f"{why}、均價 {vwap:,.2f}{note}", st_
 
 
 def eval_candidate(q: dict, ref: dict, prev: dict, phase: str, mkt: float | None, now: dt.datetime) -> tuple[str, str, dict]:
@@ -374,8 +390,10 @@ def render_monitor(deps: dict, holdings: pd.DataFrame, candidates: list[str], na
         key = f"{role}:{code}"
         prev = state.get(key, {})
         if role == "持股":
-          cost = holdings.set_index("代號").loc[code, "成本"]
-          sig, why, new = eval_holding(q, ref, None if pd.isna(cost) else float(cost), prev, phase)
+          h = holdings.set_index("代號").loc[code]
+          cost = h["成本"]
+          sig, why, new = eval_holding(q, ref, None if pd.isna(cost) else float(cost), prev, phase,
+                                       h.get("類型", er.TRADE), h.get("出場規則", "13MA 加 1% 緩衝"))
         else:
           sig, why, new = eval_candidate(q, ref, prev, phase, mkt, now)
         new["signal"] = sig
@@ -387,6 +405,7 @@ def render_monitor(deps: dict, holdings: pd.DataFrame, candidates: list[str], na
         rows.append({"角色": role, "代號": code, "名稱": names.get(code, ""), "訊號": sig,
                      "現價": round(q["last"], 2), "漲跌%": round((q["last"] / q["prev_close"] - 1) * 100, 2)
                      if q["prev_close"] == q["prev_close"] else None,
+                     "出場線": round(new["line"], 2) if new.get("line") else None,
                      "即時13MA": round(new["ma13"], 2), "均價VWAP": round(q["vwap"], 2), "理由": why,
                      "報價": f"{q['src']} {q['ts']}"})
 
